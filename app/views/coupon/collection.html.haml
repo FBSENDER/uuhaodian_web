@@ -1,0 +1,12 @@
+- title("#{@collection_name}_优优好店")
+- keywords("#{@collection_name}")
+- head_desc("优优好店 - #{@collection_name}")
+
+= render partial: "header_common"
+= render partial: "header_lanlan_fenlei"
+.wrapper{style: "margin-top: 10px;"}
+  .zk-list.clearfix#couponList
+  = render partial: "lanlan_load_more", locals: {path: @path, pagesize: 20, sort_type: 7, pinyin: '', keyword: '', cid: 0,sort: 7, type: @collection_type}
+
+= render partial: "footer"
+= render partial: "sider_fixed_area"

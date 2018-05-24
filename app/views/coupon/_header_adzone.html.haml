@@ -1,0 +1,62 @@
+.home-oper-area.wrapper
+  .cate-area
+    %a.cate-item.with-line{href: "/category/1321/"}
+      .inner
+        %i.cate-icon.ci-nvzhuang
+        女装
+    %a.cate-item{href: "/category/1327/"}
+      .inner
+        %i.cate-icon.ci-nanzhuang
+        男装
+    %a.cate-item.with-line{href: "/category/1325/"}
+      .inner
+        %i.cate-icon.ci-xiezi
+        鞋包
+    %a.cate-item{href: "/category/1324/"}
+      .inner
+        %i.cate-icon.ci-meizhuang
+        美妆
+    %a.cate-item.with-line{href: "/category/1323/"}
+      .inner
+        %i.cate-icon.ci-shenghuo
+        百货
+    %a.cate-item{href: "/category/1322/"}
+      .inner
+        %i.cate-icon.ci-meishi
+        美食
+    %a.cate-item.with-line{href: "/category/1326/"}
+      .inner
+        %i.cate-icon.ci-neiyi
+        内衣
+    %a.cate-item{href: "/category/1328/"}
+      .inner
+        %i.cate-icon.ci-muying
+        母婴
+    %a.cate-item.with-line{href: "/category/1330/"}
+      .inner
+        %i.cate-icon.ci-peishi
+        配饰
+    %a.cate-item{href: "/category/1332/"}
+      .inner
+        %i.cate-icon.ci-chengren
+        成人
+    %a.cate-item.with-line.last{href: "/category/1329/"}
+      .inner
+        %i.cate-icon.ci-shuma
+        手机
+    %a.cate-item.last{href: "/category/1331/"}
+      .inner
+        %i.cate-icon.ci-jujia
+        其他
+  .banner-top
+    .banner-area.swiper-container.swiper-container-horizontal
+      .swiper-wrapper
+        - if @banners && @banners.size > 0
+          - @banners.each do |b|
+            %a.swiper-slide{href: "#{b["link_url"]}", target: "_blank"}
+              %img{src: "#{b["img_url"]}"}
+      .swiper-bottom
+        .swiper-pager
+    .top-right-banner
+      %img{src: "/img/lbanner1.png"}
+      %img{src: "/img/lbanner2.png", style: "margin-top:10px;width:100%;"}

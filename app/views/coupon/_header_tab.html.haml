@@ -1,0 +1,19 @@
+.tab-area
+  .wrapper
+    .cate-area
+      %a.cate-item.jxtj.active{href: "/"}
+        %span.cate-rec
+      %a.cate-item.hot{href: "http://taobao.zhequan.cc/index.php?r=ddq&u=550416", target: "_blank"} 咚咚抢
+      %a.cate-item{href: "/collection/4/", class:"#{'active' if @collection_type && @collection_type == 4}"} 九块九包邮
+      %a.cate-item{href: "/collection/2/", class:"#{'active' if @collection_type && @collection_type == 2}"} 畅销榜
+      %a.cate-item{href: "/collection/1/", class:"#{'active' if @collection_type && @collection_type == 1}"} 聚特卖
+    .search-area
+      %i
+      %input.search-input.unfocus{type: "text", placeholder: "粘贴宝贝标题或输入关键词"}
+  .hori-cate-area
+    .cate-l-1
+      .wrapper
+        - if @cates
+          - @cates.each do |cate|
+            - is_active = cate['cid'] == @cid || cate['cid'] == @cid_1 ? 'active' : ''
+            %a{href: "/category/#{cate["cid"]}/", class: "#{is_active}"} #{cate["name"]}

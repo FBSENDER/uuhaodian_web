@@ -1,0 +1,16 @@
+.header-top
+  .wrapper
+    %a.logo-area{href: "/", title: "优优好店"}
+      %img{src: "/img/pc_logo.png"}
+    .search-area
+      .input-area
+        %i
+        %input.search-input.unfocus{type: "text", placeholder: "粘贴宝贝标题或输入关键词"}
+      %a.search-btn{href: "javascript:;"} 找券
+      .keywords-area
+        - if @top_keywords && @top_keywords.size > 0
+          - @top_keywords.each do |k|
+            %a{href: "/query/#{URI.encode(k)}/"} #{k}
+    .download-area
+      %a{href: "http://taobao.zhequan.cc/index.php?r=app/download&u=550416", target: "_blank", title: "下载APP"}
+        %img{src: "/img/app_download.png"}

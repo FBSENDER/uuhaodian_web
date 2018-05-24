@@ -1,0 +1,88 @@
+- coupon = @detail
+- aaid = coupon['couponUrl'].match(/activityId=(\w*)/)
+- aaid = aaid.nil? ? '' : aaid[1]
+- buy_url = coupon["couponMoney"].to_f > 0 ? "http://api.uuhaodian.com/uu/pcbuy?id=#{coupon["itemId"]}&activity_id=#{aaid}" : "http://item.taobao.com/item.htm?id=#{coupon['itemId']}"
+.zk-content
+  .img-area
+    %a{href: "#{buy_url}", title: "#{coupon['title']}", target: "_blank", isconvert: 1}
+      %img#cover_image{src: "#{coupon['coverImage']}", alt: "#{coupon['title']}"}
+  .info-area
+    %h1.title.elli
+      #{coupon['shortTitle']}
+    %p.recommend{style: "color:#FF2B22;margin-top:10px;height:42px;overflow: hidden;"} 推荐理由：#{coupon["recommend"]}
+    %input{id: "endTime", value: "#{coupon['couponEndTime']}", type: "hidden"}
+    .small-img-area
+      - coupon["auctionImages"][0,5].each_with_index do |img_url, index|
+        %img.small_img{src: "#{img_url}", style:"#{'margin-left:0' if index == 0}"}
+      %img.small_img{src: "https://www.iquan.net/image/uuercode.png"}
+    .platform
+      - if coupon['shopType'] == 'tmall'
+        %i{style: "background-image: url(http://7xlxny.com1.z0.glb.clouddn.com/zhekou/web/platform_tmall.png);"}
+      - else
+        %i{style: "background-image: url(http://7xlxny.com1.z0.glb.clouddn.com/zhekou/web/platform_taobao.png);"}
+
+      %span #{coupon["sellerName"]} - 已有 
+      %span{style: "color:#FF2B22"} #{coupon["monthSales"]}
+      %span 人购买
+    .stat
+      %p.price-area
+        %span.price
+          %span.oprice 原价 ￥#{coupon["price"]}&nbsp;&nbsp;
+          ￥
+          %em.int{style: "padding:0"}> #{coupon['nowPrice'].to_i}
+          %em.decimal> .#{coupon['nowPrice'].to_s.sub(/\d+\./,'')}
+          %i 券后价
+      .buy-area
+        - if coupon["couponMoney"].to_i > 0
+          %p#eventTimeStr.desc 有效期
+        - else
+          %p.desc &nbsp;
+        %a{href: "#{buy_url}", target: "_blank", class: "buy-btn", isconvert: 1}
+          .line.line-l
+            %i
+            %i
+            %i
+            %i
+            %i
+            %i
+            %i
+          .line.line-r
+            %i
+            %i
+            %i
+            %i
+            %i
+            %i
+            %i
+          - if coupon['nowPrice'].to_i == 0
+            立即购买
+          - else
+            领券立减
+            %em #{coupon['couponMoney'].to_i}
+            元
+
+:javascript
+  $(".small_img").hover(function(){
+    $("#cover_image").attr("src", $(this).attr("src"));  
+  })
+  var timeArea = $('#eventTimeStr');
+  var endTime = $('#endTime').val()*1;
+  setInterval(dateCountDown,1000);
+  function dateCountDown(){
+    var now = Math.floor(new Date().getTime()/1000)*1;
+    if(now > endTime){
+      timeArea.html('折扣商品限量抢购中！');
+    }else{
+      var gap = endTime - now;
+      var dd = Math.floor(gap/(60*60*24));
+      var hh = Math.floor((gap-dd*60*60*24)/(60*60));
+      var mm = Math.floor((gap-dd*60*60*24-hh*60*60)/60);
+      var ss = gap-dd*60*60*24-hh*60*60-mm*60;
+      var timeStr = '优惠券即将失效:&nbsp;'
+        +(dd>0?'<em>'+dd+'</em>天':'')
+        +(hh>0?'<em>'+hh+'</em>时':'')
+        +(mm>0?'<em>'+mm+'</em>分':'')
+        +(ss>=0?'<em>'+ss+'</em>秒':'');
+      timeArea.html(timeStr);
+    }
+  }

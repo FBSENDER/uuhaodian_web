@@ -1,0 +1,18 @@
+- title("优优好店-领券享优惠,天天九块九特价购_优优好店")
+- keywords("优优好店,uuhaodian,享优惠,九块九,天天特价,特价购,优优好店")
+- head_desc("优优好店-优惠券折扣，先领券再下单，省钱又实惠！每天更新千款，纯人工筛选验货，限时限量特卖，全场1折包邮！")
+
+= render partial: "header_common"
+= render partial: "header_adzone"
+.wrapper
+  .item-list-top
+    %span.left 精选推荐
+    %a{href: "#"}
+      %span.right 查看更多
+
+.wrapper{style: "margin-top:10px;"}
+  .zk-list.clearfix#couponList
+  = render partial: "lanlan_load_more", locals: {path: @path, pagesize: 20, sort_type: 7, pinyin: '', keyword: '', cid: 0,sort: 7, type: 0}
+
+= render partial: "footer"
+= render partial: "sider_fixed_area"

@@ -1,0 +1,92 @@
+<div class="more-coupon">
+  <span id="moreCoupon" class="btn loading-text">查看更多优惠券</span>
+</div>
+<script type="text/javascript">
+var globalChannel = 27;
+var couponList = $('#couponList'),loadingText = $('.loading-text');
+var page = 1,pagesize = <%= pagesize %>,load = 1,channel = 27,sort = <%= sort_type || 7%>;
+var callback = function(data){
+  if(data.status.code == 1001){
+    Util.createLanlanCouponList(data.result,couponList,channel,'首页');
+    if(data.result.length >= pagesize){
+      page ++;
+      load = 1;
+      loadingText.html('查看更多优惠券');
+    }else{
+      loadingText.html('没有更多了');
+    }
+  }
+};
+$(function(){
+
+  getLanlanCouponList();
+
+  $(document).on('scroll',function(){
+    if(page%4 > 0){
+      var _top = $(document).scrollTop(),
+        scroll_height = Util.pageSize()['scrollHeight'],
+        client_height = Util.pageSize()['clientHeight'];
+        if(_top + client_height >= (scroll_height-800)){
+          getLanlanCouponList();
+        }
+    }
+  });
+
+  loadingText.on('click',function(){
+    getLanlanCouponList();
+  });
+
+
+  function getLanlanCouponList(){
+    if(!load){
+      return;
+    }
+    $.ajax({
+      url: '<%= path %>',
+      type: 'GET',
+      dataType: 'jsonp',
+      data:{
+        'pinyin': '<%= pinyin || '' %>',
+        'keyword': '<%= keyword || ''%>',
+        'cid': '<%= cid || 0%>',
+        'sort': sort,
+        'price': '<%= keyword || ''%>',
+        'type': '<%= type || 0%>',
+        'page':page,
+        'pagesize':pagesize,
+        'callback': 'callback'
+      },
+      beforeSend:function(){
+        load = 0;
+        loadingText.html('努力加载中...');
+      },
+      success:function(data){
+      }
+    });
+  }
+
+  //sno
+  var sTabItem = $('.s-tab .tab-list li');
+  sTabItem.on('click',function(){
+    var _this = $(this);
+    if(!_this.hasClass('active')){
+      $('.s-tab .tab-list li.active').removeClass('active');
+      _this.addClass('active');
+      var i = _this.data('index');
+      $('.s-tab .content p.active').removeClass('active');
+      $('.s-tab .content p[data-index='+i+']').addClass('active');
+    }
+  });
+  $('.sort_li').on('click', function(){
+    var _this = $(this);
+    if(!_this.hasClass('active')){
+      $('.sort_li.active').removeClass('active');
+      _this.addClass('active');
+      sort = _this.data('sort');
+      page = 1;
+      $('#couponList').html('');
+      getLanlanCouponList();
+    }
+  });
+});
+</script>

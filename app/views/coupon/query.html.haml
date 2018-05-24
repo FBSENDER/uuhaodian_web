@@ -1,0 +1,16 @@
+- title("#{@keyword},#{@keyword}优惠券_优优好店")
+- keywords("#{@keyword},#{@keyword}优惠券")
+- head_desc("优优好店 - 搜索结果 - #{@keyword}")
+
+= render partial: "header_common"
+= render partial: "header_lanlan_fenlei"
+= render partial: "related_keywords", locals: {keywords: @keywords}
+.wrapper
+  .search-res-title 
+    %strong "#{@keyword}" 
+    搜索结果：
+  .zk-list.clearfix#couponList
+  = render partial: "lanlan_load_more", locals: {path: @path, pagesize: 20, sort_type: 7, pinyin: '', keyword: @keyword, cid: 0,sort: 7, type: 0}
+
+= render partial: "footer"
+= render partial: "sider_fixed_area"

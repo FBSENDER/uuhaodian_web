@@ -1,0 +1,11 @@
+- title("#{@category_name},#{@category_name}折扣,#{@category_name}优惠_优优好店")
+- keywords("#{@category_name},#{@category_name}折扣,#{@category_name}优惠")
+- head_desc("优优好店 - 分类 - #{@category_name}")
+
+= render partial: "header_common"
+= render partial: "header_lanlan_fenlei", locals: {categories: @lanlan_cates}
+.wrapper
+  = render partial: "lanlan_quan_filter"
+  .zk-list.clearfix#couponList
+  = render partial: "lanlan_load_more", locals: {path: @path, pagesize: 20, sort_type: 7, pinyin: '', keyword: '', cid: @cid,sort: 7, type: 0}
+= render partial: "sider_fixed_area"

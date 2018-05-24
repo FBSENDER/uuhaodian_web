@@ -1,0 +1,6 @@
+.hori-cate-area
+  .hot-keywords
+    .wrapper
+      - if keywords
+        - keywords.each do |keyword|
+          %a{href: "/query/#{URI.encode(keyword)}/"} #{keyword}
