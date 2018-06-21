@@ -9,6 +9,16 @@ class CouponController < ApplicationController
     @path = "http://api.uuhaodian.com/uu/home_list"
   end
 
+  def like
+    if cookies[:session_key].nil?
+      redirect_to "/", status: 302
+      return
+    end
+    #验证用户是否登录
+    @path = "http://api.uuhaodian.com/uu/get_product_liked"
+    @cates = get_cate_data
+  end
+
   def category
     @cid = params[:cid]
     @cid_1 = params[:cid_1]
@@ -29,7 +39,12 @@ class CouponController < ApplicationController
     begin
       result = Net::HTTP.get(URI(URI.encode(url)))
       json = JSON.parse(result)
-      not_fount if json["status"]["code"] != 1001
+      if json["status"]["code"] != 1001 || json["result"].nil?
+        url = "http://api.uuhaodian.com/uu/product_db?item_id=#{params[:id]}"
+        result = Net::HTTP.get(URI(URI.encode(url)))
+        json = JSON.parse(result)
+        not_found if json["status"]["code"] != 1001 || json["result"].nil?
+      end
     rescue
       not_found
       return

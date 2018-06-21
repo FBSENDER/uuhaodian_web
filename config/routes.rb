@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   get "/collection/:tid", to: "coupon#collection", tid: /\d+/
   get "/yh/:id", to: "coupon#product_detail", id: /\d+/
   get "/query/:keyword", to: "coupon#query"
+  get "/like/", to: "coupon#like"
 end

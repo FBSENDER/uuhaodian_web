@@ -110,6 +110,24 @@ input,input:focus{
   height: 36px;
   background-color: #f4f4f4;
 }
+.header .header-bar .login{
+  float:left;
+  text-decoration:underline;
+}
+.header .header-bar .login img{
+  height: 25px;
+  width: 25px;
+  padding: 5px;
+  float: left;
+}
+.header .header-bar .logout{
+  float:left;
+  text-decoration:underline;
+}
+.header .header-bar .sp{
+  float:left;
+  padding: 0 5px;
+}
 .header .header-bar .close{
   position: absolute;
   display: block;
@@ -896,7 +914,7 @@ input,input:focus{
   width: 680px;
   padding-left: 20px;
 }
-.zk-content .info-area .title {
+.zk-content .info-area .title h1{
   font-size: 20px;
   line-height: 34px;
   height: 34px;
@@ -904,6 +922,7 @@ input,input:focus{
   color: #444;
   font-weight: normal;
 }
+
 .zk-content .recommend{
   color: #FF2B22;
   margin-top: 10px;
@@ -932,6 +951,14 @@ input,input:focus{
   color: #a9a9a9;
   line-height: 20px;
 }
+.zk-content .info-area .platform .shoucang{
+  color: #f9a825;
+}
+.zk-content .info-area .platform .shoucang i{
+  height: 20px;
+  width: 20px;
+  background-image: url("/img/star.png");
+}
 .zk-content .info-area .platform i {
   position: relative;
   top: 4px;
@@ -959,6 +986,14 @@ input,input:focus{
   line-height: 40px;
   font-weight: bold;
 }
+.zk-content .info-area .stat .shoucang{
+  float: right;
+  padding-right: 10px;
+  margin-top: 40px;
+  font-size: 10px;
+  text-align: bottom;
+}
+
 .zk-content .oprice {
   color: #666;
   text-decoration: line-through;

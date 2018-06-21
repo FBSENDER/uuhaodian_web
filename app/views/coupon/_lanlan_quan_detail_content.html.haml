@@ -7,8 +7,9 @@
     %a{href: "#{buy_url}", title: "#{coupon['title']}", target: "_blank", isconvert: 1}
       %img#cover_image{src: "#{coupon['coverImage']}", alt: "#{coupon['title']}"}
   .info-area
-    %h1.title.elli
-      #{coupon['shortTitle']}
+    .title
+      %h1.elli
+        #{coupon['shortTitle']}
     %p.recommend{style: "color:#FF2B22;margin-top:10px;height:42px;overflow: hidden;"} 推荐理由：#{coupon["recommend"]}
     %input{id: "endTime", value: "#{coupon['couponEndTime']}", type: "hidden"}
     .small-img-area
@@ -23,7 +24,10 @@
 
       %span #{coupon["sellerName"]} - 已有 
       %span{style: "color:#FF2B22"} #{coupon["monthSales"]}
-      %span 人购买
+      %span 人购买 - 
+      %a#shoucang.shoucang{href: "javascript:;"}
+        %span#shoucang-span{data:{id: "#{@detail["itemId"]}"}}加入收藏
+        %i
     .stat
       %p.price-area
         %span.price

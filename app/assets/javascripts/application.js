@@ -73,4 +73,69 @@ $(function(){
     loop:true,
     pagination: '.swiper-pager'
   });
+  $("#user_login").on('click', function(){
+    url = "https://open.weixin.qq.com/connect/qrconnect?appid=wxb5c85d0e9a2a3ecd&esponse_type=code&scope=snsapi_login&state=STATE&redirect_uri=http%3A%2F%2Fapi.uuhaodian.com%2Fuu%2Fweb_login%3Fuu_path%3D" + encodeURIComponent(encodeURIComponent(location.href)) + "#wechat_redirect";
+    window.location.href = url;
+  });
+  $("#user_logout").on('click', function(){
+    window.location.href = "http://api.uuhaodian.com/uu/web_logout/";
+  });
+  $("#shoucang").on('click', function(){
+    var $shoucang = $("#shoucang-span");
+    if($shoucang[0].innerText == "加入收藏"){
+      $.ajax({
+        url: 'http://api.uuhaodian.com/uu/add_product_liked',
+        type: 'GET',
+        dataType: 'jsonp',
+        data:{
+          item_id: $shoucang.data("id")
+        },
+        beforeSend: function(){
+         $shoucang.text("操作中...");
+        },
+        success:function(data){
+         $shoucang.text("已收藏");
+        }
+      });
+    }
+    else if ($shoucang[0].innerText == "已收藏"){
+      $.ajax({
+        url: 'http://api.uuhaodian.com/uu/cancel_product_liked',
+        type: 'GET',
+        dataType: 'jsonp',
+        data:{
+          item_id: $shoucang.data("id")
+        },
+        beforeSend: function(){
+         $shoucang.text("操作中...");
+        },
+        success:function(data){
+         $shoucang.text("加入收藏");
+        }
+      });
+    }
+  });
+  if($("#shoucang-span").length > 0){
+    var $shoucang = $("#shoucang-span");
+    $.ajax({
+      url: 'http://api.uuhaodian.com/uu/check_product_liked',
+      type: 'GET',
+      dataType: 'jsonp',
+      data:{
+        item_id: $shoucang.data("id")
+      },
+      success:function(data){
+        if(data["status"] == 1){
+          $shoucang.text("已收藏");
+        }
+      }
+    });
+  }
+  if($.cookie('session_key') != undefined){
+    $("#user_login").hide();
+    $("#nickname").text($.cookie('nickname'));
+    $("#headimgurl").attr("src", $.cookie('headimgurl'));
+    $("#logined").show();
+  }
+
 });
