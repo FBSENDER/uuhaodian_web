@@ -83,6 +83,11 @@ $(function(){
   $("#shoucang").on('click', function(){
     var $shoucang = $("#shoucang-span");
     if($shoucang[0].innerText == "加入收藏"){
+      if($.cookie('session_key') == undefined){
+        url = "https://open.weixin.qq.com/connect/qrconnect?appid=wxb5c85d0e9a2a3ecd&esponse_type=code&scope=snsapi_login&state=STATE&redirect_uri=http%3A%2F%2Fapi.uuhaodian.com%2Fuu%2Fweb_login%3Fuu_path%3D" + encodeURIComponent(encodeURIComponent(location.href)) + "#wechat_redirect";
+        window.location.href = url;
+        return;
+      }
       $.ajax({
         url: 'http://api.uuhaodian.com/uu/add_product_liked',
         type: 'GET',
