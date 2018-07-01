@@ -5,9 +5,43 @@
 var globalChannel = 27;
 var couponList = $('#couponList'),loadingText = $('.loading-text');
 var page = 1,pagesize = <%= pagesize %>,load = 1,channel = 27,sort = <%= sort_type || 7%>;
+var path = '<%= path %>';
+function getLanlanCouponList(){
+  if(!load){
+    return;
+  }
+  $.ajax({
+    url: path,
+    type: 'GET',
+    dataType: 'jsonp',
+    data:{
+      'pinyin': '<%= pinyin || '' %>',
+      'keyword': '<%= keyword || ''%>',
+      'cid': '<%= cid || 0%>',
+      'sort': sort,
+      'price': '<%= keyword || ''%>',
+      'type': '<%= type || 0%>',
+      'page':page,
+      'pagesize':pagesize,
+      'callback': 'callback'
+    },
+    beforeSend:function(){
+      load = 0;
+      loadingText.html('努力加载中...');
+    },
+    success:function(data){
+    }
+  });
+}
 var callback = function(data){
   if(data.status.code == 1001){
     Util.createLanlanCouponList(data.result,couponList,channel,'首页');
+    if(page == 1 && data.result.length == 0)
+    {
+      path = "http://api.uuhaodian.com/uu/tb_goods_list";
+      load = 1;
+      getLanlanCouponList();
+    }
     if(data.result.length >= pagesize){
       page ++;
       load = 1;
@@ -18,10 +52,14 @@ var callback = function(data){
   }
   else if(data.status == 1){
     Util.createTaobaoCouponList(data.results,couponList,channel,'首页');
+    page ++;
+    load = 1;
     loadingText.html('加载完成');
   }
   else if(data.status == 2){
     Util.createTaobaoProductList(data.results,couponList,channel,'首页');
+    page ++;
+    load = 1;
     loadingText.html('加载完成');
   }
 };
@@ -45,33 +83,6 @@ $(function(){
   });
 
 
-  function getLanlanCouponList(){
-    if(!load){
-      return;
-    }
-    $.ajax({
-      url: '<%= path %>',
-      type: 'GET',
-      dataType: 'jsonp',
-      data:{
-        'pinyin': '<%= pinyin || '' %>',
-        'keyword': '<%= keyword || ''%>',
-        'cid': '<%= cid || 0%>',
-        'sort': sort,
-        'price': '<%= keyword || ''%>',
-        'type': '<%= type || 0%>',
-        'page':page,
-        'pagesize':pagesize,
-        'callback': 'callback'
-      },
-      beforeSend:function(){
-        load = 0;
-        loadingText.html('努力加载中...');
-      },
-      success:function(data){
-      }
-    });
-  }
 
   //sno
   var sTabItem = $('.s-tab .tab-list li');
