@@ -139,3 +139,93 @@ Util.createLanlanCouponList = function(cl,obj,channel,gaPage){
   $('.lazy.new').removeClass('new');
   Util.zkItemTimeCount();
 }
+Util.createTaobaoCouponList = function(cl,obj,channel,gaPage){
+  gaPage = gaPage || '未知';
+  var htmlstr = '<div>';
+  for(var i=0,len=cl.length;i<len;i++){
+    var z = cl[i];
+    var re = /减(\d+)元/;
+    var coupon_money = parseInt(re.exec(z.coupon_info)[1]);
+    var buy_url = 'http://api.uuhaodian.com/uu/pcbuy?id=' + z.num_iid;
+    var platform = '',platformPic = '';
+    if(z.user_type == 1)
+      platform = 2;
+    else
+      platform = 1;
+    htmlstr += '<div class="zk-item">';
+    htmlstr += '<a href="'+ buy_url +'" target="_blank">';
+    htmlstr += '<div class="img-area">';
+    htmlstr += '<img data-ga-event="商品_图片:点击:'+ gaPage +'" class="lazy new" data-original="'+ z.pict_url +'" alt="'+z.
+      title +'">';
+    htmlstr += '</div>';
+    htmlstr += '<p class="title-area elli">';
+    if(platform == 1){
+      htmlstr += '<i class="i_taobao"></i>';
+    }
+    else{
+      htmlstr += '<i class="i_tmall"></i>';
+    }
+    htmlstr += '<span class="post-free">包邮</span>';
+    htmlstr +=  z.title +'</p>';
+    htmlstr += '<div class="raw-price-area">现价：&yen;'+ z.zk_final_price +'<p class="sold">已领'+ z.volume +'张券</p></div>';
+    htmlstr += '<div class="info">';
+    htmlstr += '<div class="price-area">';
+    htmlstr += '<span class="price">&yen;<em class="number-font">'+ (parseInt(z.zk_final_price) - coupon_money) +'</em>';
+    htmlstr += '<em class="decimal">'+(z.zk_final_price.toString().split('.').length>1?'.'+z.zk_final_price.toString().split('.')[1]:'')+'</em><i></i></span>';
+    htmlstr += '</div>';
+    htmlstr += '<span class="coupon_click">券 ';
+    htmlstr += coupon_money;
+    htmlstr += ' 元</span>';
+    htmlstr += '</div>';
+    htmlstr += '</a>';
+    htmlstr += '</div>';
+  }
+  htmlstr += '</div>';
+  htmlstr = $(htmlstr);
+  obj.append(htmlstr);
+  Util.lazyLoad('lazy.new');
+  $('.lazy.new').removeClass('new');
+}
+Util.createTaobaoProductList = function(cl,obj,channel,gaPage){
+  gaPage = gaPage || '未知';
+  var htmlstr = '<div>';
+  for(var i=0,len=cl.length;i<len;i++){
+    var z = cl[i];
+    var buy_url = z.item_url; 
+    var platform = '',platformPic = '';
+    if(z.user_type == 1)
+      platform = 2;
+    else
+      platform = 1;
+    htmlstr += '<div class="zk-item">';
+    htmlstr += '<a href="'+ buy_url +'" target="_blank" isconvert="1">';
+    htmlstr += '<div class="img-area">';
+    htmlstr += '<img data-ga-event="商品_图片:点击:'+ gaPage +'" class="lazy new" data-original="'+ z.pict_url +'" alt="'+z.
+      title +'">';
+    htmlstr += '</div>';
+    htmlstr += '<p class="title-area elli">';
+    if(platform == 1){
+      htmlstr += '<i class="i_taobao"></i>';
+    }
+    else{
+      htmlstr += '<i class="i_tmall"></i>';
+    }
+    htmlstr += '<span class="post-free">包邮</span>';
+    htmlstr +=  z.title +'</p>';
+    htmlstr += '<div class="raw-price-area">现价：&yen;'+ z.reserve_price +'<p class="sold">已售'+ z.volume +'件</p></div>';
+    htmlstr += '<div class="info">';
+    htmlstr += '<div class="price-area">';
+    htmlstr += '<span class="price">&yen;<em class="number-font">'+ parseInt(z.zk_final_price) +'</em>';
+    htmlstr += '<em class="decimal">'+(z.zk_final_price.toString().split('.').length>1?'.'+z.zk_final_price.toString().split('.')[1]:'')+'</em><i></i></span>';
+    htmlstr += '</div>';
+    htmlstr += '<span class="coupon_click">立即领券</span> ';
+    htmlstr += '</div>';
+    htmlstr += '</a>';
+    htmlstr += '</div>';
+  }
+  htmlstr += '</div>';
+  htmlstr = $(htmlstr);
+  obj.append(htmlstr);
+  Util.lazyLoad('lazy.new');
+  $('.lazy.new').removeClass('new');
+}

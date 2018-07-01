@@ -16,6 +16,14 @@ var callback = function(data){
       loadingText.html('没有更多了');
     }
   }
+  else if(data.status == 1){
+    Util.createTaobaoCouponList(data.results,couponList,channel,'首页');
+    loadingText.html('加载完成');
+  }
+  else if(data.status == 2){
+    Util.createTaobaoProductList(data.results,couponList,channel,'首页');
+    loadingText.html('加载完成');
+  }
 };
 $(function(){
 

@@ -64,13 +64,13 @@ class CouponController < ApplicationController
       redirect_to URI.encode("https://www.iquan.net/tbzk/?keyword=#{@keyword}"), status: 302
       return
     end
-    if @keyword.size >= 10
-      redirect_to URI.encode("https://www.iquan.net/zhekou/#{@keyword}/"), status: 302
-    end
     @cates = get_cate_data
     @keywords = get_hot_keywords_data.sample(10)
     @top_keywords = get_hot_keywords_data.sample(8)
     @path = "http://api.uuhaodian.com/uu/goods_list"
+    if @keyword.size >= 10
+      @path = "http://api.uuhaodian.com/uu/tb_goods_list"
+    end
   end
 
   def collection
