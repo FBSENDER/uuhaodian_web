@@ -764,6 +764,9 @@ input,input:focus{
   border-radius: 2px;
   box-shadow: 0 0 4px rgba(0,0,0,.1);
 }
+.more-coupon span:hover{
+  border: 1px solid #FF2B22;
+}
 .footer {
   position: relative;
 }

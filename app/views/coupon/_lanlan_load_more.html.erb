@@ -36,10 +36,11 @@ function getLanlanCouponList(){
 var callback = function(data){
   if(data.status.code == 1001){
     Util.createLanlanCouponList(data.result,couponList,channel,'首页');
-    if(page == 1 && data.result.length == 0)
+    if(data.result.length < pagesize)
     {
       path = "http://api.uuhaodian.com/uu/tb_goods_list";
       load = 1;
+      page = 1;
       getLanlanCouponList();
     }
     if(data.result.length >= pagesize){
