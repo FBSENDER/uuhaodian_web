@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   $hot_keywords_data = {}
   $banner_data = {}
   def get_banner_data
-    if $banner_data["update_at"].nil? || $banner_data["banners"].nil? || $banner_data["banners"].size.zero? || Time.now.to_i - $cate_data["update_at"] > 3600
+    if $banner_data["update_at"].nil? || $banner_data["banners"].nil? || $banner_data["banners"].size.zero? || Time.now.to_i - $banner_data["update_at"] > 3600
       url = "http://api.uuhaodian.com/uu/banners"
       result = Net::HTTP.get(URI(url))
       json = JSON.parse(result)
