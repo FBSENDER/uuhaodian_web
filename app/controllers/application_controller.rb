@@ -3,6 +3,8 @@ class ApplicationController < ActionController::Base
   $cate_data = {}
   $hot_keywords_data = {}
   $banner_data = {}
+  $coupon_9kuai9_data = {}
+  $coupon_bang_data = {}
   def get_banner_data
     if $banner_data["update_at"].nil? || $banner_data["banners"].nil? || $banner_data["banners"].size.zero? || Time.now.to_i - $banner_data["update_at"] > 3600
       url = "http://api.uuhaodian.com/uu/banners"
@@ -49,6 +51,39 @@ class ApplicationController < ActionController::Base
     end
     return $hot_keywords_data["keywords"]
   end
+
+  def get_coupon_9kuai9_data
+    if $coupon_9kuai9_data["update_at"].nil? || $coupon_9kuai9_data["items"].nil? || $coupon_9kuai9_data["items"].size.zero? || Time.now.to_i - $coupon_9kuai9_data["update_at"] > 3600
+      url = "http://api.uuhaodian.com/uu/jiukuaijiu_list"
+      result = Net::HTTP.get(URI(url))
+      json = JSON.parse(result)
+      if json["status"] && json["status"]["code"] == 1001
+        $coupon_9kuai9_data["items"] = json["result"]
+        $coupon_9kuai9_data["update_at"] = Time.now.to_i
+        return $coupon_9kuai9_data["items"]
+      else
+        return []
+      end
+    end
+    return $coupon_9kuai9_data["items"]
+  end
+
+  def get_coupon_bang_data
+    if $coupon_bang_data["update_at"].nil? || $coupon_bang_data["items"].nil? || $coupon_bang_data["items"].size.zero? || Time.now.to_i - $coupon_bang_data["update_at"] > 3600
+      url = "http://api.uuhaodian.com/uu/sale_list"
+      result = Net::HTTP.get(URI(url))
+      json = JSON.parse(result)
+      if json["status"] && json["status"]["code"] == 1001
+        $coupon_bang_data["items"] = json["result"]
+        $coupon_bang_data["update_at"] = Time.now.to_i
+        return $coupon_bang_data["items"]
+      else
+        return []
+      end
+    end
+    return $coupon_bang_data["items"]
+  end
+
   def not_found
     raise ActionController::RoutingError.new('NOT FOUND')
   end

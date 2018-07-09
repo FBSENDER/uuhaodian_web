@@ -73,6 +73,11 @@ $(function(){
     loop:true,
     pagination: '.swiper-pager'
   });
+  var sww = new Swiper('.wide-banner',{
+    loop: true,
+    prevButton:'.swiper-button-prev',
+    nextButton:'.swiper-button-next'
+  });
   $("#user_login").on('click', function(){
     url = "https://open.weixin.qq.com/connect/qrconnect?appid=wxb5c85d0e9a2a3ecd&esponse_type=code&scope=snsapi_login&state=STATE&redirect_uri=http%3A%2F%2Fapi.uuhaodian.com%2Fuu%2Fweb_login%3Fuu_path%3D" + encodeURIComponent(encodeURIComponent(location.href)) + "#wechat_redirect";
     window.location.href = url;
