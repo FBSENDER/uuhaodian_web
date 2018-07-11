@@ -4,11 +4,9 @@
 
 = render partial: "header_common"
 = render partial: "header_lanlan_fenlei"
-= render partial: "related_keywords", locals: {keywords: @keywords}
 .wrapper
-  .search-res-title 
-    %strong "#{@keyword}" 
-    搜索结果：
+  %div{style:"margin-top:15px;"}
+  = render partial: "lanlan_quan_filter"
   .zk-list.clearfix#couponList
   = render partial: "lanlan_load_more", locals: {path: @path, pagesize: 20, sort_type: 7, pinyin: '', keyword: @keyword, cid: 0,sort: 7, type: 0}
 

@@ -67,7 +67,7 @@ class CouponController < ApplicationController
       return
     end
     @cates = get_cate_data
-    @keywords = get_hot_keywords_data.sample(10)
+    #@keywords = get_hot_keywords_data.sample(10)
     @top_keywords = get_hot_keywords_data.sample(8)
     @path = "http://api.uuhaodian.com/uu/goods_list"
     if @keyword.size >= 10
