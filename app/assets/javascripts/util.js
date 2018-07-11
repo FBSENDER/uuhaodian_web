@@ -87,7 +87,7 @@ Util.createLanlanCouponList = function(cl,obj,channel,gaPage){
   for(var i=0,len=cl.length;i<len;i++){
     var z = cl[i];
     var re = /activityId=(\w*)/;
-    var buy_url = '/yh/' + z.itemId + '/';
+    var buy_url = '/yh/' + z.itemId + '/#coupon';
     var platform = '',platformPic = '';
     if(z.shopType == 'tmall')
       platform = 2;

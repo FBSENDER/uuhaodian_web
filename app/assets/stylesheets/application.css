@@ -1215,6 +1215,7 @@ input,input:focus{
   line-height: 16px;
   font-size: 12px;
   padding: 10px 10px 0;
+  overflow: hidden;
 }
 .wide-banner .item .price{
   height: 16px;

@@ -38,6 +38,7 @@ class CouponController < ApplicationController
   def product_detail
     url = "http://api.uuhaodian.com/uu/product?item_id=#{params[:id]}"
     json = {}
+    @items = []
     begin
       result = Net::HTTP.get(URI(URI.encode(url)))
       json = JSON.parse(result)
@@ -46,6 +47,12 @@ class CouponController < ApplicationController
         result = Net::HTTP.get(URI(URI.encode(url)))
         json = JSON.parse(result)
         not_found if json["status"]["code"] != 1001 || json["result"].nil?
+      end
+      url_recommend = "http://api.uuhaodian.com/uu/tb_goods_recommend?item_id=#{params[:id]}"
+      result_recommend = Net::HTTP.get(URI(url_recommend))
+      r_json = JSON.parse(result_recommend)
+      if r_json["status"] == 2
+        @items = r_json["results"]
       end
     rescue
       not_found
