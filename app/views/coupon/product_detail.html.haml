@@ -14,7 +14,7 @@
     %p.head
       %span 更多推荐
   .zk-list.clearfix#couponList
-  = render partial: "lanlan_load_more", locals: {path: @path, pagesize: 20, sort_type: 7, pinyin: '', keyword: @detail["category"], cid: 0,sort: 7, type: 0}
+  = render partial: "lanlan_load_more", locals: {path: @path, pagesize: 20, sort_type: 7, pinyin: '', keyword: @detail["category"], cid: 0,sort: 7, type: 0, from_iquan: @from_iquan}
 
 = render partial: "footer"
 = render partial: "sider_fixed_area"

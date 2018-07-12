@@ -7,5 +7,5 @@
 .wrapper
   = render partial: "lanlan_quan_filter"
   .zk-list.clearfix#couponList
-  = render partial: "lanlan_load_more", locals: {path: @path, pagesize: 20, sort_type: 7, pinyin: '', keyword: '', cid: @cid,sort: 7, type: 0}
+  = render partial: "lanlan_load_more", locals: {path: @path, pagesize: 20, sort_type: 7, pinyin: '', keyword: '', cid: @cid,sort: 7, type: 0, from_iquan: @from_iquan}
 = render partial: "sider_fixed_area"

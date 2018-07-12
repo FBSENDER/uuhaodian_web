@@ -8,10 +8,12 @@ class CouponController < ApplicationController
     @top_keywords = get_hot_keywords_data.sample(8)
     @items_9kuai9 = get_coupon_9kuai9_data
     @items_bang = get_coupon_bang_data
+    @from_iquan = params[:from] == 'iquan'
     @path = "http://api.uuhaodian.com/uu/home_list"
   end
 
   def like
+    @from_iquan = params[:from] == 'iquan'
     if cookies[:session_key].nil?
       redirect_to "/", status: 302
       return
@@ -22,6 +24,7 @@ class CouponController < ApplicationController
   end
 
   def category
+    @from_iquan = params[:from] == 'iquan'
     @cid = params[:cid]
     @cid_1 = params[:cid_1]
     @cates = get_cate_data
@@ -36,6 +39,7 @@ class CouponController < ApplicationController
   end
 
   def product_detail
+    @from_iquan = params[:from] == 'iquan'
     url = "http://api.uuhaodian.com/uu/product?item_id=#{params[:id]}"
     json = {}
     @items = []
@@ -68,6 +72,7 @@ class CouponController < ApplicationController
   end
 
   def query
+    @from_iquan = params[:from] == 'iquan'
     @keyword = params[:keyword]
     if @keyword.include?('http') || @keyword.include?("taobao") || @keyword.include?("tmall")
       redirect_to URI.encode("https://www.iquan.net/tbzk/?keyword=#{@keyword}"), status: 302
@@ -83,6 +88,7 @@ class CouponController < ApplicationController
   end
 
   def collection
+    @from_iquan = params[:from] == 'iquan'
     @collection_type = params[:tid].to_i 
     url = ""
     if @collection_type == 1

@@ -87,7 +87,11 @@ Util.createLanlanCouponList = function(cl,obj,channel,gaPage){
   for(var i=0,len=cl.length;i<len;i++){
     var z = cl[i];
     var re = /activityId=(\w*)/;
-    var buy_url = '/yh/' + z.itemId + '/#coupon';
+    var buy_url = '/yh/' + z.itemId + '/';
+    if(channel == 10){
+      buy_url += "?from=iquan";
+    }
+    buy_url += "#coupon"
     var platform = '',platformPic = '';
     if(z.shopType == 'tmall')
       platform = 2;
@@ -147,6 +151,9 @@ Util.createTaobaoCouponList = function(cl,obj,channel,gaPage){
     var re = /减(\d+)元/;
     var coupon_money = parseInt(re.exec(z.coupon_info)[1]);
     var buy_url = 'http://api.uuhaodian.com/uu/pcbuy?id=' + z.num_iid;
+    if(channel == 10){
+      buy_url += "&from=iquan";
+    }
     var platform = '',platformPic = '';
     if(z.user_type == 1)
       platform = 2;
