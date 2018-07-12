@@ -90,6 +90,7 @@ class CouponController < ApplicationController
   def collection
     @from_iquan = params[:from] == 'iquan'
     @collection_type = params[:tid].to_i 
+    @cid = params[:cid].nil? ? 0 : params[:cid].to_i
     url = ""
     if @collection_type == 1
       @collection_name = "聚特卖"

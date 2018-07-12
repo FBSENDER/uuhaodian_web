@@ -14,6 +14,12 @@
     .cate-l-1
       .wrapper
         - if @cates
-          - @cates.each do |cate|
-            - is_active = cate['cid'] == @cid || cate['cid'] == @cid_1 ? 'active' : ''
-            %a{href: "/category/#{cate["cid"]}/", class: "#{is_active}"} #{cate["name"]}
+          - if @collection_type
+            %a{href: "/collection/#{@collection_type}/", class: "#{'active' if @cid == 0}"} 精选
+            - @cates.each do |cate|
+              - is_active = cate['cid'].to_i == @cid ? 'active' : ''
+              %a{href: "/collection/#{@collection_type}/?cid=#{cate['cid']}", class: "#{is_active}"} #{cate['name']}
+          - else
+            - @cates.each do |cate|
+              - is_active = cate['cid'] == @cid || cate['cid'] == @cid_1 ? 'active' : ''
+              %a{href: "/category/#{cate["cid"]}/", class: "#{is_active}"} #{cate["name"]}
