@@ -1,0 +1,22 @@
+.fluid-right
+  - items.each_with_index do |item, index|
+    .item
+      .img-area
+        %img{src: "#{item["coverImage"]}"}
+        - if index < 3
+          %span.top-bang-order #{index + 1}
+      .content
+        .title.elli #{item["shortTitle"]} 
+        .desc #{item["recommend"]}
+
+        .shop
+          - if item["shopType"] == "taobao"
+            .i_taobao
+          - else
+            .i_tmall
+          #{item["sellerName"]} - 2小时已售 #{item["sales2h"]} 件
+        .price 
+          %span.normal 券后价
+          #{item["nowPrice"]}
+      .right
+        .btn #{item["couponMoney"].to_i}元券 

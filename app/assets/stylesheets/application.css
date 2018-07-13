@@ -664,6 +664,15 @@ input,input:focus{
   display: inline-block;
   vertical-align: top;
 }
+.i_taobao {
+  background: url(../img/platform_taobao.png) center no-repeat;
+  background-size: cover;
+  margin-right: 5px;
+  height: 16px;
+  width: 16px;
+  display: inline-block;
+  vertical-align: top;
+}
 .zk-item .title-area {
   height: 16px;
   line-height: 16px;
@@ -1238,7 +1247,21 @@ input,input:focus{
   font-size: 16px;
   color: #fff;
 }
-.bang-order:before{
+.top-bang-order{
+  z-index: 10;
+  position: relative;
+  top: -132px;
+  left: 12px;
+  display: block;
+  height: 24px;
+  width: 24px;
+  background-color: #FF2B22;
+  line-height: 36px;
+  text-align: center;
+  font-size: 16px;
+  color: #fff;
+}
+.bang-order:before,.top-bang-order:before{
   left: 0;
   bottom: -10px;
   border-color: #FF2B22 transparent transparent #FF2B22;
@@ -1249,7 +1272,7 @@ input,input:focus{
   height: 0;
   border-style: solid;
 }
-.bang-order:after{
+.bang-order:after,.top-bang-order:after{
   right: 0;
   bottom: -10px;
   border-color: transparent #FF2B22 transparent transparent;
@@ -1259,4 +1282,152 @@ input,input:focus{
   width: 0;
   height: 0;
   border-style: solid;
+}
+.fluid-right{
+  width: 840px;
+  background-color: white;
+  margin-top: 15px;
+  float: left;
+}
+
+.fluid-right .item{
+  height: 144px;
+  border-bottom: 1px solid #eee;
+}
+.fluid-right .item:hover{
+  background-color: #eee;
+}
+.fluid-right .item .img-area{
+  width: 144px;
+  height: 144px;
+  float: left;
+}
+.fluid-right .item .img-area img{
+  height: 120px;
+  width: 120px;
+  padding: 12px;
+}
+.fluid-right .item .content{
+  width: 499px;
+  float: left;
+  margin: 15px 20px 0 10px;
+  border-right: 1px dashed #ddd;
+}
+.fluid-right .item .content .title{
+  font-size: 18px;
+  font-weight: bold;
+  overflow: hidden;
+  margin-bottom: 12px;
+  height: 27px;
+}
+.fluid-right .item .content .desc{
+  font-size: 13px;
+  color: #999;
+  margin-bottom: 15px;
+  overflow: hidden;
+  height: 40px;
+}
+.fluid-right .item .content .shop{
+  float: left;
+  color: #999;
+}
+.fluid-right .item .content .shop .volumn{
+  font-weight: bold;
+  color: #FF6434;
+}
+.fluid-right .item .content .price{
+  float: right;
+  position: relative;
+  padding-right: 20px;
+  font-size: 24px;
+  color: #FF6434;
+  font-weight: bold;
+  bottom: 5px;
+}
+.fluid-right .item .content .price .normal{
+  font-size: 13px;
+  color: #999;
+}
+.fluid-right .item .right{
+  width: 150px;
+  float: left;
+  font-size: 30px;
+  text-align: center;
+}
+.fluid-right .item .right .btn{
+  margin-top: 45px;
+  background-color: #FF6434;
+  width: 130px;
+  height: 50px;
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 50px;
+  color: white;
+  border-radius: 5px;
+}
+.fluid-left{
+  width: 250px;
+  float: right;
+  margin-top: 15px;
+  background-color: white;
+}
+.fluid-left .guide-1{
+  color: black;
+  border-top: 1px solid #eee;
+}
+.fluid-left .guide-1.fixed {
+  position: fixed;
+  top: 105px;
+  z-index: 99;
+  width: 250px;
+  margin-top: 15px;
+  background-color: white;
+}
+.fluid-left .guide-1 .item, .fluid-left .guide-1.fixed .item{
+  height: 40px;
+  width: 124px;
+  margin-top: 8px;
+  float: left;
+}
+.fluid-left .guide-1 .item .right, .fluid-left .guide-1.fixed .item .right{
+  height: 40px;
+  width: 124px;
+  margin-top: 8px;
+  float: right;
+}
+.newdoor a{
+  background: url(../img/newdoor.png) no-repeat;
+  height: 32px;
+  line-height: 32px;
+  margin: 0 16px;
+  display: inline;
+  color: #484848;
+  font-size: 14px;
+  width: 56px;
+  padding-left: 48px;
+  float: left;
+}
+.newdoor a:hover{
+  color: #FF2220;
+}
+.newdoor .atb{
+  background-position: 0 0;
+}
+.newdoor .tmcs{
+  background-position: 0 -33px;
+}
+.newdoor .jhs{
+  background-position: 0 -66px;
+}
+.newdoor .tqg{
+  background-position: 0 -99px;
+}
+.newdoor .tmjx{
+  background-position: 0 -132px;
+}
+.newdoor .tbtm{
+  background-position: 0 -165px;
+}
+.newdoor .jd{
+  background-position: 0 -198px;
 }

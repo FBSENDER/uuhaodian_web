@@ -108,4 +108,13 @@ class CouponController < ApplicationController
     @path = url
     @cates = get_cate_data
   end
+
+  def top
+    @cates = get_cate_data
+    @top_keywords = get_hot_keywords_data.sample(8)
+    @from_iquan = params[:from] == 'iquan'
+    @path = "http://api.uuhaodian.com/uu/home_list"
+    @cid = params[:cid].nil? ? 0 : params[:cid].to_i
+    @is_top = true
+  end
 end

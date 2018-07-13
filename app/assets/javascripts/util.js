@@ -236,3 +236,57 @@ Util.createTaobaoProductList = function(cl,obj,channel,gaPage){
   Util.lazyLoad('lazy.new');
   $('.lazy.new').removeClass('new');
 }
+Util.createLanlanCouponFluid = function(cl,obj,channel,gaPage){
+  gaPage = gaPage || '未知';
+  var htmlstr = '<div>';
+  for(var i=0,len=cl.length;i<len;i++){
+    var z = cl[i];
+    var re = /activityId=(\w*)/;
+    var buy_url = '/yh/' + z.itemId + '/';
+    if(channel == 10){
+      buy_url += "?from=iquan";
+    }
+    buy_url += "#coupon"
+    var platform = '',platformPic = '';
+    if(z.shopType == 'tmall')
+      platform = 2;
+    else
+      platform = 1;
+    htmlstr += '<div class="item">';
+    htmlstr += '<a href="'+ buy_url +'">';
+    htmlstr += '<div class="img-area">';
+    htmlstr += '<img data-ga-event="商品_图片:点击:'+ gaPage +'" class="lazy new" data-original="'+ z.coverImage +'" alt="'+z.
+      title +'"/>';
+    if(page == 1 && i < 3){
+      htmlstr += '<span class="top-bang-order">' + (i + 1) + '</span>'
+    }
+    htmlstr += '</div></a>';
+    htmlstr += '<a href="'+ buy_url +'">';
+    htmlstr += '<div class="content">';
+    htmlstr += '<div class="title elli">'
+    htmlstr +=  z.shortTitle +'</div>';
+    htmlstr += '<div class="desc">'
+    htmlstr +=  z.recommend +'</div>';
+    htmlstr += '<div class="shop">'
+    if(platform == 1){
+      htmlstr += '<i class="i_taobao"></i>';
+    }
+    else{
+      htmlstr += '<i class="i_tmall"></i>';
+    }
+    htmlstr += z.sellerName + ' - 2小时销量 ' + z.sales2h + ' 件';
+    htmlstr += '</div>'
+    htmlstr += '<div class="price"><span class="normal">券后价&nbsp;&nbsp; </span>';
+    htmlstr += z.nowPrice;
+    htmlstr += '</div></div></a>';
+    htmlstr += '<div class="right"><div class="btn">';
+    htmlstr += '<a href="http://api.uuhaodian.com/uu/pcbuy?id=' + z.itemId +'" target="_blank" title="立即领券">' 
+    htmlstr += parseInt(z.couponMoney) + '元券</a></div></div>';
+    htmlstr += '</div>';
+  }
+  htmlstr += '</div>';
+  htmlstr = $(htmlstr);
+  obj.append(htmlstr);
+  Util.lazyLoad('lazy.new');
+  $('.lazy.new').removeClass('new');
+}

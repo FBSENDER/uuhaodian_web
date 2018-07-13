@@ -18,6 +18,7 @@ $(function(){
   si = $('.search-input'),
   errTip = $('.err-tip'),
   sb = $('.search-btn');
+  var guide_1 = $('.guide-1');
   headerBar.find('.close').on('click',function(){
     headerBar.remove();
   });
@@ -25,8 +26,10 @@ $(function(){
     var _top = $(document).scrollTop();
     if(_top >= 400){
       tabArea.addClass('fixed');
+      guide_1.addClass('fixed');
     }else{
       tabArea.removeClass('fixed');
+      guide_1.removeClass('fixed');
     }
   });
   si.on('focus',function(){
