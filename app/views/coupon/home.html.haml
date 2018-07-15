@@ -12,14 +12,8 @@
   = render partial: "wide_banner", locals: {items: @items_9kuai9}
 
 .wrapper
-  .item-list-top
-    %span.left 畅销榜
-    %a{href: "/collection/2/"}
-      %span.right 查看更多
-  = render partial: "wide_banner", locals: {items: @items_bang}
-
-.wrapper{style: "margin-top:10px;"}
-  .order-area
+  = render partial: "header_lanlan_fenlei"
+  .order-area{style: "margin-top: 20px;"}
     %ul.sort-type
       %li{id: "li-sort-1", data: {sort: "1"}, class: "sort_li active"} 上新
       %li{id: "li-sort-7", data: {sort: "7"}, class: "sort_li"} 综合

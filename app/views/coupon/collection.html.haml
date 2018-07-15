@@ -3,6 +3,20 @@
 - head_desc("优优好店 - #{@collection_name}")
 
 = render partial: "header_common"
+.wrapper{style: "margin-top: 10px;"}
+  .item-list-top
+    - if @collection_type == 4
+      %span.left 9块9包邮 - 精选淘宝天猫特价好物 按品类筛选更精准
+      %a{href: "/collection/4/"}
+        %span.right 全部分类
+    - elsif @collection_type == 2
+      %span.left 优优好店畅销榜 - 大家最爱买 
+      %a{href: "/collection/2/"}
+        %span.right 全部分类
+    - elsif @collection_type == 1
+      %span.left 聚特卖 - 精选聚划算、淘宝特卖优惠券 
+      %a{href: "/collection/1/"}
+        %span.right 全部分类
 = render partial: "header_lanlan_fenlei_collection"
 .wrapper{style: "margin-top: 10px;"}
   .zk-list.clearfix#couponList

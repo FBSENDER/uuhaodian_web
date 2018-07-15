@@ -7,7 +7,6 @@ class CouponController < ApplicationController
     @banners = get_banner_data
     @top_keywords = get_hot_keywords_data.sample(8)
     @items_9kuai9 = get_coupon_9kuai9_data
-    @items_bang = get_coupon_bang_data
     @from_iquan = params[:from] == 'iquan'
     @path = "http://api.uuhaodian.com/uu/home_list"
   end

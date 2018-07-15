@@ -1128,11 +1128,13 @@ input,input:focus{
   width:137px;
   height:105px;
   float:left;
+  color:#666;
 }
 .lanlan-category-area-all a{
   width:91px;
   height:105px;
   float:left;
+  color:#666;
 }
 .lanlan-category-area img, .lanlan-category-area-all img{
   width:60px;
@@ -1141,9 +1143,14 @@ input,input:focus{
 }
 .lanlan-category-area p, .lanlan-category-area-all p{
   font-size:14px;
-  color:#666;
   line-height:20px;
   text-align:center;
+}
+.lanlan-category-area a:hover{
+  color: red;
+}
+.lanlan-category-area-all a:hover{
+  color: red;
 }
 .order-area{
   height: 40px;
@@ -1167,6 +1174,9 @@ input,input:focus{
   padding: 0 5px;
   margin: 0 25px;
   cursor: pointer;
+}
+.order-area .sort-type li:hover{
+  color: red;
 }
 .order-area .sort-type li.active {
   color: #FF2220;
