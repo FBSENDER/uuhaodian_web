@@ -1118,7 +1118,7 @@ input,input:focus{
   border-top: 20px solid transparent;
   border-bottom: 20px solid #fff;
 }
-.lanlan-category-area{
+.lanlan-category-area, .lanlan-category-area-all{
   margin: 10px auto;
   width: 1100px;
   height:105px;
@@ -1129,12 +1129,17 @@ input,input:focus{
   height:105px;
   float:left;
 }
-.lanlan-category-area img{
+.lanlan-category-area-all a{
+  width:91px;
+  height:105px;
+  float:left;
+}
+.lanlan-category-area img, .lanlan-category-area-all img{
   width:60px;
   height:60px;
   margin: 10px auto;
 }
-.lanlan-category-area p{
+.lanlan-category-area p, .lanlan-category-area-all p{
   font-size:14px;
   color:#666;
   line-height:20px;
@@ -1287,7 +1292,7 @@ input,input:focus{
   width: 840px;
   background-color: white;
   margin-top: 15px;
-  float: left;
+  float: right;
 }
 
 .fluid-right .item{
@@ -1367,29 +1372,51 @@ input,input:focus{
 }
 .fluid-left{
   width: 250px;
-  float: right;
+  float: left;
   margin-top: 15px;
   background-color: white;
 }
-.fluid-left .guide-1{
+.fluid-left.fixed{
+  position: fixed;
+  top: 40px;
+}
+.fluid-left .guide-1, .fluid-left .guide-2{
   color: black;
   border-top: 1px solid #eee;
+
 }
-.fluid-left .guide-1.fixed {
-  position: fixed;
-  top: 105px;
-  z-index: 99;
-  width: 250px;
-  margin-top: 15px;
-  background-color: white;
+.fluid-left .guide-2{
+  height: 370px;
 }
-.fluid-left .guide-1 .item, .fluid-left .guide-1.fixed .item{
+.fluid-left .guide-2 .item{
+  float: left;
+  width: 80px;
+  height: 90px;
+  margin-left: 3px;
+  cursor: pointer;
+}
+.fluid-left .guide-2 .item a{
+  text-align: center;
+  color: #666;
+}
+.fluid-left .guide-2 .item a.active{
+  color: #FF2220;
+}
+.fluid-left .guide-2 .item a:hover{
+  color: #FF2220;
+}
+.fluid-left .guide-2 .item img{
+  width: 60px;
+  height: 60px;
+  padding: 10px 10px 0 10px;
+}
+.fluid-left .guide-1 .item{
   height: 40px;
   width: 124px;
   margin-top: 8px;
   float: left;
 }
-.fluid-left .guide-1 .item .right, .fluid-left .guide-1.fixed .item .right{
+.fluid-left .guide-1 .item .right{
   height: 40px;
   width: 124px;
   margin-top: 8px;

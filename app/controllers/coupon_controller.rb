@@ -91,6 +91,7 @@ class CouponController < ApplicationController
     @from_iquan = params[:from] == 'iquan'
     @collection_type = params[:tid].to_i 
     @cid = params[:cid].nil? ? 0 : params[:cid].to_i
+    @top_keywords = get_hot_keywords_data.sample(8)
     url = ""
     if @collection_type == 1
       @collection_name = "聚特卖"
@@ -115,6 +116,8 @@ class CouponController < ApplicationController
     @from_iquan = params[:from] == 'iquan'
     @path = "http://api.uuhaodian.com/uu/home_list"
     @cid = params[:cid].nil? ? 0 : params[:cid].to_i
+    cate = @cates.select{|item| item["cid"].to_i == @cid}.first
+    @cate_name = cate.nil? ? '' : cate["name"]
     @is_top = true
   end
 end

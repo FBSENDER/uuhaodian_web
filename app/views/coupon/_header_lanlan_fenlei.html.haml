@@ -1,13 +1,20 @@
-.hori-cate-area
-  .cate-l-1
-    .wrapper
-      - @cates.each do |cate|
-        - is_active = cate['cid'] == @cid || cate['cid'] == @cid_1 ? 'active' : ''
-        %a{href: "/category/#{cate['cid']}/", class: "#{is_active}"} #{cate['name']}
 - if @lanlan_category && @lanlan_category['list']
+  .hori-cate-area
+    .cate-l-1
+      .wrapper
+        - @cates.each do |cate|
+          - is_active = cate['cid'] == @cid || cate['cid'] == @cid_1 ? 'active' : ''
+          %a{href: "/category/#{cate['cid']}/", class: "#{is_active}"} #{cate['name']}
   .lanlan-category-area
     - @lanlan_category['list'].each do |cate|
       - is_active = cate['cid'] == @cid ? 'red' : '#666'
       %a{href: "/category/#{cate['cid']}/?cid_1=#{@lanlan_category['cid']}&category_name=#{URI.encode(cate['name'])}"}
         %img{src: "#{cate['image']}"}
+        %p{style:"color:#{is_active};"} #{cate['name']}
+- else
+  .lanlan-category-area-all
+    - @cates.each do |cate|
+      - is_active = cate['cid'].to_i == @cid ? 'red' : ''
+      %a{href: "/collection/#{@collection_type}/?cid=#{cate['cid']}", class: "#{is_active}"}
+        %img{src: "#{cate['img_url']}"}
         %p{style:"color:#{is_active};"} #{cate['name']}
