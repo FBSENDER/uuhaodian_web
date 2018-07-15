@@ -15,6 +15,6 @@
   .lanlan-category-area-all
     - @cates.each do |cate|
       - is_active = cate['cid'].to_i == @cid ? 'red' : ''
-      %a{href: "/collection/#{@collection_type}/?cid=#{cate['cid']}", class: "#{is_active}"}
+      %a{href: "/category/?cid=#{cate['cid']}", class: "#{is_active}"}
         %img{src: "#{cate['img_url']}"}
         %p{style:"color:#{is_active};"} #{cate['name']}
