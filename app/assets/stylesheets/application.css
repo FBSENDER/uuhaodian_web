@@ -872,6 +872,20 @@ input,input:focus{
   line-height: 24px;
   text-align: center;
 }
+.side-fixed-menu .menu-item-rank {
+  position: relative;
+  height: 40px;
+  width: 40px;
+  padding: 0;
+  background-color: #fff;
+  margin-bottom: 1px;
+  border-radius: 4px;
+  cursor: pointer;
+  overflow: hidden;
+  z-index: 88;
+  line-height: 24px;
+  text-align: center;
+}
 .side-fixed-menu .menu-item .back-to-top {
   position: relative;
   left: -1px;
@@ -880,6 +894,15 @@ input,input:focus{
   height: 25px;
   background: url(../img/back-to-top.png) center no-repeat;
   background-size: 25px 25px;
+}
+.side-fixed-menu .menu-item-rank .top-rank {
+  position: relative;
+  left: -1px;
+  display: inline-block;
+  width: 35px;
+  height: 35px;
+  background: url(../img/top_rank.png) center no-repeat;
+  background-size: 35px 35px;
 }
 .side-fixed-menu .menu-item .history {
   position: relative;
