@@ -8,4 +8,12 @@
   = render partial: "lanlan_quan_filter"
   .zk-list.clearfix#couponList
   = render partial: "lanlan_load_more", locals: {path: @path, pagesize: 20, sort_type: 7, pinyin: '', keyword: '', cid: @cid,sort: 7, type: 0, from_iquan: @from_iquan}
+.wrapper
+  .item-list-top
+    %span.left 优优好店畅销榜 - 大家都在买
+    %a{href: "/collection/2/"}
+      %span.right 查看更多
+  = render partial: "wide_banner", locals: {items: @items_bang}
+
+= render partial: "footer"
 = render partial: "sider_fixed_area"

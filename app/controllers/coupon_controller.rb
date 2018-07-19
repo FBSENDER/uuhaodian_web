@@ -7,6 +7,7 @@ class CouponController < ApplicationController
     @banners = get_banner_data
     @top_keywords = get_hot_keywords_data.sample(8)
     @items_9kuai9 = get_coupon_9kuai9_data
+    @items_bang = get_coupon_bang_data
     @from_iquan = params[:from] == 'iquan'
     @path = "http://api.uuhaodian.com/uu/home_list"
   end
@@ -34,6 +35,7 @@ class CouponController < ApplicationController
     end
     @category_name = params[:category_name] || @lanlan_category["name"]
     @top_keywords = get_hot_keywords_data.sample(8)
+    @items_bang = get_coupon_bang_data
     @path = "http://api.uuhaodian.com/uu/home_list"
   end
 
@@ -80,6 +82,7 @@ class CouponController < ApplicationController
     @cates = get_cate_data
     #@keywords = get_hot_keywords_data.sample(10)
     @top_keywords = get_hot_keywords_data.sample(8)
+    @items_bang = get_coupon_bang_data
     @path = "http://api.uuhaodian.com/uu/goods_list"
     if @keyword.size >= 10
       @path = "http://api.uuhaodian.com/uu/tb_goods_list"
