@@ -1,0 +1,9 @@
+.item-list-top#fluid
+  %span.left 常用分类
+.guide-2{style: "height: 280px;"}
+  - @cates.each do |cate|
+    - is_active = cate['cid'].to_i == @cid ? 'active' : ''
+    .item
+      %a{href: "/brand/?cid=#{cate["cid"]}#tab_area", class: "#{is_active}"}
+        %img{src: "#{cate["img_url"]}"}
+        %p #{cate["name"]}

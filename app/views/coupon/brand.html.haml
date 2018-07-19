@@ -1,0 +1,20 @@
+- title("#{@cate_name}品牌好券_优优好店")
+- keywords("#{@cate_name}品牌好券")
+- head_desc("优优好店 - #{@cate_name}品牌好券")
+
+= render partial: "header_common"
+
+.wrapper
+  .fluid-left
+    = render partial: "fluid_left_guide_3"
+    %div{style: "height:15px;background-color:#f6f6f6;"}
+    = render partial: "fluid_left_guide_1"
+  .fluid-right
+    .item-list-top
+      %span.left 优优好店 - #{@cate_name}品牌好券
+      %span{style: "color: #999;font-size: 13px;float:right;padding-right:20px;"} 优质品牌好券限时抢
+  .fluid-right#couponList{style: "margin-top:0;border-top: 1px solid #eee;"}
+  .fluid-right{style: "background-color:#f6f6f6"}
+    = render partial: "taobao_fluid_load_more", locals: {path: @path, pagesize: 20, sort_type: 9, pinyin: '', keyword: '', cid: @cid,sort: 9, type: 0}
+
+= render partial: "sider_fixed_area"

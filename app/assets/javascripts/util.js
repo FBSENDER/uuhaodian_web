@@ -236,6 +236,51 @@ Util.createTaobaoProductList = function(cl,obj,channel,gaPage){
   Util.lazyLoad('lazy.new');
   $('.lazy.new').removeClass('new');
 }
+Util.createTaobaoCouponFluid = function(cl,obj,channel,gaPage){
+  gaPage = gaPage || '未知';
+  var htmlstr = '<div>';
+  for(var i=0,len=cl.length;i<len;i++){
+    var z = cl[i];
+    var platform = '',platformPic = '';
+    if(z.user_type == 1)
+      platform = 2;
+    else
+      platform = 1;
+    htmlstr += '<div class="item">';
+    htmlstr += '<a href="'+ z.coupon_click_url +'" target="_blank">';
+    htmlstr += '<div class="img-area">';
+    htmlstr += '<img data-ga-event="商品_图片:点击:'+ gaPage +'" class="lazy new" data-original="'+ z.pict_url +'" alt="'+z.
+      title +'"/>';
+    htmlstr += '</div></a>';
+    htmlstr += '<a href="'+ z.coupon_click_url +'" target="_blank">';
+    htmlstr += '<div class="content">';
+    htmlstr += '<div class="title elli">'
+    htmlstr +=  z.title +'</div>';
+    htmlstr += '<div class="desc">'
+    htmlstr +=  z.item_description +'</div>';
+    htmlstr += '<div class="shop">'
+    if(platform == 1){
+      htmlstr += '<i class="i_taobao"></i>';
+    }
+    else{
+      htmlstr += '<i class="i_tmall"></i>';
+    }
+    htmlstr += '30天销量 ' + z.volume + ' 件';
+    htmlstr += '</div>'
+    htmlstr += '<div class="price"><span class="normal">券后价&nbsp;&nbsp; </span>';
+    htmlstr += (parseInt(z.zk_final_price) - parseInt(z.coupon_amount));
+    htmlstr += '</div></div></a>';
+    htmlstr += '<div class="right"><div class="btn">';
+    htmlstr += '<a href="' + z.coupon_click_url + '" target="_blank" title="立即领券">' 
+    htmlstr += parseInt(z.coupon_amount) + '元券</a></div></div>';
+    htmlstr += '</div>';
+  }
+  htmlstr += '</div>';
+  htmlstr = $(htmlstr);
+  obj.append(htmlstr);
+  Util.lazyLoad('lazy.new');
+  $('.lazy.new').removeClass('new');
+}
 Util.createLanlanCouponFluid = function(cl,obj,channel,gaPage){
   gaPage = gaPage || '未知';
   var htmlstr = '<div>';

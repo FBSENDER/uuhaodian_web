@@ -1,0 +1,20 @@
+.fluid-right
+  - items.each_with_index do |item, index|
+    .item
+      .img-area
+        %img{src: "#{item["pict_url"]}"}
+      .content
+        .title.elli #{item["title"]} 
+        .desc #{item["item_description"]}
+
+        .shop
+          - if item["user_type"] != 1
+            .i_taobao
+          - else
+            .i_tmall
+          30天已售 #{item["volume"]} 件
+        .price 
+          %span.normal 券后价
+          #{item["zk_final_price"].to_f - item["coupon_amount"].to_f}
+      .right
+        .btn #{item["coupon_amount"].to_i}元券 

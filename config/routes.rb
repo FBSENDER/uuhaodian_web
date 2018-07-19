@@ -6,4 +6,5 @@ Rails.application.routes.draw do
   get "/query/:keyword", to: "coupon#query"
   get "/like/", to: "coupon#like"
   get "/top/", to: "coupon#top"
+  get "/brand/", to: "coupon#brand"
 end

@@ -122,4 +122,24 @@ class CouponController < ApplicationController
     @cate_name = cate.nil? ? '' : cate["name"]
     @is_top = true
   end
+
+  def brand
+    @cates = [
+      {"cid" => 3761, "name" => "美食", "img_url"=> "http://oss3.lanlanlife.com/ab30e09ed1072851ff723074e34a3a49_126x126.png"},
+      {"cid"=> 3767, "name"=> "女装", "img_url"=> "http://oss2.lanlanlife.com/e8aa20c6ba198967fffdeb479903a22c_126x126.png"},
+      {"cid"=> 3758, "name"=> "家居", "img_url"=> "http://oss2.lanlanlife.com/9ab88dded485353f3f35c5d0eb54f296_126x126.png"},
+      {"cid"=> 3763, "name"=> "美妆", "img_url"=> "http://oss2.lanlanlife.com/22ef7dd24a4e1d4f9248e988349536b6_126x126.png"},
+      {"cid"=> 3762, "name"=> "鞋包配饰", "img_url"=> "http://oss3.lanlanlife.com/3eb2d6f410443c288e5682e445db20d1_126x126.png"},
+      {"cid"=> 3765, "name"=> "内衣", "img_url"=> "http://oss2.lanlanlife.com/e81fda4ee7f33c8723dc2c87204bc92a_126x126.png"},
+      {"cid"=> 3764, "name"=> "男装", "img_url"=> "http://oss.lanlanlife.com/bf3bac5f430f6eb64b508cc524350976_126x126.png"},
+      {"cid"=> 3760, "name"=> "母婴", "img_url"=> "http://oss2.lanlanlife.com/fccdeeb51c7ac0d6d90607031c1f8414_126x126.png"},
+      {"cid"=> 3759, "name"=> "数码", "img_url"=> "http://oss1.lanlanlife.com/57f40d4d1baf8a8115548bebb2964a0c_126x126.png"}
+    ]
+    @top_keywords = get_hot_keywords_data.sample(8)
+    @cid = params[:cid].nil? ? 3761 : params[:cid].to_i
+    cate = @cates.select{|item| item["cid"].to_i == @cid}.first
+    @cate_name = cate.nil? ? '' : cate["name"]
+    @path = "http://api.uuhaodian.com/uu/tb_dg_list"
+    @is_brand = true
+  end
 end
