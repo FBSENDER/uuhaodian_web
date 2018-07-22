@@ -7,4 +7,5 @@ Rails.application.routes.draw do
   get "/like/", to: "coupon#like"
   get "/top/", to: "coupon#top"
   get "/brand/", to: "coupon#brand"
+  get "/app/", to: "coupon#app"
 end

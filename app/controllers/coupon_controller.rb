@@ -142,4 +142,8 @@ class CouponController < ApplicationController
     @path = "http://api.uuhaodian.com/uu/tb_dg_list"
     @is_brand = true
   end
+
+  def app
+    redirect_to "http://apphtml.ffquan.com/index.php?r=index/down&app_id=550416?t=1532259944"
+  end
 end
