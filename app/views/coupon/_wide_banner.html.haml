@@ -10,18 +10,20 @@
             - if index < 3
               %span.bang-order #{index + 1}
     .swiper-slide
-      - items[6,6].each_with_index do |item, index|
-        %a{href: "/yh/#{item["itemId"]}/#coupon"}
-          .item{style: "#{'margin-left:45px' if index == 0}"}
-            %img{src: "#{item["coverImage"]}"}
-            %p.title #{item["shortTitle"]}
-            %p.price 领券#{(item["couponMoney"].to_f * 10/ item["price"].to_f).ceil}折 —— ￥#{item["nowPrice"]}
+      - if items.size > 6
+        - items[6,6].each_with_index do |item, index|
+          %a{href: "/yh/#{item["itemId"]}/#coupon"}
+            .item{style: "#{'margin-left:45px' if index == 0}"}
+              %img{src: "#{item["coverImage"]}"}
+              %p.title #{item["shortTitle"]}
+              %p.price 领券#{(item["couponMoney"].to_f * 10/ item["price"].to_f).ceil}折 —— ￥#{item["nowPrice"]}
     .swiper-slide
-      - items[12,6].each_with_index do |item, index|
-        %a{href: "/yh/#{item["itemId"]}/#coupon"}
-          .item{style: "#{'margin-left:45px' if index == 0}"}
-            %img{src: "#{item["coverImage"]}"}
-            %p.title #{item["shortTitle"]}
-            %p.price 领券#{(item["couponMoney"].to_f * 10/ item["price"].to_f).ceil}折 —— ￥#{item["nowPrice"]}
+      - if items.size > 12
+        - items[12,6].each_with_index do |item, index|
+          %a{href: "/yh/#{item["itemId"]}/#coupon"}
+            .item{style: "#{'margin-left:45px' if index == 0}"}
+              %img{src: "#{item["coverImage"]}"}
+              %p.title #{item["shortTitle"]}
+              %p.price 领券#{(item["couponMoney"].to_f * 10/ item["price"].to_f).ceil}折 —— ￥#{item["nowPrice"]}
   .swiper-button-prev
   .swiper-button-next

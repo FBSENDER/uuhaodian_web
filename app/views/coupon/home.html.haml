@@ -4,12 +4,13 @@
 
 = render partial: "header_common"
 = render partial: "header_adzone"
-.wrapper
-  .item-list-top
-    %span.left 9块9包邮
-    %a{href: "/collection/4/"}
-      %span.right 查看更多
-  = render partial: "wide_banner", locals: {items: @items_9kuai9}
+- if @items_9kuai9 && @items_9kuai9.size > 0
+  .wrapper
+    .item-list-top
+      %span.left 9块9包邮
+      %a{href: "/collection/4/"}
+        %span.right 查看更多
+    = render partial: "wide_banner", locals: {items: @items_9kuai9}
 
 .wrapper
   = render partial: "header_lanlan_fenlei"
