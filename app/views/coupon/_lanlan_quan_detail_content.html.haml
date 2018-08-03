@@ -5,7 +5,7 @@
 - buy_url += '&from=iquan' if @from_iquan
 #coupon.zk-content
   .img-area
-    %a{href: "#{buy_url}", title: "#{coupon['title']}", target: "_blank", isconvert: 1}
+    %a{href: "#{buy_url}", title: "#{coupon['title']}", target: "_blank", isconvert: 1, onclick: "ga_event(this);", data:{ga: "领券:详情页:详情页_领券_按钮"}}
       %img#cover_image{src: "#{coupon['coverImage']}", alt: "#{coupon['title']}"}
   .info-area
     .title
@@ -42,7 +42,7 @@
           %p#eventTimeStr.desc 有效期
         - else
           %p.desc &nbsp;
-        %a{href: "#{buy_url}", target: "_blank", class: "buy-btn", isconvert: 1}
+        %a{href: "#{buy_url}", target: "_blank", class: "buy-btn", isconvert: 1, onclick: "ga_event(this);", data:{ga: "领券:详情页:详情页_领券_按钮"}}
           .line.line-l
             %i
             %i

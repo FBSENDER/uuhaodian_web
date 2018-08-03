@@ -11,6 +11,10 @@
 // about supported directives.
 //
 //= require_tree .
+function ga_event(e){
+  d = $(e).data("ga").split(":");
+  gtag('event', d[0], {'event_category': d[1], 'event_label': d[2]});
+}
 
 $(function(){
   var headerBar = $('.header-bar'),

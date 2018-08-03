@@ -53,7 +53,7 @@
       .swiper-wrapper
         - if @banners && @banners.size > 0
           - @banners.each do |b|
-            %a.swiper-slide{href: "#{b["link_url"]}", target: "_blank"}
+            %a.swiper-slide{href: "#{b["link_url"]}", target: "_blank", onclick: "ga_event(this);", data:{ga: "大banner:首页:首页_大banner"}}
               %img{src: "#{b["img_url"]}"}
       .swiper-bottom
         .swiper-pager

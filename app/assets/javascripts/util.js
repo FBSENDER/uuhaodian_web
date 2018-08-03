@@ -159,7 +159,7 @@ Util.createTaobaoCouponList = function(cl,obj,channel,gaPage){
       platform = 2;
     else
       platform = 1;
-    htmlstr += '<div class="zk-item">';
+    htmlstr += '<div class="zk-item"  onclick="ga_event(this);" data-ga="直接领券:搜索结果:搜索结果_直接领券">';
     htmlstr += '<a href="'+ buy_url +'" target="_blank">';
     htmlstr += '<div class="img-area">';
     htmlstr += '<img data-ga-event="商品_图片:点击:'+ gaPage +'" class="lazy new" data-original="'+ z.pict_url +'" alt="'+z.
@@ -204,7 +204,7 @@ Util.createTaobaoProductList = function(cl,obj,channel,gaPage){
       platform = 2;
     else
       platform = 1;
-    htmlstr += '<div class="zk-item">';
+    htmlstr += '<div class="zk-item" onclick="ga_event(this);" data-ga="淘点金:搜索结果:搜索结果_淘点金">';
     htmlstr += '<a href="'+ buy_url +'" target="_blank" isconvert="1">';
     htmlstr += '<div class="img-area">';
     htmlstr += '<img data-ga-event="商品_图片:点击:'+ gaPage +'" class="lazy new" data-original="'+ z.pict_url +'" alt="'+z.
@@ -246,7 +246,7 @@ Util.createTaobaoCouponFluid = function(cl,obj,channel,gaPage){
       platform = 2;
     else
       platform = 1;
-    htmlstr += '<div class="item">';
+    htmlstr += '<div class="item" onclick="ga_event(this);" data-ga="直接领券:品牌好券:品牌好券_信息流_直接领券">';
     htmlstr += '<a href="'+ z.coupon_click_url +'" target="_blank">';
     htmlstr += '<div class="img-area">';
     htmlstr += '<img data-ga-event="商品_图片:点击:'+ gaPage +'" class="lazy new" data-original="'+ z.pict_url +'" alt="'+z.
@@ -297,7 +297,7 @@ Util.createLanlanCouponFluid = function(cl,obj,channel,gaPage){
       platform = 2;
     else
       platform = 1;
-    htmlstr += '<div class="item">';
+    htmlstr += '<div class="item" onclick="ga_event(this);" data-ga="信息流详情:小时风云榜:小时风云榜_信息流详情">';
     htmlstr += '<a href="'+ buy_url +'">';
     htmlstr += '<div class="img-area">';
     htmlstr += '<img data-ga-event="商品_图片:点击:'+ gaPage +'" class="lazy new" data-original="'+ z.coverImage +'" alt="'+z.
