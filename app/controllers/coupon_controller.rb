@@ -51,7 +51,12 @@ class CouponController < ApplicationController
         url = "http://api.uuhaodian.com/uu/product_db?item_id=#{params[:id]}"
         result = Net::HTTP.get(URI(URI.encode(url)))
         json = JSON.parse(result)
-        not_found if json["status"]["code"] != 1001 || json["result"].nil?
+        if json["status"] == 0 
+          url = "http://api.uuhaodian.com/uu/product_tb?item_id=#{params[:id]}"
+          result = Net::HTTP.get(URI(URI.encode(url)))
+          json = JSON.parse(result)
+          not_found if json["result"].nil? || json["status"]["code"] != 1001
+        end
       end
       url_recommend = "http://api.uuhaodian.com/uu/tb_goods_recommend?item_id=#{params[:id]}"
       result_recommend = Net::HTTP.get(URI(url_recommend))

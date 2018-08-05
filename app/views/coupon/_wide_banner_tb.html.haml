@@ -2,21 +2,21 @@
   .swiper-wrapper
     .swiper-slide
       - items[0,6].each_with_index do |item, index|
-        %a{href: "#{item["item_url"]}", isconvert: "1", target: "_blank", onclick: "ga_event(this);", data:{ga: "淘点金:详情页:详情页_相关推荐"}}
+        %a{href: "/yh/#{item["num_iid"]}/", isconvert: "1", onclick: "ga_event(this);", data:{ga: "相关推荐:详情页:详情页_相关推荐"}}
           .item{style: "#{'margin-left:45px' if index == 0}"}
             %img{src: "#{item["pict_url"]}"}
             %p.title #{item["title"]}
             %p.price #{(item["zk_final_price"].to_f / item["reserve_price"].to_f).ceil}折 —— ￥#{item["zk_final_price"]}
     .swiper-slide
       - items[6,6].each_with_index do |item, index|
-        %a{href: "#{item["item_url"]}", isconvert: "1", target: "_blank", onclick: "ga_event(this);", data:{ga: "淘点金:详情页:详情页_相关推荐"}}
+        %a{href: "/yh/#{item["num_iid"]}/", isconvert: "1", onclick: "ga_event(this);", data:{ga: "相关推荐:详情页:详情页_相关推荐"}}
           .item{style: "#{'margin-left:45px' if index == 0}"}
             %img{src: "#{item["pict_url"]}"}
             %p.title #{item["title"]}
             %p.price #{(item["zk_final_price"].to_f / item["reserve_price"].to_f).ceil}折 —— ￥#{item["zk_final_price"]}
     .swiper-slide
       - items[12,6].each_with_index do |item, index|
-        %a{href: "#{item["item_url"]}", isconvert: "1", target: "_blank", onclick: "ga_event(this);", data:{ga: "淘点金:详情页:详情页_相关推荐"}}
+        %a{href: "/yh/#{item["num_iid"]}/", isconvert: "1", onclick: "ga_event(this);", data:{ga: "相关推荐:详情页:详情页_相关推荐"}}
           .item{style: "#{'margin-left:45px' if index == 0}"}
             %img{src: "#{item["pict_url"]}"}
             %p.title #{item["title"]}
