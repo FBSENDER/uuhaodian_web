@@ -593,6 +593,11 @@ input,input:focus{
   margin-left: 10px;
   background-color: white;
 }
+.home-oper-area .top-right-banner p{
+  padding: 5px 15px;
+  text-align: center;
+  color:#f9a825;
+}
 .item-list-top{
   padding-left: 15px;
   background-color: white;

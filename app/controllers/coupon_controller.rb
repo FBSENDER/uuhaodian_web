@@ -41,6 +41,7 @@ class CouponController < ApplicationController
 
   def product_detail
     @from_iquan = params[:from] == 'iquan'
+    @coupon_money = params[:coupon_money].to_i
     url = "http://api.uuhaodian.com/uu/product?item_id=#{params[:id]}"
     json = {}
     @items = []
@@ -69,6 +70,15 @@ class CouponController < ApplicationController
       return
     end
     @detail = json["result"]
+    if @coupon_money > 0 && @detail["couponMoney"].to_i == 0
+      @detail["couponMoney"] = @coupon_money
+      price = @detail["nowPrice"]
+      @detail["nowPrice"] = @detail["nowPrice"].to_f - @coupon_money
+      @detail["price"] = price
+    end
+    if @detail["auctionImages"].size < 5
+      @detail["auctionImages"].unshift(@detail["coverImage"])
+    end
     if @detail.nil?
       not_found
       return
