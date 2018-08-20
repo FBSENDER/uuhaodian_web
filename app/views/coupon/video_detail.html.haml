@@ -12,8 +12,8 @@
     = render partial: "taobao_ads_2"
   .sp-content
     .img-area
-      %a{href: "#{@video["video_url"]}", target: "_blank"}
-        %img{src: "#{@video["cover_url"]}"}
+      %video{class: "video-js vjs-default-skin vjs-big-play-centered", poster: "#{@video["cover_url"]}",height: "617px", width: "350px", controls: "true", data:{setup: "{}"}}
+        %source{src: "http://static.iquan.net/video/video_#{@video["id"]}.mp4"}
     .info-area
       .user-info
         %img{src: "#{@video["user_avatar"]}"}

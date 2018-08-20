@@ -1509,16 +1509,10 @@ input,input:focus{
   height: 617px;
   background-color: #f4f4f4;
 }
-.sp-content .img-area:hover{
-  background: url(/img/play_button.png) 50% 50% no-repeat;
-}
 .sp-content .img-area img {
   width: 100%;
   width: 350px;
   height: 617px;
-}
-.sp-content .img-area:hover img{
-  opacity: 0.6;
 }
 .sp-content .info-area {
   width: 430px;
