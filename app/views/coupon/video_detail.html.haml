@@ -1,0 +1,48 @@
+- title("#{@video["video_desc"]}_视频购_优优好店")
+- keywords("视频购")
+- head_desc("优优好店 - 视频购")
+
+= render partial: "header_common"
+.wrapper
+  .ad-area
+    %a{href: "http://t.cn/RegdOHa", target: "_blank"}
+      %img{src: "https://creditcardapp.bankcomm.com/applynew/front/apply/imgShow.html?uuid=4e737f74-e00d-4937-b091-5cfc8c8a281c", width: "230px"}
+      %p{style: "padding:10px;border-bottom:1px dotted #cfcfcf;margin-bottom:10px;"} 在线办理交通银行信用卡 - 美食3折起，周周有优惠！
+    = render partial: "taobao_ads_1"
+    = render partial: "taobao_ads_2"
+  .sp-content
+    .img-area
+      %a{href: "#{@video["video_url"]}", target: "_blank"}
+        %img{src: "#{@video["cover_url"]}"}
+    .info-area
+      .user-info
+        %img{src: "#{@video["user_avatar"]}"}
+        %p @#{@video["user_name"]} | 抖音
+      .desc
+        %p #{@video["video_desc"]}
+      %p.guide 视频商品
+      - @video_items.each do |item| 
+        .item
+          %a{href: "/yh/#{item["num_iid"]}/#coupon"}
+            %img{src: "#{item["pict_url"]}"}
+            %p.title.elli 
+              #{item["title"]}
+              %br
+              %span.price ￥#{item["zk_final_price"]}
+            %span.buy 去购买
+
+%aside.wrapper
+  .rel-zk-area
+    %p.head
+      %span 更多视频
+  .sp-list 
+    - @videos.each do |video|
+      %a{href: "/sp/#{video["id"]}/"}
+        .sp-item
+          .img-area
+            %img{src: "#{video["cover_url"]}"}
+          .info-area
+            %img{src: "#{video["user_avatar"]}"}
+            %p #{video["user_name"]}
+
+= render partial: "footer"

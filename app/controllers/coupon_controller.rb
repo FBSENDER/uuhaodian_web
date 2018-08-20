@@ -161,4 +161,52 @@ class CouponController < ApplicationController
   def app
     redirect_to "http://apphtml.ffquan.com/index.php?r=index/down&app_id=550416?t=1532259944"
   end
+
+  def video_detail
+    url = "http://api.uuhaodian.com/uu/video?id=#{params[:id]}"
+    @video = {}
+    @video_items = []
+    @videos = []
+    begin
+      result = Net::HTTP.get(URI(URI.encode(url)))
+      json = JSON.parse(result)
+      if json["status"] == 1
+        @video = json["result"]["video"]
+        item_ids = json["result"]["product_ids"]
+        if item_ids.size > 0
+          url_1 = "http://api.uuhaodian.com/uu/product_tbs?item_ids=#{item_ids.join(',')}"
+          result_1 = Net::HTTP.get(URI(URI.encode(url_1)))
+          json_1 = JSON.parse(result_1)
+          if json_1["status"] == 2
+            @video_items = json_1["result"]
+          end
+        end
+      else
+        not_found
+      end
+    rescue Exception => ex
+      puts ex
+      not_found
+      return
+    end
+    begin
+      url_2 = "http://api.uuhaodian.com/uu/video_list"
+      result_2 = Net::HTTP.get(URI(URI.encode(url_2)))
+      json_2 = JSON.parse(result_2)
+      if json_2["status"] == 1
+        @videos = json_2["result"]
+      end
+    rescue
+    end
+  end
+
+  def video_list
+    @videos = []
+    url = "http://api.uuhaodian.com/uu/video_list"
+    result = Net::HTTP.get(URI(URI.encode(url)))
+    json = JSON.parse(result)
+    if json["status"] == 1
+      @videos = json["result"]
+    end
+  end
 end

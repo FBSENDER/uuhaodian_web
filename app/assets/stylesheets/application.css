@@ -1496,3 +1496,154 @@ input,input:focus{
 .newdoor .jd{
   background-position: 0 -198px;
 }
+.sp-content {
+  width: 800px;
+  min-height: 617px;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 0 4px rgba(0,0,0,.1);
+}
+.sp-content .img-area {
+  float: left;
+  width: 350px;
+  height: 617px;
+  background-color: #f4f4f4;
+}
+.sp-content .img-area:hover{
+  background: url(/img/play_button.png) 50% 50% no-repeat;
+}
+.sp-content .img-area img {
+  width: 100%;
+  width: 350px;
+  height: 617px;
+}
+.sp-content .img-area:hover img{
+  opacity: 0.6;
+}
+.sp-content .info-area {
+  width: 430px;
+  float: left;
+  margin-top: 10px;
+  padding-left: 20px;
+}
+.sp-content .info-area .user-info{
+  height: 60px;
+}
+.sp-content .info-area .user-info img{
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  float: left;
+}
+.sp-content .info-area .user-info p{
+  float: left;
+  line-height: 50px;
+  padding-left: 10px;
+  font-size: 18px;
+}
+.sp-content .info-area .desc{
+  font-size: 14px;
+  color: #999;
+  padding-bottom: 10px;
+  border-bottom: 1px dotted #cfcfcf;
+}
+.sp-content .info-area .guide{
+  font-size: 18px;
+  padding: 10px 0;
+  border-bottom: 1px dotted #cfcfcf;
+}
+.sp-content .info-area .item{
+  height: 60px;
+  padding: 10px 0;
+  border-bottom: 1px dotted #cfcfcf;
+}
+.sp-content .info-area a{
+  height: 60px;
+}
+.sp-content .info-area .item img{
+  height: 60px;
+  width: 60px;
+  float: left;
+}
+.sp-content .info-area .item .title{
+  color: #333;
+  font-size: 12px;
+  float: left;
+  padding-top: 10px;
+  padding-left: 10px;
+  width: 270px;
+}
+.sp-content .info-area .item .price{
+  color: #FF2B22;
+  font-size: 16px;
+}
+.sp-content .info-area .item .buy{
+  text-align: center;
+  border: 1px solid #cfcfcf;
+  border-radius: 2px;
+  color: #333;
+  float: left;
+  height: 30px;
+  line-height: 30px;
+  width: 70px;
+  margin-top: 14px;
+  margin-left: 15px;
+}
+.sp-content .info-area .item:hover .buy{
+  color: #fff;
+  background-color: #FF2220;
+  font-weight: bold;
+}
+.ad-area{
+  float: right;
+  background-color: #fff;
+  width: 230px;
+  min-height: 617px;
+  padding: 20px 10px;
+}
+.sp-list{
+  margin-right: -20px;
+}
+.sp-item{
+  float: left;
+  width: 258px;
+  margin: 0 20px 20px 0;
+  background-color: #fff;
+  border: 1px solid #fff;
+}
+.sp-item:hover{
+  border: 1px solid #FF2B22;
+}
+.sp-item .img-area{
+  width: 258px;
+  height: 455px;
+}
+.sp-item:hover .img-area{
+  background:url(/img/play_button.png) 50% 50% no-repeat;
+}
+.sp-item .img-area img{
+  width: 258px;
+  height: 455px;
+}
+.sp-item:hover .img-area img{
+  opacity: 0.6;
+}
+.sp-item .info-area {
+  height: 40px;
+  background-color: #fff;
+  padding: 10px;
+}
+.sp-item .info-area img{
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  float: left;
+}
+.sp-item .info-area p{
+  float: left;
+  padding-left: 10px;
+  line-height: 40px;
+  width: 180px;
+  overflow: hidden;
+  height: 40px;
+}

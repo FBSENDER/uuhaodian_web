@@ -1,0 +1,19 @@
+- title("抖音同款_视频购_优优好店")
+- keywords("抖音同款,视频购")
+- head_desc("优优好店 - 视频购 - 抖音同款")
+
+= render partial: "header_common"
+.wrapper
+  .item-list-top{style: "margin-top: 10px;"}
+    %span.left 抖音同款 - 视频购
+  .sp-list{style: "margin-top: 10px;"}
+    - @videos.each do |video|
+      %a{href: "/sp/#{video["id"]}/"}
+        .sp-item
+          .img-area
+            %img{src: "#{video["cover_url"]}"}
+          .info-area
+            %img{src: "#{video["user_avatar"]}"}
+            %p #{video["user_name"]} | 抖音
+
+= render partial: "footer"

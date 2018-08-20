@@ -3,12 +3,11 @@
     .cate-area
       %a.cate-item.jxtj.active{href: "/"}
         %span.cate-rec
-      %a.cate-item.hot{href: "/top/#tab_area", class: "#{'active' if @is_top}"} 小时风云榜
-      %a.cate-item{href: "/brand/", class:"#{'active' if @is_brand}"} 品牌好券
+      %a.cate-item.hot{href: "/douyintongkuan/"} 抖音同款
+      %a.cate-item{href: "/top/#tab_area", class: "#{'active' if @is_top}"} 小时风云榜
+      %a.cate-item{href: "/brand/#tab_area", class:"#{'active' if @is_brand}"} 品牌好券
       %a.cate-item{href: "http://uuhaodian.com/index.php?r=ddq&u=550416", target: "_blank"} 咚咚抢
       %a.cate-item{href: "/collection/4/", class:"#{'active' if @collection_type && @collection_type == 4}"} 九块九包邮
-      %a.cate-item{href: "/collection/2/", class:"#{'active' if @collection_type && @collection_type == 2}"} 畅销榜
-      %a.cate-item{href: "/collection/1/", class:"#{'active' if @collection_type && @collection_type == 1}"} 聚特卖
     .search-area
       %i
       %input.search-input.unfocus{type: "text", placeholder: "粘贴宝贝标题或输入关键词"}
