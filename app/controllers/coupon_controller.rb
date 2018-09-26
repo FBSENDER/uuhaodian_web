@@ -8,12 +8,12 @@ class CouponController < ApplicationController
     @top_keywords = get_hot_keywords_data.sample(8)
     @items_9kuai9 = get_coupon_9kuai9_data
     @items_bang = get_coupon_bang_data
-    @from_iquan = params[:from] == 'iquan'
+    @from_iquan = request.host == "uu.iquan.net"
     @path = "http://api.uuhaodian.com/uu/home_list"
   end
 
   def like
-    @from_iquan = params[:from] == 'iquan'
+    @from_iquan = request.host == "uu.iquan.net"
     if cookies[:session_key].nil?
       redirect_to "/", status: 302
       return
@@ -24,7 +24,7 @@ class CouponController < ApplicationController
   end
 
   def category
-    @from_iquan = params[:from] == 'iquan'
+    @from_iquan = request.host == "uu.iquan.net"
     @cid = params[:cid]
     @cid_1 = params[:cid_1]
     @cates = get_cate_data
@@ -40,7 +40,7 @@ class CouponController < ApplicationController
   end
 
   def product_detail
-    @from_iquan = params[:from] == 'iquan'
+    @from_iquan = request.host == "uu.iquan.net"
     @coupon_money = params[:coupon_money].to_i
     url = "http://api.uuhaodian.com/uu/product?item_id=#{params[:id]}"
     json = {}
@@ -70,6 +70,10 @@ class CouponController < ApplicationController
       return
     end
     @detail = json["result"]
+    if request.host == "uu.iquan.net" && @detail["couponMoney"].to_i == 0
+      redirect_to "http://www.uuhaodian.com" + request.path
+      return
+    end
     if @coupon_money > 0 && @detail["couponMoney"].to_i == 0
       @detail["couponMoney"] = @coupon_money
       price = @detail["nowPrice"]
@@ -88,7 +92,7 @@ class CouponController < ApplicationController
   end
 
   def query
-    @from_iquan = params[:from] == 'iquan'
+    @from_iquan = request.host == "uu.iquan.net"
     @keyword = params[:keyword]
     if @keyword.include?('http') || @keyword.include?("taobao") || @keyword.include?("tmall")
       redirect_to URI.encode("https://www.iquan.net/tbzk/?keyword=#{@keyword}"), status: 302
@@ -105,7 +109,7 @@ class CouponController < ApplicationController
   end
 
   def collection
-    @from_iquan = params[:from] == 'iquan'
+    @from_iquan = request.host == "uu.iquan.net"
     @collection_type = params[:tid].to_i 
     @cid = params[:cid].nil? ? 0 : params[:cid].to_i
     @top_keywords = get_hot_keywords_data.sample(8)
@@ -130,7 +134,7 @@ class CouponController < ApplicationController
   def top
     @cates = get_cate_data
     @top_keywords = get_hot_keywords_data.sample(8)
-    @from_iquan = params[:from] == 'iquan'
+    @from_iquan = request.host == "uu.iquan.net"
     @path = "http://api.uuhaodian.com/uu/home_list"
     @cid = params[:cid].nil? ? 0 : params[:cid].to_i
     cate = @cates.select{|item| item["cid"].to_i == @cid}.first
@@ -150,6 +154,7 @@ class CouponController < ApplicationController
       {"cid"=> 3760, "name"=> "母婴", "img_url"=> "http://oss2.lanlanlife.com/fccdeeb51c7ac0d6d90607031c1f8414_126x126.png"},
       {"cid"=> 3759, "name"=> "数码", "img_url"=> "http://oss1.lanlanlife.com/57f40d4d1baf8a8115548bebb2964a0c_126x126.png"}
     ]
+    @from_iquan = request.host == "uu.iquan.net"
     @top_keywords = get_hot_keywords_data.sample(8)
     @cid = params[:cid].nil? ? 3761 : params[:cid].to_i
     cate = @cates.select{|item| item["cid"].to_i == @cid}.first
