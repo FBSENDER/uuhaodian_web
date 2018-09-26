@@ -88,8 +88,9 @@ Util.createLanlanCouponList = function(cl,obj,channel,gaPage){
     var z = cl[i];
     var re = /activityId=(\w*)/;
     var buy_url = '/yh/' + z.itemId + '/';
+    buy_url += "?coupon_money=" + parseInt(z.couponMoney)
     if(channel == 10){
-      buy_url += "?from=iquan";
+      buy_url += "&from=iquan";
     }
     buy_url += "#coupon"
     var platform = '',platformPic = '';

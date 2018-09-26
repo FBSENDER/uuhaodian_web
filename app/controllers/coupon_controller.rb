@@ -70,7 +70,7 @@ class CouponController < ApplicationController
       return
     end
     @detail = json["result"]
-    if request.host == "uu.iquan.net" && @detail["couponMoney"].to_i == 0
+    if request.host == "uu.iquan.net" && @detail["couponMoney"].to_i == 0 && @coupong_money <= 0
       redirect_to "http://www.uuhaodian.com" + request.path
       return
     end

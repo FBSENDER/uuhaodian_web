@@ -34,8 +34,9 @@ var createLanlanCouponList = function(cl,obj,channel,gaPage){
   for(var i=0,len=cl.length;i<len;i++){
     var z = cl[i];
     var buy_url = '/yh/' + z.itemId + '/';
+    buy_url += "?coupon_money=" + z.couponMoney
     if(channel == 10){
-      buy_url += "?from=iquan";
+      buy_url += "&from=iquan";
     }
     var platform = '',platformPic = '';
     if(z.shopType == 'tmall')
