@@ -252,7 +252,7 @@ Util.createTaobaoCouponFluid = function(cl,obj,channel,gaPage){
     htmlstr += '<img data-ga-event="商品_图片:点击:'+ gaPage +'" class="lazy new" data-original="'+ z.pict_url +'" alt="'+z.
       title +'"/>';
     htmlstr += '</div></a>';
-    htmlstr += '<a href="/yh/'+ z.num_iid +'/?coupon_money=' + z.coupon_amount + '#coupon" target="_blank">';
+    htmlstr += '<a href="/yh/'+ z.item_id +'/?coupon_money=' + z.coupon_amount + '#coupon" target="_blank">';
     htmlstr += '<div class="content">';
     htmlstr += '<div class="title elli">'
     htmlstr +=  z.title +'</div>';
