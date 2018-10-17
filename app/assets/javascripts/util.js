@@ -249,8 +249,7 @@ Util.createTaobaoCouponFluid = function(cl,obj,channel,gaPage){
     htmlstr += '<div class="item" onclick="ga_event(this);" data-ga="领券:品牌好券:品牌好券_信息流_领券">';
     htmlstr += '<a href="'+ z.coupon_click_url +'" target="_blank">';
     htmlstr += '<div class="img-area">';
-    htmlstr += '<img data-ga-event="商品_图片:点击:'+ gaPage +'" class="lazy new" data-original="'+ z.pict_url +'" alt="'+z.
-      title +'"/>';
+    htmlstr += '<img data-ga-event="商品_图片:点击:'+ gaPage +'" class="lazy new" data-original="'+ z.pict_url +'" alt="'+z.title +'"/>';
     htmlstr += '</div></a>';
     htmlstr += '<a href="/yh/'+ z.item_id +'/?coupon_money=' + z.coupon_amount + '#coupon" target="_blank">';
     htmlstr += '<div class="content">';
@@ -271,7 +270,7 @@ Util.createTaobaoCouponFluid = function(cl,obj,channel,gaPage){
     htmlstr += (parseInt(z.zk_final_price) - parseInt(z.coupon_amount));
     htmlstr += '</div></div></a>';
     htmlstr += '<div class="right"><div class="btn">';
-    htmlstr += '<a href="/yh/' + z.num_iid + '/?coupon_money=' + z.coupon_amount +'#coupon" title="立即领券" target="_blank">' 
+    htmlstr += '<a href="/yh/' + z.item_id + '/?coupon_money=' + z.coupon_amount +'#coupon" title="立即领券" target="_blank">' 
     htmlstr += parseInt(z.coupon_amount) + '元券</a></div></div>';
     htmlstr += '</div>';
   }
