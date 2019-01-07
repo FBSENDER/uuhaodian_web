@@ -7,7 +7,7 @@
     .icon_header
       .search
         %i
-        %a{href: "http://m.uuhaodian.com/index.php?r=index/classify&source=dazhe"}
+        %a.zh{href: "http://m.uuhaodian.com/index.php?r=index/classify&source=dazhe"}
           %p 输入您需要的商品名称
   .header
     %h1
@@ -41,7 +41,7 @@
     - @items.each do |item|
       - coupon_id = item["couponUrl"].match(/activityId=(\w+)/)[1]
       .item
-        %a{href: "http://api.uuhaodian.com/uu/buy?id=#{item["itemId"]}&activity_id=#{coupon_id}", target: "_blank"}
+        %a.zh{href: "http://api.uuhaodian.com/uu/buy?id=#{item["itemId"]}&activity_id=#{coupon_id}", target: "_blank"}
           %img.pic{src: "#{item["coverImage"]}"}
           .cent
             %h3 #{item["shortTitle"]}
@@ -54,9 +54,13 @@
               券后价 ￥
               %span.m #{item["nowPrice"]}
   .footer
-    %a.home{href: "http://m.uuhaodian.com/index.php?r=index/wap&source=dazhe", target: "_blank"}
+    %a.home.zh{href: "http://m.uuhaodian.com/index.php?r=index/wap&source=dazhe", target: "_blank"}
       %img.icon{src: "http://www.uuhaodian.com/favicon.ico"}
       .text 优优好店首页
-    %a.btn{href: "http://m.uuhaodian.com/index.php?r=index/search&kw=#{URI.encode(@keyword)}&source=dazhe"} 更多#{@keyword}优惠券
+    %a.btn.zh{href: "http://m.uuhaodian.com/index.php?r=index/search&kw=#{URI.encode(@keyword)}&source=dazhe"} 更多#{@keyword}优惠券
+
+= render partial: "sem_js"
 :javascript
   $("#ercode_show").click(function(){$("#ercode").removeClass("sno")});
+  $(".zh").click(function(){window._agl && window._agl.push(['track', ['success', {t: 3}]])});
+
