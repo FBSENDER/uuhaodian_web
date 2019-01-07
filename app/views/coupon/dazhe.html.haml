@@ -57,6 +57,6 @@
     %a.home{href: "http://m.uuhaodian.com/index.php?r=index/wap&source=dazhe", target: "_blank"}
       %img.icon{src: "http://www.uuhaodian.com/favicon.ico"}
       .text 优优好店首页
-    %a.btn{href: "http://m.uuhaodian.com/index.php?r=index/search&kw=#{URI.encode(@keyword)}&source=dazhe", target: "_blank"} 更多#{@keyword}优惠券
+    %a.btn{href: "http://m.uuhaodian.com/index.php?r=index/search&kw=#{URI.encode(@keyword)}&source=dazhe"} 更多#{@keyword}优惠券
 :javascript
   $("#ercode_show").click(function(){$("#ercode").removeClass("sno")});
