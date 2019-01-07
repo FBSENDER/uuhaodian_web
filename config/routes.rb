@@ -10,4 +10,6 @@ Rails.application.routes.draw do
   get "/brand/", to: "coupon#brand"
   get "/app/", to: "coupon#app"
   get "/douyintongkuan/", to: "coupon#video_list"
+
+  get "/dz/:keyword", to: "coupon#dazhe"
 end

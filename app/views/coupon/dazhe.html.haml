@@ -1,0 +1,62 @@
+- title("#{@keyword},淘宝#{@keyword},天猫#{@keyword}_优优好店")
+- keywords("#{@keyword},#{@keyword}优惠券,淘宝#{@keyword},天猫#{@keyword}")
+- head_desc("优优好店 - #{@keyword}淘宝天猫折上折！")
+
+.dazhe
+  .header_pr.header_red.transition
+    .icon_header
+      .search
+        %i
+        %a{href: "http://m.uuhaodian.com/index.php?r=index/classify&source=dazhe"}
+          %p 输入您需要的商品名称
+  .header
+    %h1
+      超过99.9%用户不知道的秘诀
+      %span.b 折上折
+      买
+      %span.b #{@keyword}！
+    %p.desc 
+      1. 微信扫码关注“
+      %span.b 优优好店
+      ”，回复“
+      %span.b 红包
+      ”领福利
+      %br
+      %br
+      2. 点击上方搜索框，输入淘宝宝贝标题，领取优惠券
+      %br
+      %br
+      3. 在淘宝下单，同时使用红包和优惠券，立享折上折！
+      %br
+      &nbsp;&nbsp;&nbsp;
+      %span{style: "line-height: 30px;"}
+        %a{id: "ercode_show", href: "javascript:;", style: "color: blue;"} 点击展开二维码
+    %img.sno{id: "ercode", src: "http://www.uuhaodian.com/img/lbanner1.png"}
+  .content
+    %p.header 
+      %span.left
+      大家正在领
+      %span.b #{@keyword}
+      优惠券
+    - @items.each do |item|
+      - coupon_id = item["couponUrl"].match(/activityId=(\w+)/)[1]
+      .item
+        %a{href: "http://api.uuhaodian.com/uu/buy?id=#{item["itemId"]}&activity_id=#{coupon_id}", target: "_blank"}
+          %img.pic{src: "#{item["coverImage"]}"}
+          .cent
+            %h3 #{item["shortTitle"]}
+            .num
+              %span 天猫价 ￥#{item["price"]}
+              %span.r 已售#{item["monthSales"]}件
+            .money
+              .quan
+                %i #{item["couponMoney"].to_i}元券
+              券后价 ￥
+              %span.m #{item["nowPrice"]}
+  .footer
+    %a.home{href: "http://m.uuhaodian.com/index.php?r=index/wap&source=dazhe", target: "_blank"}
+      %img.icon{src: "http://www.uuhaodian.com/favicon.ico"}
+      .text 优优好店首页
+    %a.btn{href: "http://m.uuhaodian.com/index.php?r=index/search&kw=#{URI.encode(@keyword)}&source=dazhe", target: "_blank"} 更多#{@keyword}优惠券
+:javascript
+  $("#ercode_show").click(function(){$("#ercode").removeClass("sno")});

@@ -214,4 +214,17 @@ class CouponController < ApplicationController
       @videos = json["result"]
     end
   end
+
+  def dazhe
+    @keyword = params[:keyword]
+    url = "http://api.uuhaodian.com/uu/goods_list?keyword=#{@keyword}"
+    result = Net::HTTP.get(URI(URI.encode(url)))
+    json = JSON.parse(result)
+    if json["status"]["code"] == 1001
+      @items = json["result"]
+    else
+      @items = []
+    end
+    render :dazhe, layout: "dazhe"
+  end
 end
