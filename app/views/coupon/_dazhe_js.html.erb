@@ -1,0 +1,130 @@
+<script type="text/javascript">
+var globalChannel = 27;
+var dazheList = $('#dazheList');
+var page = 1,pagesize = 20,load = 1,channel = 27,sort = 7, keyword = '<%= @keyword %>';
+var path = 'http://api.uuhaodian.com/uu/tb_goods_list';
+function createList_1(cl, obj){
+  var htmlstr = '';
+  for(var i=0,len=cl.length;i<len;i++){
+    var z = cl[i];
+    var re = /activityId=(\w*)/;
+    var buy_url = 'http://api.uuhaodian.com/uu/buy/?id=' + z.itemId;
+    htmlstr += '<div class="item">';
+    htmlstr += '<a class = "zh" href="'+ buy_url +'" target="_blank">';
+    htmlstr += '<img class="pic" src="'+ z.coverImage +'" alt="'+z.
+      title +'"/>';
+    htmlstr += '<div class="cent">';
+    htmlstr += '<h3>'+ z.shortTitle + '</h3>';
+    htmlstr += '<div class="num">';
+    htmlstr += '<span>天猫价 ￥'+ z.price + '</span>';
+    htmlstr += '<span class="r">已售'+ z.monthSales + '件</span></div>';
+    htmlstr += '<div class="money"><div class="quan"><i>' + parseInt(z.couponMoney) + '元券</i></div>';
+    htmlstr += '券后价 ￥'
+    htmlstr += '<span class="m">' + z.nowPrice + '</span></div>'
+    htmlstr += '</div></a></div>';
+  }
+  htmlstr = $(htmlstr);
+  obj.append(htmlstr);
+}
+function createList_2(cl, obj){
+  var htmlstr = '';
+  for(var i=0,len=cl.length;i<len;i++){
+    var z = cl[i];
+    var re = /减(\d+)元/;
+    var coupon_money = parseInt(re.exec(z.coupon_info)[1]);
+    var buy_url = 'http://api.uuhaodian.com/uu/buy/?id=' + z.num_iid;
+    htmlstr += '<div class="item">';
+    htmlstr += '<a class = "zh" href="'+ buy_url +'" target="_blank">';
+    htmlstr += '<img class="pic" src="'+ z.pict_url +'" alt="'+z.
+      title +'"/>';
+    htmlstr += '<div class="cent">';
+    htmlstr += '<h3>'+ z.title + '</h3>';
+    htmlstr += '<div class="num">';
+    htmlstr += '<span>天猫价 ￥'+ z.zk_final_price + '</span>';
+    htmlstr += '<span class="r">已售'+ z.volume + '件</span></div>';
+    htmlstr += '<div class="money"><div class="quan"><i>' + coupon_money + '元券</i></div>';
+    htmlstr += '券后价 ￥'
+    htmlstr += '<span class="m">' + (z.zk_final_price - coupon_money).toFixed(2) + '</span></div>'
+    htmlstr += '</div></a></div>';
+  }
+  htmlstr = $(htmlstr);
+  obj.append(htmlstr);
+}
+function createList_3(cl, obj){
+  var htmlstr = '';
+  for(var i=0,len=cl.length;i<len;i++){
+    var z = cl[i];
+    var buy_url = z.item_url;
+    htmlstr += '<div class="item">';
+    htmlstr += '<a class = "zh" href="'+ buy_url +'" target="_blank" isconvert=1>';
+    htmlstr += '<img class="pic" src="'+ z.pict_url +'" alt="'+z.
+      title +'"/>';
+    htmlstr += '<div class="cent">';
+    htmlstr += '<h3>'+ z.title + '</h3>';
+    htmlstr += '<div class="num">';
+    htmlstr += '<span>天猫价 ￥'+ z.reserve_price + '</span>';
+    htmlstr += '<span class="r">已售'+ z.volume + '件</span></div>';
+    htmlstr += '<div class="money"><div class="quan"><i>优惠券</i></div>';
+    htmlstr += '折扣价 ￥'
+    htmlstr += '<span class="m">' + z.zk_final_price + '</span></div>'
+    htmlstr += '</div></a></div>';
+  }
+  htmlstr = $(htmlstr);
+  obj.append(htmlstr);
+}
+function getDazheCouponList(){
+  $.ajax({
+    url: path,
+    type: 'GET',
+    dataType: 'jsonp',
+    data:{
+      'pinyin': '',
+      'keyword': keyword,
+      'cid': '0',
+      'sort': sort,
+      'price': '',
+      'type': '0',
+      'page':page,
+      'pagesize':pagesize,
+      'callback': 'callback'
+    },
+    beforeSend:function(){
+    },
+    success:function(data){
+    }
+  });
+}
+var callback = function(data){
+  if(data.status.code == 1001){
+    createList_1(data.result,dazheList);
+    if(data.result.length < pagesize)
+    {
+      path = "http://api.uuhaodian.com/uu/tb_goods_list";
+      page = 1;
+      getDazheCouponList();
+    }
+  }
+  else if(data.status == 1){
+    createList_2(data.results,dazheList);
+  }
+  else if(data.status == 2){
+    createList_3(data.results,dazheList);
+  }
+};
+
+$(function(){
+  getDazheCouponList();
+  $(document).scroll(function(){
+    tp = document.body.scrollTop || document.documentElement.scrollTop;
+    if(tp > 200){
+      $('.scroll_top').removeClass('close');
+      $('.scroll_top').addClass('open');
+    }
+    else{
+      $('.scroll_top').removeClass('open');
+      $('.scroll_top').addClass('close');
+    }
+  });
+  $(".scroll_top>a").click(function(){window.scrollTo(0, 2);});
+});
+</script>

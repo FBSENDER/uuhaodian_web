@@ -254,3 +254,26 @@
   background: -ms-linear-gradient(left,#FBAA58 0,#FA4DBE 100%);
   background: linear-gradient(to left,#FBAA58 0,#FA4DBE 100%);
 }
+.scroll_top{
+  background: rgba(51,51,51,.8);
+  border-radius: 35px;
+  height: 35px;
+  width: 35px;
+  position: fixed;
+  bottom: 0;
+  right: 20px;
+  text-align: center;
+  line-height: 35px;
+  transition: bottom 2;
+  z-index: 10;
+}
+.scroll_top.close{
+  bottom: 0;
+}
+.scroll_top.open{
+  bottom: 80px;
+}
+.scroll_top img{
+  height: 35px;
+  width: 35px;
+}

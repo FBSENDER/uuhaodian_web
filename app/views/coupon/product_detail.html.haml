@@ -8,8 +8,6 @@
 %aside.wrapper
   .item-list-top{style: "margin-top: 10px;"}
     %span.left 相关推荐
-    %a{href: "http://t.cn/RegdOHa", target: "_blank", rel: "nofollow", onclick: "ga_event(this);", data:{ga: "信用卡:详情页:详情页_信用卡"}}
-      %span.right{style: "color:#f9a825"} 交通银行信用卡在线申请-GO
 
   - if @items.size > 0
     = render partial: "wide_banner_tb", locals: {items: @items}

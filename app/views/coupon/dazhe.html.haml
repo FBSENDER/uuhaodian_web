@@ -30,7 +30,7 @@
       %br
       &nbsp;&nbsp;&nbsp;
       %span{style: "line-height: 30px;"}
-        %a{id: "ercode_show", href: "javascript:;", style: "color: blue;"} 点击展开二维码
+        %a{id: "ercode_show", href: "javascript:;", style: "color: #FBAA58;"} 点击展开二维码
     %img.sno{id: "ercode", src: "http://www.uuhaodian.com/img/lbanner1.png"}
   .content
     %p.header 
@@ -38,6 +38,7 @@
       大家正在领
       %span.b #{@keyword}
       优惠券
+    #dazheList
     - @items.each do |item|
       - coupon_id = item["couponUrl"].match(/activityId=(\w+)/)[1]
       .item
@@ -57,10 +58,18 @@
     %a.home.zh{href: "http://m.uuhaodian.com/index.php?r=index/wap&source=dazhe", target: "_blank"}
       %img.icon{src: "http://www.uuhaodian.com/favicon.ico"}
       .text 优优好店首页
-    %a.btn.zh{href: "http://m.uuhaodian.com/index.php?r=index/search&kw=#{URI.encode(@keyword)}&source=dazhe"} 更多#{@keyword}优惠券
+    - if @keyword.size < 5
+      %a#more_btn.btn.zh{href: "http://m.uuhaodian.com/index.php?r=index/search&kw=#{URI.encode(@keyword)}&source=dazhe"} 更多#{@keyword}优惠券
+    - else
+      %a#more_btn.btn.zh{href: "http://m.uuhaodian.com/index.php?r=index/wap&source=dazhe"} 更多优惠券
+.scroll_top.close
+  %a{href: "javascript:;"}
+    %img{src: "/img/to_top.png"}
+
 
 = render partial: "sem_js"
 :javascript
-  $("#ercode_show").click(function(){$("#ercode").removeClass("sno")});
+  $("#ercode_show").click(function(){$("#ercode").removeClass("sno");$("#ercode_show").css("display","none");});
   $(".zh").click(function(){window._agl && window._agl.push(['track', ['success', {t: 3}]])});
 
+= render partial: "dazhe_js"
