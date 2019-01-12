@@ -221,6 +221,33 @@ class CouponController < ApplicationController
     result = Net::HTTP.get(URI(URI.encode(url)))
     json = JSON.parse(result)
     @items = []
+    @device = mobile_device == 1 ? "ios" : "android" 
     render :dazhe, layout: "dazhe"
+  end
+
+  def dazhe_search
+    @keywords = %w(吹风机 耳机 暖宝宝 打底裤 袜子 抽纸 羽绒服)
+    @device = mobile_device == 1 ? "ios" : "android" 
+    @cats = [
+      {id: 4, k: "家居日用"},
+      {id: 6, k: "美食"},
+      {id: 2, k: "母婴"},
+      {id: 3, k: "美妆"},
+      {id: 1, k: "女装"},
+      {id: 8, k: "数码家电"},
+      {id: 7, k: "文娱车品"},
+      {id: 10, k: "内衣"},
+      {id: 14, k: "家装家纺"},
+      {id: 5, k: "鞋品"},
+      {id: 9, k: "男装"},
+      {id: 12, k: "配饰"},
+      {id: 13, k: "户外运动"},
+      {id: 11, k: "箱包"}
+    ]
+    @topics = [
+      {url: "http://m.uuhaodian.com/index.php?r=a/t&i=910b6ce81d643cef&source=dazhe", k: "年货节特产市集"},
+      {url: "http://m.uuhaodian.com/index.php?r=a/t&i=17050b189f22a004&source=dazhe", k: "年货大礼包"}
+    ]
+    render :dazhe_search, layout: "dazhe"
   end
 end

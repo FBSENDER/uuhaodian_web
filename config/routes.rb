@@ -12,4 +12,5 @@ Rails.application.routes.draw do
   get "/douyintongkuan/", to: "coupon#video_list"
 
   get "/dz/:keyword", to: "coupon#dazhe"
+  get "/dz_search", to: "coupon#dazhe_search"
 end

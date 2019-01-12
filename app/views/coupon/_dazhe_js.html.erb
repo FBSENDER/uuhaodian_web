@@ -2,7 +2,7 @@
 var globalChannel = 27;
 var dazheList = $('#dazheList');
 var page = 1,pagesize = 20,load = 1,channel = 27,sort = 7, keyword = '<%= @keyword %>';
-var path = 'http://api.uuhaodian.com/uu/tb_goods_list';
+var path = 'http://api.uuhaodian.com/uu/goods_list';
 function createList_1(cl, obj){
   var htmlstr = '';
   for(var i=0,len=cl.length;i<len;i++){
@@ -73,6 +73,9 @@ function createList_3(cl, obj){
   obj.append(htmlstr);
 }
 function getDazheCouponList(){
+  if(!load){
+    return;
+  }
   $.ajax({
     url: path,
     type: 'GET',
@@ -83,18 +86,21 @@ function getDazheCouponList(){
       'cid': '0',
       'sort': sort,
       'price': '',
-      'type': '0',
+      'type': sort,
       'page':page,
       'pagesize':pagesize,
       'callback': 'callback'
     },
     beforeSend:function(){
+      load = 0;
     },
     success:function(data){
     }
   });
 }
 var callback = function(data){
+  load = 1;
+  page ++;
   if(data.status.code == 1001){
     createList_1(data.result,dazheList);
     if(data.result.length < pagesize)
@@ -119,12 +125,30 @@ $(function(){
     if(tp > 200){
       $('.scroll_top').removeClass('close');
       $('.scroll_top').addClass('open');
+      $('.filter').addClass('fixed');
     }
     else{
       $('.scroll_top').removeClass('open');
       $('.scroll_top').addClass('close');
+      $('.filter').removeClass('fixed');
+    }
+    if(tp >= (document.body.scrollHeight - 800)){
+      _hmt.push(['_trackEvent', '加载更多', 'click', 'dazhe']);
+      getDazheCouponList();
     }
   });
   $(".scroll_top>a").click(function(){window.scrollTo(0, 2);});
+  $(".type").click(function(){
+    if($(this).hasClass('active')){
+      return;
+    }
+    $('.type').removeClass('active');
+    $(this).addClass('active');
+    sort = $(this).data('sort');
+    page = 1;
+    path = 'http://api.uuhaodian.com/uu/goods_list';
+    $("#dazheList").html("");
+    getDazheCouponList();
+  });
 });
 </script>

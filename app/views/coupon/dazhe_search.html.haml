@@ -1,0 +1,52 @@
+- title("搜券_找券_优惠券搜索_优优好店")
+- keywords("搜券,找券,优惠券搜索")
+- head_desc("优优好店 - 搜券找券优惠券，享淘宝天猫折上折！")
+
+.dazhe
+  .header_pr.header_red.transition
+    .icon_header
+      %a{href: "javascript:history.go(-1);"}
+        .back
+          %img{src: "/img/back.png"}
+      %input#input_k{placeholder: "输入关键词"}
+  .search-cat
+    .title 
+      %p 热门搜索
+    .search-cent
+      - @keywords.each do |k|
+        .sitem
+          %a.zh{href: "http://m.uuhaodian.com/index.php?r=index/search&kw=#{URI.encode(k)}&source=dazhe", onclick:"_hmt.push(['_trackEvent', '热门搜索点击', 'click', 'dazhe'])"} #{k}
+      - @topics.each do |t|
+        .sitem
+          %a.zh{href: "#{t[:url]}", onclick:"_hmt.push(['_trackEvent', '专题点击', 'click', 'dazhe'])"} #{t[:k]}
+
+    .clearfix
+    .title 
+      %p 商品分类
+    .search-cent
+      - @cats.each do |c|
+        .sitem
+          %a.zh{href: "http://m.uuhaodian.com/index.php?r=index/cat&cid=#{c[:id]}&u=550416&source=dazhe", onclick:"_hmt.push(['_trackEvent', '商品分类点击', 'click', 'dazhe'])"} #{c[:k]}
+
+  .footer
+    %a.home.zh{href: "http://m.uuhaodian.com/index.php?r=index/wap&source=dazhe", target: "_blank", onclick:"_hmt.push(['_trackEvent', '首页', 'click', 'dazhe'])"}
+      %img.icon{src: "http://www.uuhaodian.com/favicon.ico"}
+      .text 优优好店首页
+    - if @device == "ios"
+      %a#more_btn.btn.zh{href: "http://apphtml.ffquan.com/index.php?r=index/ios-down&app_id=550416", target: "_blank", onclick:"_hmt.push(['_trackEvent', '下载app-ios', 'click', 'dazhe'])"} 下载APP获取更多优惠
+    - else
+      %a#more_btn.btn.zh{href: "https://a.app.qq.com/o/simple.jsp?pkgname=com.dataoke.shoppingguide.app550416", target: "_blank", onclick:"_hmt.push(['_trackEvent', '下载app-android', 'click', 'dazhe'])"} 下载APP获取更多优惠
+
+= render partial: "sem_js"
+:javascript
+  $(".zh").click(function(){window._agl && window._agl.push(['track', ['success', {t: 3}]])});
+  $("#input_k").focus();
+  $("#input_k").on('keyup', function(e){
+    var keycode = e.keyCode,
+    q = $(this).val();
+    if(keycode == 13 && q.trim()){
+      window._agl && window._agl.push(['track', ['success', {t: 3}]])
+      _hmt.push(['_trackEvent', '搜索', 'click', 'dazhe']);
+      window.location.href = 'http://m.uuhaodian.com/index.php?r=index/search&source=dazhe&kw=' + encodeURIComponent(q);
+    }
+  });
