@@ -13,4 +13,6 @@ Rails.application.routes.draw do
 
   get "/dz/:keyword", to: "coupon#dazhe"
   get "/dz_search", to: "coupon#dazhe_search"
+
+  get "/dianpu/:name", to: "coupon#shop"
 end
