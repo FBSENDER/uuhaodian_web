@@ -1,0 +1,77 @@
+- title("【#{@shop['title']}】#{@shop['title']}优惠券/首页/评价/怎么样_优优好店")
+- head_desc("#{@shop['title']} - 优优好店推荐")
+- keywords("#{@shop['title']},#{@shop['title']}首页,#{@shop['title']}优惠券,#{@shop['title']}折扣,#{@shop['title']}怎么样,#{@shop['title']}评价,#{@shop['title']}淘宝,#{@shop['title']}天猫")
+
+.dazhe
+  .header_pr.header_red.transition
+    .icon_header
+      .search
+        %i
+        %a{href: "/dz_search/", onclick: "_hmt.push(['_trackEvent', '顶部点击', 'click', 'dian'])"}
+          %p 输入您需要的商品名称
+  %a{href: "#{@shop['shop_url']}", target: "_blank", isconvert: 1, onclick: "_hmt.push(['_trackEvent', '店铺点击', 'click', 'dian'])", data: {pid: "mm_130328389_44598299_97435850386"}}
+    .shop
+      .jbtn
+        %img{src: "http://www.uuhaodian.com/img/jindian.png", height: "35px;", width: "90px;"}
+      .avatar
+        %img{src: "#{@shop['pic_url']}"}
+      .info
+        %p.title #{@shop['title']}
+        %p.desc #{@shop['place']}
+        %p.desc 主营：#{@shop['type']}
+        %p.desc 评价：优
+  .header
+    %h1
+      超过99.9%用户不知道的秘诀
+      %span.b 折上折
+      逛
+      %span.b 淘宝天猫
+    %p.desc 
+      1. 微信扫码关注“
+      %span.b 优优好店
+      ”，回复“
+      %span.b 红包
+      ”领福利
+      %br
+      %br
+      2. 点击上方搜索框，输入淘宝宝贝标题，领取优惠券
+      %br
+      %br
+      3. 在淘宝下单，同时使用红包和优惠券，立享折上折！
+      %br
+      &nbsp;&nbsp;&nbsp;
+      %span{style: "line-height: 30px;"}
+        %a{id: "ercode_show", href: "javascript:;", style: "color: #FBAA58;", onclick:"_hmt.push(['_trackEvent', '展开二维码', 'click', 'dian'])"} 点击展开二维码
+    %img.sno{id: "ercode", src: "http://www.uuhaodian.com/img/lbanner1.png"}
+  .content
+    .filter
+      .type.active{data: {sort: 7}}
+        %a{href: "javascript:;", onclick:"_hmt.push(['_trackEvent', '筛选-综合', 'click', 'dian'])"} 综合
+      .type{data: {sort: 1}}
+        %a{href: "javascript:;", onclick:"_hmt.push(['_trackEvent', '筛选-上新', 'click', 'dian'])"} 上新
+      .type{data: {sort: 4}}
+        %a{href: "javascript:;", onclick:"_hmt.push(['_trackEvent', '筛选-销量', 'click', 'dian'])"} 销量
+      .type{data: {sort: 3}}
+        %a{href: "javascript:;", onclick:"_hmt.push(['_trackEvent', '筛选-价格', 'click', 'dian'])"} 价格
+    #dazheList
+  .footer
+    %a.home.zh{href: "http://m.uuhaodian.com/index.php?r=index/wap&source=dian", target: "_blank", onclick:"_hmt.push(['_trackEvent', '首页', 'click', 'dian'])"}
+      %img.icon{src: "http://www.uuhaodian.com/favicon.ico"}
+      .text 优优好店首页
+    - if @device == "ios"
+      %a#more_btn.btn.zh{href: "http://apphtml.ffquan.com/index.php?r=index/ios-down&app_id=550416", target: "_blank", onclick:"_hmt.push(['_trackEvent', '下载app-ios', 'click', 'dian'])"} 下载APP获取更多优惠
+    - else
+      %a#more_btn.btn.zh{href: "https://a.app.qq.com/o/simple.jsp?pkgname=com.dataoke.shoppingguide.app550416", target: "_blank", onclick:"_hmt.push(['_trackEvent', '下载app-android', 'click', 'dian'])"} 下载APP获取更多优惠
+
+.laxin
+  %a{href: "https://mos.m.taobao.com/activity_newer?from=pub&pid=mm_130328389_128600315_33716750445", target: "_blank"}
+    %img{src: "http://gw.alicdn.com/tfs/TB1xoJEXgmTBuNjy1XbXXaMrVXa-206-210.png", class: "laxin"}
+.scroll_top.close
+  %a{href: "javascript:;"}
+    %img{src: "/img/to_top.png"}
+
+:javascript
+  $("#ercode_show").click(function(){$("#ercode").removeClass("sno");$("#ercode_show").css("display","none");});
+  $(".zh").click(function(){window._agl && window._agl.push(['track', ['success', {t: 3}]])});
+
+= render partial: "dazhe_js"

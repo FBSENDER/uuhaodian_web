@@ -280,6 +280,39 @@
   background: -ms-linear-gradient(left,#FBAA58 0,#FA4DBE 100%);
   background: linear-gradient(to left,#FBAA58 0,#FA4DBE 100%);
 }
+.dazhe .shop{
+  background-color: #ffffff;
+  border-bottom: 1px solid #e7e7e7;
+}
+.dazhe .shop .jbtn{
+  height: 0;
+  position: relative;
+  float: right;
+  left: -10px;
+  top: 75px;
+}
+.dazhe .shop .avatar{
+  padding: 10px;
+  width: 100px;
+  height: 100px;
+}
+.dazhe .shop .avatar img{
+  height: 100px;
+  height: 100px;
+}
+.dazhe .shop .info{
+  height: 0;
+  position: relative;
+  top: -120px;
+  left: 120px;
+}
+.dazhe .shop .info .title{
+  font-size: 18px;
+  padding: 10px 0;
+}
+.dazhe .shop .info .desc{
+  font-size: 14px;
+}
 .scroll_top{
   background: rgba(51,51,51,.8);
   border-radius: 35px;

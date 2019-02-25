@@ -217,9 +217,9 @@ class CouponController < ApplicationController
 
   def dazhe
     @keyword = params[:keyword]
-    url = "http://api.uuhaodian.com/uu/goods_list?keyword=#{@keyword}"
-    result = Net::HTTP.get(URI(URI.encode(url)))
-    json = JSON.parse(result)
+    #url = "http://api.uuhaodian.com/uu/goods_list?keyword=#{@keyword}"
+    #result = Net::HTTP.get(URI(URI.encode(url)))
+    #json = JSON.parse(result)
     @items = []
     @device = mobile_device == 1 ? "ios" : "android" 
     render :dazhe, layout: "dazhe"
@@ -245,9 +245,22 @@ class CouponController < ApplicationController
       {id: 11, k: "箱包"}
     ]
     @topics = [
-      {url: "http://m.uuhaodian.com/index.php?r=a/t&i=910b6ce81d643cef&source=dazhe", k: "年货节特产市集"},
-      {url: "http://m.uuhaodian.com/index.php?r=a/t&i=17050b189f22a004&source=dazhe", k: "年货大礼包"}
     ]
     render :dazhe_search, layout: "dazhe"
+  end
+
+  def shop
+    url = "http://api.uuhaodian.com/uu/shop?name=#{URI.encode_www_form_component(params[:name])}"
+    result = Net::HTTP.get(URI(url))
+    json = JSON.parse(result)
+    if json["status"] == 0
+      not_found
+      return
+    end
+    @shop = json["result"]["shop"]
+    @keyword = @shop["keyword"]
+    @items = []
+    @device = mobile_device == 1 ? "ios" : "android" 
+    render :dian, layout: "dazhe"
   end
 end
