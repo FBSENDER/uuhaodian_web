@@ -1,0 +1,70 @@
+<script type="text/javascript">
+var globalChannel = 27;
+var dazheList = $('#dazheList');
+var page = 1,pagesize = 20,load = 1,channel = 27,sort = 7, shop_id = '<%= @shop_id %>';
+var path = 'http://api.uuhaodian.com/uu/shop_hot_items';
+function createList_1(cl, obj){
+  var htmlstr = '';
+  for(var i=0,len=cl.length;i<len;i++){
+    var z = cl[i];
+    var buy_url = z.item_url;
+    htmlstr += '<div class="item">';
+    htmlstr += '<a class = "zh" href="'+ buy_url +'" target="_blank" isconvert=1>';
+    htmlstr += '<img class="pic" src="'+ z.pict_url +'" alt="'+z.
+      title +'"/>';
+    htmlstr += '<div class="cent">';
+    htmlstr += '<h3>'+ z.title + '</h3>';
+    htmlstr += '<div class="num">';
+    htmlstr += '<span>价格 ￥'+ z.reserve_price + '</span>';
+    htmlstr += '<span class="r">已售'+ z.volume + '件</span></div>';
+    htmlstr += '<div class="money"><div class="quan"><i>' + (parseFloat(z.zk_final_price) * 10 / parseFloat(z.reserve_price)).toFixed(1) + '折</i></div>';
+    htmlstr += '促销价 ￥'
+    htmlstr += '<span class="m">' + z.zk_final_price + '</span></div>'
+    htmlstr += '</div></a></div>';
+  }
+  htmlstr = $(htmlstr);
+  obj.append(htmlstr);
+}
+function getDazheCouponList(){
+  if(!load){
+    return;
+  }
+  $.ajax({
+    url: path,
+    type: 'GET',
+    dataType: 'jsonp',
+    data:{
+      'shop_id': shop_id,
+      'callback': 'callback'
+    },
+    beforeSend:function(){
+      load = 0;
+    },
+    success:function(data){
+    }
+  });
+}
+var callback = function(data){
+  load = 1;
+  page ++;
+  if(data.status == 1){
+    createList_1(data.result,dazheList);
+  }
+};
+
+$(function(){
+  getDazheCouponList();
+  $(document).scroll(function(){
+    tp = document.body.scrollTop || document.documentElement.scrollTop;
+    if(tp > 200){
+      $('.scroll_top').removeClass('close');
+      $('.scroll_top').addClass('open');
+    }
+    else{
+      $('.scroll_top').removeClass('open');
+      $('.scroll_top').addClass('close');
+    }
+  });
+  $(".scroll_top>a").click(function(){window.scrollTo(0, 2);});
+});
+</script>

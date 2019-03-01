@@ -259,8 +259,24 @@ class CouponController < ApplicationController
     end
     @shop = json["result"]["shop"]
     @keyword = @shop["keyword"]
+    @shop_id = @shop["source_id"]
     @items = []
     @device = mobile_device == 1 ? "ios" : "android" 
     render :dian, layout: "dazhe"
+  end
+
+  def sem_shop
+    url = "http://api.uuhaodian.com/uu/shop?name=#{URI.encode_www_form_component(params[:name])}"
+    result = Net::HTTP.get(URI(url))
+    json = JSON.parse(result)
+    if json["status"] == 0
+      not_found
+      return
+    end
+    @shop = json["result"]["shop"]
+    @shop_id = @shop["source_id"]
+    @items = []
+    @device = mobile_device == 1 ? "ios" : "android" 
+    render :sem_shop, layout: "dazhe"
   end
 end
