@@ -44,15 +44,6 @@
         %a{id: "ercode_show", href: "javascript:;", style: "color: #FBAA58;", onclick:"_hmt.push(['_trackEvent', '展开二维码', 'click', 'dian'])"} 点击展开二维码
     %img.sno{id: "ercode", src: "http://www.uuhaodian.com/img/lbanner1.png"}
   .content
-    .filter
-      .type.active{data: {sort: 7}}
-        %a{href: "javascript:;", onclick:"_hmt.push(['_trackEvent', '筛选-综合', 'click', 'dian'])"} 综合
-      .type{data: {sort: 1}}
-        %a{href: "javascript:;", onclick:"_hmt.push(['_trackEvent', '筛选-上新', 'click', 'dian'])"} 上新
-      .type{data: {sort: 4}}
-        %a{href: "javascript:;", onclick:"_hmt.push(['_trackEvent', '筛选-销量', 'click', 'dian'])"} 销量
-      .type{data: {sort: 3}}
-        %a{href: "javascript:;", onclick:"_hmt.push(['_trackEvent', '筛选-价格', 'click', 'dian'])"} 价格
     #dazheList
   .footer
     %a.home.zh{href: "http://m.uuhaodian.com/index.php?r=index/wap&source=dian", target: "_blank", onclick:"_hmt.push(['_trackEvent', '首页', 'click', 'dian'])"}
@@ -72,6 +63,5 @@
 
 :javascript
   $("#ercode_show").click(function(){$("#ercode").removeClass("sno");$("#ercode_show").css("display","none");});
-  $(".zh").click(function(){window._agl && window._agl.push(['track', ['success', {t: 3}]])});
 
-= render partial: "dazhe_js"
+= render partial: "sem_shop_js"
