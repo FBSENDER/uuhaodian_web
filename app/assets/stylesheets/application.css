@@ -1641,3 +1641,12 @@ input,input:focus{
   overflow: hidden;
   height: 40px;
 }
+.act38{
+  position: fixed;
+  right: 10px;
+  top: 110px;
+  z-index: 100;
+}
+.act38 img{
+  width: 136px;
+}
