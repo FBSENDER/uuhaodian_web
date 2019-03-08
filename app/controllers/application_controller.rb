@@ -110,6 +110,10 @@ class ApplicationController < ActionController::Base
         cookies[:channel] = {value: "3", expires: Time.now + 604800} 
       elsif params[:from] == "iquan"
         cookies[:channel] = {value: "2", expires: Time.now + 604800} 
+      elsif params[:from] == "m_shikuai"
+        cookies[:channel] = {value: "9", expires: Time.now + 604800} 
+      elsif params[:from] == "m_iquan"
+        cookies[:channel] = {value: "8", expires: Time.now + 604800} 
       end
     end
   end

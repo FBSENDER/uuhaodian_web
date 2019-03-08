@@ -217,6 +217,8 @@ class CouponController < ApplicationController
   end
 
   def dazhe
+    set_cookie_channel
+    @channel = cookies[:channel]
     @keyword = params[:keyword]
     #url = "http://api.uuhaodian.com/uu/goods_list?keyword=#{@keyword}"
     #result = Net::HTTP.get(URI(URI.encode(url)))
