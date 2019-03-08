@@ -4,7 +4,7 @@
 <script type="text/javascript">
 var globalChannel = 27;
 var couponList = $('#couponList'),loadingText = $('.loading-text');
-var page = 1,pagesize = <%= pagesize %>,load = 1,channel = <%= from_iquan ? 10 : 27 %>,sort = <%= sort_type || 7%>;
+var page = 1,pagesize = <%= pagesize %>,load = 1,channel = 27,sort = <%= sort_type || 7%>;
 var path = '<%= path %>';
 function getLanlanCouponList(){
   if(!load){

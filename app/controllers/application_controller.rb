@@ -40,19 +40,20 @@ class ApplicationController < ActionController::Base
   end
 
   def get_hot_keywords_data
-    if $hot_keywords_data["update_at"].nil? || $hot_keywords_data["keywords"].nil? || $hot_keywords_data["keywords"].size.zero? || Time.now.to_i - $hot_keywords_data["update_at"] > 3600
-      url = "http://api.uuhaodian.com/uu/hot_keywords"
-      result = Net::HTTP.get(URI(url))
-      json = JSON.parse(result)
-      if json["status"] && json["status"]["code"] == 1001
-        $hot_keywords_data["keywords"] = json["result"]
-        $hot_keywords_data["update_at"] = Time.now.to_i
-        return $hot_keywords_data["keywords"]
-      else
-        return []
-      end
-    end
-    return $hot_keywords_data["keywords"]
+    %w(包包 女鞋 卫生巾 鼠标 口红 连衣裙 瑜伽垫 防晒霜)
+    #if $hot_keywords_data["update_at"].nil? || $hot_keywords_data["keywords"].nil? || $hot_keywords_data["keywords"].size.zero? || Time.now.to_i - $hot_keywords_data["update_at"] > 3600
+    #  url = "http://api.uuhaodian.com/uu/hot_keywords"
+    #  result = Net::HTTP.get(URI(url))
+    #  json = JSON.parse(result)
+    #  if json["status"] && json["status"]["code"] == 1001
+    #    $hot_keywords_data["keywords"] = json["result"]
+    #    $hot_keywords_data["update_at"] = Time.now.to_i
+    #    return $hot_keywords_data["keywords"]
+    #  else
+    #    return []
+    #  end
+    #end
+    #return $hot_keywords_data["keywords"]
   end
 
   def get_coupon_9kuai9_data
@@ -100,4 +101,17 @@ class ApplicationController < ActionController::Base
       return 2
     end 
   end
+
+  def set_cookie_channel
+    if params[:channel] 
+      cookies[:channel] = {value: params[:channel], expires: Time.now + 604800} 
+    elsif params[:from]
+      if params[:from] == "shikuai"
+        cookies[:channel] = {value: "3", expires: Time.now + 604800} 
+      elsif params[:from] == "iquan"
+        cookies[:channel] = {value: "2", expires: Time.now + 604800} 
+      end
+    end
+  end
+
 end

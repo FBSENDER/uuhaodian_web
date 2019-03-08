@@ -2,7 +2,8 @@
 - aaid = coupon['couponUrl'].match(/activityId=(\w*)/)
 - aaid = aaid.nil? ? '' : aaid[1]
 - buy_url = coupon["couponMoney"].to_f > 0 ? "http://api.uuhaodian.com/uu/pcbuy?id=#{coupon["itemId"]}&activity_id=#{aaid}" : "http://item.taobao.com/item.htm?id=#{coupon['itemId']}"
-- buy_url += '&from=iquan' if @from_iquan
+- buy_url += ("&channel=" + @channel) if @channel
+
 #coupon.zk-content
   .img-area
     %a{href: "#{buy_url}", title: "#{coupon['title']}", target: "_blank", isconvert: 1, onclick: "ga_event(this);", data:{ga: "#{coupon["couponMoney"].to_i == 0 ? '直接购买:详情页:详情页_直接购买_图片' : '领券:详情页:详情页_领券_图片'}"}}
@@ -22,11 +23,6 @@
         %img.small_img{src: "#{img_url}", style:"#{'margin-left:0' if index == 0}"}
       %img.small_img{src: "https://www.iquan.net/image/uuercode.png"}
     .platform
-      - if coupon['shopType'] == 'tmall'
-        %i{style: "background-image: url(http://7xlxny.com1.z0.glb.clouddn.com/zhekou/web/platform_tmall.png);"}
-      - else
-        %i{style: "background-image: url(http://7xlxny.com1.z0.glb.clouddn.com/zhekou/web/platform_taobao.png);"}
-
       %span #{coupon["sellerName"]} - 已有 
       %span{style: "color:#FF2B22"} #{coupon["monthSales"].to_i + 131}
       %span 人购买 - 
