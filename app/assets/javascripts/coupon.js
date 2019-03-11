@@ -52,12 +52,6 @@ var createLanlanCouponList = function(cl,obj,channel,gaPage){
     htmlstr += '<img data-ga-event="商品_图片:点击:'+ gaPage +'" class="lazy new" data-original="'+ z.coverImage +'" alt="'+z.title +'">';
     htmlstr += '</div>';
     htmlstr += '<p class="title-area elli">';
-    if(platform == 1){
-      htmlstr += '<i class="i_taobao"></i>';
-    }
-    else{
-      htmlstr += '<i class="i_tmall"></i>';
-    }
     htmlstr += '<span class="post-free">包邮</span>';
     htmlstr +=  z.shortTitle +'</p>';
     htmlstr += '<div class="raw-price-area">现价：&yen;'+ z.price +'<p class="sold">已领'+ z.monthSales +'张券</p></div>';

@@ -107,12 +107,6 @@ Util.createLanlanCouponList = function(cl,obj,channel,gaPage){
     htmlstr += '<img data-ga-event="商品_图片:点击:'+ gaPage +'" class="lazy new" data-original="'+ z.coverImage +'" alt="'+z.title +'">';
     htmlstr += '</div>';
     htmlstr += '<p class="title-area elli">';
-    if(platform == 1){
-      htmlstr += '<i class="i_taobao"></i>';
-    }
-    else{
-      htmlstr += '<i class="i_tmall"></i>';
-    }
     htmlstr += '<span class="post-free">包邮</span>';
     htmlstr +=  z.shortTitle +'</p>';
     htmlstr += '<div class="raw-price-area">现价：&yen;'+ z.price +'<p class="sold">已领'+ z.monthSales +'张券</p></div>';
@@ -166,12 +160,6 @@ Util.createTaobaoCouponList = function(cl,obj,channel,gaPage){
       title +'">';
     htmlstr += '</div>';
     htmlstr += '<p class="title-area elli">';
-    if(platform == 1){
-      htmlstr += '<i class="i_taobao"></i>';
-    }
-    else{
-      htmlstr += '<i class="i_tmall"></i>';
-    }
     htmlstr += '<span class="post-free">包邮</span>';
     htmlstr +=  z.title +'</p>';
     htmlstr += '<div class="raw-price-area">现价：&yen;'+ z.zk_final_price +'<p class="sold">已领'+ (z.volume + 131) +'张券</p></div>';
@@ -211,12 +199,6 @@ Util.createTaobaoProductList = function(cl,obj,channel,gaPage){
       title +'">';
     htmlstr += '</div>';
     htmlstr += '<p class="title-area elli">';
-    if(platform == 1){
-      htmlstr += '<i class="i_taobao"></i>';
-    }
-    else{
-      htmlstr += '<i class="i_tmall"></i>';
-    }
     htmlstr += '<span class="post-free">包邮</span>';
     htmlstr +=  z.title +'</p>';
     htmlstr += '<div class="raw-price-area">现价：&yen;'+ z.reserve_price +'<p class="sold">已售'+ (z.volume + 131) +'件</p></div>';
@@ -258,12 +240,6 @@ Util.createTaobaoCouponFluid = function(cl,obj,channel,gaPage){
     htmlstr += '<div class="desc">'
     htmlstr +=  z.item_description +'</div>';
     htmlstr += '<div class="shop">'
-    if(platform == 1){
-      htmlstr += '<i class="i_taobao"></i>';
-    }
-    else{
-      htmlstr += '<i class="i_tmall"></i>';
-    }
     htmlstr += '30天销量 ' + z.volume + ' 件';
     htmlstr += '</div>'
     htmlstr += '<div class="price"><span class="normal">券后价&nbsp;&nbsp; </span>';
@@ -312,12 +288,6 @@ Util.createLanlanCouponFluid = function(cl,obj,channel,gaPage){
     htmlstr += '<div class="desc">'
     htmlstr +=  z.recommend +'</div>';
     htmlstr += '<div class="shop">'
-    if(platform == 1){
-      htmlstr += '<i class="i_taobao"></i>';
-    }
-    else{
-      htmlstr += '<i class="i_tmall"></i>';
-    }
     htmlstr += z.sellerName + ' - 2小时销量 ' + z.sales2h + ' 件';
     htmlstr += '</div>'
     htmlstr += '<div class="price"><span class="normal">券后价&nbsp;&nbsp; </span>';
