@@ -95,10 +95,10 @@ class CouponController < ApplicationController
   def query
     set_cookie_channel
     @keyword = params[:keyword]
-    if @keyword.include?('http') || @keyword.include?("taobao") || @keyword.include?("tmall")
-      redirect_to "https://www.iquan.net/tbzk/?keyword=#{URI.encode_www_form_component(@keyword)}", status: 302
-      return
-    end
+    #if @keyword.include?('http') || @keyword.include?("taobao") || @keyword.include?("tmall")
+    #  redirect_to "https://www.iquan.net/tbzk/?keyword=#{URI.encode_www_form_component(@keyword)}", status: 302
+    #  return
+    #end
     @cates = get_cate_data
     #@keywords = get_hot_keywords_data.sample(10)
     @top_keywords = get_hot_keywords_data.sample(8)
