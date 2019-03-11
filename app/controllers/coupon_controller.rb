@@ -96,7 +96,7 @@ class CouponController < ApplicationController
     set_cookie_channel
     @keyword = params[:keyword]
     if @keyword.include?('http') || @keyword.include?("taobao") || @keyword.include?("tmall")
-      redirect_to URI.encode("https://www.iquan.net/tbzk/?keyword=#{@keyword}"), status: 302
+      redirect_to "https://www.iquan.net/tbzk/?keyword=#{URI.encode_www_form_component(@keyword)}", status: 302
       return
     end
     @cates = get_cate_data
