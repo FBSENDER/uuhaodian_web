@@ -1,6 +1,6 @@
-- title("#{@keyword},#{@keyword}折扣优惠_优优好店")
-- keywords("#{@keyword},#{@keyword}优惠券")
-- head_desc("优优好店 - #{@keyword}折上折！")
+- title("#{@keyword}_优优好店")
+- keywords("#{@keyword},#{@keyword}优优好店")
+- head_desc("优优好店 - #{@keyword}！")
 
 .dazhe
   .header_pr.header_red.transition
@@ -9,27 +9,6 @@
         %i
         %a{href: "/dz_search/", onclick: "_hmt.push(['_trackEvent', '顶部点击', 'click', 'dazhe'])"}
           %p 输入您需要的商品名称
-  .header
-    %h1
-      超过99.9%用户不知道的秘诀
-      %span.b 折上折
-      买
-      %span.b #{@keyword}！
-    %p.desc 
-      1. 微信扫码关注“
-      %span.b 优优好店
-      ”小程序领优惠更方便
-      %br
-      %br
-      2. 点击上方搜索框，输入淘宝宝贝标题，领取优惠券
-      %br
-      %br
-      3. 下单使用优惠券，立享折上折！
-      %br
-      &nbsp;&nbsp;&nbsp;
-      %span{style: "line-height: 30px;"}
-        %a{id: "ercode_show", href: "javascript:;", style: "color: #FBAA58;", onclick:"_hmt.push(['_trackEvent', '展开二维码', 'click', 'dazhe'])"} 点击展开二维码
-    %img.sno{id: "ercode", src: "http://www.uuhaodian.com/img/lbanner1.png"}
   .content
     .filter
       .type.active{data: {sort: 7}}
@@ -41,24 +20,6 @@
       .type{data: {sort: 3}}
         %a{href: "javascript:;", onclick:"_hmt.push(['_trackEvent', '筛选-价格', 'click', 'dazhe'])"} 价格
     #dazheList
-    - @items.each do |item|
-      - coupon_id = item["couponUrl"].match(/activityId=(\w+)/)[1]
-      .item
-        %a.zh{href: "http://api.uuhaodian.com/uu/buy?id=#{item["itemId"]}&activity_id=#{coupon_id}", target: "_blank", onclick:"_hmt.push(['_trackEvent', '领券', 'click', 'dazhe'])"}
-          %img.pic{src: "#{item["coverImage"]}"}
-          .cent
-            %h3 #{item["shortTitle"]}
-            .num
-              %span 原价 ￥#{item["price"]}
-              - if item["monthSales"].to_i < 10
-                %span.r 已售#{rand(1000)}件
-              - else
-                %span.r 已售#{item["monthSales"]}件
-            .money
-              .quan
-                %i #{item["couponMoney"].to_i}元券
-              券后价 ￥
-              %span.m #{item["nowPrice"]}
   .footer
     %a.home.zh{href: "http://m.uuhaodian.com/index.php?r=index/wap&source=dazhe", target: "_blank", onclick:"_hmt.push(['_trackEvent', '首页', 'click', 'dazhe'])"}
       %img.icon{src: "http://www.uuhaodian.com/favicon.ico"}
@@ -67,6 +28,10 @@
       %a#more_btn.btn.zh{href: "http://apphtml.ffquan.com/index.php?r=index/ios-down&app_id=550416", target: "_blank", onclick:"_hmt.push(['_trackEvent', '下载app-ios', 'click', 'dazhe'])"} 下载APP获取更多优惠
     - else
       %a#more_btn.btn.zh{href: "https://a.app.qq.com/o/simple.jsp?pkgname=com.dataoke.shoppingguide.app550416", target: "_blank", onclick:"_hmt.push(['_trackEvent', '下载app-android', 'click', 'dazhe'])"} 下载APP获取更多优惠
+
+.scroll_top.close
+  %a{href: "javascript:;"}
+    %img{src: "/img/to_top.png"}
 
 
 = render partial: "sem_js"

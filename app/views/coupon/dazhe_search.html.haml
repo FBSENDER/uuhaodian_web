@@ -9,13 +9,13 @@
         .back
           %img{src: "/img/back.png"}
       %input#input_k{placeholder: "输入关键词"}
-  .search-cat
+  .search-cat{style: "width: 100%;max-width: 750px;"}
     .title 
       %p 热门搜索
     .search-cent
       - @keywords.each do |k|
         .sitem
-          %a.zh{href: "http://m.uuhaodian.com/index.php?r=index/search&kw=#{URI.encode(k)}&source=dazhe", onclick:"_hmt.push(['_trackEvent', '热门搜索点击', 'click', 'dazhe'])"} #{k}
+          %a.zh{href: "/dr/#{URI.encode_www_form_component(k)}/", onclick:"_hmt.push(['_trackEvent', '热门搜索点击', 'click', 'dazhe'])"} #{k}
       - @topics.each do |t|
         .sitem
           %a.zh{href: "#{t[:url]}", onclick:"_hmt.push(['_trackEvent', '专题点击', 'click', 'dazhe'])"} #{t[:k]}
@@ -26,7 +26,7 @@
     .search-cent
       - @cats.each do |c|
         .sitem
-          %a.zh{href: "http://m.uuhaodian.com/index.php?r=index/cat&cid=#{c[:id]}&u=550416&source=dazhe", onclick:"_hmt.push(['_trackEvent', '商品分类点击', 'click', 'dazhe'])"} #{c[:k]}
+          %a.zh{href: "http://m.uuhaodian.com/index.php?r=index/cat&cid=#{c[:id]}", onclick:"_hmt.push(['_trackEvent', '商品分类点击', 'click', 'dazhe'])"} #{c[:k]}
 
   .footer
     %a.home.zh{href: "http://m.uuhaodian.com/index.php?r=index/wap&source=dazhe", target: "_blank", onclick:"_hmt.push(['_trackEvent', '首页', 'click', 'dazhe'])"}
@@ -47,11 +47,6 @@
     if(keycode == 13 && q != ''){
       window._agl && window._agl.push(['track', ['success', {t: 3}]])
       _hmt.push(['_trackEvent', '搜索', 'click', 'dazhe']);
-      if(q.length <= 10){
-        window.location.href = 'http://m.uuhaodian.com/index.php?r=index/search&source=dazhe&kw=' + encodeURIComponent(q);
-      }
-      else{
-        window.location.href = 'http://m.uuhaodian.com/index.php?r=index/search&source=dazhe&s_type=1&kw=' + encodeURIComponent(q);
-      }
+      window.location.href = '/dr/' + encodeURIComponent(q) + '/';
     }
   });

@@ -228,8 +228,16 @@ class CouponController < ApplicationController
     render :dazhe, layout: "dazhe"
   end
 
+  def dazhe_result
+    set_cookie_channel
+    @channel = cookies[:channel]
+    @keyword = params[:keyword]
+    @device = mobile_device == 1 ? "ios" : "android" 
+    render :dazhe_result, layout: "dazhe"
+  end
+
   def dazhe_search
-    @keywords = %w(吹风机 耳机 暖宝宝 打底裤 袜子 抽纸 羽绒服)
+    @keywords = %w(连衣裙 内裤 睡衣 小白鞋 防晒霜 卸妆水 雨伞 零食 雨衣)
     @device = mobile_device == 1 ? "ios" : "android" 
     @cats = [
       {id: 4, k: "家居日用"},

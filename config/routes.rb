@@ -11,8 +11,9 @@ Rails.application.routes.draw do
   get "/app/", to: "coupon#app"
   get "/douyintongkuan/", to: "coupon#video_list"
 
-  get "/dz/:keyword", to: "coupon#dazhe"
+  get "/dz/:keyword", to: "coupon#dazhe", keyword: /.+/
   get "/dz_search", to: "coupon#dazhe_search"
+  get "/dr/:keyword", to: "coupon#dazhe_result", keyword: /.+/
 
   get "/dianpu/:name", to: "coupon#shop"
   get "/sshop/:name", to: "coupon#sem_shop"
