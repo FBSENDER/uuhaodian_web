@@ -61,11 +61,13 @@ class CouponController < ApplicationController
           not_found if json["result"].nil? || json["status"]["code"] != 1001
         end
       end
-      url_recommend = "http://api.uuhaodian.com/uu/tb_goods_recommend?item_id=#{params[:id]}"
-      result_recommend = Net::HTTP.get(URI(url_recommend))
-      r_json = JSON.parse(result_recommend)
-      if r_json["status"] == 2
-        @items = r_json["results"]
+      unless is_device_mobile?
+        url_recommend = "http://api.uuhaodian.com/uu/tb_goods_recommend?item_id=#{params[:id]}"
+        result_recommend = Net::HTTP.get(URI(url_recommend))
+        r_json = JSON.parse(result_recommend)
+        if r_json["status"] == 2
+          @items = r_json["results"]
+        end
       end
     rescue
       not_found
@@ -91,6 +93,9 @@ class CouponController < ApplicationController
     end
     @top_keywords = get_hot_keywords_data.sample(8)
     @path = "http://api.uuhaodian.com/uu/goods_list"
+    if is_device_mobile?
+      render :m_product_detail, layout: "dazhe"
+    end
   end
 
   def query

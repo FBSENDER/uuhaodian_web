@@ -1,0 +1,57 @@
+- title("#{@detail["shortTitle"]}_优优好店")
+- keywords("#{@detail["shortTitle"]},#{@detail["title"]}")
+- head_desc("优优好店 - 商品详情 - #{@detail["shortTitle"]}")
+
+- coupon = @detail
+- aaid = coupon['couponUrl'].match(/activityId=(\w*)/)
+- aaid = aaid.nil? ? '' : aaid[1]
+- buy_url = coupon["couponMoney"].to_f > 0 ? "http://api.uuhaodian.com/uu/buy?id=#{coupon["itemId"]}&activity_id=#{aaid}" : "http://item.taobao.com/item.htm?id=#{coupon['itemId']}"
+- buy_url += ("&channel=" + @channel) if @channel
+
+.dazhe
+  .header_pr.header_red.transition
+    .icon_header
+      .search
+        %i
+        %a{href: "/dz_search/", onclick: "_hmt.push(['_trackEvent', '顶部点击', 'click', 'detail'])"}
+          %p 输入您需要的商品名称
+  .img-content
+    - @detail["auctionImages"].each do |img|
+      %img{src: "#{img}"}
+  .product-info
+    .title #{@detail["title"]}
+    - if @detail["recommend"] != ''
+      .desc #{@detail["recommend"]}
+    - else
+      .desc 扫码关注公众号【优优好店】，领券超方便!
+    .price 
+      原价 ￥#{@detail["price"]}
+      %span.r 优惠价 ￥#{@detail["nowPrice"]}
+    - if @detail["couponMoney"].to_i > 0
+      %a{href: "#{buy_url}"}
+        .coupon
+          %img{src: "http://cmsstatic.dataoke.com//wap_new/main/images/goods_quan.png?v=201903141045"}
+          .t 
+            点击领取
+            %span{style: "font-size:22px;"} #{@detail["couponMoney"].to_i}
+            元 优惠券
+    - else
+      %a{href: "#{buy_url}", target: "_blank", isconvert: "1"}
+        .coupon
+          %img{src: "http://cmsstatic.dataoke.com//wap_new/main/images/goods_quan.png?v=201903141045"}
+          .t 点击购买
+
+  .footer
+    %a.home.zh{href: "http://m.uuhaodian.com/index.php?r=index/wap&source=dazhe", target: "_blank", onclick:"_hmt.push(['_trackEvent', '首页', 'click', 'detail'])"}
+      %img.icon{src: "http://www.uuhaodian.com/favicon.ico"}
+      .text 优优好店首页
+    - if @device == "ios"
+      %a#more_btn.btn.zh{href: "http://apphtml.ffquan.com/index.php?r=index/ios-down&app_id=550416", target: "_blank", onclick:"_hmt.push(['_trackEvent', '下载app-ios', 'click', 'detail'])"} 下载APP获取更多优惠
+    - else
+      %a#more_btn.btn.zh{href: "https://a.app.qq.com/o/simple.jsp?pkgname=com.dataoke.shoppingguide.app550416", target: "_blank", onclick:"_hmt.push(['_trackEvent', '下载app-android', 'click', 'detail'])"} 下载APP获取更多优惠
+
+
+:javascript
+  $(".zh").click(function(){window._agl && window._agl.push(['track', ['success', {t: 3}]])});
+
+= render partial: "dazhe_js"

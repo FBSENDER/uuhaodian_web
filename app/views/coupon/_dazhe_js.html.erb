@@ -8,7 +8,7 @@ function createList_1(cl, obj){
   for(var i=0,len=cl.length;i<len;i++){
     var z = cl[i];
     var re = /activityId=(\w*)/;
-    var buy_url = 'http://api.uuhaodian.com/uu/buy/?id=' + z.itemId + '&channel=<%= @channel %>';
+    var buy_url = '/yh/' + z.itemId + '/';
     htmlstr += '<div class="item">';
     htmlstr += '<a class = "zh" href="'+ buy_url +'" target="_blank">';
     htmlstr += '<img class="pic" src="'+ z.coverImage +'" alt="'+z.

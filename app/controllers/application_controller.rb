@@ -118,4 +118,9 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def is_device_mobile?
+    user_agent = request.headers["HTTP_USER_AGENT"]
+    user_agent.present? && user_agent =~ /\b(Android|iPhone|Windows Phone|Opera Mobi|Kindle|BackBerry|PlayBook|UCWEB|Mobile)\b/i
+  end
+
 end
