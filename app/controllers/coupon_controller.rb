@@ -3,13 +3,14 @@ class CouponController < ApplicationController
     render "not_found", status: 404
   end
   def home
-    set_cookie_channel
-    @cates = get_cate_data
-    @banners = get_banner_data
-    @top_keywords = get_hot_keywords_data.sample(8)
-    @items_9kuai9 = get_coupon_9kuai9_data
-    @items_bang = get_coupon_bang_data
-    @path = "http://api.uuhaodian.com/uu/home_list"
+    redirect_to "http://uuhaodian.com", status: 302
+    #set_cookie_channel
+    #@cates = get_cate_data
+    #@banners = get_banner_data
+    #@top_keywords = get_hot_keywords_data.sample(8)
+    #@items_9kuai9 = get_coupon_9kuai9_data
+    #@items_bang = get_coupon_bang_data
+    #@path = "http://api.uuhaodian.com/uu/home_list"
   end
 
   def like
