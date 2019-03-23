@@ -1,10 +1,10 @@
 - title("优优好店-领券享优惠,天天九块九特价购_优优好店")
 - keywords("优优好店,uuhaodian,享优惠,九块九,天天特价,特价购,优优好店")
-- head_desc("优优好店-优惠券折扣，先领券再下单，省钱又实惠！每天更新千款，纯人工筛选验货，限时限量特卖，全场1折包邮！")
+- head_desc("优优好店-优惠券折扣，先领券再下单，省钱又实惠！每天更新千款，纯人工筛选验货，限时限量特卖！")
 
 = render partial: "header_common"
 = render partial: "header_adzone"
-- if @items_9kuai9 && @items_9kuai9.size > 0
+- if false && @items_9kuai9 && @items_9kuai9.size > 0
   .wrapper
     .item-list-top
       %span.left 9块9包邮
@@ -21,8 +21,8 @@
       %li{id: "li-sort-4", data: {sort: "4"}, class: "sort_li"} 销量
       %li{id: "li-sort-3", data: {sort: "3"}, class: "sort_li"} 价格
   .zk-list.clearfix#couponList
-  = render partial: "lanlan_load_more", locals: {path: @path, pagesize: 20, sort_type: 1, pinyin: '', keyword: '', cid: 0,sort: 1, type: 0}
-- if @items_bang && @items_bang.size > 0
+  = render partial: "lanlan_load_more", locals: {path: @path, pagesize: 20, sort_type: 1, pinyin: '', keyword: "#{@keyword}", cid: 0,sort: 1, type: 0}
+- if false && @items_bang && @items_bang.size > 0
   .wrapper
     .item-list-top
       %span.left 优优好店畅销榜 - 大家都在买

@@ -40,7 +40,7 @@ class ApplicationController < ActionController::Base
   end
 
   def get_hot_keywords_data
-    %w(包包 女鞋 卫生巾 鼠标 口红 连衣裙 瑜伽垫 防晒霜)
+    %w(包包 女鞋 鼠标 连衣裙 瑜伽垫 男T恤 女T恤 阔腿裤 女春装 打底裤 开衫)
     #if $hot_keywords_data["update_at"].nil? || $hot_keywords_data["keywords"].nil? || $hot_keywords_data["keywords"].size.zero? || Time.now.to_i - $hot_keywords_data["update_at"] > 3600
     #  url = "http://api.uuhaodian.com/uu/hot_keywords"
     #  result = Net::HTTP.get(URI(url))

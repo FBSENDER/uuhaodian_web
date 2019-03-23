@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   root "coupon#home"
+  get "/about.html", to: "coupon#about"
   get "/category/:cid", to: "coupon#category", cid: /\d+/
   get "/collection/:tid", to: "coupon#collection", tid: /\d+/
   get "/yh/:id", to: "coupon#product_detail", id: /\d+/

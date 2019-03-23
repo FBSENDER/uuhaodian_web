@@ -1,6 +1,7 @@
 .lanlan-category-area-all
   - @cates.each do |cate|
-    - is_active = cate['cid'].to_i == @cid ? 'red' : ''
-    %a{href: "/collection/#{@collection_type}/?cid=#{cate['cid']}", class: "#{is_active}"}
-      %img{src: "#{cate['img_url']}"}
-      %p{style:"color:#{is_active};"} #{cate['name']}
+    - if cate['name'] != '美食' && cate['name'] != '美妆洗护' && cate['name'] != '母婴'
+      - is_active = cate['cid'].to_i == @cid ? 'red' : ''
+      %a{href: "/collection/#{@collection_type}/?cid=#{cate['cid']}", class: "#{is_active}"}
+        %img{src: "#{cate['img_url']}"}
+        %p{style:"color:#{is_active};"} #{cate['name']}
