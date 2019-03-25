@@ -13,10 +13,12 @@
           - if @collection_type
             %a{href: "/collection/#{@collection_type}/", class: "#{'active' if @cid == 0}"} 精选
             - @cates.each do |cate|
-              - is_active = cate['cid'].to_i == @cid ? 'active' : ''
-              %a{href: "/collection/#{@collection_type}/?cid=#{cate['cid']}", class: "#{is_active}"} #{cate['name']}
+              - if cate['name'] != '美食' && cate['name'] != '美妆洗护' && cate['name'] != '母婴'
+                - is_active = cate['cid'].to_i == @cid ? 'active' : ''
+                %a{href: "/collection/#{@collection_type}/?cid=#{cate['cid']}", class: "#{is_active}"} #{cate['name']}
           - elsif @is_top || @is_brand
           - else
             - @cates.each do |cate|
-              - is_active = cate['cid'] == @cid || cate['cid'] == @cid_1 ? 'active' : ''
-              %a{href: "/category/#{cate["cid"]}/", class: "#{is_active}"} #{cate["name"]}
+              - if cate['name'] != '美食' && cate['name'] != '美妆洗护' && cate['name'] != '母婴'
+                - is_active = cate['cid'] == @cid || cate['cid'] == @cid_1 ? 'active' : ''
+                %a{href: "/category/#{cate["cid"]}/", class: "#{is_active}"} #{cate["name"]}
