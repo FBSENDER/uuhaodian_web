@@ -9,7 +9,7 @@
   .zk-list.clearfix#couponList
   = render partial: "lanlan_load_more", locals: {path: @path, pagesize: 20, sort_type: 7, pinyin: '', keyword: '', cid: @cid,sort: 7, type: 0}
 
-- if false && @items_bang && @items_bang.size > 0
+- if @items_bang && @items_bang.size > 0
   .wrapper
     .item-list-top
       %span.left 优优好店畅销榜 - 大家都在买

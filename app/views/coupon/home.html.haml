@@ -4,7 +4,7 @@
 
 = render partial: "header_common"
 = render partial: "header_adzone"
-- if false && @items_9kuai9 && @items_9kuai9.size > 0
+- if @items_9kuai9 && @items_9kuai9.size > 0
   .wrapper
     .item-list-top
       %span.left 9块9包邮
@@ -22,7 +22,7 @@
       %li{id: "li-sort-3", data: {sort: "3"}, class: "sort_li"} 价格
   .zk-list.clearfix#couponList
   = render partial: "lanlan_load_more", locals: {path: @path, pagesize: 20, sort_type: 1, pinyin: '', keyword: "#{@keyword}", cid: 0,sort: 1, type: 0}
-- if false && @items_bang && @items_bang.size > 0
+- if @items_bang && @items_bang.size > 0
   .wrapper
     .item-list-top
       %span.left 优优好店畅销榜 - 大家都在买

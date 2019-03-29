@@ -3,9 +3,8 @@
     .cate-l-1
       .wrapper
         - @cates.each do |cate|
-          - if cate['name'] != '美食' && cate['name'] != '美妆洗护' && cate['name'] != '母婴'
-            - is_active = cate['cid'] == @cid || cate['cid'] == @cid_1 ? 'active' : ''
-            %a{href: "/category/#{cate['cid']}/", class: "#{is_active}"} #{cate['name']}
+          - is_active = cate['cid'] == @cid || cate['cid'] == @cid_1 ? 'active' : ''
+          %a{href: "/category/#{cate['cid']}/", class: "#{is_active}"} #{cate['name']}
   .lanlan-category-area
     - @lanlan_category['list'].each do |cate|
       - is_active = cate['cid'] == @cid ? 'color:red;' : ''
@@ -15,8 +14,7 @@
 - else
   .lanlan-category-area-all
     - @cates.each do |cate|
-      - if cate['name'] != '美食' && cate['name'] != '美妆洗护' && cate['name'] != '母婴'
-        - is_active = cate['cid'].to_i == @cid ? 'red' : ''
-        %a{href: "/category/#{cate['cid']}/", class: "#{is_active}"}
-          %img{src: "#{cate['img_url']}"}
-          %p{style:"color:#{is_active};"} #{cate['name']}
+      - is_active = cate['cid'].to_i == @cid ? 'red' : ''
+      %a{href: "/category/#{cate['cid']}/", class: "#{is_active}"}
+        %img{src: "#{cate['img_url']}"}
+        %p{style:"color:#{is_active};"} #{cate['name']}

@@ -10,9 +10,8 @@ class CouponController < ApplicationController
     @top_keywords = get_hot_keywords_data.sample(8)
     @items_9kuai9 = get_coupon_9kuai9_data
     @items_bang = get_coupon_bang_data
-    #@path = "http://api.uuhaodian.com/uu/home_list"
-    @path = "http://api.uuhaodian.com/uu/goods_list"
-    @keyword = '男装'
+    @path = "http://api.uuhaodian.com/uu/home_list"
+    @keyword = ''
   end
 
   def like
