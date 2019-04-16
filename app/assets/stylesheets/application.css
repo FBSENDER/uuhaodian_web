@@ -596,7 +596,8 @@ input,input:focus{
 .home-oper-area .top-right-banner p{
   padding: 5px 15px;
   text-align: center;
-  color:#f9a825;
+  color:#FF6434;
+  line-height: 30px;
 }
 .item-list-top{
   padding-left: 15px;
@@ -956,8 +957,9 @@ input,input:focus{
 }
 .zk-content .info-area .title h1{
   font-size: 20px;
-  line-height: 34px;
-  height: 34px;
+  line-height: 30px;
+  height: 60px;
+  width: 450px;
   overflow: hidden;
   color: #444;
   font-weight: normal;
@@ -967,17 +969,31 @@ input,input:focus{
   color: #FF2B22;
   margin-top: 10px;
   height: 42px;
+  width: 450px;
   overflow: hidden;
 }
 .zk-content .small-img-area {
-  height: 108px;
+  height: 84px;
   padding-top: 20px;
+  width: 450px;
+  margin: 0;
+}
+.zk-content .banner{
+  height: 0;
+  float: right;
+  position: relative;
+  top: -210px;
+  right: 10px;
+}
+.zk-content .banner img{
+  height: 190px;
+  width: 190px;
 }
 .zk-content .small-img-area img {
-  height: 100px;
-  width: 100px;
+  height: 83px;
+  width: 83px;
   float: left;
-  margin-left: 10px;
+  margin-left: 5px;
   border: 1px solid #fff;
 }
 .zk-content .small-img-area img:hover{
@@ -986,10 +1002,13 @@ input,input:focus{
 }
 .zk-content .info-area .platform {
   height: 20px;
-  padding-top: 25px;
+  padding-top: 15px;
+  padding-bottom: 10px;
   font-size: 16px;
   color: #a9a9a9;
   line-height: 20px;
+  width: 450px;
+  margin: 0;
 }
 .zk-content .info-area .platform .shoucang{
   color: #f9a825;

@@ -10,18 +10,19 @@
       %img#cover_image{src: "#{coupon['coverImage']}", alt: "#{coupon['title']}"}
   .info-area
     .title
-      %h1.elli
+      %h1
         #{coupon['shortTitle']}
     %p.recommend{style: "color:#FF2B22;margin-top:10px;height:42px;overflow: hidden;"}
       - if coupon["recommend"] != ''
         推荐理由：#{coupon["recommend"]}
       - else
-        扫码关注公众号【优优好店】，微信小程序领券更方便！
+        微信扫一扫右侧二维码，小程序领券更方便！拼多多也能领券啦~
     %input{id: "endTime", value: "#{coupon['couponEndTime']}", type: "hidden"}
     .small-img-area
       - coupon["auctionImages"][0,5].each_with_index do |img_url, index|
         %img.small_img{src: "#{img_url}", style:"#{'margin-left:0' if index == 0}"}
-      %img.small_img{src: "https://www.iquan.net/image/uuercode.png"}
+    .banner
+      %img{src: "/img/lbanner3.jpg"}
     .platform
       %span #{coupon["sellerName"]} - 已有 
       %span{style: "color:#FF2B22"} #{coupon["monthSales"].to_i + 131}
@@ -32,7 +33,7 @@
     .stat
       %p.price-area
         %span.price
-          %span.oprice 原价 ￥#{coupon["price"]}&nbsp;&nbsp;
+          %span.oprice 原价￥#{coupon["price"]}&nbsp;&nbsp;
           ￥
           %em.int{style: "padding:0"}> #{coupon['nowPrice'].to_i}
           %em.decimal> .#{coupon['nowPrice'].to_s.sub(/\d+\./,'')}
@@ -44,7 +45,7 @@
         - if coupon["couponMoney"].to_i > 0
           %p#eventTimeStr.desc 有效期
         - else
-          %p.desc &nbsp;
+          %p.desc 扫描上方二维码，天天享优惠！
         %a{href: "#{buy_url}", target: "_blank", class: "buy-btn", isconvert: 1, onclick: "ga_event(this);", data:{ga: "#{coupon["couponMoney"].to_i == 0 ? '直接购买:详情页:详情页_直接购买_按钮' : '领券:详情页:详情页_领券_按钮'}"}}
           .line.line-l
             %i
