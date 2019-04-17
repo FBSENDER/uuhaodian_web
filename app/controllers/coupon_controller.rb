@@ -99,6 +99,49 @@ class CouponController < ApplicationController
     end
   end
 
+  def ddk_product_detail
+    url = "http://api.uuhaodian.com/ddk/product?id=#{params[:id]}"
+    json = {}
+    @items = []
+    begin
+      result = Net::HTTP.get(URI(URI.encode(url)))
+      json = JSON.parse(result)
+    rescue
+      not_found
+      return
+    end
+    @detail = json["result"]
+    if @detail.nil?
+      not_found
+      return
+    end
+    if @detail["auctionImages"].size < 5
+      @detail["auctionImages"].unshift(@detail["coverImage"])
+    end
+    @top_keywords = get_hot_keywords_data.sample(8)
+    @path = "http://api.uuhaodian.com/uu/goods_list"
+    if is_device_mobile?
+      render :m_product_detail, layout: "dazhe"
+    end
+  end
+
+  def ddk_buy
+    url = "http://api.uuhaodian.com/ddk/promotion_url?id=#{params[:id]}"
+    json = {}
+    begin
+      result = Net::HTTP.get(URI(URI.encode(url)))
+      json = JSON.parse(result)
+      if json["status"] != 1
+        not_found
+        return
+      end
+      redirect_to json["result"]["we_app_web_view_short_url"], status: 302
+    rescue
+      not_found
+      return
+    end
+  end
+
   def query
     set_cookie_channel
     @keyword = params[:keyword]

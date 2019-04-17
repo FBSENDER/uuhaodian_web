@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   get "/category/:cid", to: "coupon#category", cid: /\d+/
   get "/collection/:tid", to: "coupon#collection", tid: /\d+/
   get "/yh/:id", to: "coupon#product_detail", id: /\d+/
+  get "/ddk/:id", to: "coupon#ddk_product_detail", id: /\d+/
+  get "/ddk/buy/:id", to: "coupon#ddk_buy", id: /\d+/
   get "/sp/:id", to: "coupon#video_detail", id: /\d+/
   get "/query/:keyword", to: "coupon#query", keyword: /.+/
   get "/like/", to: "coupon#like"
