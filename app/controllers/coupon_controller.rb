@@ -3,6 +3,10 @@ class CouponController < ApplicationController
     render "not_found", status: 404
   end
   def home
+    if is_device_mobile?
+      redirect_to "http://m.uuhaodian.com"
+      return
+    end
     #redirect_to "http://uuhaodian.com", status: 302
     set_cookie_channel
     @cates = get_cate_data
