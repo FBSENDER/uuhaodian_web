@@ -16,6 +16,7 @@ class CouponController < ApplicationController
     @items_bang = get_coupon_bang_data
     @path = "http://api.uuhaodian.com/uu/home_list"
     @keyword = ''
+    @kk = $kk.sample(20)
   end
 
   def like
@@ -43,6 +44,7 @@ class CouponController < ApplicationController
     @top_keywords = get_hot_keywords_data.sample(8)
     @items_bang = get_coupon_bang_data
     @path = "http://api.uuhaodian.com/uu/home_list"
+    @kk = $kk.sample(20)
   end
 
   def product_detail
@@ -161,6 +163,7 @@ class CouponController < ApplicationController
     if @keyword.size >= 10
       @path = "http://api.uuhaodian.com/uu/tb_goods_list"
     end
+    @kk = $kk.sample(20)
   end
 
   def collection
