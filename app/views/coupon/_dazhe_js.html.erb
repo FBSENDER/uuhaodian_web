@@ -64,7 +64,7 @@ function createList_3(cl, obj){
     htmlstr += '<div class="num">';
     htmlstr += '<span>天猫价 ￥'+ z.reserve_price + '</span>';
     htmlstr += '<span class="r">已售'+ z.volume + '件</span></div>';
-    htmlstr += '<div class="money"><div class="quan"><i>优惠券</i></div>';
+    htmlstr += '<div class="money"><div class="quan"><i>' + (parseFloat(z.zk_final_price) * 10.0 / parseFloat(z.reserve_price)).toFixed(1) + ' 折</i></div>';
     htmlstr += '折扣价 ￥'
     htmlstr += '<span class="m">' + z.zk_final_price + '</span></div>'
     htmlstr += '</div></a></div>';
@@ -112,6 +112,12 @@ var callback = function(data){
   }
   else if(data.status == 1){
     createList_2(data.results,dazheList);
+    if(data.results.length < pagesize)
+    {
+      path = "http://api.uuhaodian.com/uu/tb_goods_item_list";
+      page = 1;
+      getDazheCouponList();
+    }
   }
   else if(data.status == 2){
     createList_3(data.results,dazheList);
