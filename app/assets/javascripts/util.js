@@ -193,7 +193,7 @@ Util.createTaobaoProductList = function(cl,obj,channel,gaPage){
     else
       platform = 1;
     htmlstr += '<div class="zk-item">';
-    htmlstr += '<a href="/yh/'+ z.num_iid +'/#coupon">';
+    htmlstr += '<a href="http://tt.uuhaodian.com/yh/'+ z.num_iid +'/#coupon">';
     htmlstr += '<div class="img-area">';
     htmlstr += '<img data-ga-event="商品_图片:点击:'+ gaPage +'" class="lazy new" data-original="'+ z.pict_url +'" alt="'+z.
       title +'">';
@@ -207,7 +207,7 @@ Util.createTaobaoProductList = function(cl,obj,channel,gaPage){
     htmlstr += '<span class="price">&yen;<em class="number-font">'+ parseInt(z.zk_final_price) +'</em>';
     htmlstr += '<em class="decimal">'+(z.zk_final_price.toString().split('.').length>1?'.'+z.zk_final_price.toString().split('.')[1]:'')+'</em><i></i></span>';
     htmlstr += '</div>';
-    htmlstr += '<span class="coupon_click">可抢红包</span> ';
+    htmlstr += '<span class="coupon_click">' + (parseFloat(z.zk_final_price) * 10.0 / parseFloat(z.reserve_price)).toFixed(1) + ' 折</span> ';
     htmlstr += '</div>';
     htmlstr += '</a>';
     htmlstr += '</div>';

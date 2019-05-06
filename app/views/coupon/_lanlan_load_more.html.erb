@@ -53,9 +53,17 @@ var callback = function(data){
   }
   else if(data.status == 1){
     Util.createTaobaoCouponList(data.results,couponList,channel,'首页');
-    page ++;
-    load = 1;
-    loadingText.html('加载完成');
+    if(data.results.length < pagesize){
+      path = "http://api.uuhaodian.com/uu/tb_goods_item_list";
+      load = 1;
+      page = 1;
+      getLanlanCouponList();
+    }
+    else{
+      page ++;
+      load = 1;
+      loadingText.html('加载完成');
+    }
   }
   else if(data.status == 2){
     Util.createTaobaoProductList(data.results,couponList,channel,'首页');
