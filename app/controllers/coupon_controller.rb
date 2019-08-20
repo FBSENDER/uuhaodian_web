@@ -17,6 +17,15 @@ class CouponController < ApplicationController
     @path = "http://api.uuhaodian.com/uu/home_list"
     @keyword = ''
     @kk = $kk.sample(20)
+    @items = [{
+      "shortTitle" => "【梅子系】单肩水桶包女2019新款夏天复古百搭ins手提链条斜挎包",
+      "itemId" => 601210014483,
+      "coverImage" => "https://img.alicdn.com/i1/3703618112/O1CN01tTEpua29nLRJifaca_!!3703618112.jpg",
+      "price" => 129,
+      "monthSales" => 132,
+      "couponMoney" => 10,
+      "nowPrice" => 119
+    }]
   end
 
   def like

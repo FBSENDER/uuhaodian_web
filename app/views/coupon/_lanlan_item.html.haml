@@ -1,21 +1,21 @@
 .zk-item
-  %a{href: "#"}
+  %a{href: "/yh/#{item["itemId"]}/?coupon_money=#{item["couponMoney"]}"}
     .img-area
       .bottom-info
         %p.time-count
-      %img.lazy{src: "http://oss1.lanlanlife.com/175239c8cbc76fa96d8b6e40e0c1e214_800x800.jpg@!1-500-80-jpg"}
+      %img{src: "#{item["coverImage"]}"}
     %p.title-area.elli
       %i.i_tmall
       %span.post-free 包邮
-      真真老老 嘉兴肉粽5荤1素600g
+      #{item["shortTitle"]}
     .raw-price-area
-      现价：¥24.90
-      .sold 已领24698张券
+      现价：¥#{item["price"]}
+      .sold 已领#{item["monthSales"]}张券
     .info
       .price-area
         %span.price
           ¥
-          %em.number-font 14
-          %em.decimal .90
+          %em.number-font #{item["nowPrice"]}
+          %em.decimal .00
           %i
-      .coupon_click 券 10 元
+      .coupon_click 券 #{item["couponMoney"]} 元
