@@ -32,33 +32,32 @@
     %img.sno{id: "ercode", src: "http://www.uuhaodian.com/img/lbanner1.png"}
   .content
     .filter
-      .type.active{data: {sort: 7}}
+      .type.active{id: "t7", data: {sort: 7}}
         %a{href: "javascript:;", onclick:"_hmt.push(['_trackEvent', '筛选-综合', 'click', 'dazhe'])"} 综合
       .type{data: {sort: 1}}
         %a{href: "javascript:;", onclick:"_hmt.push(['_trackEvent', '筛选-上新', 'click', 'dazhe'])"} 上新
       .type{data: {sort: 4}}
         %a{href: "javascript:;", onclick:"_hmt.push(['_trackEvent', '筛选-销量', 'click', 'dazhe'])"} 销量
       .type{data: {sort: 3}}
-        %a{href: "javascript:;", onclick:"_hmt.push(['_trackEvent', '筛选-价格', 'click', 'dazhe'])"} 价格
+        %a{id: "t3", href: "javascript:;", onclick:"_hmt.push(['_trackEvent', '筛选-价格', 'click', 'dazhe'])"} 价格
     #dazheList
-    - @items.each do |item|
-      - coupon_id = item["couponUrl"].match(/activityId=(\w+)/)[1]
-      .item
-        %a.zh{href: "http://api.uuhaodian.com/uu/buy?id=#{item["itemId"]}&activity_id=#{coupon_id}", target: "_blank", onclick:"_hmt.push(['_trackEvent', '领券', 'click', 'dazhe'])"}
-          %img.pic{src: "#{item["coverImage"]}"}
-          .cent
-            %h3 #{item["shortTitle"]}
-            .num
-              %span 原价 ￥#{item["price"]}
-              - if item["monthSales"].to_i < 10
-                %span.r 已售#{rand(1000)}件
-              - else
-                %span.r 已售#{item["monthSales"]}件
-            .money
-              .quan
-                %i #{item["couponMoney"].to_i}元券
-              券后价 ￥
-              %span.m #{item["nowPrice"]}
+      - @items.each do |item|
+        .item
+          %a.zh{href: "http://api.uuhaodian.com/uu/buy?id=#{item["itemId"]}", target: "_blank", onclick:"_hmt.push(['_trackEvent', '领券', 'click', 'dazhe'])"}
+            %img.pic{src: "#{item["coverImage"]}"}
+            .cent
+              %h3 #{item["shortTitle"]}
+              .num
+                %span 原价 ￥#{item["price"]}
+                - if item["monthSales"].to_i < 10
+                  %span.r 已售#{rand(1000)}件
+                - else
+                  %span.r 已售#{item["monthSales"]}件
+              .money
+                .quan
+                  %i #{item["couponMoney"].to_i}元券
+                券后价 ￥
+                %span.m #{item["nowPrice"]}
   .footer
     %a.home.zh{href: "http://m.uuhaodian.com/index.php?r=index/wap&source=dazhe", target: "_blank", onclick:"_hmt.push(['_trackEvent', '首页', 'click', 'dazhe'])"}
       %img.icon{src: "http://www.uuhaodian.com/favicon.ico"}
