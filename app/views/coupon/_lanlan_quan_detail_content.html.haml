@@ -16,13 +16,13 @@
       - if coupon["recommend"] != ''
         推荐理由：#{coupon["recommend"]}
       - else
-        微信扫一扫右侧二维码，小程序领券更方便！拼多多也能领券啦~
+        微信扫一扫右侧二维码，关注公众号"优优好店"，领券更方便！
     %input{id: "endTime", value: "#{coupon['couponEndTime']}", type: "hidden"}
     .small-img-area
       - coupon["auctionImages"][0,5].each_with_index do |img_url, index|
         %img.small_img{src: "#{img_url}", style:"#{'margin-left:0' if index == 0}"}
     .banner
-      %img{src: "/img/lbanner3.jpg"}
+      %img{src: "/img/lbanner1.png"}
     .platform
       %span #{coupon["sellerName"]} - 已有 
       %span{style: "color:#FF2B22"} #{coupon["monthSales"].to_i + 131}

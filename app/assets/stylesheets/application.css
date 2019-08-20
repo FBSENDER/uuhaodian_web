@@ -1225,11 +1225,14 @@ input,input:focus{
 .order-area .sort-type li:hover{
   color: red;
 }
-.order-area .sort-type li.active {
+.order-area .sort-type li.filter_li.active {
+  color: #FF2220;
+}
+.order-area .sort-type li.sort_li.active {
   color: #FF2220;
   border-bottom-color: #FF2220;
 }
-.order-area .sort-type li.active:after {
+.order-area .sort-type li.sort_li.active:after {
   position: absolute;
   bottom: -6px;
   left: 50%;
@@ -1668,4 +1671,16 @@ input,input:focus{
 }
 .act38 img{
   width: 136px;
+}
+.rk {
+  padding:10px;
+  line-height:30px;
+  height:30px;
+  border-radius: 25px;
+  background-color:#fff;
+  color:#666;
+  margin-right:10px
+}
+.rk:hover{
+  color: red;
 }

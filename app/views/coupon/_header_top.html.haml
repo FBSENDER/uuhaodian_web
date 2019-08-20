@@ -8,6 +8,7 @@
         %input.search-input.unfocus{type: "text", placeholder: "粘贴宝贝标题或输入关键词"}
       %a.search-btn{href: "javascript:;"} 找券
       .keywords-area
+        %a{href: "/query/%E6%A2%85%E5%AD%90%E7%B3%BB%E5%A5%B3%E5%8C%85/", style: "color:red;"} 梅子系女包
         - if @top_keywords && @top_keywords.size > 0
           - @top_keywords.each do |k|
             %a{href: "/query/#{URI.encode(k)}/"} #{k}

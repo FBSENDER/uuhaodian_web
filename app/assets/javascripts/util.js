@@ -304,3 +304,57 @@ Util.createLanlanCouponFluid = function(cl,obj,channel,gaPage){
   Util.lazyLoad('lazy.new');
   $('.lazy.new').removeClass('new');
 }
+Util.createDgList = function(cl,obj,channel,gaPage){
+  gaPage = gaPage || '未知';
+  var htmlstr = '<div>';
+  for(var i=0,len=cl.length;i<len;i++){
+    var z = cl[i];
+    var coupon_money = z.coupon_amount ? parseInt(z.coupon_amount) : 0;
+    var now_price = (parseFloat(z.zk_final_price) - coupon_money).toFixed(2);
+    var o_price = coupon_money > 0 ? parseFloat(z.zk_final_price).toFixed(2) : parseFloat(z.reserve_price).toFixed(2);
+    var zhe = (now_price * 10.0 / o_price).toFixed(1);
+    var platform = '',platformPic = '';
+    htmlstr += '<div class="zk-item">';
+    if(coupon_money > 0){
+      htmlstr += '<a href="/yh/'+ z.item_id +'/?coupon_money=' + coupon_money + '#coupon">';
+    }
+    else{
+      htmlstr += '<a href="http://tt.uuhaodian.com/yh/'+ z.item_id +'/?coupon_money=' + coupon_money + '#coupon">';
+    }
+    htmlstr += '<div class="img-area">';
+    htmlstr += '<img data-ga-event="商品_图片:点击:'+ gaPage +'" class="lazy new" data-original="'+ z.pict_url +'" alt="'+z.
+      title +'">';
+    htmlstr += '</div>';
+    htmlstr += '<p class="title-area elli">';
+    htmlstr += '<span class="post-free">包邮</span>';
+    if(z.short_title != ''){
+      htmlstr +=  z.short_title +'</p>';
+    }
+    else{
+      htmlstr +=  z.title +'</p>';
+    }
+    htmlstr += '<div class="raw-price-area">原价：&yen;'+ o_price +'<p class="sold">' + (z.volume) +'人已付款</p></div>';
+    htmlstr += '<div class="info">';
+    htmlstr += '<div class="price-area">';
+    htmlstr += '<span class="price">&yen;<em class="number-font">'+ now_price  +'</em></span>';
+    htmlstr += '</div>';
+    if(coupon_money > 0){
+      htmlstr += '<span class="coupon_click">券 ';
+      htmlstr += coupon_money;
+      htmlstr += ' 元</span>';
+    }
+    else{
+      htmlstr += '<span class="coupon_click">';
+      htmlstr += zhe;
+      htmlstr += ' 折</span>';
+    }
+    htmlstr += '</div>';
+    htmlstr += '</a>';
+    htmlstr += '</div>';
+  }
+  htmlstr += '</div>';
+  htmlstr = $(htmlstr);
+  obj.append(htmlstr);
+  Util.lazyLoad('lazy.new');
+  $('.lazy.new').removeClass('new');
+}

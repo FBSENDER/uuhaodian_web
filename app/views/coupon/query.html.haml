@@ -5,9 +5,13 @@
 = render partial: "header_common"
 = render partial: "header_lanlan_fenlei"
 .wrapper
-  = render partial: "lanlan_quan_filter"
+  %div{style: "margin-bottom:10px;"}
+    - @kk.each do |k|
+      %a{href: "/query/#{URI.encode(k)}/", class: "rk"}
+        #{k}
+  = render partial: "dg_filter"
   .zk-list.clearfix#couponList
-  = render partial: "lanlan_load_more", locals: {path: @path, pagesize: 20, sort_type: 7, pinyin: '', keyword: @keyword, cid: 0,sort: 7, type: 0}
+  = render partial: "dg_load_more", locals: {keyword: @keyword}
 
 - if @items_bang && @items_bang.size > 0
   .wrapper

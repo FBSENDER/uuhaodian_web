@@ -1,0 +1,176 @@
+<div class="more-coupon">
+  <span id="moreCoupon" class="btn loading-text" onclick="ga_event(this);" data-ga="更多券按钮:更多券按钮:更多券按钮">查看更多优惠券</span>
+</div>
+<script type="text/javascript">
+var couponList = $('#couponList'),loadingText = $('.loading-text');
+var page = 1,pagesize = 20, channel = 27, load = 1,sort = 0,is_simple = true, sort_type='',is_t = false, is_h = false, is_q = false;
+var path = 'http://api.uuhaodian.com/uu/dg_goods_list';
+function getDgList(){
+  if(!load){
+    return;
+  }
+  var dd = {
+    'keyword': '<%= keyword %>',
+    'sort': sort_type,
+    'page':page,
+    'callback': 'callback'
+  };
+  if(is_simple){
+    dd.is_simple = 1
+  }
+  if(is_t){
+    dd.is_tmall = 1
+  }
+  if(is_h){
+    dd.is_overseas = 1
+  }
+  if(is_q){
+    dd.has_coupon = 1
+  }
+  $.ajax({
+    url: path,
+    type: 'GET',
+    dataType: 'jsonp',
+    data: dd,
+    beforeSend:function(){
+      load = 0;
+      loadingText.html('努力加载中...');
+    },
+    success:function(data){
+    }
+  });
+}
+var callback = function(data){
+  if(data.status == 1){
+    Util.createDgList(data.results,couponList,channel,'首页');
+    if(data.results.length >= pagesize){
+      page ++;
+      load = 1;
+      loadingText.html('查看更多优惠券');
+    }else{
+      loadingText.html('没有更多了');
+    }
+  }
+  else{
+    load = 1;
+    loadingText.html('没有更多了');
+  }
+};
+$(function(){
+
+  getDgList();
+
+  $(document).on('scroll',function(){
+    if(page%4 > 0){
+      var _top = $(document).scrollTop(),
+        scroll_height = Util.pageSize()['scrollHeight'],
+        client_height = Util.pageSize()['clientHeight'];
+        if(_top + client_height >= (scroll_height-800)){
+          getDgList();
+        }
+    }
+  });
+
+  loadingText.on('click',function(){
+    getDgList();
+  });
+
+
+
+  //sno
+  var sTabItem = $('.s-tab .tab-list li');
+  sTabItem.on('click',function(){
+    var _this = $(this);
+    if(!_this.hasClass('active')){
+      $('.s-tab .tab-list li.active').removeClass('active');
+      _this.addClass('active');
+      var i = _this.data('index');
+      $('.s-tab .content p.active').removeClass('active');
+      $('.s-tab .content p[data-index='+i+']').addClass('active');
+    }
+  });
+  $('.filter_li').on('click', function(){
+    var _this = $(this);
+    if(!_this.hasClass('active')){
+      _this.addClass('active');
+      if(_this.data('h') == '1'){
+        is_h = true
+        is_simple = false
+      }
+      if(_this.data('t') == '1'){
+        is_t = true
+        is_simple = false
+      }
+      if(_this.data('q') == '1'){
+        is_q = true
+        is_simple = false
+      }
+    }
+    else{
+      _this.removeClass('active');
+      if(_this.data('h') == '1'){
+        is_h = false
+      }
+      if(_this.data('t') == '1'){
+        is_t = false
+      }
+      if(_this.data('q') == '1'){
+        is_q = false
+      }
+    }
+    if($("#li-sort-7").hasClass('active') && !$("#li-q").hasClass('active') && !$("#li-q").hasClass('active') && !$("#li-q").hasClass('active')){
+      is_simple = true
+    }
+    page = 1;
+    $('#couponList').html('');
+    getDgList();
+  });
+  $('.sort_li').on('click', function(){
+    var _this = $(this);
+    if(_this.data('sort') == '3'){
+      if(!_this.hasClass('active')){
+        $('.sort_li.active').removeClass('active');
+        _this.addClass('active');
+        is_simple = false;
+        sort_type = "price_asc";
+        _this.html("价格↑");
+      }
+      else{
+        if(sort_type == "price_asc"){
+          sort_type = "price_des"
+          _this.html("价格↓");
+        }else{
+          sort_type = "price_asc"
+          _this.html("价格↑");
+        }
+      }
+      page = 1;
+      $('#couponList').html('');
+      getDgList();
+      return;
+    }
+    if(!_this.hasClass('active')){
+      $('.sort_li.active').removeClass('active');
+      _this.addClass('active');
+      sort = _this.data('sort');
+      if(sort == '7'){
+        is_simple = true;
+        $("#li-sort-3").html("价格");
+      }
+      else if (sort == '1'){
+        is_simple = false;
+        sort_type = "tk_rate_des"
+        $("#li-sort-3").html("价格");
+      }
+      else if (sort == '4'){
+        is_simple = false;
+        sort_type = "total_sales_des";
+        $("#li-sort-3").html("价格");
+      }
+      page = 1;
+      $('#couponList').html('');
+      getDgList();
+    }
+  });
+});
+</script>

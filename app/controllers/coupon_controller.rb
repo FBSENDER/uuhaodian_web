@@ -11,7 +11,7 @@ class CouponController < ApplicationController
     set_cookie_channel
     @cates = get_cate_data
     @banners = get_banner_data
-    @top_keywords = get_hot_keywords_data.sample(8)
+    @top_keywords = get_hot_keywords_data.sample(7)
     @items_9kuai9 = get_coupon_9kuai9_data
     @items_bang = get_coupon_bang_data
     @path = "http://api.uuhaodian.com/uu/home_list"
@@ -41,7 +41,7 @@ class CouponController < ApplicationController
       return
     end
     @category_name = params[:category_name] || @lanlan_category["name"]
-    @top_keywords = get_hot_keywords_data.sample(8)
+    @top_keywords = get_hot_keywords_data.sample(7)
     @items_bang = get_coupon_bang_data
     @path = "http://api.uuhaodian.com/uu/home_list"
     @kk = $kk.sample(20)
@@ -58,15 +58,10 @@ class CouponController < ApplicationController
       result = Net::HTTP.get(URI(URI.encode(url)))
       json = JSON.parse(result)
       if json["status"]["code"] != 1001 || json["result"].nil?
-        url = "http://api.uuhaodian.com/uu/product_db?item_id=#{params[:id]}"
+        url = "http://api.uuhaodian.com/uu/product_tb?item_id=#{params[:id]}"
         result = Net::HTTP.get(URI(URI.encode(url)))
         json = JSON.parse(result)
-        if json["status"] == 0 
-          url = "http://api.uuhaodian.com/uu/product_tb?item_id=#{params[:id]}"
-          result = Net::HTTP.get(URI(URI.encode(url)))
-          json = JSON.parse(result)
-          not_found if json["result"].nil? || json["status"]["code"] != 1001
-        end
+        not_found if json["result"].nil? || json["status"]["code"] != 1001
       end
       unless is_device_mobile?
         url_recommend = "http://api.uuhaodian.com/uu/tb_goods_recommend?item_id=#{params[:id]}"
@@ -98,8 +93,8 @@ class CouponController < ApplicationController
       not_found
       return
     end
-    @top_keywords = get_hot_keywords_data.sample(8)
-    @path = "http://api.uuhaodian.com/uu/goods_list"
+    @top_keywords = get_hot_keywords_data.sample(7)
+    @path = "http://api.uuhaodian.com/uu/dg_goods_list"
     if is_device_mobile?
       render :m_product_detail, layout: "dazhe"
     end
@@ -124,7 +119,7 @@ class CouponController < ApplicationController
     if @detail["auctionImages"].size < 5
       @detail["auctionImages"].unshift(@detail["coverImage"])
     end
-    @top_keywords = get_hot_keywords_data.sample(8)
+    @top_keywords = get_hot_keywords_data.sample(7)
     @path = "http://api.uuhaodian.com/uu/goods_list"
     if is_device_mobile?
       render :m_product_detail, layout: "dazhe"
@@ -151,26 +146,27 @@ class CouponController < ApplicationController
   def query
     set_cookie_channel
     @keyword = params[:keyword]
-    #if @keyword.include?('http') || @keyword.include?("taobao") || @keyword.include?("tmall")
-    #  redirect_to "https://www.iquan.net/tbzk/?keyword=#{URI.encode_www_form_component(@keyword)}", status: 302
-    #  return
-    #end
     @cates = get_cate_data
-    #@keywords = get_hot_keywords_data.sample(10)
-    @top_keywords = get_hot_keywords_data.sample(8)
+    @top_keywords = get_hot_keywords_data.sample(7)
     @items_bang = get_coupon_bang_data
-    @path = "http://api.uuhaodian.com/uu/goods_list"
-    if @keyword.size >= 10
-      @path = "http://api.uuhaodian.com/uu/tb_goods_list"
+    @path = "http://api.uuhaodian.com/uu/dg_goods_list"
+    url = "http://api.uuhaodian.com/uu/keyword_infos?keyword=#{URI.encode_www_form_component(@keyword)}"
+    result = Net::HTTP.get(URI(url))
+    json = JSON.parse(result)
+    if json["status"] == 1
+      @kk = json["result"]["r_keywords"] || []
+    else
+      @kk = []
     end
-    @kk = $kk.sample(20)
+    @kk = @kk.sample(10)
+
   end
 
   def collection
     set_cookie_channel
     @collection_type = params[:tid].to_i 
     @cid = params[:cid].nil? ? 0 : params[:cid].to_i
-    @top_keywords = get_hot_keywords_data.sample(8)
+    @top_keywords = get_hot_keywords_data.sample(7)
     url = ""
     if @collection_type == 1
       @collection_name = "聚特卖"
@@ -192,7 +188,7 @@ class CouponController < ApplicationController
   def top
     set_cookie_channel
     @cates = get_cate_data
-    @top_keywords = get_hot_keywords_data.sample(8)
+    @top_keywords = get_hot_keywords_data.sample(7)
     @path = "http://api.uuhaodian.com/uu/home_list"
     @cid = params[:cid].nil? ? 0 : params[:cid].to_i
     cate = @cates.select{|item| item["cid"].to_i == @cid}.first
@@ -213,7 +209,7 @@ class CouponController < ApplicationController
       {"cid"=> 3760, "name"=> "母婴", "img_url"=> "http://oss2.lanlanlife.com/fccdeeb51c7ac0d6d90607031c1f8414_126x126.png"},
       {"cid"=> 3759, "name"=> "数码", "img_url"=> "http://oss1.lanlanlife.com/57f40d4d1baf8a8115548bebb2964a0c_126x126.png"}
     ]
-    @top_keywords = get_hot_keywords_data.sample(8)
+    @top_keywords = get_hot_keywords_data.sample(7)
     @cid = params[:cid].nil? ? 3761 : params[:cid].to_i
     cate = @cates.select{|item| item["cid"].to_i == @cid}.first
     @cate_name = cate.nil? ? '' : cate["name"]
