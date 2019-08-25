@@ -168,7 +168,6 @@ class CouponController < ApplicationController
       @kk = []
     end
     @kk = @kk.sample(10)
-
   end
 
   def collection

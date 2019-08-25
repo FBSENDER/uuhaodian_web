@@ -26,10 +26,7 @@
     .platform
       %span #{coupon["sellerName"]} - 已有 
       %span{style: "color:#FF2B22"} #{coupon["monthSales"].to_i + 131}
-      %span 人购买 - 
-      %a#shoucang.shoucang{href: "javascript:;"}
-        %span#shoucang-span{data:{id: "#{@detail["itemId"]}"}}加入收藏
-        %i
+      %span 人购买 
     .stat
       %p.price-area
         %span.price

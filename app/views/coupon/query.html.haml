@@ -2,15 +2,33 @@
 - keywords("#{@keyword},#{@keyword}优惠券")
 - head_desc("优优好店 - 搜索结果 - #{@keyword}")
 
-= render partial: "header_common"
-= render partial: "header_lanlan_fenlei"
+%header.header#header
+  = render partial: "header_top"
+  .tab-area#tab_area
+    .wrapper
+      .cate-area
+        %a.cate-item.jxtj.active{href: "/", title: "天天特价"}
+          %span.cate-rec
+        %a.cate-item.hot{href: "http://uuhaodian.com/index.php?r=app/download&u=550416", target: "_blank"} 下载APP
+        %a.cate-item{href: "/top/#tab_area", class: "#{'active' if @is_top}"} 小时风云榜
+        %a.cate-item{href: "/brand/#tab_area", class:"#{'active' if @is_brand}"} 品牌好券
+        %a.cate-item{href: "http://uuhaodian.com/index.php?r=ddq&u=550416", target: "_blank"} 咚咚抢
+        %a.cate-item{href: "/collection/4/", class:"#{'active' if @collection_type && @collection_type == 4}"} 九块九包邮
+      .search-area
+        %i
+        %input.search-input.unfocus{type: "text", placeholder: "粘贴宝贝标题或输入关键词"}
+    %div{style: "background-color:#fff;height:40px;"}
+      .wrapper
+        = render partial: "dg_filter"
+
 .wrapper
-  %div{style: "margin-bottom:10px;"}
-    - @kk.each do |k|
-      %a{href: "/query/#{URI.encode(k)}/", class: "rk"}
-        #{k}
-  = render partial: "dg_filter"
-  .zk-list.clearfix#couponList
+  - if @kk.size > 0
+    %div{style: "margin-top:20px;height:36px;overflow:hidden;line-height:36px;"}
+      %span.rk{style: "color: red;"} #{@keyword}
+      - @kk.each do |k|
+        %a{href: "/query/#{URI.encode(k)}/", class: "rk"}
+          #{k}
+  .zk-list.clearfix#couponList{style: "margin-top: 20px;"}
   = render partial: "dg_load_more", locals: {keyword: @keyword}
 
 - if @items_bang && @items_bang.size > 0

@@ -2,7 +2,10 @@
 - keywords("#{@detail["shortTitle"]},#{@detail["title"]}")
 - head_desc("优优好店 - 商品详情 - #{@detail["shortTitle"]}")
 
-= render partial: "header_common"
+%header.header#header
+  = render partial: "header_top"
+  = render partial: "header_tab"
+
 .wrapper
   = render partial: "lanlan_quan_detail_content"
 %aside.wrapper
@@ -14,7 +17,7 @@
     %p.head
       %span 更多推荐
   .zk-list.clearfix#couponList
-  = render partial: "dg_load_more", locals: {keyword: @detail["category"]}
+  = render partial: "dg_load_more", locals: {keyword: @detail["title"][-6,6]}
 
 = render partial: "footer"
 = render partial: "sider_fixed_area"

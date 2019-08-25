@@ -326,6 +326,9 @@ Util.createDgList = function(cl,obj,channel,gaPage){
       title +'">';
     htmlstr += '</div>';
     htmlstr += '<p class="title-area elli">';
+    if(z.user_type == 1){
+      htmlstr += '<i class="i_tmall"></i>';
+    }
     htmlstr += '<span class="post-free">包邮</span>';
     if(z.short_title != ''){
       htmlstr +=  z.short_title +'</p>';
