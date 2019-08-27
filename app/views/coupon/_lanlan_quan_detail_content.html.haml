@@ -1,7 +1,7 @@
 - coupon = @detail
 - aaid = coupon['couponUrl'].match(/activityId=(\w*)/)
 - aaid = aaid.nil? ? '' : aaid[1]
-- buy_url = coupon["couponMoney"].to_f > 0 ? "http://api.uuhaodian.com/uu/pcbuy?id=#{coupon["itemId"]}&activity_id=#{aaid}" : "http://item.taobao.com/item.htm?id=#{coupon['itemId']}"
+- buy_url = "http://api.uuhaodian.com/uu/pcbuy?id=#{coupon["itemId"]}&activity_id=#{aaid}"
 - buy_url += ("&channel=" + @channel) if @channel
 
 #coupon.zk-content
