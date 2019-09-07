@@ -1,9 +1,9 @@
 <script type="text/javascript">
 var globalChannel = 27;
-var dazheList = $('#dazheList');
 var page = 1,pagesize = 20,load = 1,channel = '<%= @channel %>',sort = 0,is_simple = true, sort_type='',is_t = false, is_h = false, is_q = false, keyword = '<%= @keyword %>';
 var path = 'http://api.uuhaodian.com/uu/dg_goods_list';
-function createList_dg(cl, obj){
+function createList_dg(cl){
+  var obj = $('#dazheList');
   var htmlstr = '';
   for(var i=0,len=cl.length;i<len;i++){
     var z = cl[i];
@@ -146,7 +146,7 @@ var callback = function(data){
   load = 1;
   page ++;
   if(data.status == 1){
-    createList_dg(data.results,dazheList);
+    createList_dg(data.results);
   }
 };
 
