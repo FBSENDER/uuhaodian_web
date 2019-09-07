@@ -149,6 +149,10 @@ function getDazheCouponList(){
     },
     success:function(data){
       alert("success");
+    },
+    error: function(data){
+      alert("error");
+      alert(data);
     }
   });
 }
