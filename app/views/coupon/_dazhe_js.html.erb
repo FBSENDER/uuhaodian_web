@@ -1,7 +1,6 @@
 <script type="text/javascript">
 var globalChannel = 27;
 var page = 1,pagesize = 20,load = 1,channel = '<%= @channel %>',sort = 0,is_simple = true, sort_type='',is_t = false, is_h = false, is_q = false, keyword = '<%= @keyword %>';
-var path = 'http://api.uuhaodian.com/uu/dg_goods_list';
 function createList_dg(cl){
   var obj = $('#dazheList');
   var htmlstr = '';
@@ -140,14 +139,16 @@ function getDazheCouponList(){
     dd.has_coupon = 1
   }
   $.ajax({
-    url: path,
+    url: 'http://api.uuhaodian.com/uu/dg_goods_list',
     type: 'GET',
     dataType: 'jsonp',
     data: dd,
     beforeSend:function(){
       load = 0;
+      alert("send");
     },
     success:function(data){
+      alert("success");
     }
   });
 }
