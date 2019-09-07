@@ -112,6 +112,7 @@ function getDazheCouponList(){
   if(!load){
     return;
   }
+  alert("start ajax");
   var dd = {
     'keyword': keyword,
     'sort': sort_type,
@@ -145,6 +146,7 @@ function getDazheCouponList(){
 var callback = function(data){
   load = 1;
   page ++;
+  alert("callback " + data.status);
   if(data.status == 1){
     createList_dg(data.results);
   }
