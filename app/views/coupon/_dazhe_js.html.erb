@@ -108,6 +108,14 @@ function createList_3(cl, obj){
   htmlstr = $(htmlstr);
   obj.append(htmlstr);
 }
+var callback = function(data){
+  load = 1;
+  page ++;
+  alert("callback " + data.status);
+  if(data.status == 1){
+    createList_dg(data.results);
+  }
+};
 function getDazheCouponList(){
   if(!load){
     return;
@@ -145,14 +153,6 @@ function getDazheCouponList(){
 }
 
 $(function(){
-  var callback = function(data){
-    load = 1;
-    page ++;
-    alert("callback " + data.status);
-    if(data.status == 1){
-      createList_dg(data.results);
-    }
-  };
   getDazheCouponList();
   $(document).scroll(function(){
     tp = document.body.scrollTop || document.documentElement.scrollTop;
