@@ -123,8 +123,7 @@ function getDazheCouponList(){
   var dd = {
     'keyword': keyword,
     'sort': sort_type,
-    'page':page,
-    'callback': 'callback'
+    'page':page
   };
   if(is_simple){
     dd.is_simple = 1
@@ -143,6 +142,7 @@ function getDazheCouponList(){
     type: 'GET',
     dataType: 'jsonp',
     data: dd,
+    jsonp: 'callback',
     beforeSend:function(){
       load = 0;
       alert("send");
