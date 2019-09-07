@@ -38,7 +38,7 @@ function createList_dg(cl){
   htmlstr = $(htmlstr);
   obj.append(htmlstr);
 }
-var callback = function(data){
+var callback1 = function(data){
   load = 1;
   page ++;
   if(data.status == 1){
@@ -115,7 +115,6 @@ function createList_3(cl, obj){
   obj.append(htmlstr);
 }
 function getDazheCouponList(){
-  alert(callback);
   if(!load){
     return;
   }
@@ -123,7 +122,7 @@ function getDazheCouponList(){
     'keyword': keyword,
     'sort': sort_type,
     'page':page,
-    'callback': 'callback'
+    'callback': 'callback1'
   };
   if(is_simple){
     dd.is_simple = 1
@@ -142,8 +141,8 @@ function getDazheCouponList(){
     type: 'GET',
     dataType: 'jsonp',
     data: dd,
-    jsonp: 'callback',
-    jsonpCallback: 'callback',
+    jsonp: 'callback1',
+    jsonpCallback: 'callback1',
     beforeSend:function(){
       load = 0;
     },
