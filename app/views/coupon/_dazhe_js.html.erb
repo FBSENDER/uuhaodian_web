@@ -1,6 +1,6 @@
 <script type="text/javascript">
 var globalChannel = 27;
-var page = 1,pagesize = 20,load = 1,channel = '<%= @channel %>',sort = 0,is_simple = true, sort_type='',is_t = false, is_h = false, is_q = false, keyword = '<%= @keyword %>';
+var retry =0,page = 1,pagesize = 20,load = 1,channel = '<%= @channel %>',sort = 0,is_simple = true, sort_type='',is_t = false, is_h = false, is_q = false, keyword = '<%= @keyword %>';
 function createList_dg(cl){
   var obj = $('#dazheList');
   var htmlstr = '';
@@ -149,6 +149,11 @@ function getDazheCouponList(){
     success:function(data){
     },
     error: function(data){
+      if(!retry){
+        retry = 1;
+        load = 1;
+        getDazheCouponList();
+      }
     }
   });
 }
