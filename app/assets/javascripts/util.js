@@ -319,7 +319,7 @@ Util.createDgList = function(cl,obj,channel,gaPage){
       htmlstr += '<a href="/yh/'+ z.item_id +'/?coupon_money=' + coupon_money + '#coupon">';
     }
     else{
-      htmlstr += '<a href="http://tt.uuhaodian.com/yh/'+ z.item_id +'/?coupon_money=' + coupon_money + '#coupon">';
+      htmlstr += '<a href="'+ z.url +'" target="_blank">';
     }
     htmlstr += '<div class="img-area">';
     htmlstr += '<img data-ga-event="商品_图片:点击:'+ gaPage +'" class="lazy new" data-original="'+ z.pict_url +'" alt="'+z.
