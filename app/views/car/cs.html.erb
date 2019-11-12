@@ -1,0 +1,86 @@
+<% title(@title) %>
+<% head_desc(@description) %>
+<% keywords(@page_keywords) %>
+<% path(@path) %>
+<% h1(@h1) %>
+<% home_anchor = "优优汽配帮手" %>
+
+<header class="col-12" style="background-color:#FF6434;color:#fff;height:40px;line-height:40px;text-align:center;">优优汽配帮手</header>
+<article class="container" style="max-width:1200px;margin: 0 auto;min-height:500px;background-color:#f6f6f6;padding-bottom: 20px;">
+  <div class="columns">
+    <div class="col-12">
+      <p style="padding: 10px 10px 0 10px;margin:0;font-size:14px;color:#999;">
+      <a href="http://car.uuhaodian.com/" style="color:#999;"><%= home_anchor %></a>
+      >
+      <a href="http://car.uuhaodian.com/car/category/<%= @category[:id]%>/" style="color:#999;" title="汽车<%= @category[:name]%>"><%= @category[:name]%></a>
+      >
+      <a href="http://car.uuhaodian.com/car/series/<%= @series[:id]%>/" style="color:#999;" title="<%= @series[:name]%>配件"><%= @series[:name]%></a>
+      >
+      <%= @keyword %>
+      </p>
+    </div>
+    <% @items.each do |item|%>
+      <% coupon_money = item["coupon_amount"] ? item["coupon_amount"].to_i : 0 %>
+      <% now_price = (item["zk_final_price"].to_f - coupon_money).round(2) %>
+      <% zhe = (now_price * 10.0 / item["reserve_price"].to_f).round(1) %>
+      <% buy_url = coupon_money <= 0 ? item["url"] : "https://api.uuhaodian.com/uu/buy?id=#{item["item_id"]}&channel=12" %>
+      <div class="col-3 col-sm-6 column" style="margin-top: 10px;">
+        <a href="<%= buy_url %>" target="_blank" style="color:#3b4351;" rel="nofollow">
+          <div class="col-12 item">
+            <amp-img src="<%= item["pict_url"] %>" height="200px" width="200px" layout="responsive"></amp-img>
+            <p class="title"><%= item["title"] %></p>
+            <p class="o-price">
+            原价 ￥<%= coupon_money > 0 ? item["zk_final_price"] : item["reserve_price"] %>
+          <span style="float:right"><%= item["volume"] %>人已付款</span>
+            </p>
+            <p style="margin:0;padding: 0 5px 5px 5px;">
+              <span style="font-size:16px;color:red;">￥<%= now_price%><span>
+                  <span class="coupon">
+                    <%= coupon_money > 0 ? "券 #{coupon_money} 元" : "#{zhe} 折" %>
+                  </span>
+            </p>
+          </div>
+        </a>
+      </div>
+    <% end %>
+  </div>
+  <div class="col-12 column" style="margin: 20px 0;">
+    <% @categories.each do |c| %>
+      <p style="margin:20px 0;"><a href="http://car.uuhaodian.com/car/cs-<%= c[:id] %>-<%= @series[:id]%>/" style="color:#999;" title="<%= @series[:name]%><%= c[:name]%>"><%= @series[:name]%><%= c[:name] %></a></p>
+      <% c[:children].each do |cc| %>
+        <a href="http://car.uuhaodian.com/car/cs-<%= cc[:id] %>-<%= @series[:id]%>/" class="k" title="<%= @series[:name]%><%= cc[:name]%>"><%= cc[:name] %></a>
+      <% end %>
+    <% end %>
+    <div style="margin-top:20px;overflow: auto;height: 60px;line-height:60px;">
+      <p style="margin:0;"><a href="#" style="color:#999;">汽车品牌</a></p>
+      <% @brands.each do |b| %>
+        <a href="http://car.uuhaodian.com/car/cb-<%= @category[:id]%>-<%= b[:id] %>/" class="k" title="<%= b[:name]%><%= @category[:name]%>"><%= b[:name] %><%= @category[:name]%></a>
+      <% end %>
+    </div>
+    <div style="margin-top:20px;overflow: auto;height: 60px;line-height:60px;">
+      <p style="margin:0;"><a href="#" style="color:#999;"><%= @category[:name]%>品牌</a></p>
+      <% @qb.each do |b| %>
+        <a href="http://car.uuhaodian.com/car/cd/<%= b[:id] %>/" class="k"><%= b[:name] %><%= b[:keyword] %></a>
+      <% end %>
+    </div>
+  </div>
+  <div style="margin-top:20px;overflow: auto;height: 60px;line-height:60px;">
+    <p style="margin:0;"><a href="#" style="color:#999;">汽车型号</a></p>
+    <% @ss.each do |s| %>
+      <a href="http://car.uuhaodian.com/car/cs-<%= @category[:id]%>-<%= s[:id] %>/" class="k" title="<%= s[:name]%><%= @category[:name]%>"><%= s[:name] %><%= @category[:name]%></a>
+    <% end %>
+  </div>
+  <div class="col-12 column" style="background-color:#fff;padding:10px;margin: 20px 0;">
+    <p style="margin:0;font-size:14px;">
+      <%= "优优汽配帮手，实时更新#{@keyword}商品报价信息。" %>
+      <br/>
+      <%= "#{@keyword}推荐店铺：" %>
+      <%= @items.map{|t| t["shop_title"]}.uniq.join('，')%>
+      。
+    </p>
+  </div>
+  <h1 class="sno"><%= @keyword %></h1>
+</article>
+<footer style="text-align:center;font-size:12px;padding: 20px 0;">
+  「优优汽配帮手」汽车配件、汽车保养、汽修汽配，每日推荐! - 京ICP备18009981号-1 
+</footer>

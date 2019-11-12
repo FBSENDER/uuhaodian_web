@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html amp lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+    <title><%= yield(:title) %></title>
+    <meta name="keywords" content="<%= yield(:keywords)%>">
+    <meta name="description" content="<%= yield(:head_desc)%>">
+    <link rel="canonical" href="<%= yield(:path) %>">
+    <link rel="amphtml" href="<%= yield(:path) %>">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <style amp-custom>
+      <%= render partial: "layouts/amp_spectre_css" %>
+      .item{
+        border-radius:10px;
+        overflow:hidden;
+        background-color:#fff;
+      }
+      .coupon{
+        float:right;
+        background: #fff7fa;
+        text-align:center;
+        border: dotted 1px #FF2220;
+        color:#FF2220;
+        font-size:14px;
+        min-width:60px;
+        padding: 0 10px;
+      }
+      .title{
+        margin:0;
+        font-size:14px;
+        line-height:16px;
+        height:37px;
+        overflow:hidden;
+        padding:5px;
+      }
+      .o-price{
+        margin:0;
+        padding:5px;
+        font-size:12px;
+        color:#999;
+      }
+      .k{
+        font-size:12px;
+        height:20px;
+        line-height:20px;
+        background-color: #fff;
+        color:#333;
+        padding:10px 20px;
+        border-radius:30px;
+        margin-right:10px;
+      }
+      .sno{
+        display: none;
+      }
+    </style>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+  </head>
+
+  <body>
+    <amp-analytics type="gtag" data-credentials="include">
+      <script type="application/json">
+        {
+          "vars" : {
+            "gtag_id": "UA-96984648-4",
+            "config" : {
+              "UA-96984648-4": { "groups": "default" }
+            }
+          }
+        }
+      </script>
+    </amp-analytics>
+    <%= yield %>
+  </body>
+</html>

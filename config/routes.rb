@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root "car#index", constraints: {host: "car.uuhaodian.com"}
   root "coupon#home"
   get "/about.html", to: "coupon#about"
   get "/category/:cid", to: "coupon#category", cid: /\d+/
@@ -20,4 +21,12 @@ Rails.application.routes.draw do
 
   get "/dianpu/:name", to: "coupon#shop"
   get "/sshop/:name", to: "coupon#sem_shop"
+
+  #car
+  get "/car/brand/:id", to: "car#brand"
+  get "/car/category/:id", to: "car#category"
+  get "/car/series/:id", to: "car#series"
+  get "/car/cd/:id", to: "car#cd"
+  get "/car/cb-:cid-:bid", to: "car#cb"
+  get "/car/cs-:cid-:sid", to: "car#cs"
 end
