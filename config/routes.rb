@@ -29,4 +29,6 @@ Rails.application.routes.draw do
   get "/car/cd/:id", to: "car#cd"
   get "/car/cb-:cid-:bid", to: "car#cb"
   get "/car/cs-:cid-:sid", to: "car#cs"
+  get "/car/product/:id", to: "car#product"
+  get "/car/keyword", to: "car#keyword"
 end

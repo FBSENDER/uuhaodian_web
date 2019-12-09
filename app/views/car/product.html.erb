@@ -1,0 +1,87 @@
+<% title(@title) %>
+<% head_desc(@description) %>
+<% keywords(@page_keywords) %>
+<% path(@path) %>
+<% h1(@h1) %>
+<% home_anchor = "优优汽配帮手" %>
+
+<header class="col-12" style="background-color:#FF6434;color:#fff;height:40px;line-height:40px;text-align:center;"><%= @product["title"]%></header>
+<article class="container" style="max-width:1200px;margin: 0 auto;min-height:500px;background-color:#f6f6f6;padding-bottom: 20px;">
+  <div class="columns" style="padding-top:10px;">
+    <div class="col-3 col-sm-12 column" style="margin-bottom: 10px">
+      <amp-img src="<%= @product["coverImage"] %>" height="200px" width="200px" layout="responsive"></amp-img>
+    </div>
+    <div class="col-9 col-sm-12 column">
+      <div style="padding:10px;border-radius:5px;background-color:#fff;">
+        <div>商品名称：<%= @product['title']%></div>
+        <div>店铺：<%= @product["sellerName"]%> </div>
+        <% if @product["monthSales"] > 0%>
+          <div>月销量：<%= @product["monthSales"]%></div>
+        <% end %>
+        <div>原价：<%=@product["price"]%>元</div>
+        <% if @product["price"] > @product["nowPrice"]%>
+          <div>折扣价：<%= @product["nowPrice"]%>元</div>
+        <% end %>
+        <div>发货地：<%= @product["provcity"]%></div>
+        <% if @product["recommend"] != ''%>
+          <div><%= @product["recommend"]%></div>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-12 colomn">
+      <div style="text-align:center;background-color:#fff;margin:10px;padding:10px;border-radius:5px;">
+      更多商品图片
+      </div>
+    </div>
+    <% @product["auctionImages"].each do |img| %>
+      <div class="col-3 col-sm-12 column" style="">
+        <amp-img src="<%= img %>" height="200px" width="200px" layout="responsive"></amp-img>
+      </div>
+    <% end %>
+  </div>
+  <div class="columns">
+    <div class="col-12 colomn">
+      <div style="text-align:center;background-color:#fff;margin:10px;padding:10px;border-radius:5px;">
+      相关商品
+      </div>
+    </div>
+    <% @product["related"].each do |item|%>
+      <% buy_url = "http://car.uuhaodian.com/car/product/#{item["id"]}/" %>
+      <div class="col-3 col-sm-6 column" style="margin-top: 10px;">
+        <a href="<%= buy_url %>" style="color:#3b4351;">
+          <div class="col-12 item">
+            <amp-img src="<%= item["pict_url"] %>" height="200px" width="200px" layout="responsive"></amp-img>
+            <p class="title"><%= item["title"] %></p>
+            <p style="margin:0;padding: 5px;">
+              <span style="font-size:16px;color:red;">￥<%= item["price"]%><span>
+            </p>
+          </div>
+        </a>
+      </div>
+    <% end %>
+  </div>
+  <div class="col-12 column" style="margin: 20px 0;">
+    <div>
+      <p style="margin:20px 0;"><a href="#" style="color:#999;">相关关键词</a></p>
+      <% @product["keywords"].split(',').each do |k| %>
+        <a href="http://car.uuhaodian.com/car/keyword?k=<%= URI.encode(k) %>" class="k"><%= k %></a>
+      <% end %>
+    </div>
+    <% @categories.each do |c| %>
+      <p style="margin:20px 0;"><a href="http://car.uuhaodian.com/car/category/<%= c[:id] %>/" style="color:#999;" title="汽车<%= c[:name]%>"><%= c[:name] %></a></p>
+      <% c[:children].each do |cc| %>
+        <a href="http://car.uuhaodian.com/car/category/<%= cc[:id] %>/" class="k" title="汽车<%= cc[:name] %>"><%= cc[:name] %></a>
+      <% end %>
+    <% end %>
+    <div style="margin-top:20px;overflow: auto;height: 60px;line-height:60px;">
+      <p style="margin:0;"><a href="#" style="color:#999;">汽车品牌</a></p>
+      <% @brands.each do |b| %>
+        <a href="http://car.uuhaodian.com/car/brand/<%= b[:id] %>/" class="k" title="<%= b[:name]%>汽车配件"><%= b[:name] %></a>
+      <% end %>
+    </div>
+  </div>
+  <h1 class="sno"><%= @h1 %></h1>
+</article>
+<footer style="text-align:center;font-size:12px;padding: 20px 0;">
+  「优优汽配帮手」汽车配件、汽车保养、汽修汽配，每日推荐! - 京ICP备18009981号-1 
+</footer>

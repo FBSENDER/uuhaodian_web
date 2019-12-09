@@ -41,6 +41,13 @@
     <% end %>
   </div>
   <div class="col-12 column" style="margin: 20px 0;">
+    <div>
+      <p style="margin:20px 0;"><a href="#" style="color:#999;">大家正在搜</a></p>
+        <a href="http://car.uuhaodian.com/car/product/<%= @hot_product_id %>/" class="k">热销配件</a>
+      <% @hot_keywords.each do |k| %>
+        <a href="http://car.uuhaodian.com/car/keyword?k=<%= URI.encode(k) %>" class="k"><%= k %></a>
+      <% end %>
+    </div>
     <% @categories.each do |c| %>
       <p style="margin:20px 0;"><a href="http://car.uuhaodian.com/car/cb-<%= c[:id] %>-<%= @brand[:id]%>/" style="color:#999;" title="<%= @brand[:name]%><%= c[:name]%>"><%= c[:name] %></a></p>
       <% c[:children].each do |cc| %>
