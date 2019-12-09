@@ -50,7 +50,7 @@ class CarController < ApplicationController
     @title = "#{@keyword}_#{@keyword}价格/图片/品牌_优优汽配帮手"
     @description = "优优汽配帮手为您提供#{@keyword}产品报价等信息，包括#{@keyword}价格、#{@keyword}多少钱、#{@keyword}打折信息、#{@keyword}包邮特卖，优质汽修汽配产品推荐，就在优优汽配帮手！"
     @page_keywords = "#{@keyword},#{@keyword}多少钱,#{@keyword}价格,#{@keyword}特价,#{@keyword}产品报价,#{@keyword}打折"
-    @path = "#{request.path}/"
+    @path = "#{request.path}?k=#{URI.encode(@keyword)}"
     @h1 = @keyword
     @items = get_dg_items(@keyword)
     @hot_keywords = $hot_keywords.sample(20)
