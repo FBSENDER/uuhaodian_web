@@ -21,7 +21,6 @@
       %li{id: "li-sort-4", data: {sort: "4"}, class: "sort_li"} 销量
       %li{id: "li-sort-3", data: {sort: "3"}, class: "sort_li"} 价格
   .zk-list.clearfix#couponList
-    = render partial: "lanlan_item", locals: {item: @items[0]}
   = render partial: "lanlan_load_more", locals: {path: @path, pagesize: 20, sort_type: 1, pinyin: '', keyword: "#{@keyword}", cid: 0,sort: 1, type: 0}
 - if @items_bang && @items_bang.size > 0
   .wrapper
