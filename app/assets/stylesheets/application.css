@@ -224,9 +224,9 @@ input,input:focus{
   color: #FF2220;
 }
 .header .header-top .download-area{
-  position: relative;
-  top: 15px;
-  left: 70px;
+  float: left;
+  margin-top: 15px;
+  margin-left: 100px;
 }
 .header .tab-area{
   position: relative;
