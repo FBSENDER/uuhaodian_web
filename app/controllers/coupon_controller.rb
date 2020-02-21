@@ -11,7 +11,7 @@ class CouponController < ApplicationController
     set_cookie_channel
     @cates = get_cate_data
     @banners = get_banner_data
-    @top_keywords = get_hot_keywords_data.sample(7)
+    @top_keywords = get_hot_keywords_data.sample(8)
     @items_9kuai9 = get_coupon_9kuai9_data
     @items_bang = get_coupon_bang_data
     @path = "http://api.uuhaodian.com/uu/home_list"
@@ -42,7 +42,7 @@ class CouponController < ApplicationController
       return
     end
     @category_name = params[:category_name] || @lanlan_category["name"]
-    @top_keywords = get_hot_keywords_data.sample(7)
+    @top_keywords = get_hot_keywords_data.sample(8)
     @items_bang = get_coupon_bang_data
     @path = "http://api.uuhaodian.com/uu/home_list"
     @kk = $kk.sample(20)
@@ -97,10 +97,51 @@ class CouponController < ApplicationController
       not_found
       return
     end
-    @top_keywords = get_hot_keywords_data.sample(7)
+    @top_keywords = get_hot_keywords_data.sample(8)
     @path = "http://api.uuhaodian.com/uu/dg_goods_list"
     if is_device_mobile?
       render :m_product_detail, layout: "dazhe"
+    end
+  end
+
+  def dtk_product_detail
+    set_cookie_channel
+    @channel = cookies[:channel]
+    url = "http://api.uuhaodian.com/uu/dtk_static_product?id=#{params[:id]}"
+    json = {}
+    @items = []
+    begin
+      result = Net::HTTP.get(URI(URI.encode(url)))
+      json = JSON.parse(result)
+    rescue
+      not_found
+      return
+    end
+    if json["code"] != 0 || json["data"].nil?
+      not_found
+      return
+    end
+    @detail = json["data"]["product"]
+    if @detail.nil?
+      not_found
+      return
+    end
+    @detail["shortTitle"] = @detail["dtitle"]
+    @detail["itemId"] = @detail["goodsId"]
+    @detail["coverImage"] = @detail["mainPic"]
+    @detail["recommend"] = @detail["desc"]
+    @detail["auctionImages"] = [@detail["mainPic"]]
+    @detail["sellerName"] = @detail["shopName"]
+    @detail["price"] = @detail["originalPrice"]
+    @detail["nowPrice"] = @detail["actualPrice"]
+    @detail["couponMoney"] = @detail["couponPrice"]
+    @detail["couponEndTime"] = ''
+    @detail["couponUrl"] = ''
+    @items = json["data"]["related"]
+    @path = "http://api.uuhaodian.com/uu/dg_goods_list"
+    @top_keywords = get_hot_keywords_data.sample(8)
+    if is_device_mobile?
+      render :m_dtk_product_detail, layout: "dazhe"
     end
   end
 
@@ -123,7 +164,7 @@ class CouponController < ApplicationController
     if @detail["auctionImages"].size < 5
       @detail["auctionImages"].unshift(@detail["coverImage"])
     end
-    @top_keywords = get_hot_keywords_data.sample(7)
+    @top_keywords = get_hot_keywords_data.sample(8)
     @path = "http://api.uuhaodian.com/uu/goods_list"
     if is_device_mobile?
       render :m_product_detail, layout: "dazhe"
@@ -155,7 +196,7 @@ class CouponController < ApplicationController
     set_cookie_channel
     @keyword = params[:keyword]
     @cates = get_cate_data
-    @top_keywords = get_hot_keywords_data.sample(7)
+    @top_keywords = get_hot_keywords_data.sample(8)
     @items_bang = get_coupon_bang_data
     @path = "http://api.uuhaodian.com/uu/dg_goods_list"
     url = "http://api.uuhaodian.com/uu/keyword_infos?keyword=#{URI.encode_www_form_component(@keyword)}"
@@ -173,7 +214,7 @@ class CouponController < ApplicationController
     set_cookie_channel
     @collection_type = params[:tid].to_i 
     @cid = params[:cid].nil? ? 0 : params[:cid].to_i
-    @top_keywords = get_hot_keywords_data.sample(7)
+    @top_keywords = get_hot_keywords_data.sample(8)
     url = ""
     if @collection_type == 1
       @collection_name = "聚特卖"
@@ -195,7 +236,7 @@ class CouponController < ApplicationController
   def top
     set_cookie_channel
     @cates = get_cate_data
-    @top_keywords = get_hot_keywords_data.sample(7)
+    @top_keywords = get_hot_keywords_data.sample(8)
     @path = "http://api.uuhaodian.com/uu/home_list"
     @cid = params[:cid].nil? ? 0 : params[:cid].to_i
     cate = @cates.select{|item| item["cid"].to_i == @cid}.first
@@ -206,17 +247,17 @@ class CouponController < ApplicationController
   def brand
     set_cookie_channel
     @cates = [
-      {"cid" => 3761, "name" => "美食", "img_url"=> "http://oss3.lanlanlife.com/ab30e09ed1072851ff723074e34a3a49_126x126.png"},
-      {"cid"=> 3767, "name"=> "女装", "img_url"=> "http://oss2.lanlanlife.com/e8aa20c6ba198967fffdeb479903a22c_126x126.png"},
-      {"cid"=> 3758, "name"=> "家居", "img_url"=> "http://oss2.lanlanlife.com/9ab88dded485353f3f35c5d0eb54f296_126x126.png"},
-      {"cid"=> 3763, "name"=> "美妆", "img_url"=> "http://oss2.lanlanlife.com/22ef7dd24a4e1d4f9248e988349536b6_126x126.png"},
-      {"cid"=> 3762, "name"=> "鞋包配饰", "img_url"=> "http://oss3.lanlanlife.com/3eb2d6f410443c288e5682e445db20d1_126x126.png"},
-      {"cid"=> 3765, "name"=> "内衣", "img_url"=> "http://oss2.lanlanlife.com/e81fda4ee7f33c8723dc2c87204bc92a_126x126.png"},
-      {"cid"=> 3764, "name"=> "男装", "img_url"=> "http://oss.lanlanlife.com/bf3bac5f430f6eb64b508cc524350976_126x126.png"},
-      {"cid"=> 3760, "name"=> "母婴", "img_url"=> "http://oss2.lanlanlife.com/fccdeeb51c7ac0d6d90607031c1f8414_126x126.png"},
-      {"cid"=> 3759, "name"=> "数码", "img_url"=> "http://oss1.lanlanlife.com/57f40d4d1baf8a8115548bebb2964a0c_126x126.png"}
+      {"cid" => 3761, "name" => "美食", "img_url"=> "http://qnoss1.lanlanlife.com/0a29c91c030c7d324c7651cddf7e31d2_126x126.png"},
+      {"cid"=> 3767, "name"=> "女装", "img_url"=> "http://qnoss3.lanlanlife.com/de67fe83df5046ac7f3d6042120152c2_126x126.jpg"},
+      {"cid"=> 3758, "name"=> "家居", "img_url"=> "http://qnoss.lanlanlife.com/5174917635791c5eb63bfe482d5fc175_126x126.jpg"},
+      {"cid"=> 3763, "name"=> "美妆", "img_url"=> "http://qnoss.lanlanlife.com/bf45e751fc791ea6cbb743eaeb0d31c1_126x126.jpg"},
+      {"cid"=> 3762, "name"=> "鞋包配饰", "img_url"=> "http://qnoss.lanlanlife.com/5a87f8a441028e199cba8af5188fc06f_126x126.jpg"},
+      {"cid"=> 3765, "name"=> "内衣", "img_url"=> "http://qnoss1.lanlanlife.com/884bc36f08752afbc7d149205f8c1138_126x126.jpg"},
+      {"cid"=> 3764, "name"=> "男装", "img_url"=> "http://qnoss2.lanlanlife.com/98d45a951aa5dca79fd3d251b625122e_126x126.jpg"},
+      {"cid"=> 3760, "name"=> "母婴", "img_url"=> "http://qnoss2.lanlanlife.com/282cd239d5b99379edb68f3009a20c26_126x126.jpg"},
+      {"cid"=> 3759, "name"=> "数码", "img_url"=> "http://qnoss2.lanlanlife.com/740886691d1c742a6a1c028d2c818271_126x126.jpg"}
     ]
-    @top_keywords = get_hot_keywords_data.sample(7)
+    @top_keywords = get_hot_keywords_data.sample(8)
     @cid = params[:cid].nil? ? 3761 : params[:cid].to_i
     cate = @cates.select{|item| item["cid"].to_i == @cid}.first
     @cate_name = cate.nil? ? '' : cate["name"]

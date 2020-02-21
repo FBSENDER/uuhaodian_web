@@ -1,6 +1,6 @@
 - title("#{@detail["shortTitle"]}_优优好店")
 - keywords("#{@detail["shortTitle"]},#{@detail["title"]}")
-- head_desc("优优好店 - 商品详情 - #{@detail["shortTitle"]}")
+- head_desc("#{@detail["shortTitle"]} - 优优好店推荐：#{@detail["desc"]} 优优好店，找券领券更方便！")
 
 - coupon = @detail
 - aaid = coupon['couponUrl'].match(/activityId=(\w*)/)
@@ -15,7 +15,7 @@
         %i
         %a{href: "/dz_search/", onclick: "_hmt.push(['_trackEvent', '顶部点击', 'click', 'detail'])"}
           %p 输入您需要的商品名称
-  .img-content
+  .img-content{style: "text-align:center;width:100%;"}
     - @detail["auctionImages"].each do |img|
       %img{src: "#{img}"}
   .product-info

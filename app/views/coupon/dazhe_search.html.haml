@@ -13,8 +13,6 @@
     .title 
       %p 热门搜索
     .search-cent
-      .sitem
-        %a.zh{href: "/dr/#{URI.encode_www_form_component('梅子系女包')}/", onclick:"_hmt.push(['_trackEvent', '热门搜索点击', 'click', 'dazhe'])", style: "color:red;"} 梅子系女包
       - @keywords.each do |k|
         .sitem
           %a.zh{href: "/dr/#{URI.encode_www_form_component(k)}/", onclick:"_hmt.push(['_trackEvent', '热门搜索点击', 'click', 'dazhe'])"} #{k}

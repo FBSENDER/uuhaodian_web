@@ -227,8 +227,6 @@ input,input:focus{
   position: relative;
   top: 15px;
   left: 70px;
-  height: 0;
-  width: 0;
 }
 .header .tab-area{
   position: relative;

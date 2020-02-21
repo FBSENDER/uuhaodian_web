@@ -1,6 +1,6 @@
 - title("#{@detail["shortTitle"]}_优优好店")
 - keywords("#{@detail["shortTitle"]},#{@detail["title"]}")
-- head_desc("优优好店 - 商品详情 - #{@detail["shortTitle"]}")
+- head_desc("#{@detail["shortTitle"]} - 优优好店推荐：#{@detail["desc"]} 优优好店，找券领券更方便！")
 
 %header.header#header
   = render partial: "header_top"
@@ -12,7 +12,7 @@
   - if @items.size > 0
     .item-list-top{style: "margin-top: 10px;padding-left:0;"}
       %span.left{style: "padding-left:15px;"} 相关推荐
-      = render partial: "wide_banner_tb", locals: {items: @items}
+      = render partial: "wide_banner_dtk", locals: {items: @items}
   .rel-zk-area
     %p.head
       %span 更多推荐

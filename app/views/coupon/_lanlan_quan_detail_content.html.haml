@@ -23,6 +23,8 @@
         %img.small_img{src: "#{img_url}", style:"#{'margin-left:0' if index == 0}"}
     .banner
       %img{src: "/img/lbanner1.png"}
+      %p{style: "text-align:center;color:#ff2b22;line-height:25px;"} 关注"优优好店"公众号
+      %p{style: "text-align:center;color:#ff2b22;line-height:25px;"} 领券找优惠 更方便！
     .platform
       %span #{coupon["sellerName"]} - 已有 
       %span{style: "color:#FF2B22"} #{coupon["monthSales"].to_i + 131}
