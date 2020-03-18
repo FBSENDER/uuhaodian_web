@@ -76,7 +76,9 @@ $(function(){
     }
   });
   var sw = new Swiper('.banner-area',{
-    autoplay: 3000,
+    autoplay: {
+      delay: 3000
+    },
     loop:true,
     pagination: {
       el: '.swiper-pager'

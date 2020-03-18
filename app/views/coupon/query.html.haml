@@ -1,33 +1,23 @@
-- title("#{@keyword},#{@keyword}优惠券_优优好店")
-- keywords("#{@keyword},#{@keyword}优惠券")
-- head_desc("优优好店 - 搜索结果 - #{@keyword}")
+- title("#{@keyword}优惠券_#{@keyword}天猫淘宝京东拼多多优惠券_优优好店")
+- keywords("#{@keyword},#{@keyword}优惠券,#{@keyword}淘宝优惠券,#{@keyword}天猫优惠券,#{@keyword}京东优惠券,#{@keyword}拼多多优惠券")
+- head_desc("优优好店-#{@keyword}商品优惠券搜索结果。您可以在优优好店查找并免费领取#{@keyword}淘宝天猫、京东、拼多多优惠券，并可以按照商品的销量、价格等维度进行筛选，领券后在淘宝、京东、拼多多平台使用并购买商品，即可享受优惠与折扣！")
 
-%header.header#header
-  = render partial: "header_top"
-  .tab-area#tab_area
-    .wrapper
-      .cate-area
-        %a.cate-item.jxtj.active{href: "/", title: "天天特价"}
-          %span.cate-rec
-        %a.cate-item.hot{href: "http://uuhaodian.com/index.php?r=app/download&u=550416", target: "_blank"} 下载APP
-        %a.cate-item{href: "/top/#tab_area", class: "#{'active' if @is_top}"} 小时风云榜
-        %a.cate-item{href: "/brand/#tab_area", class:"#{'active' if @is_brand}"} 品牌好券
-        %a.cate-item{href: "http://uuhaodian.com/index.php?r=ddq&u=550416", target: "_blank"} 咚咚抢
-        %a.cate-item{href: "/collection/4/", class:"#{'active' if @collection_type && @collection_type == 4}"} 九块九包邮
-      .search-area
-        %i
-        %input.search-input.unfocus{type: "text", placeholder: "粘贴宝贝标题或输入关键词"}
-    %div{style: "background-color:#fff;height:40px;"}
+= render partial: "header_common"
+- if @kk.size > 0
+  .hori-cate-area
+    %div{style: "background-color:#fff;padding:10px 0;height:23px;overflow:hidden;white-space:nowrap;"}
       .wrapper
-        = render partial: "dg_filter"
+        - @kk.each do |k|
+          %a{href: "/query/#{URI.encode(k)}/", class: "rk"}
+            #{k}
 
 .wrapper
-  - if @kk.size > 0
-    %div{style: "margin-top:20px;height:36px;overflow:hidden;line-height:36px;"}
-      %span.rk{style: "color: red;"} #{@keyword}
-      - @kk.each do |k|
-        %a{href: "/query/#{URI.encode(k)}/", class: "rk"}
-          #{k}
+  %ul.platform-area
+    %li.platform-type{id: "platform_1", data:{type: 1}} 天猫淘宝
+    %li.platform-type{id: "platform_2", data:{type: 2}} 京东
+    %li.platform-type{id: "platform_3", data:{type: 3}} 拼多多
+    %h1{style: "float:right;padding: 0 20px;font-size:14px;"} “#{@keyword}”搜索结果
+  = render partial: "dg_filter"
   .zk-list.clearfix#couponList{style: "margin-top: 20px;"}
   = render partial: "dg_load_more", locals: {keyword: @keyword}
 

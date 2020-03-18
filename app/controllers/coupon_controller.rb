@@ -172,6 +172,10 @@ class CouponController < ApplicationController
   end
 
   def ddk_buy
+    if is_robot?
+      render "not_found", status: 403
+      return
+    end
     url = "http://api.uuhaodian.com/ddk/promotion_url?id=#{params[:id]}"
     json = {}
     begin
@@ -188,6 +192,27 @@ class CouponController < ApplicationController
     end
   end
 
+  def jd_buy
+    if is_robot?
+      render "not_found", status: 403
+      return
+    end
+    url = "http://api.uuhaodian.com/ddk/jd_product_url?id=#{params[:id]}"
+    json = {}
+    begin
+      result = Net::HTTP.get(URI(URI.encode(url)))
+      json = JSON.parse(result)
+      if json["status_code"] != 200
+        not_found
+        return
+      end
+      redirect_to json["data"], status: 302
+    rescue
+      not_found
+      return
+    end
+  end
+
   def query
     if is_device_mobile?
       redirect_to "/dz/#{URI.encode(params[:keyword])}/", status: 302
@@ -195,7 +220,6 @@ class CouponController < ApplicationController
     end
     set_cookie_channel
     @keyword = params[:keyword]
-    @cates = get_cate_data
     @top_keywords = get_hot_keywords_data.sample(8)
     @items_bang = get_coupon_bang_data
     @path = "http://api.uuhaodian.com/uu/dg_goods_list"

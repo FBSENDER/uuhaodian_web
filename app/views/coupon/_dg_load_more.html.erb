@@ -3,32 +3,42 @@
 </div>
 <script type="text/javascript">
 var couponList = $('#couponList'),loadingText = $('.loading-text');
-var page = 1,pagesize = 20, channel = 27, load = 1,sort = 0,is_simple = true, sort_type='',is_t = false, is_h = false, is_q = false;
-var path = 'http://api.uuhaodian.com/uu/dg_goods_list';
-function getDgList(){
-  if(!load){
-    return;
+var page = 1,pagesize = 20, channel = 27, load = 1,sort_id= 1, sort = '', pdd_sort = 0, jd_sort = 0, jd_is_hot = 0,is_simple = true, sort_type='',is_tmall = 0, has_coupon = 0, platform = 1;
+if($.cookie('filter_platform') != undefined){
+  platform = $.cookie('filter_platform');
+  if(platform == 1){
+    $("#platform_1").addClass('active');
   }
+  else if(platform == 2){
+    $("#platform_2").addClass('active');
+  }
+  else{
+    $("#platform_3").addClass('active');
+  }
+}
+else{
+  $("#platform_1").addClass('active');
+}
+function doAjaxTaobao(d){
   var dd = {
-    'keyword': '<%= keyword %>',
-    'sort': sort_type,
-    'page':page,
-    'callback': 'callback'
-  };
-  if(is_simple){
-    dd.is_simple = 1
+    page: d.page,
+    keyword: d.keyword,
+    callback: d.callback
   }
-  if(is_t){
-    dd.is_tmall = 1
-  }
-  if(is_h){
-    dd.is_overseas = 1
-  }
-  if(is_q){
+  if(d.has_coupon > 0){
     dd.has_coupon = 1
   }
+  if(d.sort != ''){
+    dd.sort = d.sort
+  }
+  if(d.is_tmall == 1){
+    dd.is_tmall = 1
+  }
+  if(is_simple == 1){
+    dd.is_simple = 1
+  }
   $.ajax({
-    url: path,
+    url: "https://api.uuhaodian.com/uu/dg_goods_list",
     type: 'GET',
     dataType: 'jsonp',
     data: dd,
@@ -37,13 +47,110 @@ function getDgList(){
       loadingText.html('努力加载中...');
     },
     success:function(data){
+    },
+    complete: function(){
+      load = 1;
     }
   });
 }
+function doAjaxJingdong(d){
+  var dd = {
+    page: d.page,
+    keyword: d.keyword,
+    sort_type: d.jd_sort,
+    has_coupon: d.has_coupon,
+    is_hot: d.jd_is_hot,
+    callback: d.callback
+  }
+  $.ajax({
+    url: "https://api.uuhaodian.com/ddk/jd_search",
+    type: 'GET',
+    dataType: 'jsonp',
+    data: dd,
+    beforeSend:function(){
+      load = 0;
+      loadingText.html('努力加载中...');
+    },
+    success:function(data){
+    },
+    complete: function(){
+      load = 1;
+    }
+  });
+}
+function doAjaxPinduoduo(d){
+  var dd = {
+    page: d.page,
+    keyword: d.keyword,
+    sort_type: d.pdd_sort,
+    has_coupon: d.has_coupon > 0 ? true : false,
+    callback: d.callback
+  }
+  $.ajax({
+    url: "https://api.uuhaodian.com/ddk/search_2",
+    type: 'GET',
+    dataType: 'jsonp',
+    data: dd,
+    beforeSend:function(){
+      load = 0;
+      loadingText.html('努力加载中...');
+    },
+    success:function(data){
+    },
+    complete: function(){
+      load = 1;
+    }
+  });
+}
+function getDgList(){
+  if(!load){
+    return;
+  }
+  var d = {
+    'keyword': '<%= keyword %>',
+    'page':page,
+    'sort': sort,
+    'jd_sort': jd_sort,
+    'pdd_sort': pdd_sort,
+    'is_tmall': is_tmall,
+    'has_coupon': has_coupon,
+    'jd_is_hot': jd_is_hot,
+    'callback': 'callback'
+  };
+  if(platform == 1){
+    doAjaxTaobao(d);
+  }
+  else if(platform == 2){
+    doAjaxJingdong(d);
+  }
+  else{
+    doAjaxPinduoduo(d);
+  }
+}
 var callback = function(data){
   if(data.status == 1){
-    Util.createDgList(data.results,couponList,channel,'首页');
+    Util.createDgList(data.results,couponList,channel,'搜索');
     if(data.results.length >= pagesize){
+      page ++;
+      load = 1;
+      loadingText.html('查看更多优惠券');
+    }else{
+      loadingText.html('没有更多了');
+    }
+  }
+  else if(data.status_code == 200){
+    Util.createJdList(data.data.data,couponList,channel,'搜索');
+    if(data.data.data.length >= pagesize){
+      page ++;
+      load = 1;
+      loadingText.html('查看更多优惠券');
+    }else{
+      loadingText.html('没有更多了');
+    }
+  }
+  else if(data.status.code == 1001){
+    Util.createPddList(data.result,couponList,channel,'搜索');
+    if(data.result.length >= pagesize){
       page ++;
       load = 1;
       loadingText.html('查看更多优惠券');
@@ -89,37 +196,46 @@ $(function(){
       $('.s-tab .content p[data-index='+i+']').addClass('active');
     }
   });
+  $('.platform-type').on('click', function(){
+    var _this = $(this);
+    if(!_this.hasClass('active')){
+      $('.platform-type.active').removeClass('active');
+      _this.addClass('active');
+      if(_this.data('type') == '1'){
+        platform = 1
+        $.cookie('filter_platform', 1);
+      }
+      else if(_this.data('type') == '2'){
+        platform = 2
+        $.cookie('filter_platform', 2);
+      }
+      else{
+        platform = 3
+        $.cookie('filter_platform', 3);
+      }
+      page = 1;
+      $('#couponList').html('');
+      getDgList();
+    }
+    else{
+      return
+    }
+  });
   $('.filter_li').on('click', function(){
     var _this = $(this);
     if(!_this.hasClass('active')){
       _this.addClass('active');
-      if(_this.data('h') == '1'){
-        is_h = true
-        is_simple = false
-      }
-      if(_this.data('t') == '1'){
-        is_t = true
-        is_simple = false
-      }
       if(_this.data('q') == '1'){
-        is_q = true
+        has_coupon = 1
         is_simple = false
       }
     }
     else{
       _this.removeClass('active');
-      if(_this.data('h') == '1'){
-        is_h = false
-      }
-      if(_this.data('t') == '1'){
-        is_t = false
-      }
       if(_this.data('q') == '1'){
-        is_q = false
+        has_coupon = 0
+        is_simple = false
       }
-    }
-    if($("#li-sort-7").hasClass('active') && !$("#li-q").hasClass('active') && !$("#li-t").hasClass('active') && !$("#li-h").hasClass('active')){
-      is_simple = true
     }
     page = 1;
     $('#couponList').html('');
@@ -127,20 +243,32 @@ $(function(){
   });
   $('.sort_li').on('click', function(){
     var _this = $(this);
+    is_simple = false;
     if(_this.data('sort') == '3'){
       if(!_this.hasClass('active')){
         $('.sort_li.active').removeClass('active');
         _this.addClass('active');
-        is_simple = false;
-        sort_type = "price_asc";
+        sort = "price_asc";
+        is_tmall = 0
+        pdd_sort = 9
+        jd_sort = 3
+        jd_is_hot = 0
         _this.html("价格↑");
       }
       else{
-        if(sort_type == "price_asc"){
-          sort_type = "price_des"
+        if(sort == "price_asc"){
+          sort = "price_des"
+          is_tmall = 1
+          pdd_sort = 10
+          jd_sort = 2
+          jd_is_hot = 0
           _this.html("价格↓");
         }else{
-          sort_type = "price_asc"
+          sort = "price_asc";
+          is_tmall = 0
+          pdd_sort = 9
+          jd_sort = 3
+          jd_is_hot = 0
           _this.html("价格↑");
         }
       }
@@ -152,19 +280,29 @@ $(function(){
     if(!_this.hasClass('active')){
       $('.sort_li.active').removeClass('active');
       _this.addClass('active');
-      sort = _this.data('sort');
-      if(sort == '7'){
-        is_simple = true;
+      sort_id = _this.data('sort');
+      if (sort_id == '1'){
+        sort = ""
+        is_tmall = 0
+        pdd_sort = 0
+        jd_sort = 0
+        jd_is_hot = 0
         $("#li-sort-3").html("价格");
       }
-      else if (sort == '1'){
-        is_simple = false;
-        sort_type = "tk_rate_des"
+      else if (sort_id == '2'){
+        sort = "total_sales_des"
+        is_tmall = 0
+        pdd_sort = 6
+        jd_sort = 1
+        jd_is_hot = 0
         $("#li-sort-3").html("价格");
       }
-      else if (sort == '4'){
-        is_simple = false;
-        sort_type = "total_sales_des";
+      else if (sort_id == '5'){
+        sort = "tk_total_sales_des"
+        is_tmall = 1
+        pdd_sort = 2
+        jd_sort = 1
+        jd_is_hot = 1
         $("#li-sort-3").html("价格");
       }
       page = 1;
