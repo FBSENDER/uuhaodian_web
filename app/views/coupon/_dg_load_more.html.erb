@@ -3,7 +3,7 @@
 </div>
 <script type="text/javascript">
 var couponList = $('#couponList'),loadingText = $('.loading-text');
-var page = 1,pagesize = 20, channel = 27, load = 1,sort_id= 1, sort = '', pdd_sort = 0, jd_sort = 0, jd_is_hot = 0,is_simple = true, sort_type='',is_tmall = 0, has_coupon = 0, platform = 1;
+var page = 1,pagesize = 20, channel = 27, load = 1,sort_id= 1, sort = '', pdd_sort = 0, pdd_activity = '', jd_sort = 0, jd_is_hot = 0,is_simple = true, sort_type='',is_tmall = 0, has_coupon = 0, platform = 1;
 if($.cookie('filter_platform') != undefined){
   platform = $.cookie('filter_platform');
   if(platform == 1){
@@ -83,6 +83,7 @@ function doAjaxPinduoduo(d){
     page: d.page,
     keyword: d.keyword,
     sort_type: d.pdd_sort,
+    activity: d.pdd_activity,
     has_coupon: d.has_coupon > 0 ? true : false,
     callback: d.callback
   }
@@ -112,6 +113,7 @@ function getDgList(){
     'sort': sort,
     'jd_sort': jd_sort,
     'pdd_sort': pdd_sort,
+    'pdd_activity': pdd_activity,
     'is_tmall': is_tmall,
     'has_coupon': has_coupon,
     'jd_is_hot': jd_is_hot,
@@ -251,6 +253,7 @@ $(function(){
         sort = "price_asc";
         is_tmall = 0
         pdd_sort = 9
+        pdd_activity = '4,7,21'
         jd_sort = 3
         jd_is_hot = 0
         _this.html("价格↑");
@@ -260,6 +263,7 @@ $(function(){
           sort = "price_des"
           is_tmall = 1
           pdd_sort = 10
+          pdd_activity = '4,7,21'
           jd_sort = 2
           jd_is_hot = 0
           _this.html("价格↓");
@@ -267,6 +271,7 @@ $(function(){
           sort = "price_asc";
           is_tmall = 0
           pdd_sort = 9
+          pdd_activity = '4,7,21'
           jd_sort = 3
           jd_is_hot = 0
           _this.html("价格↑");
@@ -285,6 +290,7 @@ $(function(){
         sort = ""
         is_tmall = 0
         pdd_sort = 0
+        pdd_activity = ''
         jd_sort = 0
         jd_is_hot = 0
         $("#li-sort-3").html("价格");
@@ -293,6 +299,7 @@ $(function(){
         sort = "total_sales_des"
         is_tmall = 0
         pdd_sort = 6
+        pdd_activity = ''
         jd_sort = 1
         jd_is_hot = 0
         $("#li-sort-3").html("价格");
@@ -301,6 +308,7 @@ $(function(){
         sort = "tk_total_sales_des"
         is_tmall = 1
         pdd_sort = 2
+        pdd_activity = '4,7,21'
         jd_sort = 1
         jd_is_hot = 1
         $("#li-sort-3").html("价格");
