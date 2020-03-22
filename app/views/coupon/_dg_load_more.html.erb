@@ -56,7 +56,7 @@ function doAjaxTaobao(d){
 function doAjaxJingdong(d){
   var dd = {
     page: d.page,
-    keyword: d.keyword,
+    keyword: d.keyword.slice(0,30),
     sort_type: d.jd_sort,
     has_coupon: d.has_coupon,
     is_hot: d.jd_is_hot,
@@ -81,7 +81,7 @@ function doAjaxJingdong(d){
 function doAjaxPinduoduo(d){
   var dd = {
     page: d.page,
-    keyword: d.keyword,
+    keyword: d.keyword.slice(0,40),
     sort_type: d.pdd_sort,
     activity: d.pdd_activity,
     has_coupon: d.has_coupon > 0 ? true : false,

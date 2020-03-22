@@ -331,47 +331,40 @@ Util.createDgList = function(cl,obj,channel,gaPage){
       title +'">';
     htmlstr += '</div>';
     htmlstr += '<p class="title-area elli">';
-    if(z.user_type == 1){
-      htmlstr += '<span class="tmark">天猫</span>';
-    }
-    else{
-      htmlstr += '<span class="tmark">淘宝</span>';
-    }
     if(z.short_title != ''){
       htmlstr +=  z.short_title +'</p>';
     }
     else{
       htmlstr +=  z.title +'</p>';
     }
+    htmlstr += '<div class="tags-area">'
+    if(z.user_type == 1){
+      htmlstr += '<span class="tag">天猫</span>';
+    }
+    else{
+      htmlstr += '<span class="tag taobao">淘宝</span>';
+    }
+    if(z.shop_title.indexOf('旗舰店') > 0){
+      htmlstr += '<span class="tag">旗舰店</span>';
+    }
+    if(coupon_money > 0){
+      htmlstr += '<span class="tag c">' + coupon_money + '元券</span>';
+    }
+    htmlstr += '</div>'
+    htmlstr += '<div class="price-area">';
+    if(coupon_money > 0){
+      htmlstr += '券后价 ￥ <span class="price">' + now_price + '</span>';
+    }
+    else{
+      htmlstr += '折扣价 ￥ <span class="price">' + now_price + '</span>';
+    }
+    htmlstr += '</div>';
     htmlstr += '<div class="raw-price-area">原价：&yen;'+ o_price;
     if(z.volume > 0){
       var vv = z.volume > 10000 ? ((z.volume / 10000).toFixed(1) + '万') : z.volume
       htmlstr += '<p class="sold">' + vv +'人已付款</p>'
     }
     htmlstr += '</div>';
-    htmlstr += '<div class="info">';
-    htmlstr += '<div class="price-area">';
-    htmlstr += '<span class="price">&yen;<em class="number-font">'+ now_price.toString().split('.')[0] +'</em>';
-    htmlstr += '<em class="decimal">'+(now_price.toString().split('.').length>1?'.'+now_price.toString().split('.')[1]:'')+'</em>';
-    if(coupon_money > 0 && now_price < 1000){
-      htmlstr += '<i></i>';
-    }
-    htmlstr += '</span></div>';
-    if(coupon_money > 0){
-      htmlstr += '<span class="coupon_click">券 ';
-      htmlstr += coupon_money;
-      htmlstr += ' 元</span>';
-    }
-    else{
-      if(zhe < 10){
-        htmlstr += '<span class="coupon_click">';
-        htmlstr += zhe;
-        htmlstr += ' 折</span>';
-      }
-      else{
-        htmlstr += '<span class="coupon_click">去看看</span>';
-      }
-    }
     htmlstr += '</div>';
     htmlstr += '</a>';
     htmlstr += '</div>';
@@ -396,35 +389,36 @@ Util.createPddList = function(cl,obj,channel,gaPage){
     htmlstr += '<img data-ga-event="商品_图片:点击:'+ gaPage +'" class="lazy new" data-original="'+ z.coverImage +'" alt="'+z.title +'">';
     htmlstr += '</div>';
     htmlstr += '<p class="title-area elli">';
-    htmlstr += '<span class="tmark">拼多多</span>';
     htmlstr +=  z.shortTitle +'</p>';
-    htmlstr += '<div class="raw-price-area">现价：&yen;'+ z.price;
-    if(z.monthSales != '0'){
-      htmlstr += '<p class="sold">'+ z.monthSales +'人已付款</p>';
+    htmlstr += '<div class="tags-area">'
+    htmlstr += '<span class="tag">拼多多</span>';
+    if(z.shopName.indexOf('旗舰店') > 0){
+      htmlstr += '<span class="tag">旗舰店</span>';
+    }
+    if(z.activityTags != null && z.activityTags.includes(4)){
+      htmlstr += '<span class="tag">秒杀</span>';
+    }
+    if(z.activityTags != null && z.activityTags.includes(7)){
+      htmlstr += '<span class="tag">百亿补贴</span>';
+    }
+    if(z.activityTags != null && z.activityTags.includes(21)){
+      htmlstr += '<span class="tag">金牌卖家</span>';
+    }
+    if(coupon_money > 0){
+      htmlstr += '<span class="tag c">' + coupon_money + '元券</span>';
     }
     htmlstr += '</div>'
-    htmlstr += '<div class="info">';
     htmlstr += '<div class="price-area">';
-    htmlstr += '<span class="price">&yen;<em class="number-font">'+ z.nowPrice.toString().split('.')[0] +'</em>';
-    htmlstr += '<em class="decimal">'+(z.nowPrice.toString().split('.').length>1?'.'+z.nowPrice.toString().split('.')[1]:'')+'</em>';
-    if(coupon_money > 0 && z.nowPrice < 1000){
-      htmlstr += '<i></i>';
-    }
-    htmlstr += '</span></div>';
     if(coupon_money > 0){
-      htmlstr += '<span class="coupon_click">券 ';
-      htmlstr += coupon_money;
-      htmlstr += ' 元</span>';
+      htmlstr += '券后价 ￥ <span class="price">' + z.nowPrice + '</span>';
     }
     else{
-      if(zhe < 10){
-        htmlstr += '<span class="coupon_click">';
-        htmlstr += zhe;
-        htmlstr += ' 折</span>';
-      }
-      else{
-        htmlstr += '<span class="coupon_click">去看看</span>';
-      }
+      htmlstr += '折扣价 ￥ <span class="price">' + z.nowPrice + '</span>';
+    }
+    htmlstr += '</div>';
+    htmlstr += '<div class="raw-price-area">原价：&yen;'+ z.price;
+    if(z.monthSales != '0'){
+      htmlstr += '<p class="sold">'+ z.monthSales +'人已付款</p>';
     }
     htmlstr += '</div>';
     htmlstr += '</a>';
@@ -450,8 +444,6 @@ Util.createJdList = function(cl,obj,channel,gaPage){
   for(var i=0,len=cl.length;i<len;i++){
     var z = cl[i];
     var coupon_money = z.discount ? parseInt(z.discount) : 0;
-    var o_price = coupon_money > 0 ? parseFloat(z.zk_final_price).toFixed(2) : parseFloat(z.reserve_price).toFixed(2);
-    var zhe = (parseFloat(z.price_after) * 10.0 / parseFloat(z.price)).toFixed(1);
     var buy_url = "/jd/buy/" + z.goods_id + '/';
     htmlstr += '<div class="zk-item">';
     htmlstr += '<a href="'+ buy_url +'" target="_blank">';
@@ -459,36 +451,34 @@ Util.createJdList = function(cl,obj,channel,gaPage){
     htmlstr += '<img data-ga-event="商品_图片:点击:'+ gaPage +'" class="lazy new" data-original="'+ z.picurl +'" alt="'+z.goods_name +'">';
     htmlstr += '</div>';
     htmlstr += '<p class="title-area elli">';
-    htmlstr += '<span class="tmark">京东</span>';
     htmlstr +=  z.goods_short_name +'</p>';
-    htmlstr += '<div class="raw-price-area">现价：&yen;'+ z.price_after;
+    htmlstr += '<div class="tags-area">'
+    htmlstr += '<span class="tag">京东</span>';
+    if(z.owner == 'g'){
+      htmlstr += '<span class="tag">自营</span>';
+    }
+    if(z.shopname.indexOf('旗舰店') > 0){
+      htmlstr += '<span class="tag">旗舰店</span>';
+    }
+    if(z.ishot > 0){
+      htmlstr += '<span class="tag">爆款</span>';
+    }
+    if(coupon_money > 0){
+      htmlstr += '<span class="tag c">' + coupon_money + '元券</span>';
+    }
+    htmlstr += '</div>'
+    htmlstr += '<div class="price-area">';
+    if(coupon_money > 0){
+      htmlstr += '券后价 ￥ <span class="price">' + z.price_after + '</span>';
+    }
+    else{
+      htmlstr += '折扣价 ￥ <span class="price">' + z.price_after + '</span>';
+    }
+    htmlstr += '</div>';
+    htmlstr += '<div class="raw-price-area">原价：&yen;'+ z.price;
     if(z.sales > 0){
       var vv = z.sales > 10000 ? ((z.sales / 10000).toFixed(1) + '万') : z.sales
       htmlstr += '<p class="sold">'+ vv +'人已付款</p>';
-    }
-    htmlstr += '</div>';
-    htmlstr += '<div class="info">';
-    htmlstr += '<div class="price-area">';
-    htmlstr += '<span class="price">&yen;<em class="number-font">'+ z.price_after.toString().split('.')[0] +'</em>';
-    htmlstr += '<em class="decimal">'+(z.price_after.toString().split('.').length>1?'.'+z.price_after.toString().split('.')[1]:'')+'</em>';
-    if(coupon_money > 0){
-      htmlstr += '<i></i>'
-    }
-    htmlstr += '</span></div>';
-    if(coupon_money > 0){
-      htmlstr += '<span class="coupon_click">券 ';
-      htmlstr += coupon_money;
-      htmlstr += ' 元</span>';
-    }
-    else{
-      if(zhe < 10){
-        htmlstr += '<span class="coupon_click">';
-        htmlstr += zhe;
-        htmlstr += ' 折</span>';
-      }
-      else{
-        htmlstr += '<span class="coupon_click">去看看</span>';
-      }
     }
     htmlstr += '</div>';
     htmlstr += '</a>';
