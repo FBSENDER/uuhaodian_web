@@ -1,0 +1,24 @@
+<script type="text/javascript">
+var ddktongdian= $('#ddktongdian');
+function doAjaxPinduoduoMallProduct(id){
+  $.ajax({
+    url: "https://api.uuhaodian.com/ddk/mall_products",
+    type: 'GET',
+    dataType: 'jsonp',
+    data:{
+      id: id,
+      callback: 'mallCallback'
+    },
+    success:function(data){
+    }
+  });
+}
+var mallCallback = function(data){
+  if(data.status.code == 1001){
+    Util.createPddList(data.result,ddktongdian,channel,'同店推荐');
+  }
+};
+$(function(){
+  doAjaxPinduoduoMallProduct(<%= seller_id %>);
+});
+</script>

@@ -8,6 +8,11 @@
 %aside.wrapper
   .rel-zk-area
     %p.head
+      %span #{@detail["sellerName"]} - 同店商品推荐
+  .zk-list.clearfix#ddktongdian
+  = render partial: "ddk_tongdian", locals: {seller_id: @detail["sellerId"]}
+  .rel-zk-area
+    %p.head
       %span 更多推荐
   .zk-list.clearfix#couponList
   = render partial: "lanlan_load_more", locals: {path: @path, pagesize: 20, sort_type: 7, pinyin: '', keyword: @detail["category"], cid: 0,sort: 7, type: 0}

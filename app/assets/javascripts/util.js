@@ -107,22 +107,36 @@ Util.createLanlanCouponList = function(cl,obj,channel,gaPage){
     htmlstr += '<img data-ga-event="商品_图片:点击:'+ gaPage +'" class="lazy new" data-original="'+ z.coverImage +'" alt="'+z.title +'">';
     htmlstr += '</div>';
     htmlstr += '<p class="title-area elli">';
+    htmlstr +=  z.shortTitle +'</p>';
+    htmlstr += '<div class="tags-area">'
     if(platform == 2){
-      htmlstr += '<span class="tmark">天猫</span>';
+      htmlstr += '<span class="tag">天猫</span>';
     }
     else{
-      htmlstr += '<span class="tmark">淘宝</span>';
+      htmlstr += '<span class="tag taobao">淘宝</span>';
     }
-    htmlstr +=  z.shortTitle +'</p>';
-    htmlstr += '<div class="raw-price-area">现价：&yen;'+ z.price +'<p class="sold">已领'+ z.monthSales +'张券</p></div>';
-    htmlstr += '<div class="info">';
+    if(z.sellerName.indexOf('旗舰店') > 0){
+      htmlstr += '<span class="tag">旗舰店</span>';
+    }
+    if(z.activityType == 2){
+      htmlstr += '<span class="tag">淘抢购</span>';
+    }
+    else if(z.activityType == 3){
+      htmlstr += '<span class="tag">聚划算</span>';
+    }
+    if(z.couponMoney > 0){
+      htmlstr += '<span class="tag c">' + parseInt(z.couponMoney) + '元券</span>';
+    }
+    htmlstr += '</div>'
     htmlstr += '<div class="price-area">';
-    htmlstr += '<span class="price">&yen;<em class="number-font">'+ z.nowPrice.toString().split('.')[0] +'</em>';
-    htmlstr += '<em class="decimal">'+(z.nowPrice.toString().split('.').length>1?'.'+z.nowPrice.toString().split('.')[1]:'')+'</em><i></i></span>';
+    htmlstr += '券后价 ￥ <span class="price">' + (z.nowPrice > 0 ? z.nowPrice : z.price)  + '</span>';
     htmlstr += '</div>';
-    htmlstr += '<span class="coupon_click">券 ';
-    htmlstr += parseInt(z.couponMoney);
-    htmlstr += ' 元</span>';
+    htmlstr += '<div class="raw-price-area">原价：&yen;'+ z.price;
+    if(z.monthSales > 0){
+      var vv = z.monthSales > 10000 ? ((z.monthSales / 10000).toFixed(1) + '万') : z.monthSales
+      htmlstr += '<p class="sold">' + vv +'人已付款</p>'
+    }
+    htmlstr += '</div>';
     htmlstr += '</div>';
     htmlstr += '</a>';
     htmlstr += '</div>';
@@ -324,7 +338,7 @@ Util.createDgList = function(cl,obj,channel,gaPage){
       htmlstr += '<a href="/yh/'+ z.item_id +'/?coupon_money=' + coupon_money + '#coupon">';
     }
     else{
-      htmlstr += '<a href="'+ z.url +'" target="_blank">';
+      htmlstr += '<a href="/yh/'+ z.item_id +'/#coupon">';
     }
     htmlstr += '<div class="img-area">';
     htmlstr += '<img data-ga-event="商品_图片:点击:'+ gaPage +'" class="lazy new" data-original="'+ z.pict_url +'" alt="'+z.
@@ -444,9 +458,9 @@ Util.createJdList = function(cl,obj,channel,gaPage){
   for(var i=0,len=cl.length;i<len;i++){
     var z = cl[i];
     var coupon_money = z.discount ? parseInt(z.discount) : 0;
-    var buy_url = "/jd/buy/" + z.goods_id + '/';
+    var buy_url = "/jd/" + z.goods_id + '/#coupon';
     htmlstr += '<div class="zk-item">';
-    htmlstr += '<a href="'+ buy_url +'" target="_blank">';
+    htmlstr += '<a href="'+ buy_url +'">';
     htmlstr += '<div class="img-area">';
     htmlstr += '<img data-ga-event="商品_图片:点击:'+ gaPage +'" class="lazy new" data-original="'+ z.picurl +'" alt="'+z.goods_name +'">';
     htmlstr += '</div>';

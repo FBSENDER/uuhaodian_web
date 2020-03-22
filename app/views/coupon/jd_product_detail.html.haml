@@ -1,0 +1,21 @@
+- title("#{@detail["goods_short_name"]}_优优好店")
+- keywords("#{@detail["goods_short_name"]},#{@detail["goods_name"]}")
+- head_desc("优优好店 - 商品详情 - #{@detail["goods_name"]}")
+
+= render partial: "header_common"
+.wrapper
+  = render partial: "jd_quan_detail_content"
+%aside.wrapper
+  .rel-zk-area
+    %p.head
+      %span #{@detail["shopname"]} - 同店商品推荐
+  .zk-list.clearfix#jdtongdian
+  = render partial: "jd_tongdian", locals: {seller_id: @detail["shopid"]}
+  .rel-zk-area
+    %p.head
+      %span 更多推荐
+  .zk-list.clearfix#couponList
+  = render partial: "lanlan_load_more", locals: {path: @path, pagesize: 20, sort_type: 7, pinyin: '', keyword: @detail["pf_cname3"], cid: 0,sort: 7, type: 0}
+
+= render partial: "footer"
+= render partial: "sider_fixed_area"

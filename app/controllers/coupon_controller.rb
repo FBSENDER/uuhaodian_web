@@ -166,9 +166,6 @@ class CouponController < ApplicationController
     end
     @top_keywords = get_hot_keywords_data.sample(8)
     @path = "http://api.uuhaodian.com/uu/goods_list"
-    if is_device_mobile?
-      render :m_product_detail, layout: "dazhe"
-    end
   end
 
   def ddk_buy
@@ -192,6 +189,26 @@ class CouponController < ApplicationController
     end
   end
 
+  def jd_product_detail
+    url = "http://api.uuhaodian.com/ddk/jd_product?id=#{params[:id]}"
+    json = {}
+    @items = []
+    begin
+      result = Net::HTTP.get(URI(URI.encode(url)))
+      json = JSON.parse(result)
+    rescue
+      not_found
+      return
+    end
+    @detail = json["data"]
+    if @detail.nil?
+      not_found
+      return
+    end
+    @detail["auctionImages"] = @detail["picurls"].split(',')
+    @top_keywords = get_hot_keywords_data.sample(8)
+    @path = "http://api.uuhaodian.com/uu/goods_list"
+  end
   def jd_buy
     if is_robot?
       render "not_found", status: 403

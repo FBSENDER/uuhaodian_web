@@ -1006,13 +1006,13 @@ input,input:focus{
 .zk-content .recommend{
   color: #FF2B22;
   margin-top: 10px;
-  height: 42px;
+  height: 62px;
   width: 450px;
   overflow: hidden;
 }
 .zk-content .small-img-area {
   height: 84px;
-  padding-top: 20px;
+  padding-top: 5px;
   width: 450px;
   margin: 0;
 }
@@ -1105,6 +1105,7 @@ input,input:focus{
   font-style: normal;
   font-size: 30px;
   line-height: 50px;
+  padding-right: 5px;
 }
 .zk-content .info-area .stat .price-area .price i {
   position: absolute;

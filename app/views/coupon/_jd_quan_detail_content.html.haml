@@ -1,23 +1,20 @@
 - coupon = @detail
-- aaid = coupon['couponUrl'].match(/activityId=(\w*)/)
-- aaid = aaid.nil? ? '' : aaid[1]
-- buy_url = "http://api.uuhaodian.com/uu/pcbuy?id=#{coupon["itemId"]}&activity_id=#{aaid}"
-- buy_url += ("&channel=" + @channel) if @channel
+- buy_url = "/jd/buy/#{@detail["goods_id"]}/"
 
 #coupon.zk-content
   .img-area
-    %a{href: "#{buy_url}", title: "#{coupon['title']}", target: "_blank", isconvert: 1, onclick: "ga_event(this);", data:{ga: "#{coupon["couponMoney"].to_i == 0 ? '直接购买:详情页:详情页_直接购买_图片' : '领券:详情页:详情页_领券_图片'}"}}
-      %img#cover_image{src: "#{coupon['coverImage']}", alt: "#{coupon['title']}"}
+    %a{href: "#{buy_url}", title: "#{coupon['goods_short_name']}", target: "_blank", onclick: "ga_event(this);", data:{ga: "#{coupon["discount"].to_i == 0 ? '直接购买:详情页:详情页_直接购买_图片' : '领券:详情页:详情页_领券_图片'}"}}
+      %img#cover_image{src: "#{coupon['picurl']}", alt: "#{coupon['goods_short_name']}"}
   .info-area
     .title
       %h1
-        #{coupon['shortTitle']}
+        #{coupon['goods_short_name']}
     %p.recommend
-      - if coupon["recommend"] != ''
-        推荐理由：#{coupon["recommend"]}
+      - if coupon["goods_desc"] != '' && coupon["goods_desc"] != coupon["goods_name"]
+        #{coupon["goods_desc"]}
       - else
         微信扫一扫右侧二维码，关注公众号"UU好店"，领券更方便！现已支持淘宝天猫、京东、拼多多优惠券领取，还有不定期红包！
-    %input{id: "endTime", value: "#{coupon['couponEndTime']}", type: "hidden"}
+    %input{id: "endTime", value: "#{coupon['end_time']}", type: "hidden"}
     .small-img-area
       - coupon["auctionImages"][0,5].each_with_index do |img_url, index|
         %img.small_img{src: "#{img_url}", style:"#{'margin-left:0' if index == 0}"}
@@ -26,31 +23,31 @@
       %p{style: "text-align:center;color:#ff2b22;line-height:25px;"} 关注"UU好店"公众号
       %p{style: "text-align:center;color:#ff2b22;line-height:25px;"} 查券-淘宝/京东/拼多多
     .platform
-      %span #{coupon["shopType"] == 'tmall' ? '天猫' : '淘宝'} - #{coupon["sellerName"].empty? ? coupon["shopName"] : coupon["sellerName"]} 
-      - if coupon["monthSales"].to_i > 0
+      %span 京东 - #{coupon["shopname"]}
+      - if coupon["sales"] != 0 
         %span - 已有
-        %span{style: "color:#FF2B22"} #{coupon["monthSales"].to_i}
+        %span{style: "color:#FF2B22"} #{coupon["sales"]}
         %span 人购买 
     .stat
       %p.price-area
         %span.price
-          - if coupon["couponMoney"].to_i == 0
-            %span.oprice 原价￥#{coupon["price"]}&nbsp;&nbsp;
+          - if coupon["price_pg"] != 0
+            %span.oprice 拼购价￥#{coupon["price_pg"]}&nbsp;&nbsp;
           - else
-            %span.oprice 原价￥#{coupon["nowPrice"].to_f + coupon["couponMoney"].to_i}&nbsp;&nbsp;
+            %span.oprice 原价￥#{coupon["price"]}&nbsp;&nbsp;
           ￥
-          %em.int{style: "padding:0"}> #{coupon['nowPrice'].to_i}
-          %em.decimal> .#{coupon['nowPrice'].to_s.sub(/\d+\./,'')[0,2]}
-          - if coupon["couponMoney"].to_i == 0
+          %em.int{style: "padding:0"}> #{coupon['price_after'].to_i}
+          %em.decimal> .#{coupon['price_after'].to_s.sub(/\d+\./,'')}
+          - if coupon["discount"].to_i == 0
             %i 折扣价
           - else
             %i 券后价
       .buy-area
-        - if coupon["couponMoney"].to_i > 0
+        - if coupon["discount"].to_i > 0
           %p#eventTimeStr.desc 有效期
         - else
           %p.desc 扫描上方二维码，天天享优惠！
-        %a{href: "#{buy_url}", target: "_blank", class: "buy-btn", isconvert: 1, onclick: "ga_event(this);", data:{ga: "#{coupon["couponMoney"].to_i == 0 ? '直接购买:详情页:详情页_直接购买_按钮' : '领券:详情页:详情页_领券_按钮'}"}}
+        %a{href: "#{buy_url}", target: "_blank", class: "buy-btn", onclick: "ga_event(this);", data:{ga: "#{coupon["discount"].to_i == 0 ? '直接购买:详情页:详情页_直接购买_按钮' : '领券:详情页:详情页_领券_按钮'}"}}
           .line.line-l
             %i
             %i
@@ -67,11 +64,11 @@
             %i
             %i
             %i
-          - if coupon['couponMoney'].to_i == 0
+          - if coupon['discount'].to_i == 0
             立即购买
           - else
             领券立减
-            %em #{coupon['couponMoney'].to_i}
+            %em #{coupon['discount'].to_i}
             元
 
 :javascript
