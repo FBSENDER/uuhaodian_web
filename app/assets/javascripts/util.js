@@ -485,11 +485,19 @@ Util.createJdList = function(cl,obj,channel,gaPage){
     if(coupon_money > 0){
       htmlstr += '券后价 ￥ <span class="price">' + z.price_after + '</span>';
     }
+    else if(coupon_money == 0 && z.price_pg > 0){
+      htmlstr += '拼购价 ￥ <span class="price">' + z.price_after + '</span>';
+    }
     else{
-      htmlstr += '折扣价 ￥ <span class="price">' + z.price_after + '</span>';
+      htmlstr += '现价 ￥ <span class="price">' + z.price_after + '</span>';
     }
     htmlstr += '</div>';
-    htmlstr += '<div class="raw-price-area">原价：&yen;'+ z.price;
+    if(z.price_pg > 0 && z.discount > 0){
+      htmlstr += '<div class="raw-price-area">拼购价：&yen;'+ z.price_pg;
+    }
+    else{
+      htmlstr += '<div class="raw-price-area">原价：&yen;'+ z.price;
+    }
     if(z.sales > 0){
       var vv = z.sales > 10000 ? ((z.sales / 10000).toFixed(1) + '万') : z.sales
       htmlstr += '<p class="sold">'+ vv +'人已付款</p>';

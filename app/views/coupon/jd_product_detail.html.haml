@@ -9,7 +9,7 @@
   .rel-zk-area
     %p.head
       %span #{@detail["shopname"]} - 同店商品推荐
-  .zk-list.clearfix#jdtongdian
+  .zk-list.clearfix#jdtongdian{style: "min-height:0;"}
   = render partial: "jd_tongdian", locals: {seller_id: @detail["shopid"]}
   .rel-zk-area
     %p.head

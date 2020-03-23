@@ -1,5 +1,5 @@
 - coupon = @detail
-- buy_url = "/jd/buy/#{@detail["goods_id"]}/"
+- buy_url = @detail["couponurl"] == '' ? "/jd/buy/#{@detail["goods_id"]}/" : "/jd/buy/#{@detail["goods_id"]}/?coupon=#{URI.encode_www_form_component(@detail["couponurl"])}"
 
 #coupon.zk-content
   .img-area
@@ -23,7 +23,7 @@
       %p{style: "text-align:center;color:#ff2b22;line-height:25px;"} 关注"UU好店"公众号
       %p{style: "text-align:center;color:#ff2b22;line-height:25px;"} 查券-淘宝/京东/拼多多
     .platform
-      %span 京东 - #{coupon["shopname"]}
+      %span 京东#{coupon["owner"] == 'g' ? '自营' : ''} - #{coupon["shopname"]}
       - if coupon["sales"] != 0 
         %span - 已有
         %span{style: "color:#FF2B22"} #{coupon["sales"]}
@@ -31,17 +31,22 @@
     .stat
       %p.price-area
         %span.price
-          - if coupon["price_pg"] != 0
+          - if coupon["price_pg"] != 0 && coupon["discount"] > 0
             %span.oprice 拼购价￥#{coupon["price_pg"]}&nbsp;&nbsp;
           - else
             %span.oprice 原价￥#{coupon["price"]}&nbsp;&nbsp;
           ￥
           %em.int{style: "padding:0"}> #{coupon['price_after'].to_i}
-          %em.decimal> .#{coupon['price_after'].to_s.sub(/\d+\./,'')}
-          - if coupon["discount"].to_i == 0
-            %i 折扣价
+          - if coupon["price_after"].to_s.include?('.')
+            %em.decimal> .#{coupon['price_after'].to_s.sub(/\d+\./,'')}
           - else
+            %em.decimal> .00
+          - if coupon["discount"] > 0
             %i 券后价
+          - elsif coupon["discount"] == 0 && coupon["price_pg"] > 0
+            %i 拼购价
+          - else
+            %i 现价
       .buy-area
         - if coupon["discount"].to_i > 0
           %p#eventTimeStr.desc 有效期

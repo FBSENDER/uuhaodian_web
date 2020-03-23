@@ -9,7 +9,7 @@
   .rel-zk-area
     %p.head
       %span #{@detail["sellerName"]} - 同店商品推荐
-  .zk-list.clearfix#ddktongdian
+  .zk-list.clearfix#ddktongdian{style: "min-height: 0;"}
   = render partial: "ddk_tongdian", locals: {seller_id: @detail["sellerId"]}
   .rel-zk-area
     %p.head

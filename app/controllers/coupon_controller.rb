@@ -196,6 +196,10 @@ class CouponController < ApplicationController
     begin
       result = Net::HTTP.get(URI(URI.encode(url)))
       json = JSON.parse(result)
+      if json["status_code"] != 200
+        not_found
+        return
+      end
     rescue
       not_found
       return
@@ -215,6 +219,9 @@ class CouponController < ApplicationController
       return
     end
     url = "http://api.uuhaodian.com/ddk/jd_product_url?id=#{params[:id]}"
+    if params[:coupon]
+      url = "http://api.uuhaodian.com/ddk/jd_product_url?id=#{params[:id]}&coupon=#{URI.encode_www_form_component(params[:coupon])}"
+    end
     json = {}
     begin
       result = Net::HTTP.get(URI(URI.encode(url)))
@@ -231,6 +238,11 @@ class CouponController < ApplicationController
   end
 
   def query
+    if params[:keyword] && params[:keyword].match(/\.jd\..*\d+\.html/)
+      jdid = params[:keyword].match(/\d+/)[0]
+      redirect_to "/jd/#{jdid}/", status: 302
+      return
+    end 
     if is_device_mobile?
       redirect_to "/dz/#{URI.encode(params[:keyword])}/", status: 302
       return
@@ -333,7 +345,6 @@ class CouponController < ApplicationController
         not_found
       end
     rescue Exception => ex
-      puts ex
       not_found
       return
     end
