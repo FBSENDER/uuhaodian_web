@@ -31,7 +31,7 @@
     .stat
       %p.price-area
         %span.price
-          - if coupon["price_pg"] != 0 && coupon["discount"] > 0
+          - if coupon["price_pg"].to_f != 0 && coupon["discount"].to_i > 0
             %span.oprice 拼购价￥#{coupon["price_pg"]}&nbsp;&nbsp;
           - else
             %span.oprice 原价￥#{coupon["price"]}&nbsp;&nbsp;
@@ -41,9 +41,9 @@
             %em.decimal> .#{coupon['price_after'].to_s.sub(/\d+\./,'')}
           - else
             %em.decimal> .00
-          - if coupon["discount"] > 0
+          - if coupon["discount"].to_i > 0
             %i 券后价
-          - elsif coupon["discount"] == 0 && coupon["price_pg"] > 0
+          - elsif coupon["discount"].to_i == 0 && coupon["price_pg"].to_f > 0
             %i 拼购价
           - else
             %i 现价
