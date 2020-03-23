@@ -49,7 +49,6 @@ function doAjaxTaobao(d){
     success:function(data){
     },
     complete: function(){
-      load = 1;
     }
   });
 }
@@ -74,7 +73,6 @@ function doAjaxJingdong(d){
     success:function(data){
     },
     complete: function(){
-      load = 1;
     }
   });
 }
@@ -99,7 +97,6 @@ function doAjaxPinduoduo(d){
     success:function(data){
     },
     complete: function(){
-      load = 1;
     }
   });
 }
@@ -216,6 +213,7 @@ $(function(){
         $.cookie('filter_platform', 3);
       }
       page = 1;
+      load = 1;
       $('#couponList').html('');
       getDgList();
     }
@@ -240,6 +238,7 @@ $(function(){
       }
     }
     page = 1;
+    load = 1;
     $('#couponList').html('');
     getDgList();
   });
@@ -314,6 +313,7 @@ $(function(){
         $("#li-sort-3").html("价格");
       }
       page = 1;
+      load = 1;
       $('#couponList').html('');
       getDgList();
     }
