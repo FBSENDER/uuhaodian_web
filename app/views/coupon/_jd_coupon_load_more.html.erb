@@ -1,0 +1,64 @@
+<div class="more-coupon">
+  <span id="moreCoupon" class="btn loading-text">查看更多优惠券</span>
+</div>
+<script type="text/javascript">
+var couponList = $('#couponList'),loadingText = $('.loading-text');
+var page = 0, pagesize = 30, load = 1,cid = <%= cid || 0%>;
+var path = "https://api.uuhaodian.com/ddk/jd_coupons"
+function getJdCoupon(){
+  if(!load){
+    return;
+  }
+  $.ajax({
+    url: path,
+    type: 'GET',
+    dataType: 'jsonp',
+    data:{
+      'cid': cid,
+      'page':page,
+      'callback': 'callback'
+    },
+    beforeSend:function(){
+      load = 0;
+      loadingText.html('努力加载中...');
+    },
+    success:function(data){
+    }
+  });
+}
+var callback = function(data){
+  if(data.status == 1){
+    Util.createJdCoupon(data.result,couponList,0,page);
+    if(data.result.length >= pagesize){
+      page ++;
+      load = 1;
+      loadingText.html('查看更多优惠券');
+    }else{
+      loadingText.html('没有更多了');
+    }
+  }
+  else{
+    loadingText.html('没有更多了');
+  }
+};
+$(function(){
+
+  getJdCoupon();
+
+  $(document).on('scroll',function(){
+    if(page%4 > 0){
+      var _top = $(document).scrollTop(),
+        scroll_height = Util.pageSize()['scrollHeight'],
+        client_height = Util.pageSize()['clientHeight'];
+        if(_top + client_height >= (scroll_height-800)){
+          getJdCoupon();
+        }
+    }
+  });
+
+  loadingText.on('click',function(){
+    getJdCoupon();
+  });
+
+});
+</script>

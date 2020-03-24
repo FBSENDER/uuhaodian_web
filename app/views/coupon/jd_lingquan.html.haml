@@ -1,0 +1,20 @@
+- title("京东优惠券领取_京券东券商品券领券查找_优优好店")
+- keywords("京东优惠券,京东领券,京东优惠券领取,京券,东券")
+- head_desc("优优好店 - 现在已经支持查询与领取京东优惠券啦，搜索商品标题，即可精确找券，先领券再下单，在京东购物更便宜！")
+
+= render partial: "header_common"
+.wrapper{style: "margin-top: 10px;"}
+  .item-list-top
+    %span.left 京东优惠券领取
+    %span.left{style: "color:#999;margin-left:10px;font-size:16px;"} 搜索商品标题或链接，可精准找券
+.hori-cate-area{style: "margin: 10px auto;width:1100px;"}
+  .wrapper
+    .cate-l-1{style: "padding-left:20px"}
+      - @jd_cates[0,13].each do |c|
+        %a{href: "/jd/?cid=#{c[:cid]}", class: "#{'active' if c[:cid] == @cid}"} #{c[:name]}
+.wrapper{style: "margin: 10px auto;"}
+  .jd-coupon-list.clearfix#couponList
+  = render partial: "jd_coupon_load_more", locals: {cid: @cid}
+
+= render partial: "footer"
+= render partial: "sider_fixed_area"

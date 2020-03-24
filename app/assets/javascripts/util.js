@@ -520,3 +520,34 @@ Util.createJdList = function(cl,obj,channel,gaPage){
   Util.lazyLoad('lazy.new');
   $('.lazy.new').removeClass('new');
 }
+
+Util.createJdCoupon = function(cl,obj,channel,gaPage){
+  gaPage = gaPage || '未知';
+  var htmlstr = '';
+  for(var i=0,len=cl.length;i<len;i++){
+    var z = cl[i];
+    var buy_url = "/jd/buy/" + z.product_id + '/?coupon=' + encodeURIComponent(z.coupon_url);
+    htmlstr += '<a href="'+ buy_url +'" target="_blank">';
+    htmlstr += '<div class="jd-coupon">';
+    htmlstr += '<div class="img">';
+    htmlstr += '<img class="lazy new" data-original="'+ z.pic_url +'">';
+    htmlstr += '</div>';
+    htmlstr += '<div class="c-content">';
+    htmlstr += '<div class="price-area">';
+    htmlstr += '<span class="s1">￥</span>';
+    htmlstr += '<span class="s2">' + z.discount + '</span>';
+    htmlstr += '<span class="s3">满' + z.quota + '元可用</span>';
+    htmlstr += '</div>';
+    htmlstr += '<div class="c-desc">';
+    htmlstr += '<p>【' + z.mall_name +'】购买部分商品可用</p>';
+    htmlstr += '</div>';
+    htmlstr += '</div>';
+    htmlstr += '<div class="lingquan">立即领券</div>';
+    htmlstr += '</div>';
+    htmlstr += '</a>';
+  }
+  htmlstr = $(htmlstr);
+  obj.append(htmlstr);
+  Util.lazyLoad('lazy.new');
+  $('.lazy.new').removeClass('new');
+}

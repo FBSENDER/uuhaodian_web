@@ -189,6 +189,35 @@ class CouponController < ApplicationController
     end
   end
 
+  def jd_lingquan
+    @is_jd = 1
+    @jd_cates = [
+      { cid: 0, name: '全部' },
+      { cid: 1620, name: '家居日用' },
+      { cid: 1315, name: '服饰内衣' },
+      { cid: 1316, name: '美妆护肤' },
+      { cid: 16750, name: '个人护理' },
+      { cid: 17329, name: '箱包皮具' },
+      { cid: 15901, name: '家庭清洁' },
+      { cid: 15248, name: '家纺' },
+      { cid: 1318, name: '运动户外' },
+      { cid: 670, name: '电脑办公' },
+      { cid: 1320, name: '食品饮料' },
+      { cid: 6144, name: '珠宝首饰' },
+      { cid: 652, name: '数码' },
+      { cid: 1713, name: '图书' },
+      { cid: 9847, name: '家具' },
+      { cid: 5025, name: '钟表' },
+      { cid: 6994, name: '宠物' },
+      { cid: 6196, name: '厨具' },
+      { cid: 6233, name: '玩具乐器' },
+      { cid: 737, name: '家用电器' },
+      { cid: 6728, name: '汽车用品' },
+      { cid: 9987, name: '手机配件' }
+    ]
+    @cid = params[:cid] ? params[:cid].to_i : 0
+  end
+
   def jd_product_detail
     url = "http://api.uuhaodian.com/ddk/jd_product?id=#{params[:id]}"
     json = {}
