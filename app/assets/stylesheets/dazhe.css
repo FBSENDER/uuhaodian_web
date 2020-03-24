@@ -151,6 +151,7 @@
   background-color: #ffffff;
   height: 136px;
   z-index: 3;
+  border-bottom: 1px solid #e7e7e7;
 }
 .dazhe .content .item .pic{
   height: 126px;
@@ -173,6 +174,14 @@
   height: 40px;
   margin-right: 10px;
   overflow: hidden;
+}
+.dazhe .content .item .cent h3 span{
+  font-size: 12px;
+  color: #FC4D52;
+  border: 1px solid #FC4D52;
+  border-radius: 3px;
+  padding: 1px 3px;
+  margin-right: 5px;
 }
 .dazhe .content .item .cent .num{
   font-size: 12px;
@@ -386,6 +395,21 @@
 .filter .type.active>a{
   color: #fe4a65;
 }
+.platform-filter{
+  height: 40px;
+  line-height: 40px;
+  width: 100%;
+  margin:0 auto;
+  max-width: 750px;
+}
+.platform-filter.fixed{
+  margin:0 auto;
+  position: fixed;
+  top: 88px;
+  z-index: 160;
+  opacity: 0.8;
+  background-color: #fff;
+}
 .search-cat{
   position: fixed;
   top: 47px;
@@ -487,3 +511,80 @@
   font-size: 16px;
   color: #fff;
 }
+input[type='checkbox'].switch{
+    outline: none;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    position: relative;
+    width: 40px;
+    height: 20px;
+    background: #ccc;
+    border-radius: 10px;
+    transition: border-color .3s, background-color .3s;
+}
+
+input[type='checkbox'].switch::after {
+    content: '';
+    display: inline-block;
+    width: 1rem;
+    height:1rem;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0, 0, 2px, #999;
+    transition:.4s;
+    top: 2px;
+    position: absolute;
+    left: 2px;
+}
+
+input[type='checkbox'].switch:checked {
+    background: #FC4D52;
+}
+/* 当input[type=checkbox]被选中时：伪元素显示下面样式 位置发生变化 */
+input[type='checkbox'].switch:checked::after {
+    content: '';
+    position: absolute;
+    left: 55%;
+    top: 2px;
+}
+.radio{
+  margin-right:15px;
+}
+.radio input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+}
+.radio input[type="radio"] + .radio-label:before {
+  content: '';
+  background: #f4f4f4;
+  border-radius: 100%;
+  border: 1px solid #b4b4b4;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  position: relative;
+  vertical-align: top;
+  top: 9px;
+  cursor: pointer;
+  text-align: center;
+  -webkit-transition: all 250ms ease;
+  transition: all 250ms ease;
+}
+.radio input[type="radio"]:checked + .radio-label:before {
+  background-color: #FC4D52;
+  box-shadow: inset 0 0 0 4px #f4f4f4;
+}
+.radio input[type="radio"]:focus + .radio-label:before {
+  outline: none;
+  border-color: #FC4D52;
+}
+.radio input[type="radio"]:disabled + .radio-label:before {
+  box-shadow: inset 0 0 0 4px #f4f4f4;
+  border-color: #b4b4b4;
+  background: #b4b4b4;
+}
+.radio input[type="radio"] + .radio-label:empty:before {
+  margin-right: 0;
+}
+

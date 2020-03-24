@@ -216,6 +216,7 @@ class CouponController < ApplicationController
       { cid: 9987, name: '手机配件' }
     ]
     @cid = params[:cid] ? params[:cid].to_i : 0
+    @top_keywords = get_hot_keywords_data.sample(8)
   end
 
   def jd_product_detail
@@ -272,6 +273,12 @@ class CouponController < ApplicationController
       redirect_to "/jd/#{jdid}/", status: 302
       return
     end 
+    if params[:keyword] && (params[:keyword].match(/taobao.com/) || params[:keyword].match(/tmall.com/))
+      @top_keywords = get_hot_keywords_data.sample(8)
+      @error_message = '淘宝天猫商品，不支持搜索链接，请粘贴商品标题搜索'
+      not_found
+      return
+    end
     if is_device_mobile?
       redirect_to "/dz/#{URI.encode(params[:keyword])}/", status: 302
       return

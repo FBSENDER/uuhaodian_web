@@ -43,6 +43,7 @@ var callback = function(data){
 };
 $(function(){
 
+  $.cookie('ff_platform', 2, {path:"/"});
   getJdCoupon();
 
   $(document).on('scroll',function(){

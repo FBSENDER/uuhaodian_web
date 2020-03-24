@@ -8,17 +8,31 @@
       .search
         %i
         %a{href: "/dz_search/", onclick: "_hmt.push(['_trackEvent', '顶部点击', 'click', 'dazhe'])"}
-          %p 输入您需要的商品名称
+          %p #{@keyword}
   .content
     .filter
-      .type.active{data: {sort: 7}}
+      .type.active{data: {sort: 1}}
         %a{href: "javascript:;", onclick:"_hmt.push(['_trackEvent', '筛选-综合', 'click', 'dazhe'])"} 综合
-      .type{data: {sort: 1}}
-        %a{href: "javascript:;", onclick:"_hmt.push(['_trackEvent', '筛选-上新', 'click', 'dazhe'])"} 上新
-      .type{data: {sort: 4}}
+      .type{data: {sort: 2}}
         %a{href: "javascript:;", onclick:"_hmt.push(['_trackEvent', '筛选-销量', 'click', 'dazhe'])"} 销量
+      .type{data: {sort: 5}}
+        %a{href: "javascript:;", onclick:"_hmt.push(['_trackEvent', '筛选-推荐', 'click', 'dazhe'])"} 推荐
       .type{data: {sort: 3}}
         %a{id: "t3", href: "javascript:;", onclick:"_hmt.push(['_trackEvent', '筛选-价格', 'click', 'dazhe'])"} 价格
+    .platform-filter
+      %div{style: "float:left;padding:5px 0 5px 20px;height:30px;"}
+        %input.switch{type: "checkbox", style: "font-size: 20px;"}
+      %div{style: "float:left;padding-left:10px;"} 只看券
+      %div{style: "float:right;"}
+        .radio{style: "float:right;"}
+          %input{id: "radio_3", name: "platform", type: "radio", checked: "true", value: "3"}
+          %label.radio-label{for: "radio_3"} &nbsp;拼多多
+        .radio{style: "float:right;"}
+          %input{id: "radio_2", name: "platform", type: "radio", checked: "true", value: "2"}
+          %label.radio-label{for: "radio_2"} &nbsp;京东
+        .radio{style: "float:right;"}
+          %input{id: "radio_1", name: "platform", type: "radio", checked: "true", value: "1"}
+          %label.radio-label{for: "radio_1"} &nbsp;淘宝
     #dazheList
   .footer
     %a.home.zh{href: "http://m.uuhaodian.com/index.php?r=index/wap&source=dazhe", target: "_blank", onclick:"_hmt.push(['_trackEvent', '首页', 'click', 'dazhe'])"}

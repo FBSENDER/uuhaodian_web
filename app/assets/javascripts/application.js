@@ -56,7 +56,7 @@ $(function(){
   });
 
   function goSearch(q){
-    window.location.href = '/query/' + encodeURIComponent(q).replace(/\x/g, "%") + '/';
+    window.location.href = '/query/' + encodeURIComponent(q) + '/';
   }
   function scrollToTop(){
     var body = $('body,html');

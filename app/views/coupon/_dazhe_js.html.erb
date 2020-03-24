@@ -1,6 +1,6 @@
 <script type="text/javascript">
 var globalChannel = 27;
-var retry =0,page = 1,pagesize = 20,load = 1,channel = '<%= @channel %>',sort = 0,is_simple = true, sort_type='',is_t = false, is_h = false, is_q = false, keyword = '<%= @keyword %>';
+var retry =0,page = 1,pagesize = 20,load = 1,channel = '<%= @channel %>',sort = 0,is_simple = true, is_tmall = 0, has_coupon = 0, sort_type='',is_t = false, is_h = false, is_q = false, keyword = '<%= @keyword %>', platform = '1', jd_sort = 0, jd_is_hot = 0, pdd_sort = 0, pdd_activity = '';
 function createList_dg(cl){
   var obj = $('#dazheList');
   var htmlstr = '';
@@ -20,14 +20,34 @@ function createList_dg(cl){
       title +'"/>';
     htmlstr += '<div class="cent">';
     if(z.short_title != ''){
-      htmlstr += '<h3>'+ z.short_title + '</h3>';
+      htmlstr += '<h3>';
+      if(z.user_type == 1){
+        htmlstr += '<span>天猫</span>';
+      }
+      else{
+        htmlstr += '<span>淘宝</span>';
+      }
+      htmlstr += z.short_title;
+      htmlstr += '</h3>';
     }
     else{
-      htmlstr += '<h3>'+ z.title + '</h3>';
+      htmlstr += '<h3>';
+      if(z.user_type == 1){
+        htmlstr += '<span>天猫</span>';
+      }
+      else{
+        htmlstr += '<span>淘宝</span>';
+      }
+      htmlstr += z.title;
+      htmlstr += '</h3>';
     }
     htmlstr += '<div class="num">';
     htmlstr += '<span>原价 ￥'+ o_price + '</span>';
-    htmlstr += '<span class="r">已售'+ z.volume + '件</span></div>';
+    if(z.volume > 0){
+      var vv = z.volume > 10000 ? ((z.volume / 10000.0).toFixed(1) + '万') : z.volume;
+      htmlstr += '<span class="r">已售'+ vv + '件</span>';
+    }
+    htmlstr += '</div>';
     if(coupon_money > 0){
       htmlstr += '<div class="money"><div class="quan"><i>' + coupon_money + '元券</i></div>';
     }
@@ -41,11 +61,94 @@ function createList_dg(cl){
   htmlstr = $(htmlstr);
   obj.append(htmlstr);
 }
+function createList_jd(cl){
+  var obj = $('#dazheList');
+  var htmlstr = '';
+  for(var i=0,len=cl.length;i<len;i++){
+    var z = cl[i];
+    var buy_url = 'http://www.uuhaodian.com/jd/buy/' + z.goods_id + '/';
+    if(z.couponurl != ''){
+      buy_url += '?coupon=' + encodeURIComponent(z.couponurl);
+    }
+    htmlstr += '<div class="item">';
+    htmlstr += '<a class = "zh" href="'+ buy_url +'" target="_blank">';
+    htmlstr += '<img class="pic" src="'+ z.picurl +'"/>';
+    htmlstr += '<div class="cent">';
+    htmlstr += '<h3>';
+    htmlstr += '<span>京东</span>';
+    htmlstr += z.goods_short_name;
+    htmlstr += '</h3>';
+    htmlstr += '<div class="num">';
+    if(z.discount > 0 && z.price_pg > 0){
+      htmlstr += '<span>拼购价 ￥'+ z.price_pg + '</span>';
+    }
+    else{
+      htmlstr += '<span>原价 ￥'+ z.price + '</span>';
+    }
+    if(z.sales > 0){
+      var vv = z.sales > 10000 ? ((z.sales / 10000.0).toFixed(1) + '万') : z.sales;
+      htmlstr += '<span class="r">已售'+ vv + '件</span>';
+    }
+    htmlstr += '</div>';
+    if(z.discount > 0){
+      htmlstr += '<div class="money"><div class="quan"><i>' + parseInt(z.discount) + '元券</i></div>';
+    }
+    else if(z.price_pg > 0){
+      htmlstr += '<div class="money"><div class="quan"><i>拼购</i></div>';
+    }
+    else{
+      htmlstr += '<div class="money"><div class="quan"><i>去看看</i></div>';
+    }
+    htmlstr += '到手价 ￥'
+    htmlstr += '<span class="m">' + z.price_after + '</span></div>'
+    htmlstr += '</div></a></div>';
+  }
+  htmlstr = $(htmlstr);
+  obj.append(htmlstr);
+}
+function createList_pdd(cl){
+  var obj = $('#dazheList');
+  var htmlstr = '';
+  for(var i=0,len=cl.length;i<len;i++){
+    var z = cl[i];
+    var buy_url = 'http://www.uuhaodian.com/ddk/buy/' + z.itemId + '/';
+    htmlstr += '<div class="item">';
+    htmlstr += '<a class = "zh" href="'+ buy_url +'" target="_blank">';
+    htmlstr += '<img class="pic" src="'+ z.coverImage +'" alt="'+z.
+      title +'"/>';
+    htmlstr += '<div class="cent">';
+    htmlstr += '<h3>';
+    htmlstr += '<span>拼多多</span>';
+    htmlstr += z.shortTitle;
+    htmlstr += '</h3>';
+    htmlstr += '<div class="num">';
+    htmlstr += '<span>原价 ￥'+ z.price + '</span>';
+    htmlstr += '<span class="r">已售'+ z.monthSales + '件</span>';
+    htmlstr += '</div>';
+    if(z.couponMoney > 0){
+      htmlstr += '<div class="money"><div class="quan"><i>' + z.couponMoney + '元券</i></div>';
+    }
+    else{
+      htmlstr += '<div class="money"><div class="quan"><i>拼购</i></div>';
+    }
+    htmlstr += '到手价 ￥'
+    htmlstr += '<span class="m">' + z.nowPrice + '</span></div>'
+    htmlstr += '</div></a></div>';
+  }
+  htmlstr = $(htmlstr);
+  obj.append(htmlstr);
+}
 var callback1 = function(data){
   load = 1;
   page ++;
   if(data.status == 1){
     createList_dg(data.results);
+  }
+  else if(data.status_code == 200){
+    createList_jd(data.data.data);
+  }
+  else if(data.status.code == 1001){
+    createList_pdd(data.result)
   }
 };
 function createList_1(cl, obj){
@@ -121,6 +224,17 @@ function getDazheCouponList(){
   if(!load){
     return;
   }
+  if(platform == 1){
+    doTaobao();
+  }
+  else if(platform == 2){
+    doJingdong();
+  }
+  else{
+    doPinduoduo();
+  }
+}
+function doTaobao(){
   var dd = {
     'keyword': keyword,
     'sort': sort_type,
@@ -130,13 +244,10 @@ function getDazheCouponList(){
   if(is_simple){
     dd.is_simple = 1
   }
-  if(is_t){
+  if(is_tmall == 1){
     dd.is_tmall = 1
   }
-  if(is_h){
-    dd.is_overseas = 1
-  }
-  if(is_q){
+  if(has_coupon == 1){
     dd.has_coupon = 1
   }
   $.ajax({
@@ -160,6 +271,67 @@ function getDazheCouponList(){
     }
   });
 }
+function doJingdong(){
+  var dd = {
+    page: page,
+    keyword: keyword.slice(0,30),
+    sort_type: jd_sort,
+    has_coupon: has_coupon,
+    is_hot: jd_is_hot,
+    callback: 'callback1'
+  }
+  $.ajax({
+    url: "https://api.uuhaodian.com/ddk/jd_search",
+    type: 'GET',
+    dataType: 'jsonp',
+    data: dd,
+    jsonp: 'callback1',
+    jsonpCallback: 'callback1',
+    beforeSend:function(){
+      load = 0;
+    },
+    success:function(data){
+    },
+    error: function(data){
+      if(!retry){
+        retry = 1;
+        load = 1;
+        getDazheCouponList();
+      }
+    }
+  });
+}
+function doPinduoduo(){
+  var dd = {
+    page: page,
+    keyword: keyword.slice(0,40),
+    sort_type: pdd_sort,
+    has_coupon: has_coupon > 0 ? true : false,
+    activity: pdd_activity,
+    callback: 'callback1'
+  }
+  $.ajax({
+    url: "https://api.uuhaodian.com/ddk/search_2",
+    type: 'GET',
+    dataType: 'jsonp',
+    data: dd,
+    jsonp: 'callback1',
+    jsonpCallback: 'callback1',
+    beforeSend:function(){
+      load = 0;
+    },
+    success:function(data){
+    },
+    error: function(data){
+      if(!retry){
+        retry = 1;
+        load = 1;
+        getDazheCouponList();
+      }
+    }
+  });
+}
+
 
 $(function(){
   getDazheCouponList();
@@ -169,11 +341,13 @@ $(function(){
       $('.scroll_top').removeClass('close');
       $('.scroll_top').addClass('open');
       $('.filter').addClass('fixed');
+      $('.platform-filter').addClass('fixed');
     }
     else{
       $('.scroll_top').removeClass('open');
       $('.scroll_top').addClass('close');
       $('.filter').removeClass('fixed');
+      $('.platform-filter').removeClass('fixed');
     }
     if(tp >= (document.body.scrollHeight - 800)){
       _hmt.push(['_trackEvent', '加载更多', 'click', 'dazhe']);
@@ -181,6 +355,27 @@ $(function(){
     }
   });
   $(".scroll_top>a").click(function(){window.scrollTo(0, 2);});
+  $(".switch").change(function(){
+    var _this = $(this);
+    if(has_coupon == 0){
+      has_coupon = 1
+    }
+    else{
+      has_coupon = 0
+    }
+    page = 1;
+    load = 1;
+    $("#dazheList").html("");
+    getDazheCouponList();
+  });
+  $(".radio input").click(function(){
+    var _this = $(this);
+    platform = _this.val();
+    page = 1;
+    load = 1;
+    $("#dazheList").html("");
+    getDazheCouponList();
+  });
   $(".type").click(function(){
     var _this = $(this);
     if(_this.data('sort') == '3'){
@@ -189,14 +384,29 @@ $(function(){
         _this.addClass('active');
         is_simple = false;
         sort_type = "price_asc";
+        is_tmall = 1
+        pdd_sort = 9
+        pdd_activity = '4,7,21'
+        jd_sort = 3
+        jd_is_hot = 0
         $("#t3").html("价格↑");
       }
       else{
         if(sort_type == "price_asc"){
           sort_type = "price_des"
+          is_tmall = 1
+          pdd_sort = 10
+          pdd_activity = '4,7,21'
+          jd_sort = 2
+          jd_is_hot = 0
           $("#t3").html("价格↓");
         }else{
           sort_type = "price_asc"
+          is_tmall = 1
+          pdd_sort = 9
+          pdd_activity = '4,7,21'
+          jd_sort = 3
+          jd_is_hot = 0
           $("#t3").html("价格↑");
         }
       }
@@ -210,18 +420,34 @@ $(function(){
       $('.type.active').removeClass('active');
       _this.addClass('active');
       sort = _this.data('sort');
-      if(sort == '7'){
-        is_simple = true;
-        $("#t3").html("价格");
-      }
-      else if (sort == '1'){
+      if(sort == '1'){
         is_simple = false;
-        sort_type = "tk_rate_des"
+        is_tmall = 0;
+        sort_type = '';
+        pdd_sort = 0
+        pdd_activity = ''
+        jd_sort = 0
+        jd_is_hot = 0
         $("#t3").html("价格");
       }
-      else if (sort == '4'){
+      else if (sort == '2'){
         is_simple = false;
         sort_type = "total_sales_des";
+        is_tmall = 0
+        pdd_sort = 6
+        pdd_activity = ''
+        jd_sort = 1
+        jd_is_hot = 0
+        $("#t3").html("价格");
+      }
+      else if (sort == '5'){
+        is_simple = false;
+        sort_type = "tk_total_sales";
+        is_tmall = 1;
+        pdd_sort = 2
+        pdd_activity = '4,7,21'
+        jd_sort = 1
+        jd_is_hot = 1
         $("#t3").html("价格");
       }
     }

@@ -8,7 +8,7 @@
       .search
         %i
         %a{href: "/dz_search/", onclick: "_hmt.push(['_trackEvent', '顶部点击', 'click', 'dazhe'])"}
-          %p 输入您需要的商品名称
+          %p #{@keyword}
   .header
     %h1
       超过99.9%用户不知道的秘诀
@@ -32,14 +32,28 @@
     %img.sno{id: "ercode", src: "http://www.uuhaodian.com/img/lbanner1.png"}
   .content
     .filter
-      .type.active{id: "t7", data: {sort: 7}}
+      .type.active{id: "t1", data: {sort: 1}}
         %a{href: "javascript:;", onclick:"_hmt.push(['_trackEvent', '筛选-综合', 'click', 'dazhe'])"} 综合
-      .type{data: {sort: 1}}
-        %a{href: "javascript:;", onclick:"_hmt.push(['_trackEvent', '筛选-上新', 'click', 'dazhe'])"} 上新
-      .type{data: {sort: 4}}
+      .type{data: {sort: 2}}
         %a{href: "javascript:;", onclick:"_hmt.push(['_trackEvent', '筛选-销量', 'click', 'dazhe'])"} 销量
+      .type{data: {sort: 5}}
+        %a{href: "javascript:;", onclick:"_hmt.push(['_trackEvent', '筛选-推荐', 'click', 'dazhe'])"} 推荐
       .type{data: {sort: 3}}
         %a{id: "t3", href: "javascript:;", onclick:"_hmt.push(['_trackEvent', '筛选-价格', 'click', 'dazhe'])"} 价格
+    .platform-filter
+      %div{style: "float:left;padding:5px 0 5px 20px;height:30px;"}
+        %input.switch{type: "checkbox", style: "font-size: 20px;"}
+      %div{style: "float:left;padding-left:10px;"} 只看券
+      %div{style: "float:right;"}
+        .radio{style: "float:right;"}
+          %input{id: "radio_3", name: "platform", type: "radio", checked: "true", value: "3"}
+          %label.radio-label{for: "radio_3"} &nbsp;拼多多
+        .radio{style: "float:right;"}
+          %input{id: "radio_2", name: "platform", type: "radio", checked: "true", value: "2"}
+          %label.radio-label{for: "radio_2"} &nbsp;京东
+        .radio{style: "float:right;"}
+          %input{id: "radio_1", name: "platform", type: "radio", checked: "true", value: "1"}
+          %label.radio-label{for: "radio_1"} &nbsp;淘宝
     #dazheList
       - @items.each do |item|
         .item
@@ -66,6 +80,10 @@
       %a#more_btn.btn.zh{href: "http://download1.51cyin.cn/index.php?r=index/ios-down&app_id=550416", target: "_blank", onclick:"_hmt.push(['_trackEvent', '下载app-ios', 'click', 'dazhe'])"} 下载APP获取更多优惠
     - else
       %a#more_btn.btn.zh{href: "http://download1.51cyin.cn/index.php?r=index/down&app_id=550416", target: "_blank", onclick:"_hmt.push(['_trackEvent', '下载app-android', 'click', 'dazhe'])"} 下载APP获取更多优惠
+
+.scroll_top.close
+  %a{href: "javascript:;"}
+    %img{src: "/img/to_top.png"}
 
 
 = render partial: "sem_js"
