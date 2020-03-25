@@ -15,6 +15,15 @@ function ga_event(e){
   d = $(e).data("ga").split(":");
   gtag('event', d[0], {'event_category': d[1], 'event_label': d[2]});
 }
+function goSearch(q){
+  window.location.href = '/query/' + encodeURIComponent(q) + '/';
+}
+function suggestClick(obj){
+  $(".suggest-area").addClass('sno');
+  var kw = $(obj).text();
+  $("#search_input").val(kw);
+  goSearch(kw);
+}
 
 $(function(){
   var headerBar = $('.header-bar'),
@@ -55,9 +64,6 @@ $(function(){
     }
   });
 
-  function goSearch(q){
-    window.location.href = '/query/' + encodeURIComponent(q) + '/';
-  }
   function scrollToTop(){
     var body = $('body,html');
     body.stop(true,true).animate({
@@ -91,75 +97,39 @@ $(function(){
       nextEl:'.swiper-button-next'
     }
   });
-  $("#user_login").on('click', function(){
-    url = "https://open.weixin.qq.com/connect/qrconnect?appid=wxb5c85d0e9a2a3ecd&esponse_type=code&scope=snsapi_login&state=STATE&redirect_uri=http%3A%2F%2Fapi.uuhaodian.com%2Fuu%2Fweb_login%3Fuu_path%3D" + encodeURIComponent(encodeURIComponent(location.href)) + "#wechat_redirect";
-    window.location.href = url;
-  });
-  $("#user_logout").on('click', function(){
-    window.location.href = "http://api.uuhaodian.com/uu/web_logout/";
-  });
-  $("#shoucang").on('click', function(){
-    var $shoucang = $("#shoucang-span");
-    if($shoucang[0].innerText == "加入收藏"){
-      if($.cookie('session_key') == undefined){
-        url = "https://open.weixin.qq.com/connect/qrconnect?appid=wxb5c85d0e9a2a3ecd&esponse_type=code&scope=snsapi_login&state=STATE&redirect_uri=http%3A%2F%2Fapi.uuhaodian.com%2Fuu%2Fweb_login%3Fuu_path%3D" + encodeURIComponent(encodeURIComponent(location.href)) + "#wechat_redirect";
-        window.location.href = url;
-        return;
-      }
+  $("#search_input").keyup(function(){
+    var _this = $(this);
+    var kw = _this.val().trim();
+    if(kw != ''){
       $.ajax({
-        url: 'http://api.uuhaodian.com/uu/add_product_liked',
+        url: "/query_suggest",
         type: 'GET',
-        dataType: 'jsonp',
-        data:{
-          item_id: $shoucang.data("id")
-        },
-        beforeSend: function(){
-         $shoucang.text("操作中...");
+        data: {
+          kw: kw
         },
         success:function(data){
-         $shoucang.text("已收藏");
+          if(data.status == 1 && data.data.length > 0){
+            $("#suggest_list_items").html("");
+            var s = "";
+            for(var i = 0; i < data.data.length; i++){
+              s += '<p class="suggest-item" onclick="suggestClick(this);">' + data.data[i] + '</p>';
+            }
+            $("#suggest_list_items").html(s);
+            $(".suggest-area").removeClass('sno');
+          }
+          else{
+            $(".suggest-area").addClass('sno');
+          }
         }
       });
     }
-    else if ($shoucang[0].innerText == "已收藏"){
-      $.ajax({
-        url: 'http://api.uuhaodian.com/uu/cancel_product_liked',
-        type: 'GET',
-        dataType: 'jsonp',
-        data:{
-          item_id: $shoucang.data("id")
-        },
-        beforeSend: function(){
-         $shoucang.text("操作中...");
-        },
-        success:function(data){
-         $shoucang.text("加入收藏");
-        }
-      });
+    else{
+      $(".suggest-area").addClass('sno');
     }
   });
-  if($("#shoucang-span").length > 0){
-    var $shoucang = $("#shoucang-span");
-    $.ajax({
-      url: 'http://api.uuhaodian.com/uu/check_product_liked',
-      type: 'GET',
-      dataType: 'jsonp',
-      data:{
-        item_id: $shoucang.data("id")
-      },
-      success:function(data){
-        if(data["status"] == 1){
-          $shoucang.text("已收藏");
-        }
-      }
-    });
-  }
-  if($.cookie('session_key') != undefined){
-    $("#user_login").hide();
-    $("#nickname").text($.cookie('nickname'));
-    $("#headimgurl").attr("src", $.cookie('headimgurl'));
-    $("#logined").show();
-  }
+  $("#suggest_close").click(function(){
+    $(".suggest-area").addClass('sno');
+  });
 
 });
 

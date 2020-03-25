@@ -479,4 +479,14 @@ class CouponController < ApplicationController
     @device = mobile_device == 1 ? "ios" : "android" 
     render :sem_shop, layout: "dazhe"
   end
+
+  def query_suggest
+    begin
+      url = "http://m.uuhaodian.com/index.php?r=index/kwarr&kw=#{URI.encode_www_form_component(params[:kw])}"
+      result = Net::HTTP.get(URI(url))
+      render json: result
+    rescue
+      render json: {status: 0}
+    end
+  end
 end

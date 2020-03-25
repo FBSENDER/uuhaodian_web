@@ -5,8 +5,12 @@
     .search-area
       .input-area
         %i
-        %input.search-input.unfocus{type: "text", placeholder: "粘贴宝贝标题或输入关键词，天猫淘宝京东拼多多都能搜！", value: "#{@keyword && @keyword != '' ? @keyword: ''}"}
+        %input.search-input.unfocus#search_input{type: "text", placeholder: "粘贴宝贝标题或输入关键词，天猫淘宝京东拼多多都能搜！", value: "#{@keyword && @keyword != '' ? @keyword: ''}"}
       %a.search-btn{href: "javascript:;"} 找券
+      .suggest-area.sno
+        .suggest-list
+          #suggest_list_items
+          %p.suggest-close#suggest_close 关闭
       .keywords-area
         - if @top_keywords && @top_keywords.size > 0
           - @top_keywords.each do |k|

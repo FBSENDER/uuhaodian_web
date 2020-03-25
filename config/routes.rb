@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   get "/jd/buy/:id", to: "coupon#jd_buy", id: /\d+/
   get "/sp/:id", to: "coupon#video_detail", id: /\d+/
   get "/query/:keyword", to: "coupon#query", keyword: /.+/
+  get "/query_suggest", to: "coupon#query_suggest"
   get "/like/", to: "coupon#like"
   get "/top/", to: "coupon#top"
   get "/brand/", to: "coupon#brand"
