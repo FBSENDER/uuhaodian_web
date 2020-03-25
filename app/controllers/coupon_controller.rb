@@ -426,7 +426,7 @@ class CouponController < ApplicationController
   end
 
   def dazhe_search
-    @keywords = %w(连衣裙 内裤 睡衣 小白鞋 防晒霜 卸妆水 雨伞 零食 雨衣)
+    @keywords = get_hot_keywords_data.sample(20)
     @device = mobile_device == 1 ? "ios" : "android" 
     @cats = [
       {id: 4, k: "家居日用"},

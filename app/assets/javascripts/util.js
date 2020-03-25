@@ -459,8 +459,16 @@ Util.createJdList = function(cl,obj,channel,gaPage){
     var z = cl[i];
     var coupon_money = z.discount ? parseInt(z.discount) : 0;
     var buy_url = "/jd/" + z.goods_id + '/#coupon';
+    if(z.discount == 0 && z.price_pg == 0){
+      buy_url = "/jd/buy/" + z.goods_id + '/';
+    }
     htmlstr += '<div class="zk-item">';
-    htmlstr += '<a href="'+ buy_url +'">';
+    if(z.discount == 0 && z.price_pg == 0){
+      htmlstr += '<a href="'+ buy_url +'" target="_blank">';
+    }
+    else{
+      htmlstr += '<a href="'+ buy_url +'">';
+    }
     htmlstr += '<div class="img-area">';
     htmlstr += '<img data-ga-event="商品_图片:点击:'+ gaPage +'" class="lazy new" data-original="'+ z.picurl +'" alt="'+z.goods_name +'">';
     htmlstr += '</div>';

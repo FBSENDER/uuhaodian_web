@@ -68,7 +68,7 @@
             %i
             %i
           - if coupon['couponMoney'].to_i == 0
-            立即购买
+            去#{coupon['shopType'] == 'tmall' ? '天猫' : '淘宝'}购买
           - else
             领券立减
             %em #{coupon['couponMoney'].to_i}

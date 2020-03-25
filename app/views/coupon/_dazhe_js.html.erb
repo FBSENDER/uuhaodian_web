@@ -123,7 +123,9 @@ function createList_pdd(cl){
     htmlstr += '</h3>';
     htmlstr += '<div class="num">';
     htmlstr += '<span>原价 ￥'+ z.price + '</span>';
-    htmlstr += '<span class="r">已售'+ z.monthSales + '件</span>';
+    if(z.monthSales != 0){
+      htmlstr += '<span class="r">已售'+ z.monthSales + '件</span>';
+    }
     htmlstr += '</div>';
     if(z.couponMoney > 0){
       htmlstr += '<div class="money"><div class="quan"><i>' + z.couponMoney + '元券</i></div>';
@@ -143,12 +145,47 @@ var callback1 = function(data){
   page ++;
   if(data.status == 1){
     createList_dg(data.results);
+    $("#imgLoading").addClass("sno");
+    if(data.results.length < pagesize){
+      $("#loadRetry").addClass("sno");
+      $("#noMore").removeClass("sno");
+      load = 0;
+    }
+    else{
+      $("#loadRetry").addClass("sno");
+      $("#noMore").addClass("sno");
+    }
   }
   else if(data.status_code == 200){
     createList_jd(data.data.data);
+    $("#imgLoading").addClass("sno");
+    if(data.data.data.length < pagesize){
+      $("#loadRetry").addClass("sno");
+      $("#noMore").removeClass("sno");
+      load = 0;
+    }
+    else{
+      $("#loadRetry").addClass("sno");
+      $("#noMore").addClass("sno");
+    }
   }
   else if(data.status.code == 1001){
     createList_pdd(data.result)
+    $("#imgLoading").addClass("sno");
+    if(data.result.length < pagesize){
+      $("#loadRetry").addClass("sno");
+      $("#noMore").removeClass("sno");
+      load = 0;
+    }
+    else{
+      $("#loadRetry").addClass("sno");
+      $("#noMore").addClass("sno");
+    }
+  }
+  else{
+    $("#loadRetry").removeClass("sno");
+    $("#imgLoading").addClass("sno");
+    $("#noMore").addClass("sno");
   }
 };
 function createList_1(cl, obj){
@@ -224,6 +261,9 @@ function getDazheCouponList(){
   if(!load){
     return;
   }
+  $("#imgLoading").removeClass("sno");
+  $("#loadRetry").addClass("sno");
+  $("#noMore").addClass("sno");
   if(platform == 1){
     doTaobao();
   }
@@ -268,6 +308,11 @@ function doTaobao(){
         load = 1;
         getDazheCouponList();
       }
+      else{
+        $("#loadRetry").removeClass("sno");
+        $("#imgLoading").addClass("sno");
+        $("#noMore").addClass("sno");
+      }
     }
   });
 }
@@ -297,6 +342,11 @@ function doJingdong(){
         retry = 1;
         load = 1;
         getDazheCouponList();
+      }
+      else{
+        $("#loadRetry").removeClass("sno");
+        $("#imgLoading").addClass("sno");
+        $("#noMore").addClass("sno");
       }
     }
   });
@@ -328,16 +378,22 @@ function doPinduoduo(){
         load = 1;
         getDazheCouponList();
       }
+      else{
+        $("#loadRetry").removeClass("sno");
+        $("#imgLoading").addClass("sno");
+        $("#noMore").addClass("sno");
+      }
     }
   });
 }
+
 
 
 $(function(){
   getDazheCouponList();
   $(document).scroll(function(){
     tp = document.body.scrollTop || document.documentElement.scrollTop;
-    if(tp > 200){
+    if(tp > 216){
       $('.scroll_top').removeClass('close');
       $('.scroll_top').addClass('open');
       $('.filter').addClass('fixed');
@@ -376,6 +432,9 @@ $(function(){
     $("#dazheList").html("");
     getDazheCouponList();
   });
+  $("#loadRetry").click(function(){
+    getDazheCouponList();
+  });
   $(".type").click(function(){
     var _this = $(this);
     if(_this.data('sort') == '3'){
@@ -394,6 +453,7 @@ $(function(){
       else{
         if(sort_type == "price_asc"){
           sort_type = "price_des"
+          is_simple = false;
           is_tmall = 1
           pdd_sort = 10
           pdd_activity = '4,7,21'
@@ -402,6 +462,7 @@ $(function(){
           $("#t3").html("价格↓");
         }else{
           sort_type = "price_asc"
+          is_simple = false;
           is_tmall = 1
           pdd_sort = 9
           pdd_activity = '4,7,21'

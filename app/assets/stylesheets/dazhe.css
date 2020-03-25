@@ -521,14 +521,15 @@ input[type='checkbox'].switch{
     height: 20px;
     background: #ccc;
     border-radius: 10px;
+    border: 1px solid #ccc;
     transition: border-color .3s, background-color .3s;
 }
 
 input[type='checkbox'].switch::after {
     content: '';
     display: inline-block;
-    width: 1rem;
-    height:1rem;
+    width: 14px;
+    height: 14px;
     border-radius: 50%;
     background: #fff;
     box-shadow: 0, 0, 2px, #999;
@@ -540,6 +541,7 @@ input[type='checkbox'].switch::after {
 
 input[type='checkbox'].switch:checked {
     background: #FC4D52;
+    border: 1px solid #FC4D52;
 }
 /* 当input[type=checkbox]被选中时：伪元素显示下面样式 位置发生变化 */
 input[type='checkbox'].switch:checked::after {
@@ -587,4 +589,14 @@ input[type='checkbox'].switch:checked::after {
 .radio input[type="radio"] + .radio-label:empty:before {
   margin-right: 0;
 }
-
+.button-btn{
+  margin: 20px auto 100px auto;
+  width:120px;
+  height: 40px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  text-align:center;
+  font-size: 18px;
+  line-height: 40px;
+  border-radius: 5px;
+}
