@@ -335,10 +335,10 @@ Util.createDgList = function(cl,obj,channel,gaPage){
     var platform = '',platformPic = '';
     htmlstr += '<div class="zk-item">';
     if(coupon_money > 0){
-      htmlstr += '<a href="/yh/'+ z.item_id +'/?coupon_money=' + coupon_money + '#coupon">';
+      htmlstr += '<a href="/yh/'+ z.item_id +'/?coupon_money=' + coupon_money + '#coupon" onclick="_hmt.push([\'_trackEvent\', \'淘宝商品点击\', \'click\', \'PC查询页\'])">';
     }
     else{
-      htmlstr += '<a href="/yh/'+ z.item_id +'/#coupon">';
+      htmlstr += '<a href="/yh/'+ z.item_id +'/#coupon" onclick="_hmt.push([\'_trackEvent\', \'淘宝商品点击\', \'click\', \'PC查询页\'])">';
     }
     htmlstr += '<div class="img-area">';
     htmlstr += '<img data-ga-event="商品_图片:点击:'+ gaPage +'" class="lazy new" data-original="'+ z.pict_url +'" alt="'+z.
@@ -398,7 +398,7 @@ Util.createPddList = function(cl,obj,channel,gaPage){
     var zhe = (parseFloat(z.nowPrice) * 10.0 / parseFloat(z.price)).toFixed(1);
     var buy_url = '/ddk/' + z.itemId + '/#coupon';
     htmlstr += '<div class="zk-item">';
-    htmlstr += '<a href="'+ buy_url +'">';
+    htmlstr += '<a href="'+ buy_url +'" onclick="_hmt.push([\'_trackEvent\', \'拼多多商品点击\', \'click\', \'PC查询页\'])">';
     htmlstr += '<div class="img-area">';
     htmlstr += '<img data-ga-event="商品_图片:点击:'+ gaPage +'" class="lazy new" data-original="'+ z.coverImage +'" alt="'+z.title +'">';
     htmlstr += '</div>';
@@ -464,10 +464,10 @@ Util.createJdList = function(cl,obj,channel,gaPage){
     }
     htmlstr += '<div class="zk-item">';
     if(z.discount == 0 && z.price_pg == 0){
-      htmlstr += '<a href="'+ buy_url +'" target="_blank">';
+      htmlstr += '<a href="'+ buy_url +'" target="_blank" onclick="_hmt.push([\'_trackEvent\', \'京东商品jump\', \'click\', \'PC查询页\'])">';
     }
     else{
-      htmlstr += '<a href="'+ buy_url +'">';
+      htmlstr += '<a href="'+ buy_url +'" onclick="_hmt.push([\'_trackEvent\', \'京东商品点击\', \'click\', \'PC查询页\'])">';
     }
     htmlstr += '<div class="img-area">';
     htmlstr += '<img data-ga-event="商品_图片:点击:'+ gaPage +'" class="lazy new" data-original="'+ z.picurl +'" alt="'+z.goods_name +'">';
@@ -535,7 +535,7 @@ Util.createJdCoupon = function(cl,obj,channel,gaPage){
   for(var i=0,len=cl.length;i<len;i++){
     var z = cl[i];
     var buy_url = "/jd/buy/" + z.product_id + '/?coupon=' + encodeURIComponent(z.coupon_url);
-    htmlstr += '<a href="'+ buy_url +'" target="_blank">';
+    htmlstr += '<a href="'+ buy_url +'" target="_blank" onclick="_hmt.push([\'_trackEvent\', \'京券领取\', \'click\', \'jd\'])">';
     htmlstr += '<div class="jd-coupon">';
     htmlstr += '<div class="img">';
     htmlstr += '<img class="lazy new" data-original="'+ z.pic_url +'">';

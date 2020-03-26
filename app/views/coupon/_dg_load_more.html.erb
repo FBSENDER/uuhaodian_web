@@ -173,12 +173,14 @@ $(function(){
         client_height = Util.pageSize()['clientHeight'];
         if(_top + client_height >= (scroll_height-800)){
           getDgList();
+          _hmt.push(['_trackEvent', '加载更多', 'click', 'PC查询页']);
         }
     }
   });
 
   loadingText.on('click',function(){
     getDgList();
+    _hmt.push(['_trackEvent', '加载更多', 'click', 'PC查询页']);
   });
 
 
@@ -203,14 +205,17 @@ $(function(){
       if(_this.data('type') == '1'){
         platform = 1
         $.cookie('ff_platform', 1, {path:"/"});
+        _hmt.push(['_trackEvent', '筛选-平台-淘宝', 'click', 'PC查询页']);
       }
       else if(_this.data('type') == '2'){
         platform = 2
         $.cookie('ff_platform', 2, {path:"/"});
+        _hmt.push(['_trackEvent', '筛选-平台-京东', 'click', 'PC查询页']);
       }
       else{
         platform = 3
         $.cookie('ff_platform', 3, {path:"/"});
+        _hmt.push(['_trackEvent', '筛选-平台-拼多多', 'click', 'PC查询页']);
       }
       page = 1;
       load = 1;
@@ -241,6 +246,7 @@ $(function(){
     load = 1;
     $('#couponList').html('');
     getDgList();
+    _hmt.push(['_trackEvent', '筛选-券', 'click', 'PC查询页']);
   });
   $('.sort_li').on('click', function(){
     var _this = $(this);
@@ -279,6 +285,7 @@ $(function(){
       page = 1;
       $('#couponList').html('');
       getDgList();
+      _hmt.push(['_trackEvent', '筛选-价格', 'click', 'PC查询页']);
       return;
     }
     if(!_this.hasClass('active')){
@@ -293,6 +300,7 @@ $(function(){
         jd_sort = 0
         jd_is_hot = 0
         $("#li-sort-3").html("价格");
+        _hmt.push(['_trackEvent', '筛选-综合', 'click', 'PC查询页']);
       }
       else if (sort_id == '2'){
         sort = "total_sales_des"
@@ -302,6 +310,7 @@ $(function(){
         jd_sort = 1
         jd_is_hot = 0
         $("#li-sort-3").html("价格");
+        _hmt.push(['_trackEvent', '筛选-销量', 'click', 'PC查询页']);
       }
       else if (sort_id == '5'){
         sort = "tk_total_sales_des"
@@ -311,6 +320,7 @@ $(function(){
         jd_sort = 1
         jd_is_hot = 1
         $("#li-sort-3").html("价格");
+        _hmt.push(['_trackEvent', '筛选-推荐', 'click', 'PC查询页'])
       }
       page = 1;
       load = 1;

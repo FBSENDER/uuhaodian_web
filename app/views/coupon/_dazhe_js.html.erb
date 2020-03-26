@@ -15,7 +15,7 @@ function createList_dg(cl){
       buy_url = z.url
     }
     htmlstr += '<div class="item">';
-    htmlstr += '<a class = "zh" href="'+ buy_url +'" target="_blank">';
+    htmlstr += '<a class = "zh" href="'+ buy_url +'" target="_blank" onclick="_hmt.push([\'_trackEvent\', \'淘宝商品jump\', \'click\', \'dazhe\'])">';
     htmlstr += '<img class="pic" src="'+ z.pict_url +'" alt="'+z.
       title +'"/>';
     htmlstr += '<div class="cent">';
@@ -71,7 +71,7 @@ function createList_jd(cl){
       buy_url += '?coupon=' + encodeURIComponent(z.couponurl);
     }
     htmlstr += '<div class="item">';
-    htmlstr += '<a class = "zh" href="'+ buy_url +'" target="_blank">';
+    htmlstr += '<a class = "zh" href="'+ buy_url +'" target="_blank" onclick="_hmt.push([\'_trackEvent\', \'京东商品jump\', \'click\', \'dazhe\'])">';
     htmlstr += '<img class="pic" src="'+ z.picurl +'"/>';
     htmlstr += '<div class="cent">';
     htmlstr += '<h3>';
@@ -113,7 +113,7 @@ function createList_pdd(cl){
     var z = cl[i];
     var buy_url = 'http://www.uuhaodian.com/ddk/buy/' + z.itemId + '/';
     htmlstr += '<div class="item">';
-    htmlstr += '<a class = "zh" href="'+ buy_url +'" target="_blank">';
+    htmlstr += '<a class = "zh" href="'+ buy_url +'" target="_blank" onclick="_hmt.push([\'_trackEvent\', \'拼多多商品jump\', \'click\', \'dazhe\'])">';
     htmlstr += '<img class="pic" src="'+ z.coverImage +'" alt="'+z.
       title +'"/>';
     htmlstr += '<div class="cent">';
@@ -434,6 +434,7 @@ $(function(){
   });
   $("#loadRetry").click(function(){
     getDazheCouponList();
+    _hmt.push(['_trackEvent', '点击重试', 'click', 'dazhe']);
   });
   $(".type").click(function(){
     var _this = $(this);

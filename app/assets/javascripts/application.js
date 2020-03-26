@@ -22,6 +22,7 @@ function suggestClick(obj){
   $(".suggest-area").addClass('sno');
   var kw = $(obj).text();
   $("#search_input").val(kw);
+  _hmt.push(['_trackEvent', '顶部suggest点击', 'click', 'PC全局']);
   goSearch(kw);
 }
 

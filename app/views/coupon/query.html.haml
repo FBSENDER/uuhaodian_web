@@ -8,7 +8,7 @@
     %div{style: "background-color:#fff;padding:10px 0;height:23px;overflow:hidden;white-space:nowrap;"}
       .wrapper
         - @kk.each do |k|
-          %a{href: "/query/#{URI.encode(k)}/", class: "rk"}
+          %a{href: "/query/#{URI.encode(k)}/", class: "rk", onclick: "_hmt.push(['_trackEvent', '顶部关联词', 'click', 'PC查询页'])"}
             #{k}
 
 .wrapper
