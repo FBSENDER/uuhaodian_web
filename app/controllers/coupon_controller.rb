@@ -192,7 +192,7 @@ class CouponController < ApplicationController
   def jd_lingquan
     @is_jd = 1
     @jd_cates = [
-      { cid: 0, name: '全部' },
+      { cid: 1, name: '精选' },
       { cid: 1620, name: '家居日用' },
       { cid: 1315, name: '服饰内衣' },
       { cid: 1316, name: '美妆护肤' },
@@ -215,7 +215,7 @@ class CouponController < ApplicationController
       { cid: 6728, name: '汽车用品' },
       { cid: 9987, name: '手机配件' }
     ]
-    @cid = params[:cid] ? params[:cid].to_i : 0
+    @cid = params[:cid] ? params[:cid].to_i : 1
     @top_keywords = get_hot_keywords_data.sample(8)
   end
 

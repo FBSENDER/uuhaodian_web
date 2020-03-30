@@ -1322,6 +1322,12 @@ input,input:focus{
   border: 2px solid transparent;
   border-top-color: #FF2220;
 }
+#li-q label:hover{
+  cursor: pointer;
+}
+#li-q.active{
+  color: #FF2220;
+}
 .search-res-title {
   font-size: 12px;
   color: #666;
@@ -1820,7 +1826,7 @@ input,input:focus{
   padding:2px 5px;
   font-weight:bold;
   border-radius:3px;
-  margin-left:10px;
+  margin-left:5px;
 }
 .jd-coupon .c-content .c-desc{
   font-size:15px;
@@ -1868,4 +1874,46 @@ input,input:focus{
 }
 .suggest-list .suggest-close:hover{
   color:#FF472B;
+}
+input[type='checkbox'].switch{
+    outline: none;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    position: relative;
+    width: 40px;
+    height: 20px;
+    background: #ccc;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    transition: border-color .3s, background-color .3s;
+}
+input[type='checkbox'].switch:hover{
+  cursor: pointer;
+}
+
+input[type='checkbox'].switch::after {
+    content: '';
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0, 0, 2px, #999;
+    transition:.4s;
+    top: 2px;
+    position: absolute;
+    left: 2px;
+}
+
+input[type='checkbox'].switch:checked {
+    background: #FC4D52;
+    border: 1px solid #FC4D52;
+}
+/* 当input[type=checkbox]被选中时：伪元素显示下面样式 位置发生变化 */
+input[type='checkbox'].switch:checked::after {
+    content: '';
+    position: absolute;
+    left: 55%;
+    top: 2px;
 }

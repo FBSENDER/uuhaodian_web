@@ -226,8 +226,8 @@ $(function(){
       return
     }
   });
-  $('.filter_li').on('click', function(){
-    var _this = $(this);
+  $('#li-q-switch').on('change', function(){
+    var _this = $("#li-q");
     if(!_this.hasClass('active')){
       _this.addClass('active');
       if(_this.data('q') == '1'){
