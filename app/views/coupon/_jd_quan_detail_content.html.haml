@@ -1,5 +1,6 @@
 - coupon = @detail
 - buy_url = @detail["couponurl"] == '' ? "/jd/buy/#{@detail["goods_id"]}/" : "/jd/buy/#{@detail["goods_id"]}/?coupon=#{URI.encode_www_form_component(@detail["couponurl"])}"
+- c_url = @detail["couponurl"] == '' ? "/jd/buy_url/#{@detail["goods_id"]}/" : "/jd/buy_url/#{@detail["goods_id"]}/?coupon=#{URI.encode_www_form_component(@detail["couponurl"])}"
 
 #coupon.zk-content
   .img-area
@@ -75,11 +76,45 @@
             领券立减
             %em #{coupon['discount'].to_i}
             元
+        #qrcode_cv{style: "width: 219px;height: 200px;margin: 0;background-color:#fff;display:none;"}
+          #qrcode_in{style: "width: 160px;height: 160px;margin: 20px auto 10px;"}
+          %p{style: "text-align:center;color:#787878;font-size:14px;"} 支持扫码#{coupon['discount'].to_i == 0 ? '购买' : '领券'}
 
 :javascript
+  var canvas_callback = function(data){
+    if(data.status == 1){
+      var cv = $("#qrcode_in");
+      cv.qrcode({
+        render: "canvas",
+        height: 160,
+        width: 160,
+        text: data.url
+      });
+    }
+  }
   $(".small_img").hover(function(){
     $("#cover_image").attr("src", $(this).attr("src"));  
   })
+  $(".buy-btn").hover(function(){
+    var cv = $("#qrcode_cv");
+    cv.show();
+    if($("#qrcode_in").html() == ""){
+      $.ajax({
+        url: "#{c_url}",
+        type: 'GET',
+        dataType: 'jsonp',
+        data:{
+          'callback': 'canvas_callback'
+        },
+        success:function(data){
+        }
+      });
+    }
+  },
+  function(){
+    var cv = $("#qrcode_cv");
+    cv.hide();
+  });
   var timeArea = $('#eventTimeStr');
   var endTime = $('#endTime').val()*1;
   setInterval(dateCountDown,1000);

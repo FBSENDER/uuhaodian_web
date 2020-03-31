@@ -535,10 +535,14 @@ Util.createJdCoupon = function(cl,obj,channel,gaPage){
   for(var i=0,len=cl.length;i<len;i++){
     var z = cl[i];
     var buy_url = "/jd/buy/" + z.product_id + '/?coupon=' + encodeURIComponent(z.coupon_url);
+    var c_url = "/jd/buy_url/" + z.product_id + '/?coupon=' + encodeURIComponent(z.coupon_url);
     htmlstr += '<a href="'+ buy_url +'" target="_blank" onclick="_hmt.push([\'_trackEvent\', \'京券领取\', \'click\', \'jd\'])">';
-    htmlstr += '<div class="jd-coupon">';
-    htmlstr += '<div class="img">';
-    htmlstr += '<img class="lazy new" data-original="'+ z.pic_url +'">';
+    htmlstr += '<div class="jd-coupon" data-id="' + z.product_id + '" data-url="' + c_url + '">';
+    htmlstr += '<div class="img" style="overflow:hidden;white-space:nowrap;">';
+    htmlstr += '<div id="c' + z.product_id + '" style="position:relative;">' 
+    htmlstr += '<img class="lazy new" data-original="'+ z.pic_url +'" style="display:inline;">';
+    htmlstr += '<div id="cv' + z.product_id + '" style="display:inline;height:104px;width:104px"></div>';
+    htmlstr += '</div>' 
     htmlstr += '</div>';
     htmlstr += '<div class="c-content">';
     htmlstr += '<div class="price-area">';

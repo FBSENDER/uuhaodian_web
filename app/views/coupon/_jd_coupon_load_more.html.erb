@@ -27,6 +27,17 @@ function getJdCoupon(){
   });
   _hmt.push(['_trackEvent', '加载更多', 'click', 'jd'])
 }
+var canvas_callback = function(data){
+  if(data.status == 1){
+    var cv = $("#cv" + data.id);
+    cv.qrcode({
+      render: "canvas",
+      height: 104,
+      width: 104,
+      text: data.url
+    });
+  }
+}
 var callback = function(data){
   if(data.status == 1){
     Util.createJdCoupon(data.result,couponList,0,page);
@@ -41,6 +52,26 @@ var callback = function(data){
   else{
     loadingText.html('没有更多了');
   }
+
+  $(".jd-coupon").hover(function(){
+    var cv = $("#cv" + $(this).data("id"));
+    if(cv.html() == ""){
+      $.ajax({
+        url: $(this).data("url"),
+        type: 'GET',
+        dataType: 'jsonp',
+        data:{
+          'callback': 'canvas_callback'
+        },
+        success:function(data){
+        }
+      });
+    }
+    $("#c" + $(this).data("id")).animate({right:'104px'});
+  },
+  function(){
+    $("#c" + $(this).data("id")).animate({right: 0});
+  });
 };
 $(function(){
 

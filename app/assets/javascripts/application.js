@@ -16,6 +16,9 @@ function ga_event(e){
   gtag('event', d[0], {'event_category': d[1], 'event_label': d[2]});
 }
 function goSearch(q){
+  if(q.indexOf('jd.com') >= 0){
+    _hmt.push(['_trackEvent', '京东商品搜索', 'click', 'PC全局']);
+  }
   window.location.href = '/query/' + encodeURIComponent(q) + '/';
 }
 function suggestClick(obj){

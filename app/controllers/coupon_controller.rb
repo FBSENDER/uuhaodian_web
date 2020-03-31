@@ -267,6 +267,29 @@ class CouponController < ApplicationController
     end
   end
 
+  def jd_buy_url
+    if is_robot?
+      render "not_found", status: 403
+      return
+    end
+    url = "http://api.uuhaodian.com/ddk/jd_product_url?id=#{params[:id]}"
+    if params[:coupon]
+      url = "http://api.uuhaodian.com/ddk/jd_product_url?id=#{params[:id]}&coupon=#{URI.encode_www_form_component(params[:coupon])}"
+    end
+    json = {}
+    begin
+      result = Net::HTTP.get(URI(URI.encode(url)))
+      json = JSON.parse(result)
+      if json["status_code"] != 200
+        render json: {status: 1, id: params[:id], url: "https://item.jd.com/#{params[:id]}.html"}, callback: params[:callback]
+        return
+      end
+      render json: {status: 1, id: params[:id], url: json["data"]}, callback: params[:callback]
+    rescue
+      render json: {status: 0}, callback: params[:callback]
+    end
+  end
+
   def query
     if params[:keyword] && params[:keyword].match(/\.jd\..*\d+\.html/)
       jdid = params[:keyword].match(/\d+/)[0]

@@ -3,10 +3,10 @@
 - head_desc("优优好店 - 商品详情 - #{@detail["goods_name"]}")
 
 = render partial: "header_common"
-.wrapper
+.wrapper{style: "overflow:visible;z-index:100;"}
   = render partial: "jd_quan_detail_content"
 %aside.wrapper
-  .rel-zk-area
+  .rel-zk-area{style: "z-index:1;"}
     %p.head
       %span #{@detail["shopname"]} - 同店商品推荐
   .zk-list.clearfix#jdtongdian{style: "min-height:0;"}
