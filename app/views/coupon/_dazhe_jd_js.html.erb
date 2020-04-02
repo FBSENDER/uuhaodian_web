@@ -1,0 +1,118 @@
+<script type="text/javascript">
+var globalChannel = 27;
+var retry =0,page = 0,pagesize = 30,load = 1;
+function createCp(cl){
+  var obj = $('#dazheList');
+  var htmlstr = '';
+  for(var i=0,len=cl.length;i<len;i++){
+    var z = cl[i];
+    var buy_url = "/jd/buy/" + z.product_id + '/?coupon=' + encodeURIComponent(z.coupon_url);
+    htmlstr += '<div class="item">';
+    htmlstr += '<a class = "zh" href="'+ buy_url +'" target="_blank" onclick="_hmt.push([\'_trackEvent\', \'京东券jump\', \'click\', \'dazhe_jd\'])">';
+    htmlstr += '<img class="pic" src="'+ z.pic_url +'" alt="'+z.mall_name +'"/>';
+    htmlstr += '<div class="cent">';
+    htmlstr += '<h3 style="height:20px;">';
+    htmlstr += z.mall_name;
+    htmlstr += '</h3>';
+    htmlstr += '<div class="jd-logo"><img src="/img/jd_logo.png"/></div>';
+    htmlstr += '<div class="num" style="margin-top:0;">';
+    var nn = z.num > 10000 ? (z.num / 10000) + '万' : z.num
+    htmlstr += '<span>共'+ nn + '张券</span>';
+    var rn = (z.num - z.remain) > 10000 ? parseInt((z.num - z.remain) / 10000) + '万' : (z.num - z.remain);
+    if(z.num - z.remain > 0){
+      htmlstr += '<span class="r">'+ rn + '人已领券</span>';
+    }
+    else{
+      htmlstr += '<span class="r">新券速抢</span>';
+    }
+    htmlstr += '</div>';
+    htmlstr += '<div class="money"><div class="quan"><i>' + z.discount + '元券</i></div>';
+    htmlstr += '满' + z.quota +'元可用</div>';
+    htmlstr += '</div></a></div>';
+  }
+  htmlstr = $(htmlstr);
+  obj.append(htmlstr);
+}
+
+var callback1 = function(data){
+  load = 1;
+  page ++;
+  if(data.status == 1){
+    createCp(data.result);
+    $("#imgLoading").addClass("sno");
+    if(data.result.length < 30){
+      $("#loadRetry").addClass("sno");
+      $("#noMore").removeClass("sno");
+      load = 0;
+    }
+    else{
+      $("#loadRetry").addClass("sno");
+      $("#noMore").addClass("sno");
+    }
+  }
+  else{
+    $("#loadRetry").removeClass("sno");
+    $("#imgLoading").addClass("sno");
+    $("#noMore").addClass("sno");
+  }
+};
+function getJdCouponList(){
+  if(!load){
+    return;
+  }
+  $("#imgLoading").removeClass("sno");
+  $("#loadRetry").addClass("sno");
+  $("#noMore").addClass("sno");
+  var dd = {
+    page: page,
+    cid: '<%= @cid %>',
+    callback: 'callback1'
+  }
+  $.ajax({
+    url: "https://api.uuhaodian.com/ddk/jd_coupons",
+    type: 'GET',
+    dataType: 'jsonp',
+    data: dd,
+    jsonp: 'callback1',
+    jsonpCallback: 'callback1',
+    beforeSend:function(){
+      load = 0;
+    },
+    success:function(data){
+    },
+    error: function(data){
+      if(!retry){
+        retry = 1;
+        load = 1;
+        getJdCouponList();
+      }
+      else{
+        $("#loadRetry").removeClass("sno");
+        $("#imgLoading").addClass("sno");
+        $("#noMore").addClass("sno");
+      }
+    }
+  });
+}
+
+$(function(){
+  $.cookie('ff_platform', 2, {path:"/"});
+  getJdCouponList();
+  $(document).scroll(function(){
+    tp = document.body.scrollTop || document.documentElement.scrollTop;
+    if(tp > 216){
+      $('.scroll_top').removeClass('close');
+      $('.scroll_top').addClass('open');
+    }
+    else{
+      $('.scroll_top').removeClass('open');
+      $('.scroll_top').addClass('close');
+    }
+    if(tp >= (document.body.scrollHeight - 800)){
+      _hmt.push(['_trackEvent', '加载更多', 'click', 'dazhe_jd']);
+      getJdCouponList();
+    }
+    $(".scroll_top>a").click(function(){window.scrollTo(0, 2);});
+  });
+});
+</script>

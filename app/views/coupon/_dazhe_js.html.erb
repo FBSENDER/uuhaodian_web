@@ -390,6 +390,21 @@ function doPinduoduo(){
 
 
 $(function(){
+  if($.cookie('ff_platform') != undefined){
+    platform = $.cookie('ff_platform');
+    if(platform == 1){
+      $("#radio_1").attr("checked", "checked");
+    }
+    else if(platform == 2){
+      $("#radio_2").attr("checked", "checked");
+    }
+    else{
+      $("#radio_3").attr("checked", "checked");
+    }
+  }
+  else{
+    $("#radio_1").attr("checked", "checked");
+  }
   getDazheCouponList();
   $(document).scroll(function(){
     tp = document.body.scrollTop || document.documentElement.scrollTop;
@@ -427,6 +442,7 @@ $(function(){
   $(".radio input").click(function(){
     var _this = $(this);
     platform = _this.val();
+    $.cookie('ff_platform', parseInt(platform), {path:"/"});
     page = 1;
     load = 1;
     $("#dazheList").html("");

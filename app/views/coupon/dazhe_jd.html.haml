@@ -1,0 +1,64 @@
+- title("#{@cname}京东优惠券领取_#{@cname}京券东券商品券领券查找_优优好店")
+- keywords("#{@cname}京东优惠券,京东优惠券,京东领券,京东优惠券领取,京券,东券")
+- head_desc("优优好店 - 现在已经支持查询与领取#{@cname}京东优惠券啦，搜索商品标题，即可精确找券，先领券再下单，在京东购物更便宜！")
+
+.dazhe
+  .header_pr.header_red.transition
+    .icon_header
+      .search
+        %i
+        %a{href: "/dz_search/", onclick: "_hmt.push(['_trackEvent', '顶部点击', 'click', 'dazhe_jd'])"}
+          %p 输入京东宝贝标题或链接，可精准搜券
+  .header
+    %h1
+      超过99.9%用户不知道的
+      %span.b 京东领券秘诀
+      ！
+    %p.desc 
+      1. 微信扫码关注“
+      %span.b UU好店
+      ” 已经支持京东、淘宝、拼多多优惠券领取
+      %br
+      %br
+      2. 点击上方搜索框，输入京东宝贝标题或链接，可领取优惠券
+      %br
+      %br
+      3. 下单使用优惠券，立享折上折！
+      %br
+      &nbsp;&nbsp;&nbsp;
+      %span{style: "line-height: 30px;"}
+        %a{id: "ercode_show", href: "javascript:;", style: "color: #FBAA58;", onclick:"_hmt.push(['_trackEvent', '展开二维码', 'click', 'dazhe_jd'])"} 点击展开二维码
+    %img.sno{id: "ercode", src: "http://www.uuhaodian.com/img/lbanner1.png"}
+  .top-menu-container
+    .top-menu
+      .inner
+        %a.top-menu-item{href: "#", class: "active"} #{@cname}
+        - @jd_cates.each do |cat|
+          - if cat[:cid] != @cid
+            %a.top-menu-item{href: "/jd/?cid=#{cat[:cid]}"} #{cat[:name]}
+  .content
+    #dazheList
+
+    %img#imgLoading{src: "/img/img_loading.gif", width: "200px", style: "margin: 10px auto;"}
+  .button-btn.sno#loadRetry 重新加载
+  .button-btn.sno#noMore 没有更多了
+  .footer
+    %a.home.zh{href: "http://m.uuhaodian.com/index.php?r=index/wap&source=dazhe", target: "_blank", onclick:"_hmt.push(['_trackEvent', '首页', 'click', 'dazhe_jd'])"}
+      %img.icon{src: "http://www.uuhaodian.com/favicon.ico"}
+      .text 优优好店首页
+    - if @device == "ios"
+      %a#more_btn.btn.zh{href: "http://download1.51cyin.cn/index.php?r=index/ios-down&app_id=550416", target: "_blank", onclick:"_hmt.push(['_trackEvent', '下载app-ios', 'click', 'dazhe_jd'])"} 下载APP获取更多优惠
+    - else
+      %a#more_btn.btn.zh{href: "http://download1.51cyin.cn/index.php?r=index/down&app_id=550416", target: "_blank", onclick:"_hmt.push(['_trackEvent', '下载app-android', 'click', 'dazhe_jd'])"} 下载APP获取更多优惠
+
+.scroll_top.close
+  %a{href: "javascript:;"}
+    %img{src: "/img/to_top.png"}
+
+
+= render partial: "sem_js"
+:javascript
+  $("#ercode_show").click(function(){$("#ercode").removeClass("sno");$("#ercode_show").css("display","none");});
+  $(".zh").click(function(){window._agl && window._agl.push(['track', ['success', {t: 3}]])});
+
+= render partial: "dazhe_jd_js"

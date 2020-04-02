@@ -216,7 +216,15 @@ class CouponController < ApplicationController
       { cid: 9987, name: '手机配件' }
     ]
     @cid = params[:cid] ? params[:cid].to_i : 1
+    @cname = ''
+    if jc = @jd_cates.select{|c| c[:cid] == @cid}.first
+      @cname = jc[:name]
+    end
     @top_keywords = get_hot_keywords_data.sample(8)
+    if is_device_mobile?
+      render :dazhe_jd, layout: "dazhe"
+      return
+    end
   end
 
   def jd_product_detail
@@ -242,6 +250,10 @@ class CouponController < ApplicationController
     @detail["auctionImages"] = @detail["picurls"].split(',')
     @top_keywords = get_hot_keywords_data.sample(8)
     @path = "http://api.uuhaodian.com/uu/goods_list"
+    if !is_robot? && is_device_mobile?
+      redirect_to "/jd/buy/#{params[:id]}?coupon=#{URI.encode_www_form_component(@detail["couponurl"])}"
+      return
+    end
   end
   def jd_buy
     if is_robot?
@@ -441,6 +453,11 @@ class CouponController < ApplicationController
   end
 
   def dazhe_result
+    if params[:keyword] && params[:keyword].match(/\.jd\..*\d+\.html/)
+      jdid = params[:keyword].match(/\d+/)[0]
+      redirect_to "/jd/#{jdid}/", status: 302
+      return
+    end 
     set_cookie_channel
     @channel = cookies[:channel]
     @keyword = params[:keyword]

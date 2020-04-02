@@ -94,6 +94,7 @@
   width: 100%;
   max-width: 750px;
   margin: 46px auto;
+  overflow: hidden;
 }
 .dazhe .header{
   background-color: #ffffff;
@@ -254,6 +255,15 @@
 .dazhe .content .item .cent .money .quan i:before{
   left: auto;
   right: -4px;
+}
+.dazhe .content .item .cent .jd-logo{
+  height: 50px;
+}
+.dazhe .content .item .cent .jd-logo img{
+  height: 50px;
+  width: 100px;
+  float: right;
+  margin-right: -10px;
 }
 .dazhe .footer{
   position: fixed;
@@ -599,4 +609,59 @@ input[type='checkbox'].switch:checked::after {
   font-size: 18px;
   line-height: 40px;
   border-radius: 5px;
+}
+.top-menu-container{
+    max-width: 1024px;
+    width: 100%;
+    z-index: 9;
+    margin-top: 5px;
+}
+.top-menu-container .dl-docker{
+    display: block;
+    position: relative;
+}
+.top-menu-container .dl-docker img{
+    width: 100%;
+}
+.top-menu{
+    position: relative;
+    height: 40px;
+    top:0;
+    z-index: 9;
+    width: 100%;
+    background-color: #fff;
+    border-bottom: 1px solid #e7e7e7;
+    border-top: 1px solid #e7e7e7;
+}
+.top-menu.fixed{
+    position: fixed;
+    top:0;
+}
+.top-menu .inner{
+    overflow: hidden;
+    overflow-x: scroll;
+    -webkit-overflow-scrolling:touch;
+    white-space: nowrap;
+}
+.top-menu .inner::-webkit-scrollbar{
+    display: none;
+}
+.top-menu .inner a.top-menu-item{
+    display: inline-block;
+    height: 38px;
+    border-bottom: 2px solid #fff;
+    color: #333;
+    font-size: 14px;
+    line-height: 40px;
+    text-align: center;
+    margin-right: 15px;
+    padding: 0 2px;
+    cursor: pointer;
+}
+.top-menu .inner a.top-menu-item:first-child{
+    margin-left: 15px;
+}
+.top-menu .inner a.top-menu-item.active{
+    color: #FF2A24;
+    border-bottom-color: #FF2A24;
 }
