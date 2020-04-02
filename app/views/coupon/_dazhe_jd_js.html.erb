@@ -100,13 +100,15 @@ $(function(){
   getJdCouponList();
   $(document).scroll(function(){
     tp = document.body.scrollTop || document.documentElement.scrollTop;
-    if(tp > 216){
+    if(tp > 236){
       $('.scroll_top').removeClass('close');
       $('.scroll_top').addClass('open');
+      $('.top-menu').addClass('fixed');
     }
     else{
       $('.scroll_top').removeClass('open');
       $('.scroll_top').addClass('close');
+      $('.top-menu').removeClass('fixed');
     }
     if(tp >= (document.body.scrollHeight - 800)){
       _hmt.push(['_trackEvent', '加载更多', 'click', 'dazhe_jd']);
