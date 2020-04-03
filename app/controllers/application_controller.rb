@@ -121,6 +121,11 @@ class ApplicationController < ActionController::Base
     end
     if params[:jd_channel]
       cookies[:jd_channel] = {value: params[:jd_channel], expires: Time.now + 604800}
+    else
+      unless cookies[:jd_channel]
+        jc = is_device_mobile? ? 4 : 3
+        cookies[:jd_channel] = {value: jc, expires: Time.now + 604800}
+      end
     end
   end
 
