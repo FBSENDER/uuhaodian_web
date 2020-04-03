@@ -221,6 +221,7 @@ class CouponController < ApplicationController
       @cname = jc[:name]
     end
     @top_keywords = get_hot_keywords_data.sample(8)
+    set_cookie_channel
     if is_device_mobile?
       render :dazhe_jd, layout: "dazhe"
       return
@@ -231,6 +232,7 @@ class CouponController < ApplicationController
     url = "http://api.uuhaodian.com/ddk/jd_product?id=#{params[:id]}"
     json = {}
     @items = []
+    set_cookie_channel
     begin
       result = Net::HTTP.get(URI(URI.encode(url)))
       json = JSON.parse(result)
@@ -264,9 +266,9 @@ class CouponController < ApplicationController
       redirect_to params[:coupon], status: 302
       return
     end
-    url = "http://api.uuhaodian.com/ddk/jd_product_url?id=#{params[:id]}"
+    url = "http://api.uuhaodian.com/ddk/jd_product_url?id=#{params[:id]}&jd_channel=#{cookies[:jd_channel]}"
     if params[:coupon]
-      url = "http://api.uuhaodian.com/ddk/jd_product_url?id=#{params[:id]}&coupon=#{URI.encode_www_form_component(params[:coupon])}"
+      url = "http://api.uuhaodian.com/ddk/jd_product_url?id=#{params[:id]}&jd_channel=#{cookies[:jd_channel]}&coupon=#{URI.encode_www_form_component(params[:coupon])}"
     end
     json = {}
     begin
@@ -292,9 +294,9 @@ class CouponController < ApplicationController
       render json: {status: 1, id: params[:id], url: params[:coupon]}, callback: params[:callback]
       return
     end
-    url = "http://api.uuhaodian.com/ddk/jd_product_url?id=#{params[:id]}"
+    url = "http://api.uuhaodian.com/ddk/jd_product_url?id=#{params[:id]}&jd_channel=#{cookies[:jd_channel]}"
     if params[:coupon]
-      url = "http://api.uuhaodian.com/ddk/jd_product_url?id=#{params[:id]}&coupon=#{URI.encode_www_form_component(params[:coupon])}"
+      url = "http://api.uuhaodian.com/ddk/jd_product_url?id=#{params[:id]}&jd_channel=#{cookies[:jd_channel]}&coupon=#{URI.encode_www_form_component(params[:coupon])}"
     end
     json = {}
     begin

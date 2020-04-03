@@ -119,6 +119,9 @@ class ApplicationController < ActionController::Base
         cookies[:channel] = {value: "8", expires: Time.now + 604800} 
       end
     end
+    if params[:jd_channel]
+      cookies[:jd_channel] = {value: params[:jd_channel], expires: Time.now + 604800}
+    end
   end
 
   def is_device_mobile?

@@ -41,6 +41,8 @@ function createList_dg(cl){
       htmlstr += z.title;
       htmlstr += '</h3>';
     }
+    htmlstr += '<div class="tags">';
+    htmlstr += '&nbsp;</div>';
     htmlstr += '<div class="num">';
     htmlstr += '<span>原价 ￥'+ o_price + '</span>';
     if(z.volume > 0){
@@ -78,6 +80,17 @@ function createList_jd(cl){
     htmlstr += '<span>京东</span>';
     htmlstr += z.goods_short_name;
     htmlstr += '</h3>';
+    htmlstr += '<div class="tags">';
+    if(z.shopname.indexOf('旗舰店') > 0){
+      htmlstr += '<span class="tag">旗舰店</span>';
+    }
+    if(z.owner == 'g'){
+      htmlstr += '<span class="tag">自营</span>';
+    }
+    if(z.ishot == 1){
+      htmlstr += '<span class="tag">爆款</span>';
+    }
+    htmlstr += '&nbsp;</div>';
     htmlstr += '<div class="num">';
     if(z.discount > 0 && z.price_pg > 0){
       htmlstr += '<span>拼购价 ￥'+ z.price_pg + '</span>';
@@ -121,6 +134,11 @@ function createList_pdd(cl){
     htmlstr += '<span>拼多多</span>';
     htmlstr += z.shortTitle;
     htmlstr += '</h3>';
+    htmlstr += '<div class="tags">';
+    if(z.shopName.indexOf('旗舰店') > 0){
+      htmlstr += '<span class="tag">旗舰店</span>';
+    }
+    htmlstr += '&nbsp;</div>';
     htmlstr += '<div class="num">';
     htmlstr += '<span>原价 ￥'+ z.price + '</span>';
     if(z.monthSales != 0){
