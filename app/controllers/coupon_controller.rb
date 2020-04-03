@@ -260,6 +260,10 @@ class CouponController < ApplicationController
       render "not_found", status: 403
       return
     end
+    if params[:id].to_i < 10 && params[:coupon]
+      redirect_to params[:coupon], status: 302
+      return
+    end
     url = "http://api.uuhaodian.com/ddk/jd_product_url?id=#{params[:id]}"
     if params[:coupon]
       url = "http://api.uuhaodian.com/ddk/jd_product_url?id=#{params[:id]}&coupon=#{URI.encode_www_form_component(params[:coupon])}"
@@ -282,6 +286,10 @@ class CouponController < ApplicationController
   def jd_buy_url
     if is_robot?
       render "not_found", status: 403
+      return
+    end
+    if params[:id].to_i < 10 && params[:coupon]
+      render json: {status: 1, id: params[:id], url: params[:coupon]}, callback: params[:callback]
       return
     end
     url = "http://api.uuhaodian.com/ddk/jd_product_url?id=#{params[:id]}"
