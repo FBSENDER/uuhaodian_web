@@ -313,6 +313,9 @@ class CouponController < ApplicationController
   end
 
   def query
+    if params[:platform] && [1,2,3].include?(params[:platform].to_i)
+      cookies[:ff_platform] = {value: params[:platform].to_i, path: "/"}
+    end
     if params[:keyword] && params[:keyword].match(/\.jd\..*\d+\.html/)
       jdid = params[:keyword].match(/\d+/)[0]
       redirect_to "/jd/#{jdid}/", status: 302
@@ -451,6 +454,9 @@ class CouponController < ApplicationController
   end
 
   def dazhe
+    if params[:platform] && [1,2,3].include?(params[:platform].to_i)
+      cookies[:ff_platform] = {value: params[:platform].to_i, path: "/"}
+    end
     set_cookie_channel
     @channel = cookies[:channel]
     @keyword = params[:keyword]
@@ -463,6 +469,9 @@ class CouponController < ApplicationController
   end
 
   def dazhe_result
+    if params[:platform] && [1,2,3].include?(params[:platform].to_i)
+      cookies[:ff_platform] = {value: params[:platform].to_i, path: "/"}
+    end
     if params[:keyword] && params[:keyword].match(/\.jd\..*\d+\.html/)
       jdid = params[:keyword].match(/\d+/)[0]
       redirect_to "/jd/#{jdid}/", status: 302
