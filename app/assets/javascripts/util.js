@@ -551,7 +551,7 @@ Util.createJdCoupon = function(cl,obj,channel,gaPage){
     htmlstr += '<span class="s3">满' + z.quota + '元可用</span>';
     htmlstr += '</div>';
     htmlstr += '<div class="c-desc">';
-    htmlstr += '<p style="height:46px;overflow:hidden;">' + z.mall_name +'</p>';
+    htmlstr += '<p style="height:46px;overflow:hidden;font-weight:bold;">' + z.mall_name +'</p>';
     htmlstr += '<img src="/img/jd_logo.png" width="76px" height=38px" style="padding:0;margin:0;float:right;"/>';
     htmlstr += '</div>';
     htmlstr += '</div>';
