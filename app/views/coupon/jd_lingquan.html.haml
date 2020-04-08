@@ -21,5 +21,11 @@
   .jd-coupon-list.clearfix#couponList
   = render partial: "jd_coupon_load_more", locals: {cid: @cid}
 
+- if @miaosha && @miaosha.size > 0
+  .wrapper
+    .item-list-top
+      %span.left 京东秒杀 - 手机专场
+    = render partial: "wide_banner_jd_miaosha", locals: {items: @miaosha}
+
 = render partial: "footer"
 = render partial: "sider_fixed_area"

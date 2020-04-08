@@ -536,7 +536,7 @@ Util.createJdCoupon = function(cl,obj,channel,gaPage){
     var z = cl[i];
     var buy_url = "/jd/buy/" + z.product_id + '/?coupon=' + encodeURIComponent(z.coupon_url);
     var c_url = "/jd/buy_url/" + z.product_id + '/?coupon=' + encodeURIComponent(z.coupon_url);
-    htmlstr += '<a href="'+ buy_url +'" target="_blank" onclick="_hmt.push([\'_trackEvent\', \'京券领取\', \'click\', \'jd\'])">';
+    htmlstr += '<a href="'+ buy_url +'" target="_blank" onclick="_hmt.push([\'_trackEvent\', \'京券领取\', \'click\', \'jd\'])" title="使用手机京东扫啊扫，可以直接领券">';
     htmlstr += '<div class="jd-coupon" data-id="' + z.product_id + '" data-url="' + c_url + '">';
     htmlstr += '<div class="img" style="overflow:hidden;white-space:nowrap;">';
     htmlstr += '<div id="c' + z.product_id + '" style="position:relative;">' 

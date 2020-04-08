@@ -1,0 +1,15 @@
+.wide-banner.swiper-container.swiper-container-horizontal
+  .swiper-wrapper
+    - (0..(items.size / 6.0).floor).each do |num|
+      .swiper-slide
+        - items[0 + num * 6,6 + num * 6].each_with_index do |item, index|
+          %a{href: "/jd/buy/#{item["skuId"]}/", onclick: '_hmt.push(["_trackEvent", "底部秒杀商品点击", "click",  "jd"])', target: "_blank"}
+            .item{style: "#{'margin-left:45px' if index == 0}"}
+              %img{src: "http://img14.360buyimg.com/ads/#{item["imageUrl"]}"}
+              %p.title #{item["skuName"]}
+              %p.price 
+                秒杀价 #{item["secKillPrice"]}
+                %span{style: "color:#666;float:right;text-decoration:line-through;"} 原价 #{item["jdPrice"]}
+
+  .swiper-button-prev
+  .swiper-button-next

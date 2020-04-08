@@ -226,6 +226,14 @@ class CouponController < ApplicationController
       render :dazhe_jd, layout: "dazhe"
       return
     end
+    url = "http://api.uuhaodian.com/ddk/jd_miaosha"
+    result = Net::HTTP.get(URI(url))
+    json = JSON.parse(result)
+    if json["status_code"] == 200
+      @miaosha = json["data"]["data"]
+    else
+      @miaosha = []
+    end
   end
 
   def jd_product_detail
