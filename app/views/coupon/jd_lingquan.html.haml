@@ -18,8 +18,12 @@
       - @jd_cates[0,13].each do |c|
         %a{href: "/jd/?cid=#{c[:cid]}", class: "#{'active' if c[:cid] == @cid}", onclick: "_hmt.push(['_trackEvent', '顶部分类', 'click', 'jd'])"} #{c[:name]}
 .wrapper{style: "margin: 10px auto;"}
-  .jd-coupon-list.clearfix#couponList
+  .jd-coupon-list.clearfix#jdCouponList
   = render partial: "jd_coupon_load_more", locals: {cid: @cid}
+
+  = render partial: "dg_filter"
+  .zk-list.clearfix#couponList{style: "margin-top: 20px;"}
+  = render partial: "dg_load_more", locals: {keyword: "#{@cname == '精选' ? '5g手机' : @cname}"}
 
 - if @miaosha && @miaosha.size > 0
   .wrapper

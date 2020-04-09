@@ -302,9 +302,9 @@ class CouponController < ApplicationController
       render json: {status: 1, id: params[:id], url: params[:coupon]}, callback: params[:callback]
       return
     end
-    url = "http://api.uuhaodian.com/ddk/jd_product_url?id=#{params[:id]}&jd_channel=#{cookies[:jd_channel]}"
+    url = "http://api.uuhaodian.com/ddk/jd_product_url?id=#{params[:id]}&jd_channel=11"
     if params[:coupon]
-      url = "http://api.uuhaodian.com/ddk/jd_product_url?id=#{params[:id]}&jd_channel=#{cookies[:jd_channel]}&coupon=#{URI.encode_www_form_component(params[:coupon])}"
+      url = "http://api.uuhaodian.com/ddk/jd_product_url?id=#{params[:id]}&jd_channel=11&coupon=#{URI.encode_www_form_component(params[:coupon])}"
     end
     json = {}
     begin
