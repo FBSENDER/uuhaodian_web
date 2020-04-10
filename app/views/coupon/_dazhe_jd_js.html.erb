@@ -1,8 +1,64 @@
 <script type="text/javascript">
-var globalChannel = 27;
-var retry =0,page = 0,pagesize = 30,load = 1;
-function createCp(cl){
+var jdRetry = 0;
+var retry =0,page = 1,pagesize = 20,load = 1,channel = '<%= @channel %>',sort = 0,is_simple = true, is_tmall = 0, has_coupon = 0, sort_type='',is_t = false, is_h = false, is_q = false, keyword = '<%= @cname =="精选" ? "5g手机" : @cname %>', platform = '1', jd_sort = 0, jd_is_hot = 0, pdd_sort = 0, pdd_activity = '';
+function createList_jd(cl){
   var obj = $('#dazheList');
+  var htmlstr = '';
+  for(var i=0,len=cl.length;i<len;i++){
+    var z = cl[i];
+    var buy_url = 'http://www.uuhaodian.com/jd/buy/' + z.goods_id + '/';
+    if(z.couponurl != ''){
+      buy_url += '?coupon=' + encodeURIComponent(z.couponurl);
+    }
+    htmlstr += '<div class="item">';
+    htmlstr += '<a class = "zh" href="'+ buy_url +'" target="_blank" onclick="_hmt.push([\'_trackEvent\', \'京东商品jump\', \'click\', \'dazhe\'])">';
+    htmlstr += '<img class="pic" src="'+ z.picurl +'"/>';
+    htmlstr += '<div class="cent">';
+    htmlstr += '<h3>';
+    htmlstr += '<span>京东</span>';
+    htmlstr += z.goods_short_name;
+    htmlstr += '</h3>';
+    htmlstr += '<div class="tags">';
+    if(z.shopname.indexOf('旗舰店') > 0){
+      htmlstr += '<span class="tag">旗舰店</span>';
+    }
+    if(z.owner == 'g'){
+      htmlstr += '<span class="tag">自营</span>';
+    }
+    if(z.ishot == 1){
+      htmlstr += '<span class="tag">爆款</span>';
+    }
+    htmlstr += '&nbsp;</div>';
+    htmlstr += '<div class="num">';
+    if(z.discount > 0 && z.price_pg > 0){
+      htmlstr += '<span>拼购价 ￥'+ z.price_pg + '</span>';
+    }
+    else{
+      htmlstr += '<span>原价 ￥'+ z.price + '</span>';
+    }
+    if(z.sales > 0){
+      var vv = z.sales > 10000 ? ((z.sales / 10000.0).toFixed(1) + '万') : z.sales;
+      htmlstr += '<span class="r">已售'+ vv + '件</span>';
+    }
+    htmlstr += '</div>';
+    if(z.discount > 0){
+      htmlstr += '<div class="money"><div class="quan"><i>' + parseInt(z.discount) + '元券</i></div>';
+    }
+    else if(z.price_pg > 0){
+      htmlstr += '<div class="money"><div class="quan"><i>拼购</i></div>';
+    }
+    else{
+      htmlstr += '<div class="money"><div class="quan"><i>优惠券</i></div>';
+    }
+    htmlstr += '到手价 ￥'
+    htmlstr += '<span class="m">' + z.price_after + '</span></div>'
+    htmlstr += '</div></a></div>';
+  }
+  htmlstr = $(htmlstr);
+  obj.append(htmlstr);
+}
+function createCp(cl){
+  var obj = $('#jdDazheList');
   var htmlstr = '';
   for(var i=0,len=cl.length;i<len;i++){
     var z = cl[i];
@@ -37,10 +93,10 @@ function createCp(cl){
 var callback1 = function(data){
   load = 1;
   page ++;
-  if(data.status == 1){
-    createCp(data.result);
+  if(data.status_code == 200){
+    createList_jd(data.data.data);
     $("#imgLoading").addClass("sno");
-    if(data.result.length < 30){
+    if(data.data.data.length < pagesize){
       $("#loadRetry").addClass("sno");
       $("#noMore").removeClass("sno");
       load = 0;
@@ -56,20 +112,31 @@ var callback1 = function(data){
     $("#noMore").addClass("sno");
   }
 };
-function getJdCouponList(){
+var callback_jdcoupon = function(data){
+  if(data.status == 1){
+    createCp(data.result);
+  }
+};
+function getDazheCouponList(){
   if(!load){
     return;
   }
   $("#imgLoading").removeClass("sno");
   $("#loadRetry").addClass("sno");
   $("#noMore").addClass("sno");
+  doJingdong();
+}
+function doJingdong(){
   var dd = {
     page: page,
-    cid: '<%= @cid %>',
+    keyword: keyword.slice(0,30),
+    sort_type: jd_sort,
+    has_coupon: has_coupon,
+    is_hot: jd_is_hot,
     callback: 'callback1'
   }
   $.ajax({
-    url: "https://api.uuhaodian.com/ddk/jd_coupons",
+    url: "https://api.uuhaodian.com/ddk/jd_search",
     type: 'GET',
     dataType: 'jsonp',
     data: dd,
@@ -84,7 +151,7 @@ function getJdCouponList(){
       if(!retry){
         retry = 1;
         load = 1;
-        getJdCouponList();
+        getDazheCouponList();
       }
       else{
         $("#loadRetry").removeClass("sno");
@@ -94,10 +161,32 @@ function getJdCouponList(){
     }
   });
 }
+function getJdCouponList(){
+  var dd = {
+    page: 0,
+    cid: '<%= @cid %>',
+    callback: 'callback_jdcoupon'
+  }
+  $.ajax({
+    url: "https://api.uuhaodian.com/ddk/jd_coupons",
+    type: 'GET',
+    dataType: 'jsonp',
+    data: dd,
+    success:function(data){
+    },
+    error: function(data){
+      if(!jdRetry){
+        jdRtry = 1;
+        //getJdCouponList();
+      }
+    }
+  });
+}
 
 $(function(){
   $.cookie('ff_platform', 2, {path:"/"});
   getJdCouponList();
+  getDazheCouponList();
   $(document).scroll(function(){
     tp = document.body.scrollTop || document.documentElement.scrollTop;
     if(tp > 236){
@@ -112,7 +201,8 @@ $(function(){
     }
     if(tp >= (document.body.scrollHeight - 800)){
       _hmt.push(['_trackEvent', '加载更多', 'click', 'dazhe_jd']);
-      getJdCouponList();
+      //getJdCouponList();
+      getDazheCouponList();
     }
     $(".scroll_top>a").click(function(){window.scrollTo(0, 2);});
   });
