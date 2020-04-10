@@ -29,8 +29,8 @@
       %span{style: "line-height: 30px;"}
         %a{id: "ercode_show", href: "javascript:;", style: "color: #FBAA58;", onclick:"_hmt.push(['_trackEvent', '展开二维码', 'click', 'dazhe_jd'])"} 点击展开二维码
     %img.sno{id: "ercode", src: "http://www.uuhaodian.com/img/lbanner1.png"}
-  .top-menu-container
-    .top-menu
+  .top-menu-container{style: "max-width:750px;"}
+    .top-menu{style: "max-width:750px;"}
       .inner
         %a.top-menu-item{href: "#", class: "active"} #{@cname}
         - @jd_cates.each do |cat|
