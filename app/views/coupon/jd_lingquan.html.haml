@@ -3,7 +3,7 @@
 - head_desc("优优好店 - 现在已经支持查询与领取#{@cname}京东优惠券啦，搜索商品标题，即可精确找券，先领券再下单，在京东购物更便宜！")
 
 = render partial: "header_common"
-.wrapper{style: "margin-top: 10px;"}
+.wrapper1200{style: "margin-top: 10px;"}
   .item-list-top
     %span.left 京东优惠券领取
     %span.left{style: "color:#999;margin-left:10px;font-size:16px;"} 搜索商品标题或链接，可精准找券 - 微信扫一扫右侧二维码，关注公众号"UU好店"，领券更方便！
@@ -12,15 +12,16 @@
     %p{style: "color:#666;line-height:30px;"} 本站进一步支持：通过搜索，查看同款商品在淘宝天猫和拼多多的价格，为您的购物决策提供方便。
     %div{style: "height:0;position:relative;top:-138px;float:right;"}
       %img{src: "/img/lbanner1.png", height: "138px", width: "138px"}
-.hori-cate-area{style: "margin: 10px auto;width:1100px;"}
-  .wrapper
-    .cate-l-1{style: "padding-left:20px"}
+.hori-cate-area{style: "margin: 10px auto;width:1200px;"}
+  .wrapper1200
+    .cate-l-1{style: "padding-left:20px;width:1200px;"}
       - @jd_cates[0,13].each do |c|
         %a{href: "/jd/?cid=#{c[:cid]}", class: "#{'active' if c[:cid] == @cid}", onclick: "_hmt.push(['_trackEvent', '顶部分类', 'click', 'jd'])"} #{c[:name]}
 .wrapper{style: "margin: 10px auto;"}
   .jd-coupon-list.clearfix#jdCouponList
   = render partial: "jd_coupon_load_more", locals: {cid: @cid}
 
+.wrapper1200
   = render partial: "dg_filter"
   .zk-list.clearfix#couponList{style: "margin-top: 20px;"}
   = render partial: "dg_load_more", locals: {keyword: "#{@cname == '精选' ? '5g手机' : @cname}"}

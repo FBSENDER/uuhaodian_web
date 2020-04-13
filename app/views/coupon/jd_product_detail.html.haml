@@ -3,9 +3,9 @@
 - head_desc("优优好店 - 商品详情 - #{@detail["goods_name"]}")
 
 = render partial: "header_common"
-.wrapper{style: "overflow:visible;z-index:100;"}
+.wrapper{style: "overflow:visible;z-index:98;"}
   = render partial: "jd_quan_detail_content"
-%aside.wrapper
+%aside.wrapper1200
   .rel-zk-area{style: "z-index:1;"}
     %p.head
       %span #{@detail["shopname"]} - 同店商品推荐

@@ -106,7 +106,7 @@ Util.createLanlanCouponList = function(cl,obj,channel,gaPage){
     htmlstr += '</div>';
     htmlstr += '<img data-ga-event="商品_图片:点击:'+ gaPage +'" class="lazy new" data-original="'+ z.coverImage +'" alt="'+z.title +'">';
     htmlstr += '</div>';
-    htmlstr += '<p class="title-area elli">';
+    htmlstr += '<p class="title-area">';
     htmlstr +=  z.shortTitle +'</p>';
     htmlstr += '<div class="tags-area">'
     if(platform == 2){
@@ -178,7 +178,7 @@ Util.createTaobaoCouponList = function(cl,obj,channel,gaPage){
     htmlstr += '<img data-ga-event="商品_图片:点击:'+ gaPage +'" class="lazy new" data-original="'+ z.pict_url +'" alt="'+z.
       title +'">';
     htmlstr += '</div>';
-    htmlstr += '<p class="title-area elli">';
+    htmlstr += '<p class="title-area">';
     htmlstr += '<span class="post-free">包邮</span>';
     htmlstr +=  z.title +'</p>';
     htmlstr += '<div class="raw-price-area">现价：&yen;'+ z.zk_final_price +'<p class="sold">已领'+ (z.volume + 131) +'张券</p></div>';
@@ -217,7 +217,7 @@ Util.createTaobaoProductList = function(cl,obj,channel,gaPage){
     htmlstr += '<img data-ga-event="商品_图片:点击:'+ gaPage +'" class="lazy new" data-original="'+ z.pict_url +'" alt="'+z.
       title +'">';
     htmlstr += '</div>';
-    htmlstr += '<p class="title-area elli">';
+    htmlstr += '<p class="title-area">';
     htmlstr += '<span class="post-free">包邮</span>';
     htmlstr +=  z.title +'</p>';
     htmlstr += '<div class="raw-price-area">现价：&yen;'+ z.reserve_price +'<p class="sold">已售'+ (z.volume + 131) +'件</p></div>';
@@ -344,7 +344,7 @@ Util.createDgList = function(cl,obj,channel,gaPage){
     htmlstr += '<img data-ga-event="商品_图片:点击:'+ gaPage +'" class="lazy new" data-original="'+ z.pict_url +'" alt="'+z.
       title +'">';
     htmlstr += '</div>';
-    htmlstr += '<p class="title-area elli">';
+    htmlstr += '<p class="title-area">';
     if(z.short_title != ''){
       htmlstr +=  z.short_title +'</p>';
     }
@@ -398,11 +398,11 @@ Util.createPddList = function(cl,obj,channel,gaPage){
     var zhe = (parseFloat(z.nowPrice) * 10.0 / parseFloat(z.price)).toFixed(1);
     var buy_url = '/ddk/' + z.itemId + '/#coupon';
     htmlstr += '<div class="zk-item">';
-    htmlstr += '<a href="'+ buy_url +'" onclick="_hmt.push([\'_trackEvent\', \'拼多多商品点击\', \'click\', \'PC查询页\'])">';
+    htmlstr += '<a href="'+ buy_url +'" title="'+ z.title + '" onclick="_hmt.push([\'_trackEvent\', \'拼多多商品点击\', \'click\', \'PC查询页\'])">';
     htmlstr += '<div class="img-area">';
     htmlstr += '<img data-ga-event="商品_图片:点击:'+ gaPage +'" class="lazy new" data-original="'+ z.coverImage +'" alt="'+z.title +'">';
     htmlstr += '</div>';
-    htmlstr += '<p class="title-area elli">';
+    htmlstr += '<p class="title-area">';
     htmlstr +=  z.shortTitle +'</p>';
     htmlstr += '<div class="tags-area">'
     htmlstr += '<span class="tag">拼多多</span>';
@@ -464,15 +464,15 @@ Util.createJdList = function(cl,obj,channel,gaPage){
     }
     htmlstr += '<div class="zk-item">';
     if(z.discount == 0 && z.price_pg == 0){
-      htmlstr += '<a href="'+ buy_url +'" target="_blank" onclick="_hmt.push([\'_trackEvent\', \'京东商品jump\', \'click\', \'PC查询页\'])">';
+      htmlstr += '<a href="'+ buy_url +'" target="_blank" title="' + z.goods_desc +  '" onclick="_hmt.push([\'_trackEvent\', \'京东商品jump\', \'click\', \'PC查询页\'])">';
     }
     else{
-      htmlstr += '<a href="'+ buy_url +'" onclick="_hmt.push([\'_trackEvent\', \'京东商品点击\', \'click\', \'PC查询页\'])">';
+      htmlstr += '<a href="'+ buy_url +'" title="' + z.goods_name +  '" onclick="_hmt.push([\'_trackEvent\', \'京东商品点击\', \'click\', \'PC查询页\'])">';
     }
     htmlstr += '<div class="img-area">';
     htmlstr += '<img data-ga-event="商品_图片:点击:'+ gaPage +'" class="lazy new" data-original="'+ z.picurl +'" alt="'+z.goods_name +'">';
     htmlstr += '</div>';
-    htmlstr += '<p class="title-area elli">';
+    htmlstr += '<p class="title-area">';
     htmlstr +=  z.goods_short_name +'</p>';
     htmlstr += '<div class="tags-area">'
     htmlstr += '<span class="tag">京东</span>';

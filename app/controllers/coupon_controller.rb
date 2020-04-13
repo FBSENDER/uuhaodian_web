@@ -355,6 +355,30 @@ class CouponController < ApplicationController
     @kk = @kk.sample(10)
   end
 
+  def gaoyong
+    if params[:platform] && [1,2,3].include?(params[:platform].to_i)
+      cookies[:ff_platform] = {value: params[:platform].to_i, path: "/"}
+    end
+    if is_device_mobile?
+      redirect_to "/dz/#{URI.encode(params[:keyword])}/", status: 302
+      return
+    end
+    set_cookie_channel
+    @keyword = params[:keyword]
+    @top_keywords = get_hot_keywords_data.sample(8)
+    @items_bang = get_coupon_bang_data
+    @path = "http://api.uuhaodian.com/uu/dg_goods_list"
+    url = "http://api.uuhaodian.com/uu/keyword_infos?keyword=#{URI.encode_www_form_component(@keyword)}"
+    result = Net::HTTP.get(URI(url))
+    json = JSON.parse(result)
+    if json["status"] == 1
+      @kk = json["result"]["r_keywords"] || []
+    else
+      @kk = []
+    end
+    @kk = @kk.sample(10)
+  end
+
   def collection
     set_cookie_channel
     @collection_type = params[:tid].to_i 

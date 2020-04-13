@@ -36,6 +36,7 @@ $(function(){
   errTip = $('.err-tip'),
   sb = $('.search-btn');
   var fluid_left = $('.fluid-left');
+  var gy_filter = $('#gy_filter');
   headerBar.find('.close').on('click',function(){
     headerBar.remove();
   });
@@ -44,9 +45,15 @@ $(function(){
     if(_top >= 400){
       tabArea.addClass('fixed');
       fluid_left.addClass('fixed');
+      if(gy_filter){
+        gy_filter.addClass('fixed');
+      }
     }else{
       tabArea.removeClass('fixed');
       fluid_left.removeClass('fixed');
+      if(gy_filter){
+        gy_filter.removeClass('fixed');
+      }
     }
   });
   si.on('focus',function(){
@@ -75,6 +82,9 @@ $(function(){
     },100);
   }
   $("#backToTop").on('click', function(){
+    scrollToTop();
+  });
+  $("#gy_filter.fixed").on('click', function(){
     scrollToTop();
   });
   $(window).on('scroll',function(){

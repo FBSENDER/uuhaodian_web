@@ -4,7 +4,7 @@
 
 = render partial: "header_common"
 = render partial: "header_lanlan_fenlei", locals: {categories: @lanlan_cates}
-.wrapper
+.wrapper1200
   = render partial: "lanlan_quan_filter"
   .zk-list.clearfix#couponList
   = render partial: "lanlan_load_more", locals: {path: @path, pagesize: 20, sort_type: 7, pinyin: '', keyword: '', cid: @cid,sort: 7, type: 0}

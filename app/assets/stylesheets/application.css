@@ -41,6 +41,12 @@ input,input:focus{
   outline: none;
 }
 
+.wrapper1200{
+  position: relative;
+  width: 1200px;
+  margin: 0 auto;
+  overflow: hidden;
+}
 .wrapper{
   position: relative;
   width: 1100px;
@@ -616,23 +622,26 @@ input,input:focus{
 }
 .zk-item {
   float: left;
-  width: 258px;
-  margin: 0 20px 20px 0;
+  width: 240px;
+  border: 1px solid transparent;
+  border-bottom: 1px solid #F1F1F1;
+  border-right: 1px solid #F1F1F1;
+  padding: 15px 15px 0 15px;
+  box-sizing: border-box;
   background-color: #fff;
-  border: 1px solid #fff;
-}
-.zk-item:hover{
-  border: 1px solid #FF2B22;
 }
 .zk-item .img-area {
   position: relative;
-  height: 258px;
+  height: 210px;
+  width: 210px;
   overflow: hidden;
 }
-.zk-item .img-area img {
-  position: relative;
-  max-width: 258px;
-  max-height: 258px;
+.zk-item .img-area img{
+  width: 100%;
+  height: 210px;
+}
+.zk-item:hover{
+  border: 1px solid #FF2B22;
 }
 .zk-item .img-area .bottom-info{
   opacity: 0;
@@ -677,10 +686,11 @@ input,input:focus{
   vertical-align: top;
 }
 .zk-item .title-area {
-  height: 16px;
-  line-height: 16px;
+  height: 36px;
+  line-height: 18px;
   font-size: 14px;
-  padding: 10px 10px 0;
+  margin-top: 10px;
+  overflow: hidden;
 }
 .zk-item .title-area .tmark{
   padding: 0 3px;
@@ -702,8 +712,10 @@ input,input:focus{
   border-radius: 1px;
 }
 .zk-item .tags-area{
-  margin: 8px 10px 0 10px;
+  margin: 8px 0 0 0;
   font-size: 12px;
+  height: 19px;
+  overflow: hidden;
 }
 .zk-item .tags-area .tag{
   padding: 1px 3px;
@@ -726,19 +738,19 @@ input,input:focus{
   padding: 1px 5px;
 }
 .zk-item .price-area{
-  margin: 5px 10px 0 10px;
+  margin: 5px 0 0 0;
   font-size: 12px;
   color: #FF2B22;
 }
 .zk-item .price-area .price{
-  font-size: 24px;
+  font-size: 20px;
   font-weight: bold;
 }
 .zk-item .raw-price-area {
   font-size: 12px;
   color: #999;
   line-height: 17px;
-  padding: 5px 10px;
+  padding: 5px 0;
 }
 .zk-item .raw-price-area .sold {
   float: right;
@@ -899,7 +911,7 @@ input,input:focus{
   left: 50%;
   bottom: 210px;
   overflow: hidden;
-  margin-left: 575px;
+  margin-left: 625px;
 }
 .side-fixed-menu .menu-item {
   position: relative;
@@ -1916,4 +1928,24 @@ input[type='checkbox'].switch:checked::after {
     position: absolute;
     left: 55%;
     top: 2px;
+}
+#gy_filter{
+  background-color: #fff;
+  z-index: 100;
+}
+#gy_filter .order-area{
+  margin-bottom: 1px;
+}
+#gy_filter.fixed{
+  position: fixed;
+  top: 40px;
+  left: 0;
+  height: 82px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px 0 rgba(170,170,170,.2);
+  width: 100%;
+  opacity: 0.6;
+}
+#gy_filter.fixed:hover{
+  opacity: 1;
 }

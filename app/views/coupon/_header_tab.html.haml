@@ -1,31 +1,32 @@
-.tab-area#tab_area
-  .wrapper
-    .cate-area
-      %a.cate-item.jxtj.active{href: "/", title: "天天特价"}
-        %span.cate-rec
-      %a.cate-item{href: "/jd/", class: "#{'active' if @is_jd}"} 京券东券
-      %a.cate-item{href: "/top/#tab_area", class: "#{'active' if @is_top}"} 小时风云榜
-      %a.cate-item{href: "/brand/#tab_area", class:"#{'active' if @is_brand}"} 品牌好券
-      %a.cate-item{href: "/collection/4/", class:"#{'active' if @collection_type && @collection_type == 4}"} 九块九包邮
-      %a.cate-item.hot{href: "http://uuhaodian.com/index.php?r=app/download&u=550416", target: "_blank"} 下载APP
-    .search-area
-      %i
-      %input.search-input.unfocus{type: "text", placeholder: "粘贴宝贝标题或输入关键词"}
-  .hori-cate-area
-    .cate-l-1
-      .wrapper
-        - if @cates
-          - if @collection_type
-            %a{href: "/collection/#{@collection_type}/", class: "#{'active' if @cid == 0}"} 精选
-            - @cates.each do |cate|
-              - is_active = cate['cid'].to_i == @cid ? 'active' : ''
-              %a{href: "/collection/#{@collection_type}/?cid=#{cate['cid']}", class: "#{is_active}"} #{cate['name']}
-          - elsif @is_top || @is_brand
-          - else
-            - @cates.each do |cate|
-              - is_active = cate['cid'] == @cid || cate['cid'] == @cid_1 ? 'active' : ''
-              %a{href: "/category/#{cate["cid"]}/", class: "#{is_active}"} #{cate["name"]}
-        - if @jd_cates
-          - @jd_cates[0,13].each do |cate|
-            - is_active = cate[:cid] == @cid ? 'active' : ''
-            %a{href: "/jd/?cid=#{cate[:cid]}", class: "#{is_active}"} #{cate[:name]}
+%div{style: "height: 40px;"}
+  .tab-area#tab_area
+    .wrapper
+      .cate-area
+        %a.cate-item.jxtj.active{href: "/", title: "天天特价"}
+          %span.cate-rec
+        %a.cate-item{href: "/jd/", class: "#{'active' if @is_jd}"} 京券东券
+        %a.cate-item{href: "/top/#tab_area", class: "#{'active' if @is_top}"} 小时风云榜
+        %a.cate-item{href: "/brand/#tab_area", class:"#{'active' if @is_brand}"} 品牌好券
+        %a.cate-item{href: "/collection/4/", class:"#{'active' if @collection_type && @collection_type == 4}"} 九块九包邮
+        %a.cate-item.hot{href: "http://uuhaodian.com/index.php?r=app/download&u=550416", target: "_blank"} 下载APP
+      .search-area
+        %i
+        %input.search-input.unfocus{type: "text", placeholder: "粘贴宝贝标题或输入关键词"}
+    .hori-cate-area
+      .cate-l-1
+        .wrapper
+          - if @cates
+            - if @collection_type
+              %a{href: "/collection/#{@collection_type}/", class: "#{'active' if @cid == 0}"} 精选
+              - @cates.each do |cate|
+                - is_active = cate['cid'].to_i == @cid ? 'active' : ''
+                %a{href: "/collection/#{@collection_type}/?cid=#{cate['cid']}", class: "#{is_active}"} #{cate['name']}
+            - elsif @is_top || @is_brand
+            - else
+              - @cates.each do |cate|
+                - is_active = cate['cid'] == @cid || cate['cid'] == @cid_1 ? 'active' : ''
+                %a{href: "/category/#{cate["cid"]}/", class: "#{is_active}"} #{cate["name"]}
+          - if @jd_cates
+            - @jd_cates[0,13].each do |cate|
+              - is_active = cate[:cid] == @cid ? 'active' : ''
+              %a{href: "/jd/?cid=#{cate[:cid]}", class: "#{is_active}"} #{cate[:name]}

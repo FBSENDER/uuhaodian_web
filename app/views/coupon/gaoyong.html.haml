@@ -1,0 +1,39 @@
+- title("#{@keyword}_京东淘宝天猫价格/多少钱_优优好店")
+- keywords("#{@keyword},#{@keyword}价格,#{@keyword}多少钱,#{@keyword}优惠券,#{@keyword}淘宝优惠券,#{@keyword}天猫优惠券,#{@keyword}京东优惠券,#{@keyword}拼多多优惠券")
+- head_desc("优优好店-#{@keyword}商品价格搜索结果。您可以在优优好店查找并免费领取#{@keyword}淘宝天猫、京东、拼多多优惠券，并可以按照商品的销量、价格等维度进行筛选，领券后在淘宝、京东、拼多多平台使用并购买商品，即可享受优惠与折扣！")
+
+= render partial: "header_common"
+
+.wrapper1200{style: "margin-top: 10px;margin-bottom: 10px;"}
+  .item-list-top
+    %span.left 优优好店 - 商品比价 优惠券领取网站
+    %span.left{style: "color:#999;margin-left:10px;font-size:16px;"} 微信扫一扫右侧二维码，关注公众号"UU好店"，领券更方便！
+    %p{style: "color:#666;line-height:30px;"} 领券小帮手：京东、淘宝、拼多多的大多数商品都有优惠券，但是这些券不易被找到。本网站，提供了找券功能，搜索商品的标题并选择相应平台，就能够
+    %p{style: "color:#666;line-height:30px;"} 找到优惠券（如果存在），点击领取优惠券后，下单时即可优惠相应金额。 
+    %p{style: "color:#666;line-height:30px;"} 本站进一步支持：通过搜索，查看同款商品在京东、淘宝天猫和拼多多的不同价格，为您的购物决策提供方便。
+    %div{style: "height:0;position:relative;top:-138px;float:right;"}
+      %img{src: "/img/lbanner1.png", height: "138px", width: "138px"}
+
+.wrapper1200
+  %div{style: "height: 80px;"}
+    #gy_filter
+      .wrapper1200
+        %ul.platform-area{style: "margin:0;"}
+          %li.platform-type{id: "platform_1", data:{type: 1}} 天猫淘宝
+          %li.platform-type{id: "platform_2", data:{type: 2}} 京东
+          %li.platform-type{id: "platform_3", data:{type: 3}} 拼多多
+          %h1{style: "float:right;padding: 0 20px;font-size:14px;"} “#{@keyword[0,40]}”搜索结果
+        = render partial: "dg_filter"
+  .zk-list.clearfix#couponList{style: "margin-top: 10px;"}
+  = render partial: "dg_load_more", locals: {keyword: @keyword}
+
+- if @items_bang && @items_bang.size > 0
+  .wrapper
+    .item-list-top
+      %span.left 优优好店畅销榜 - 大家都在买
+      %a{href: "/collection/2/"}
+        %span.right 查看更多
+    = render partial: "wide_banner", locals: {items: @items_bang}
+
+= render partial: "footer"
+= render partial: "sider_fixed_area"

@@ -11,13 +11,16 @@
           %a{href: "/query/#{URI.encode(k)}/", class: "rk", onclick: "_hmt.push(['_trackEvent', '顶部关联词', 'click', 'PC查询页'])"}
             #{k}
 
-.wrapper
-  %ul.platform-area
-    %li.platform-type{id: "platform_1", data:{type: 1}} 天猫淘宝
-    %li.platform-type{id: "platform_2", data:{type: 2}} 京东
-    %li.platform-type{id: "platform_3", data:{type: 3}} 拼多多
-    %h1{style: "float:right;padding: 0 20px;font-size:14px;"} “#{@keyword[0,40]}”搜索结果
-  = render partial: "dg_filter"
+.wrapper1200{style: "margin-top:10px;"}
+  %div{style: "height: 80px;"}
+    #gy_filter
+      .wrapper1200
+        %ul.platform-area{style: "margin:0;"}
+          %li.platform-type{id: "platform_1", data:{type: 1}} 天猫淘宝
+          %li.platform-type{id: "platform_2", data:{type: 2}} 京东
+          %li.platform-type{id: "platform_3", data:{type: 3}} 拼多多
+          %h1{style: "float:right;padding: 0 20px;font-size:14px;"} “#{@keyword[0,40]}”搜索结果
+        = render partial: "dg_filter"
   .zk-list.clearfix#couponList{style: "margin-top: 20px;"}
   = render partial: "dg_load_more", locals: {keyword: @keyword}
 

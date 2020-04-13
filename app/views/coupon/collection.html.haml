@@ -3,7 +3,7 @@
 - head_desc("优优好店 - #{@collection_name}")
 
 = render partial: "header_common"
-.wrapper{style: "margin-top: 10px;"}
+.wrapper1200{style: "margin-top: 10px;"}
   .item-list-top
     - if @collection_type == 4
       %span.left 9块9包邮 - 精选特价好物 按品类筛选更精准
@@ -18,7 +18,7 @@
       %a{href: "/collection/1/"}
         %span.right 全部分类
 = render partial: "header_lanlan_fenlei_collection"
-.wrapper{style: "margin-top: 10px;"}
+.wrapper1200{style: "margin-top: 10px;"}
   .zk-list.clearfix#couponList
   = render partial: "lanlan_load_more", locals: {path: @path, pagesize: 20, sort_type: 7, pinyin: '', keyword: '', cid: @cid,sort: 7, type: @collection_type}
 

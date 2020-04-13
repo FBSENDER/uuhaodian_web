@@ -1,4 +1,4 @@
-.lanlan-category-area-all
+.lanlan-category-area-all{style: "width:1200px;"}
   - @cates.each do |cate|
     - if cate['name'] != '美食' && cate['name'] != '美妆洗护' && cate['name'] != '母婴'
       - is_active = cate['cid'].to_i == @cid ? 'red' : ''

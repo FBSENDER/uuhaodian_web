@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   get "/sp/:id", to: "coupon#video_detail", id: /\d+/
   get "/query/:keyword", to: "coupon#query", keyword: /.+/
   get "/query_suggest", to: "coupon#query_suggest"
+  get "/gy/:keyword", to: "coupon#gaoyong", keyword: /.+/
   get "/like/", to: "coupon#like"
   get "/top/", to: "coupon#top"
   get "/brand/", to: "coupon#brand"
