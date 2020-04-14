@@ -3,7 +3,7 @@
 </div>
 <script type="text/javascript">
 var couponList = $('#couponList'),loadingText = $('.loading-text');
-var page = 1,pagesize = 20, channel = 27, load = 1,sort_id= 1, sort = '', pdd_sort = 0, pdd_activity = '', jd_sort = 0, jd_is_hot = 0,is_simple = true, sort_type='',is_tmall = 0, has_coupon = 0, platform = 1;
+var page = 1,pagesize = 20, channel = 27, load = 1,sort_id= 1, sort = '', pdd_sort = 0, pdd_activity = '', jd_sort = 0, jd_is_hot = 0,is_simple = true, sort_type='',is_tmall = 0, has_coupon = <%= has_coupon %>, platform = 1;
 function doAjaxTaobao(d){
   var dd = {
     page: d.page,
