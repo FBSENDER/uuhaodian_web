@@ -19,7 +19,7 @@
         微信扫一扫右侧二维码，关注公众号"UU好店"，领券更方便！现已支持淘宝天猫、京东、拼多多优惠券领取，还有不定期红包！
     %input{id: "endTime", value: "#{coupon['couponEndTime']}", type: "hidden"}
     .small-img-area
-      - coupon["auctionImages"][0,5].each_with_index do |img_url, index|
+      - coupon["auctionImages"][0,6].each_with_index do |img_url, index|
         %img.small_img{src: "#{img_url}", style:"#{'margin-left:0' if index == 0}"}
     .banner
       %img{src: "/img/lbanner1.png"}

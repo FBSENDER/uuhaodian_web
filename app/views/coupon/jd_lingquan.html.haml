@@ -27,7 +27,7 @@
   = render partial: "dg_load_more", locals: {keyword: "#{@cname == '精选' ? '5g手机' : @cname}"}
 
 - if @miaosha && @miaosha.size > 0
-  .wrapper
+  .wrapper1200
     .item-list-top
       %span.left 京东秒杀 - 手机专场
     = render partial: "wide_banner_jd_miaosha", locals: {items: @miaosha}

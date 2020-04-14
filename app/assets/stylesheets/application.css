@@ -339,7 +339,7 @@ input,input:focus{
   background-color: #FF472B;
 }
 .header .tab-area .cate-area .cate-item.jxtj {
-  width: 220px;
+  width: 260px;
   padding: 0;
   margin-right: 25px;
 }
@@ -395,18 +395,18 @@ input,input:focus{
 .home-oper-area .cate-area{
   height: 270px;
   float: left;
-  width: 220px;
+  width: 260px;
   padding: 5px 0;
   background-color: #fff;
 }
 .home-oper-area .cate-area .inner{
-  padding-left: 22px;
+  padding-left: 32px;
 }
 .home-oper-area .cate-area .cate-item{
   position: relative;
   display: block;
   float: left;
-  width: 110px;
+  width: 130px;
   height: 44px;
   font-size: 14px;
   color: #5E4F4F;
@@ -505,7 +505,7 @@ input,input:focus{
 }
 .home-oper-area .banner-top {
   float: left;
-  width: 870px;
+  width: 930px;
   height: 270px;
   margin: 10px 0 0 10px;
 }
@@ -590,7 +590,7 @@ input,input:focus{
 .home-oper-area .top-right-banner {
   float: left;
   position: relative;
-  width: 185px;
+  width: 245px;
   height: 270px;
   overflow: hidden;
   margin-left: 10px;
@@ -984,7 +984,7 @@ input,input:focus{
   transition: top .2s ease-out;
 }
 .zk-content {
-  width: 1100px;
+  width: 1160px;
   height: 350px;
   padding: 20px;
   background-color: #fff;
@@ -1001,14 +1001,14 @@ input,input:focus{
 }
 .zk-content .info-area {
   float: left;
-  width: 680px;
+  width: 780px;
   padding-left: 20px;
 }
 .zk-content .info-area .title h1{
   font-size: 20px;
   line-height: 30px;
   height: 60px;
-  width: 450px;
+  width: 550px;
   overflow: hidden;
   color: #444;
   font-weight: normal;
@@ -1018,13 +1018,13 @@ input,input:focus{
   color: #FF2B22;
   margin-top: 10px;
   height: 62px;
-  width: 450px;
+  width: 550px;
   overflow: hidden;
 }
 .zk-content .small-img-area {
   height: 84px;
   padding-top: 5px;
-  width: 450px;
+  width: 550px;
   margin: 0;
 }
 .zk-content .banner{
@@ -1056,7 +1056,7 @@ input,input:focus{
   font-size: 16px;
   color: #a9a9a9;
   line-height: 20px;
-  width: 450px;
+  width: 550px;
   margin: 0;
 }
 .zk-content .info-area .platform .shoucang{
@@ -1217,7 +1217,7 @@ input,input:focus{
 }
 .lanlan-category-area, .lanlan-category-area-all{
   margin: 10px auto;
-  width: 1100px;
+  width: 1200px;
   height:105px;
   background-color:white;
 }
@@ -1527,7 +1527,7 @@ input,input:focus{
   border-radius: 5px;
 }
 .fluid-left{
-  width: 250px;
+  width: 350px;
   float: left;
   margin-top: 15px;
   background-color: white;
@@ -1542,7 +1542,7 @@ input,input:focus{
 
 }
 .fluid-left .guide-2{
-  height: 370px;
+  height: 280px;
 }
 .fluid-left .guide-2 .item{
   float: left;

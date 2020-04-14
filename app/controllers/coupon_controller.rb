@@ -90,7 +90,7 @@ class CouponController < ApplicationController
       @detail["nowPrice"] = @detail["nowPrice"].to_f - @coupon_money
       @detail["price"] = price
     end
-    if @detail["auctionImages"].size < 5
+    if @detail["auctionImages"].size < 6
       @detail["auctionImages"].unshift(@detail["coverImage"])
     end
     if @detail.nil?
@@ -161,7 +161,7 @@ class CouponController < ApplicationController
       not_found
       return
     end
-    if @detail["auctionImages"].size < 5
+    if @detail["auctionImages"].size < 6
       @detail["auctionImages"].unshift(@detail["coverImage"])
     end
     @top_keywords = get_hot_keywords_data.sample(8)
