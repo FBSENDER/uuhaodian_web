@@ -1,6 +1,19 @@
+<div class="more-coupon" style="margin: 10px auto;width:1100px;">
+  <a href="https://union-click.jd.com/jdc?e=&p=AyIGZRprFDJWWA1FBCVbV0IUWVALHEIYDk5ER1xOGRdPC1ZQSxgMXgdIDFBTBVgJTGdGThAXT2EFBg5dD1JmFmYAQRMpAXFiNyBBH1MGZwMoeQtvXnZbLEZFcmVKQSUXVyUCFgJUG1slABcCUR1aEAsVN2UbWCVJfAZlGVoUAxQEVBJZEzISA1wcUxEAFwFVGVsXMhUHXCssZmBmeCBvOCUyIgRlK2sUMhI3Cl8GSDIQBlQfUg%3D%3D" target="_blank">
+  <span class="btn" style="float:left;margin-left:260px;" onclick='_hmt.push(["_trackEvent", "优惠券 去京东", "click", "jd"])'>
+    去京东查券
+  </span>
+  </a>
+  <span id="changeCoupon" class="btn" style="float:right;margin-right:260px;" onclick='_hmt.push(["_trackEvent", "优惠券 换一换", "click", "jd"])'>换一换</span>
+</div>
 <script type="text/javascript">
 var jdCouponList = $('#jdCouponList');
+var jdCouponResult = [];
 var cid = <%= cid || 0%>;
+$("#changeCoupon").click(function(){
+  jdCouponList.html("");
+  show_jdcoupon();
+});
 function getJdCoupon(){
   $.ajax({
     url: 'https://api.uuhaodian.com/ddk/jd_coupons',
@@ -26,21 +39,23 @@ var canvas_callback = function(data){
     });
   }
 }
-var callback_jdcoupon = function(data){
-  if(data.status == 1){
-    Util.createJdCoupon(data.result,jdCouponList,0,page);
-    if(data.result.length >= pagesize){
-      page ++;
-      load = 1;
-      loadingText.html('查看更多优惠券');
-    }else{
-      loadingText.html('没有更多了');
-    }
+var show_jdcoupon = function(){
+  var rsize = jdCouponResult.length - 1;
+  var coupon_sample = []
+  var coupon_sample_index = []
+  if(jdCouponResult.length <= 9){
+    coupon_sample = jdCouponResult;
   }
   else{
-    loadingText.html('没有更多了');
+    while(coupon_sample_index.length < 9 ){
+      var rnd = Math.floor((Math.random() * rsize));
+      if(!coupon_sample_index.includes(rnd)){
+        coupon_sample_index.push(rnd);
+        coupon_sample.push(jdCouponResult[rnd]);
+      }
+    }
   }
-
+  Util.createJdCoupon(coupon_sample,jdCouponList,0,page);
   $(".jd-coupon").hover(function(){
     var cv = $("#cv" + $(this).data("id"));
     if(cv.html() == ""){
@@ -60,6 +75,12 @@ var callback_jdcoupon = function(data){
   function(){
     $("#c" + $(this).data("id")).animate({right: 0});
   });
+}
+var callback_jdcoupon = function(data){
+  if(data.status == 1){
+    jdCouponResult = data.result;
+    show_jdcoupon();
+  }
 };
 //$(function(){
 

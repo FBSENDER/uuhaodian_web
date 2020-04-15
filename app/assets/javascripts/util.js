@@ -479,14 +479,14 @@ Util.createJdList = function(cl,obj,channel,gaPage){
     if(z.owner == 'g'){
       htmlstr += '<span class="tag">自营</span>';
     }
+    if(coupon_money > 0){
+      htmlstr += '<span class="tag c">' + coupon_money + '元券</span>';
+    }
     if(z.shopname.indexOf('旗舰店') > 0){
       htmlstr += '<span class="tag">旗舰店</span>';
     }
     if(z.ishot > 0){
       htmlstr += '<span class="tag">爆款</span>';
-    }
-    if(coupon_money > 0){
-      htmlstr += '<span class="tag c">' + coupon_money + '元券</span>';
     }
     htmlstr += '</div>'
     htmlstr += '<div class="price-area">';

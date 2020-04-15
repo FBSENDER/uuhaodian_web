@@ -826,10 +826,12 @@ input,input:focus{
   cursor: pointer;
   margin: 0 auto;
   border-radius: 2px;
+  border: 1px solid #fff;
   box-shadow: 0 0 4px rgba(0,0,0,.1);
 }
 .more-coupon span:hover{
   border: 1px solid #FF2B22;
+  color: #FF2B22;
 }
 .footer {
   position: relative;
@@ -1948,4 +1950,40 @@ input[type='checkbox'].switch:checked::after {
 }
 #gy_filter.fixed:hover{
   opacity: 1;
+}
+.btn300{
+  width:300px;
+  float:left;
+  text-align:center;
+  background-color:#fff;
+  padding: 20px 0;
+  box-sizing: border-box;
+  font-size: 15px;
+  color: #333;
+  border: 1px solid #fff;
+  box-shadow: 0 0 4px rgba(0,0,0,.1);
+  cursor: pointer;
+}
+.btn300:hover{
+  border: 1px solid #FF2B22;
+  color: #FF2B22;
+}
+.jd-icon{
+  display: block;
+  background-repeat: no-repeat;
+  background-image: url(/img/jd_icon_background.png);
+  width: 55px;
+  height: 55px;
+}
+.jd-icon-plus{
+  background-position: -59px 0;
+}
+.jd-icon-gift{
+  background-position: 0 -177px;
+}
+.jd-icon-wish{
+  background-position: 0 -118px;
+}
+.jd-icon-sheng{
+  background-position: -236px 0;
 }

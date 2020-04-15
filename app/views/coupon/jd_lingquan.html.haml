@@ -22,7 +22,7 @@
 .wrapper{style: "margin: 10px auto;"}
   .jd-coupon-list.clearfix#jdCouponList
   = render partial: "jd_coupon_load_more", locals: {cid: @cid}
-
+= render partial: "jd_tool"
 .wrapper1200
   = render partial: "dg_filter", locals: {has_coupon: true}
   .zk-list.clearfix#couponList{style: "margin-top: 20px;"}
@@ -33,8 +33,6 @@
     .item-list-top
       %span.left 京东秒杀 - 手机专场
     = render partial: "wide_banner_jd_miaosha", locals: {items: @miaosha}
-
-= render partial: "jd_banner_1200_1"
 
 = render partial: "footer"
 = render partial: "sider_fixed_area"

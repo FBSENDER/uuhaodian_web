@@ -42,7 +42,7 @@ $(function(){
   });
   $(document).on('scroll',function(){
     var _top = $(document).scrollTop();
-    if(_top >= 400){
+    if(_top >= 800){
       tabArea.addClass('fixed');
       fluid_left.addClass('fixed');
       if(gy_filter){
