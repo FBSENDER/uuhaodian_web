@@ -37,6 +37,7 @@ $(function(){
   sb = $('.search-btn');
   var fluid_left = $('.fluid-left');
   var gy_filter = $('#gy_filter');
+  var jd_tool_area_right = $('.jd-tool-area-right');
   headerBar.find('.close').on('click',function(){
     headerBar.remove();
   });
@@ -48,11 +49,17 @@ $(function(){
       if(gy_filter){
         gy_filter.addClass('fixed');
       }
+      if(jd_tool_area_right){
+        jd_tool_area_right.fadeIn(1000);
+      }
     }else{
       tabArea.removeClass('fixed');
       fluid_left.removeClass('fixed');
       if(gy_filter){
         gy_filter.removeClass('fixed');
+      }
+      if(jd_tool_area_right){
+        jd_tool_area_right.fadeOut(100);
       }
     }
   });

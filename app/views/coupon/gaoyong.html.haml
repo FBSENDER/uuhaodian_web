@@ -3,6 +3,7 @@
 - head_desc("优优好店-#{@keyword}商品价格搜索结果。您可以在优优好店查找并免费领取#{@keyword}淘宝天猫、京东、拼多多优惠券，并可以按照商品的销量、价格等维度进行筛选，领券后在淘宝、京东、拼多多平台使用并购买商品，即可享受优惠与折扣！")
 
 = render partial: "header_common"
+= render partial: "jd_banner_1200_1"
 
 .wrapper1200{style: "margin-top: 10px;margin-bottom: 10px;"}
   .item-list-top
@@ -27,6 +28,9 @@
   .zk-list.clearfix#couponList{style: "margin-top: 10px;"}
   = render partial: "dg_load_more", locals: {keyword: @keyword, has_coupon: 0}
 
+%div{style: "margin-top: -30px;"}
+  = render partial: "jd_tool"
+
 - if @items_bang && @items_bang.size > 0
   .wrapper1200
     .item-list-top
@@ -37,3 +41,4 @@
 
 = render partial: "footer"
 = render partial: "sider_fixed_area"
+= render partial: "jd_tool_right_fixed"

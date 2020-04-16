@@ -4,8 +4,8 @@ class CouponController < ApplicationController
   end
   def home
     if is_device_mobile?
-      #redirect_to "http://m.uuhaodian.com"
-      redirect_to "http://uuhaodian.haozhia.cc/"
+      redirect_to "http://m.uuhaodian.com"
+      #redirect_to "http://uuhaodian.haozhia.cc/"
       return
     end
     #redirect_to "http://uuhaodian.com", status: 302

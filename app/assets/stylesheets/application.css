@@ -911,7 +911,7 @@ input,input:focus{
 .side-fixed-menu {
   position: fixed;
   left: 50%;
-  bottom: 210px;
+  bottom: 150px;
   overflow: hidden;
   margin-left: 625px;
 }
@@ -1986,4 +1986,10 @@ input[type='checkbox'].switch:checked::after {
 }
 .jd-icon-sheng{
   background-position: -236px 0;
+}
+.jd-tool-area-right{
+  position:fixed;
+  top:140px;
+  right:20px;
+  width:55px;
 }
