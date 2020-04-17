@@ -38,10 +38,24 @@ $(function(){
   var fluid_left = $('.fluid-left');
   var gy_filter = $('#gy_filter');
   var jd_tool_area_right = $('.jd-tool-area-right');
+  var jd_mengceng = $('.jd-mengceng');
+  $("#jd_mengceng_close").hover(function(){
+    if(jd_mengceng){
+      jd_mengceng.fadeOut(500);
+    }
+  });
+  if(jd_mengceng){
+    jd_mengceng.click(function(){
+      jd_mengceng.fadeOut(500);
+    })
+  }
   headerBar.find('.close').on('click',function(){
     headerBar.remove();
   });
   $(document).on('scroll',function(){
+    if(jd_mengceng){
+      jd_mengceng.hide();
+    }
     var _top = $(document).scrollTop();
     if(_top >= 800){
       tabArea.addClass('fixed');
