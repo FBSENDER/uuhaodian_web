@@ -43,15 +43,7 @@
     %img#imgLoading{src: "/img/img_loading.gif", width: "200px", style: "margin: 10px auto;"}
   .button-btn.sno#loadRetry 重新加载
   .button-btn.sno#noMore 没有更多了
-  .footer
-    %a.home.zh{href: "http://m.uuhaodian.com/index.php?r=index/wap&source=dazhe", target: "_blank", onclick:"_hmt.push(['_trackEvent', '首页', 'click', 'dazhe_jd'])"}
-      %img.icon{src: "http://www.uuhaodian.com/favicon.ico"}
-      .text 优优好店首页
-    - if @device == "ios"
-      %a#more_btn.btn.zh{href: "http://download1.51cyin.cn/index.php?r=index/ios-down&app_id=550416", target: "_blank", onclick:"_hmt.push(['_trackEvent', '下载app-ios', 'click', 'dazhe_jd'])"} 下载APP获取更多优惠
-    - else
-      %a#more_btn.btn.zh{href: "http://download1.51cyin.cn/index.php?r=index/down&app_id=550416", target: "_blank", onclick:"_hmt.push(['_trackEvent', '下载app-android', 'click', 'dazhe_jd'])"} 下载APP获取更多优惠
-
+  = render partial: "jd_mobile_footer"
 .scroll_top.close
   %a{href: "javascript:;"}
     %img{src: "/img/to_top.png"}

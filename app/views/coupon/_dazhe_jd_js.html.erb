@@ -114,7 +114,21 @@ var callback1 = function(data){
 };
 var callback_jdcoupon = function(data){
   if(data.status == 1){
-    createCp(data.result);
+    var cp_list = [];
+    var cp_index = [];
+    if(data.result.length <= 10){
+      cp_list = data.result;
+    }
+    else{
+      while(cp_index.length < 10){
+        var rnd = Math.floor((Math.random() * (data.result.length - 1)));
+        if(!cp_index.includes(rnd)){
+          cp_index.push(rnd);
+          cp_list.push(data.result[rnd])
+        }
+      }
+    }
+    createCp(cp_list);
   }
 };
 function getDazheCouponList(){
