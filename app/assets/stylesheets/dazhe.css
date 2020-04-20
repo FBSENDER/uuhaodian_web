@@ -618,7 +618,7 @@ input[type='checkbox'].switch:checked::after {
   margin-right: 0;
 }
 .button-btn{
-  margin: 20px auto 100px auto;
+  margin: -40px auto 30px auto;
   width:120px;
   height: 40px;
   border: 1px solid #ccc;
