@@ -38,4 +38,9 @@ Rails.application.routes.draw do
   get "/car/cs-:cid-:sid", to: "car#cs"
   get "/car/product/:id", to: "car#product"
   get "/car/keyword", to: "car#keyword"
+
+  #seo
+  get "/core_1_:id", to: "coupon#core_tb", id: /\d+/
+  get "/core_2_:id", to: "coupon#core_jd", id: /\d+/
+
 end

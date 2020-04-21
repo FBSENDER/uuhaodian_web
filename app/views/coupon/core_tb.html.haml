@@ -1,0 +1,53 @@
+- title("淘宝天猫#{@keyword}_#{@keyword}淘宝优惠券_#{@keyword}天猫优惠券")
+- keywords("淘宝#{@keyword},#{@keyword}淘宝,#{@keyword}淘宝优惠券,#{@keyword}天猫优惠券,#{@keyword}天猫,天猫#{@keyword}")
+- head_desc("优优好店 - 提供#{@keyword}淘宝天猫商品价格查询，#{@keyword}淘宝优惠券，#{@keyword}天猫优惠免费领取，搜索#{@keyword}商品标题，即可精确找券，先领券再下单，在淘宝天猫购物更便宜！")
+
+= render partial: "header_common"
+.wrapper1200{style: "margin-top: 10px;"}
+  .item-list-top
+    %h1.left{style: "display:inline;"} #{@keyword}淘宝天猫优惠券
+    %span.left{style: "color:#999;margin-left:10px;font-size:16px;"} 搜索#{@keyword}商品标题或链接，可精准找券 - 关注公众号"UU好店"，领券更方便！
+    %p{style: "color:#666;line-height:30px;"} 淘宝天猫领券小帮手：淘宝天猫的大多数#{@keyword}商品都有优惠券，但是这些券不易被找到。本网站，提供了找券功能，搜索淘宝#{@keyword}的标题或链接，就能够
+    %p{style: "color:#666;line-height:30px;"} 找到优惠券（如果存在），点击领取优惠券后，下单时即可优惠相应金额。 
+    %p{style: "color:#666;line-height:30px;"}
+      本站进一步支持：通过搜索，查看同款商品在京东和拼多多的价格，为您的购物决策提供方便 - 
+      %a{href: "/query/#{URI.encode(@keyword)}/", style: "color: blue;"} #{@keyword}
+      %a{href: "/core_2_#{@id}/", style: "color: blue;"} #{@keyword}京东优惠券
+    
+    %div{style: "height:0;position:relative;top:-138px;float:right;"}
+      %img{src: "/img/lbanner1.png", height: "138px", width: "138px"}
+.wrapper1200{style: "margin-top:10px;"}
+  %div{style: "height: 80px;"}
+    #gy_filter
+      .wrapper1200
+        %ul.platform-area{style: "margin:0;"}
+          %li.platform-type{id: "platform_1", data:{type: 1}} 天猫淘宝
+          %li.platform-type{id: "platform_2", data:{type: 2}} 京东
+          %li.platform-type{id: "platform_3", data:{type: 3}} 拼多多
+          %span{style: "float:right;padding: 0 20px;font-size:14px;"} “#{@keyword}”淘宝天猫优惠券
+        = render partial: "dg_filter", locals: {has_coupon: false}
+
+  .zk-list.clearfix#couponList{style: "margin-top: 20px;"}
+  = render partial: "dg_load_more", locals: {keyword: "#{@keyword}", has_coupon: 1}
+
+.wrapper1200
+  .item-list-top{style: "paddin-right:15px;"}
+    %h2.left{style: "display:inline;"} #{@keyword}淘宝天猫优惠券相关推荐
+    %span.left{style: "color:#999;margin-left:10px;font-size:16px;"} 大家都在看的优惠券
+    %p{style: "color:#666;line-height:30px;"} 
+      #{@keyword}相关品牌：
+      - @brands.each do |brand|
+        %a{href: "/query/#{URI.encode_www_form_component(brand)}/", style: "color:blue;"} #{brand}
+    %p{style: "color:#666;line-height:30px;"} 
+      #{@keyword}相关分类：
+      - @cates.each do |cate|
+        %span #{cate}
+    %p{style: "color:#666;line-height:30px;"}
+      更多相关优惠券：
+      - @related.each do |r|
+        %a{href: "/core_1_#{r["id"]}/", style: "color:blue;", title: "#{r["keyword"]}淘宝天猫优惠券"} #{r["keyword"]}
+= render partial: "jd_tool"
+
+= render partial: "footer"
+= render partial: "sider_fixed_area"
+= render partial: "jd_tool_right_fixed"

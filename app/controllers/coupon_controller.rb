@@ -581,4 +581,48 @@ class CouponController < ApplicationController
       render json: {status: 0}
     end
   end
+
+  def core_tb
+    url = "http://api.uuhaodian.com/jduu/core_keyword?id=#{params[:id]}"
+    result = Net::HTTP.get(URI(url))
+    r_json = JSON.parse(result)
+    if r_json["status"] == 0
+      not_found
+      return
+    end
+    @top_keywords = get_hot_keywords_data.sample(8)
+    @keyword = r_json["result"]["keyword"]
+    @id = r_json["result"]["id"]
+    @brands = r_json["result"]["brands"]
+    @cates = r_json["result"]["cates"]
+    @shops = r_json["result"]["shops"]
+    @related = r_json["result"]["related_keywords"]
+    cookies[:ff_platform] = {value: 1, path: "/"}
+    if is_device_mobile?
+      render :dazhe_core_tb, layout: "dazhe"
+      return
+    end
+  end
+
+  def core_jd
+    url = "http://api.uuhaodian.com/jduu/core_keyword?id=#{params[:id]}"
+    result = Net::HTTP.get(URI(url))
+    r_json = JSON.parse(result)
+    if r_json["status"] == 0
+      not_found
+      return
+    end
+    @top_keywords = get_hot_keywords_data.sample(8)
+    @keyword = r_json["result"]["keyword"]
+    @id = r_json["result"]["id"]
+    @brands = r_json["result"]["brands"]
+    @cates = r_json["result"]["cates"]
+    @shops = r_json["result"]["shops"]
+    @related = r_json["result"]["related_keywords"]
+    cookies[:ff_platform] = {value: 2, path: "/"}
+    if is_device_mobile?
+      render :dazhe_core_jd, layout: "dazhe"
+      return
+    end
+  end
 end
