@@ -18,7 +18,7 @@
     %p.head
       %span 更多推荐
   .zk-list.clearfix#couponList
-  = render partial: "dg_load_more", locals: {keyword: @detail["title"][-6,6]}
+  = render partial: "dg_load_more", locals: {keyword: @detail["title"][-6,6], has_coupon: 0}
 
 = render partial: "footer"
 = render partial: "sider_fixed_area"
