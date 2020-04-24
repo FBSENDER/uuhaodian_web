@@ -1,12 +1,13 @@
 <script type="text/javascript">
 var jdtongdian= $('#jdtongdian');
-function doAjaxJingdongMallProduct(id){
+function doAjaxJingdongMallProduct(id, cid3){
   $.ajax({
-    url: "https://api.uuhaodian.com/ddk/jd_mall_products",
+    url: "https://api.uuhaodian.com/jduu/search_by_shop",
     type: 'GET',
     dataType: 'jsonp',
     data:{
       id: id,
+      cid3: cid3,
       callback: 'mallCallback'
     },
     success:function(data){
@@ -14,11 +15,11 @@ function doAjaxJingdongMallProduct(id){
   });
 }
 var mallCallback = function(data){
-  if(data.status_code == 200){
-    Util.createJdList(data.data.data,jdtongdian,channel,'同店推荐');
+  if(data.status == 200){
+    Util.createJdList(data.results,jdtongdian,channel,'同店推荐');
   }
 };
 $(function(){
-  doAjaxJingdongMallProduct(<%= seller_id %>);
+  doAjaxJingdongMallProduct(<%= seller_id %>, <%= cid3 %>);
 });
 </script>

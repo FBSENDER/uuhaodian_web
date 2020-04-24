@@ -12,7 +12,7 @@ class CouponController < ApplicationController
     set_cookie_channel
     @cates = get_cate_data
     @banners = get_banner_data
-    @top_keywords = get_hot_keywords_data.sample(8)
+    @top_keywords = get_hot_keywords_data.sample(7)
     @items_9kuai9 = get_coupon_9kuai9_data
     @items_bang = get_coupon_bang_data
     @path = "http://api.uuhaodian.com/uu/home_list"
@@ -43,7 +43,7 @@ class CouponController < ApplicationController
       return
     end
     @category_name = params[:category_name] || @lanlan_category["name"]
-    @top_keywords = get_hot_keywords_data.sample(8)
+    @top_keywords = get_hot_keywords_data.sample(7)
     @items_bang = get_coupon_bang_data
     @path = "http://api.uuhaodian.com/uu/home_list"
     @kk = $kk.sample(20)
@@ -98,7 +98,7 @@ class CouponController < ApplicationController
       not_found
       return
     end
-    @top_keywords = get_hot_keywords_data.sample(8)
+    @top_keywords = get_hot_keywords_data.sample(7)
     @path = "http://api.uuhaodian.com/uu/dg_goods_list"
     if is_device_mobile?
       render :m_product_detail, layout: "dazhe"
@@ -140,7 +140,7 @@ class CouponController < ApplicationController
     @detail["couponUrl"] = ''
     @items = json["data"]["related"]
     @path = "http://api.uuhaodian.com/uu/dg_goods_list"
-    @top_keywords = get_hot_keywords_data.sample(8)
+    @top_keywords = get_hot_keywords_data.sample(7)
     if is_device_mobile?
       render :m_dtk_product_detail, layout: "dazhe"
     end
@@ -165,7 +165,7 @@ class CouponController < ApplicationController
     if @detail["auctionImages"].size < 6
       @detail["auctionImages"].unshift(@detail["coverImage"])
     end
-    @top_keywords = get_hot_keywords_data.sample(8)
+    @top_keywords = get_hot_keywords_data.sample(7)
     @path = "http://api.uuhaodian.com/uu/goods_list"
   end
 
@@ -221,7 +221,7 @@ class CouponController < ApplicationController
     if jc = @jd_cates.select{|c| c[:cid] == @cid}.first
       @cname = jc[:name]
     end
-    @top_keywords = get_hot_keywords_data.sample(8)
+    @top_keywords = get_hot_keywords_data.sample(7)
     set_cookie_channel
     if is_device_mobile?
       render :dazhe_jd, layout: "dazhe"
@@ -238,14 +238,14 @@ class CouponController < ApplicationController
   end
 
   def jd_product_detail
-    url = "http://api.uuhaodian.com/ddk/jd_product?id=#{params[:id]}"
+    url = "http://api.uuhaodian.com/jduu/product?id=#{params[:id]}"
     json = {}
     @items = []
     set_cookie_channel
     begin
       result = Net::HTTP.get(URI(URI.encode(url)))
       json = JSON.parse(result)
-      if json["status_code"] != 200
+      if json["status"] != 200
         not_found
         return
       end
@@ -253,16 +253,15 @@ class CouponController < ApplicationController
       not_found
       return
     end
-    @detail = json["data"]
+    @detail = json["result"]
     if @detail.nil?
       not_found
       return
     end
-    @detail["auctionImages"] = @detail["picurls"].split(',')
-    @top_keywords = get_hot_keywords_data.sample(8)
+    @top_keywords = get_hot_keywords_data.sample(7)
     @path = "http://api.uuhaodian.com/uu/goods_list"
     if !is_robot? && is_device_mobile?
-      redirect_to "/jd/buy/#{params[:id]}?coupon=#{URI.encode_www_form_component(@detail["couponurl"])}"
+      redirect_to "/jd/buy/#{params[:id]}?coupon=#{URI.encode_www_form_component(@detail["coupon_url"])}"
       return
     end
   end
@@ -275,15 +274,15 @@ class CouponController < ApplicationController
       redirect_to params[:coupon], status: 302
       return
     end
-    url = "http://api.uuhaodian.com/ddk/jd_product_url?id=#{params[:id]}&jd_channel=#{cookies[:jd_channel]}"
+    url = "http://api.uuhaodian.com/jduu/product_url?id=#{params[:id]}&jd_channel=#{cookies[:jd_channel]}"
     if params[:coupon]
-      url = "http://api.uuhaodian.com/ddk/jd_product_url?id=#{params[:id]}&jd_channel=#{cookies[:jd_channel]}&coupon=#{URI.encode_www_form_component(params[:coupon])}"
+      url = "http://api.uuhaodian.com/jduu/product_url?id=#{params[:id]}&jd_channel=#{cookies[:jd_channel]}&coupon=#{URI.encode_www_form_component(params[:coupon])}"
     end
     json = {}
     begin
       result = Net::HTTP.get(URI(URI.encode(url)))
       json = JSON.parse(result)
-      if json["status_code"] != 200
+      if json["status"] != 200
         not_found
         return
       end
@@ -303,15 +302,15 @@ class CouponController < ApplicationController
       render json: {status: 1, id: params[:id], url: params[:coupon]}, callback: params[:callback]
       return
     end
-    url = "http://api.uuhaodian.com/ddk/jd_product_url?id=#{params[:id]}&jd_channel=11"
+    url = "http://api.uuhaodian.com/jduu/product_url?id=#{params[:id]}&jd_channel=11"
     if params[:coupon]
-      url = "http://api.uuhaodian.com/ddk/jd_product_url?id=#{params[:id]}&jd_channel=11&coupon=#{URI.encode_www_form_component(params[:coupon])}"
+      url = "http://api.uuhaodian.com/jduu/product_url?id=#{params[:id]}&jd_channel=11&coupon=#{URI.encode_www_form_component(params[:coupon])}"
     end
     json = {}
     begin
       result = Net::HTTP.get(URI(URI.encode(url)))
       json = JSON.parse(result)
-      if json["status_code"] != 200
+      if json["status"] != 200
         render json: {status: 1, id: params[:id], url: "https://item.jd.com/#{params[:id]}.html"}, callback: params[:callback]
         return
       end
@@ -331,7 +330,7 @@ class CouponController < ApplicationController
       return
     end 
     if params[:keyword] && (params[:keyword].match(/taobao.com/) || params[:keyword].match(/tmall.com/))
-      @top_keywords = get_hot_keywords_data.sample(8)
+      @top_keywords = get_hot_keywords_data.sample(7)
       @error_message = '淘宝天猫商品，不支持搜索链接，请粘贴商品标题搜索'
       not_found
       return
@@ -342,7 +341,7 @@ class CouponController < ApplicationController
     end
     set_cookie_channel
     @keyword = params[:keyword]
-    @top_keywords = get_hot_keywords_data.sample(8)
+    @top_keywords = get_hot_keywords_data.sample(7)
     @items_bang = get_coupon_bang_data
     @path = "http://api.uuhaodian.com/uu/dg_goods_list"
     url = "http://api.uuhaodian.com/uu/keyword_infos?keyword=#{URI.encode_www_form_component(@keyword)}"
@@ -366,7 +365,7 @@ class CouponController < ApplicationController
     end
     set_cookie_channel
     @keyword = params[:keyword]
-    @top_keywords = get_hot_keywords_data.sample(8)
+    @top_keywords = get_hot_keywords_data.sample(7)
     @items_bang = get_coupon_bang_data
     @path = "http://api.uuhaodian.com/uu/dg_goods_list"
     url = "http://api.uuhaodian.com/uu/keyword_infos?keyword=#{URI.encode_www_form_component(@keyword)}"
@@ -384,7 +383,7 @@ class CouponController < ApplicationController
     set_cookie_channel
     @collection_type = params[:tid].to_i 
     @cid = params[:cid].nil? ? 0 : params[:cid].to_i
-    @top_keywords = get_hot_keywords_data.sample(8)
+    @top_keywords = get_hot_keywords_data.sample(7)
     url = ""
     if @collection_type == 1
       @collection_name = "聚特卖"
@@ -406,7 +405,7 @@ class CouponController < ApplicationController
   def top
     set_cookie_channel
     @cates = get_cate_data
-    @top_keywords = get_hot_keywords_data.sample(8)
+    @top_keywords = get_hot_keywords_data.sample(7)
     @path = "http://api.uuhaodian.com/uu/home_list"
     @cid = params[:cid].nil? ? 0 : params[:cid].to_i
     cate = @cates.select{|item| item["cid"].to_i == @cid}.first
@@ -427,7 +426,7 @@ class CouponController < ApplicationController
       {"cid"=> 3760, "name"=> "母婴", "img_url"=> "http://qnoss2.lanlanlife.com/282cd239d5b99379edb68f3009a20c26_126x126.jpg"},
       {"cid"=> 3759, "name"=> "数码", "img_url"=> "http://qnoss2.lanlanlife.com/740886691d1c742a6a1c028d2c818271_126x126.jpg"}
     ]
-    @top_keywords = get_hot_keywords_data.sample(8)
+    @top_keywords = get_hot_keywords_data.sample(7)
     @cid = params[:cid].nil? ? 3761 : params[:cid].to_i
     cate = @cates.select{|item| item["cid"].to_i == @cid}.first
     @cate_name = cate.nil? ? '' : cate["name"]
@@ -590,7 +589,7 @@ class CouponController < ApplicationController
       not_found
       return
     end
-    @top_keywords = get_hot_keywords_data.sample(8)
+    @top_keywords = get_hot_keywords_data.sample(7)
     @keyword = r_json["result"]["keyword"]
     @id = r_json["result"]["id"]
     @brands = r_json["result"]["brands"]
@@ -612,7 +611,7 @@ class CouponController < ApplicationController
       not_found
       return
     end
-    @top_keywords = get_hot_keywords_data.sample(8)
+    @top_keywords = get_hot_keywords_data.sample(7)
     @keyword = r_json["result"]["keyword"]
     @id = r_json["result"]["id"]
     @brands = r_json["result"]["brands"]

@@ -457,23 +457,23 @@ Util.createJdList = function(cl,obj,channel,gaPage){
   var htmlstr = '<div>';
   for(var i=0,len=cl.length;i<len;i++){
     var z = cl[i];
-    var coupon_money = z.discount ? parseInt(z.discount) : 0;
-    var buy_url = "/jd/" + z.goods_id + '/#coupon';
-    if(z.discount == 0 && z.price_pg == 0){
-      buy_url = "/jd/buy/" + z.goods_id + '/';
+    var coupon_money = z.coupon_amount ? parseInt(z.coupon_amount) : 0;
+    var buy_url = "/jd/" + z.item_id + '/#coupon';
+    if(coupon_money == 0 && z.price_type == 1){
+      buy_url = "/jd/buy/" + z.item_id + '/';
     }
     htmlstr += '<div class="zk-item">';
-    if(z.discount == 0 && z.price_pg == 0){
-      htmlstr += '<a href="'+ buy_url +'" target="_blank" title="' + z.goods_desc +  '" onclick="_hmt.push([\'_trackEvent\', \'京东商品jump\', \'click\', \'PC查询页\'])">';
+    if(coupon_money == 0 && z.price_type == 1){
+      htmlstr += '<a href="'+ buy_url +'" target="_blank" title="' + z.title +  '" onclick="_hmt.push([\'_trackEvent\', \'京东商品jump\', \'click\', \'PC查询页\'])">';
     }
     else{
-      htmlstr += '<a href="'+ buy_url +'" title="' + z.goods_name +  '" onclick="_hmt.push([\'_trackEvent\', \'京东商品点击\', \'click\', \'PC查询页\'])">';
+      htmlstr += '<a href="'+ buy_url +'" title="' + z.title +  '" onclick="_hmt.push([\'_trackEvent\', \'京东商品点击\', \'click\', \'PC查询页\'])">';
     }
     htmlstr += '<div class="img-area">';
-    htmlstr += '<img data-ga-event="商品_图片:点击:'+ gaPage +'" class="lazy new" data-original="'+ z.picurl +'" alt="'+z.goods_name +'">';
+    htmlstr += '<img data-ga-event="商品_图片:点击:'+ gaPage +'" class="lazy new" data-original="'+ z.pict_url +'" alt="'+z.title +'">';
     htmlstr += '</div>';
     htmlstr += '<p class="title-area">';
-    htmlstr +=  z.goods_short_name +'</p>';
+    htmlstr +=  z.title +'</p>';
     htmlstr += '<div class="tags-area">'
     htmlstr += '<span class="tag">京东</span>';
     if(z.owner == 'g'){
@@ -482,29 +482,35 @@ Util.createJdList = function(cl,obj,channel,gaPage){
     if(coupon_money > 0){
       htmlstr += '<span class="tag c">' + coupon_money + '元券</span>';
     }
-    if(z.shopname.indexOf('旗舰店') > 0){
+    if(z.shop_title.indexOf('旗舰店') > 0){
       htmlstr += '<span class="tag">旗舰店</span>';
     }
-    if(z.ishot > 0){
+    if(z.is_hot > 0){
       htmlstr += '<span class="tag">爆款</span>';
     }
     htmlstr += '</div>'
     htmlstr += '<div class="price-area">';
     if(coupon_money > 0){
-      htmlstr += '券后价 ￥ <span class="price">' + z.price_after + '</span>';
+      htmlstr += '券后价 ￥ <span class="price">' + z.lowest_coupon_price + '</span>';
     }
-    else if(coupon_money == 0 && z.price_pg > 0){
-      htmlstr += '拼购价 ￥ <span class="price">' + z.price_after + '</span>';
+    else if(coupon_money == 0 && z.price_type == 2){
+      htmlstr += '拼购价 ￥ <span class="price">' + z.lowest_coupon_price + '</span>';
+    }
+    else if(coupon_money == 0 && z.price_type == 3){
+      htmlstr += '秒杀价 ￥ <span class="price">' + z.lowest_coupon_price + '</span>';
     }
     else{
-      htmlstr += '现价 ￥ <span class="price">' + z.price_after + '</span>';
+      htmlstr += '现价 ￥ <span class="price">' + z.lowest_price + '</span>';
     }
     htmlstr += '</div>';
-    if(z.price_pg > 0 && z.discount > 0){
-      htmlstr += '<div class="raw-price-area">拼购价：&yen;'+ z.price_pg;
+    if(coupon_money > 0 && z.price_type == 2){
+      htmlstr += '<div class="raw-price-area">拼购价：&yen; '+ z.lowest_price;
+    }
+    else if(coupon_money > 0 && z.price_type == 3){
+      htmlstr += '<div class="raw-price-area">秒杀价：&yen; '+ z.lowest_price;
     }
     else{
-      htmlstr += '<div class="raw-price-area">原价：&yen;'+ z.price;
+      htmlstr += '<div class="raw-price-area">原价：&yen; '+ z.o_price;
     }
     if(z.sales > 0){
       var vv = z.sales > 10000 ? ((z.sales / 10000).toFixed(1) + '万') : z.sales
