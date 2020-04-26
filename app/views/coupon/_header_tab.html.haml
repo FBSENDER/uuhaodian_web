@@ -26,7 +26,7 @@
               - @cates.each do |cate|
                 - is_active = cate['cid'] == @cid || cate['cid'] == @cid_1 ? 'active' : ''
                 %a{href: "/category/#{cate["cid"]}/", class: "#{is_active}"} #{cate["name"]}
-          - if @jd_cates
-            - @jd_cates[0,13].each do |cate|
-              - is_active = cate[:cid] == @cid ? 'active' : ''
-              %a{href: "/jd/?cid=#{cate[:cid]}", class: "#{is_active}"} #{cate[:name]}
+          - if @jd_home_items
+            - @jd_home_items.each do |item|
+              - is_active = item["id"] == @jd_item_id ? 'active' : ''
+              %a{href: "/jd/?id=#{item["id"]}", class: "#{is_active}"} #{item["name"]}

@@ -9,18 +9,18 @@
 <script type="text/javascript">
 var jdCouponList = $('#jdCouponList');
 var jdCouponResult = [];
-var cid = <%= cid || 0%>;
+var jd_item_id = <%= @jd_item_id %>;
 $("#changeCoupon").click(function(){
   jdCouponList.html("");
   show_jdcoupon();
 });
 function getJdCoupon(){
   $.ajax({
-    url: 'https://api.uuhaodian.com/ddk/jd_coupons',
+    url: 'https://api.uuhaodian.com/jduu/jd_home_coupons',
     type: 'GET',
     dataType: 'jsonp',
     data:{
-      'cid': cid,
+      'id': jd_item_id,
       'page': 0,
       'callback': 'callback_jdcoupon'
     },
@@ -43,11 +43,11 @@ var show_jdcoupon = function(){
   var rsize = jdCouponResult.length - 1;
   var coupon_sample = []
   var coupon_sample_index = []
-  if(jdCouponResult.length <= 9){
+  if(jdCouponResult.length <= 6){
     coupon_sample = jdCouponResult;
   }
   else{
-    while(coupon_sample_index.length < 9 ){
+    while(coupon_sample_index.length < 6 ){
       var rnd = Math.floor((Math.random() * rsize));
       if(!coupon_sample_index.includes(rnd)){
         coupon_sample_index.push(rnd);
@@ -55,7 +55,7 @@ var show_jdcoupon = function(){
       }
     }
   }
-  Util.createJdCoupon(coupon_sample,jdCouponList,0,page);
+  Util.createJdCoupon(coupon_sample,jdCouponList,0,'');
   $(".jd-coupon").hover(function(){
     var cv = $("#cv" + $(this).data("id"));
     if(cv.html() == ""){

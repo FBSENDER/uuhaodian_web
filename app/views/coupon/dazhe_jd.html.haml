@@ -1,6 +1,6 @@
-- title("#{@cname}京东优惠券领取_#{@cname}京券东券商品券领券查找_优优好店")
-- keywords("#{@cname}京东优惠券,京东优惠券,京东领券,京东优惠券领取,京券,东券")
-- head_desc("优优好店 - 现在已经支持查询与领取#{@cname}京东优惠券啦，搜索商品标题，即可精确找券，先领券再下单，在京东购物更便宜！")
+- title("京东优惠券领取_京券东券商品券领券查找_优优好店")
+- keywords("京东优惠券,京东优惠券,京东领券,京东优惠券领取,京券,东券")
+- head_desc("优优好店 - 现在已经支持查询与领取京东优惠券啦，搜索商品标题，即可精确找券，先领券再下单，在京东购物更便宜！")
 
 .dazhe
   .header_pr.header_red.transition
@@ -32,10 +32,10 @@
   .top-menu-container{style: "max-width:750px;"}
     .top-menu{style: "max-width:750px;"}
       .inner
-        %a.top-menu-item{href: "#", class: "active"} #{@cname}
-        - @jd_cates.each do |cat|
-          - if cat[:cid] != @cid
-            %a.top-menu-item{href: "/jd/?cid=#{cat[:cid]}"} #{cat[:name]}
+        %a.top-menu-item{href: "#", class: "active"} #{@jd_item["name"]}
+        - @jd_home_items.each do |item|
+          - if item["id"] != @jd_item_id
+            %a.top-menu-item{href: "/jd/?id=#{item["id"]}"} #{item["name"]}
   .content
     #jdDazheList
     #dazheList

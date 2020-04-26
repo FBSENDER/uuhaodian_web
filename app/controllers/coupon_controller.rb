@@ -191,49 +191,41 @@ class CouponController < ApplicationController
   end
 
   def jd_lingquan
-    @is_jd = 1
-    @jd_cates = [
-      { cid: 1, name: '精选' },
-      { cid: 652, name: '数码' },
-      { cid: 737, name: '家用电器' },
-      { cid: 6196, name: '厨具' },
-      { cid: 6728, name: '汽车用品' },
-      { cid: 17329, name: '箱包皮具' },
-      { cid: 1620, name: '家居日用' },
-      { cid: 1315, name: '服饰内衣' },
-      { cid: 1316, name: '美妆护肤' },
-      { cid: 16750, name: '个人护理' },
-      { cid: 15901, name: '家庭清洁' },
-      { cid: 15248, name: '家纺' },
-      { cid: 1318, name: '运动户外' },
-      { cid: 670, name: '电脑办公' },
-      { cid: 1320, name: '食品饮料' },
-      { cid: 6144, name: '珠宝首饰' },
-      { cid: 1713, name: '图书' },
-      { cid: 9847, name: '家具' },
-      { cid: 5025, name: '钟表' },
-      { cid: 6994, name: '宠物' },
-      { cid: 6233, name: '玩具乐器' },
-      { cid: 9987, name: '手机配件' }
-    ]
-    @cid = params[:cid] ? params[:cid].to_i : 1
-    @cname = ''
-    if jc = @jd_cates.select{|c| c[:cid] == @cid}.first
-      @cname = jc[:name]
+    if $jd_items["update_at"].nil? || $jd_items["items"].nil? || $jd_items["items"].size.zero? || Time.now.to_i - $jd_items["update_at"] > 3600
+      url = "http://api.uuhaodian.com/jduu/jd_home_items"
+      result = Net::HTTP.get(URI(url))
+      json = JSON.parse(result)
+      if json["status"] == 1
+        @items = json["results"]
+        $jd_items["items"] = json["results"]
+        $jd_items["update_at"] = Time.now.to_i
+        @jd_home_items = $jd_items["items"]
+      else
+        @jd_home_items = [
+          {"id" => 1, "name" => '手机', "sort" => 1},
+          {"id" => 2, "name" => '电视', "sort" => 2},
+          {"id" => 3, "name" => '笔记本', "sort" => 3},
+          {"id" => 4, "name" => '显示器', "sort" => 4},
+          {"id" => 5, "name" => '空调', "sort" => 5},
+          {"id" => 6, "name" => '冰箱', "sort" => 6},
+          {"id" => 7, "name" => '路由器', "sort" => 7}
+        ]
+      end
+    else
+      @jd_home_items = $jd_items["items"]
     end
+    @jd_item_id = params[:id].nil? ? 1 : params[:id].to_i
+    @jd_home_items.each do |item|
+      if item["id"] == @jd_item_id
+        @jd_item = item
+      end
+    end
+    @jd_item = @jd_home_items[0] if @jd_item.nil?
     @top_keywords = get_hot_keywords_data.sample(7)
     set_cookie_channel
     if is_device_mobile?
       render :dazhe_jd, layout: "dazhe"
       return
-    end
-    url = "http://api.uuhaodian.com/ddk/jd_miaosha"
-    result = Net::HTTP.get(URI(url))
-    json = JSON.parse(result)
-    if json["status_code"] == 200
-      @miaosha = json["data"]["data"]
-    else
-      @miaosha = []
     end
   end
 
@@ -283,6 +275,10 @@ class CouponController < ApplicationController
       result = Net::HTTP.get(URI(URI.encode(url)))
       json = JSON.parse(result)
       if json["status"] != 200
+        if params[:coupon]
+          redirect_to "/jd/buy/#{params[:id]}/"
+          return
+        end
         not_found
         return
       end

@@ -1845,6 +1845,12 @@ input,input:focus{
 .jd-coupon .c-content .c-desc{
   font-size:15px;
 }
+.jd-coupon .c-content .c-small{
+  font-size:10px;
+  margin-top: -6px;
+  overflow:hidden;
+  line-height: 23px;
+}
 .jd-coupon .lingquan{
   float:right;
   width:20px;
@@ -2039,4 +2045,25 @@ input[type='checkbox'].switch:checked::after {
   font-size: 14px;
   margin: 50px auto 0;
   width: 60px;
+}
+.jd-home-shop{
+  margin-top: 20px;
+  box-sizing: border-box;
+}
+.jd-home-shop .rel-zk-area{
+  margin: 0;
+}
+.jd-home-shop .no-quan{
+  text-align: center;
+  font-size: 15px;
+  font-weight: bold;
+  line-height: 40px;
+  background-color: #fff;
+  margin: 10px auto;
+}
+.jd-home-shop .product-area{
+}
+.jd-home-shop .head-desc{
+  line-height: 40px;
+  height: 40px;
 }

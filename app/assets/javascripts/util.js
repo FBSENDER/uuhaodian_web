@@ -570,3 +570,46 @@ Util.createJdCoupon = function(cl,obj,channel,gaPage){
   Util.lazyLoad('lazy.new');
   $('.lazy.new').removeClass('new');
 }
+
+Util.createJdShopCoupon = function(cl,obj,channel,gaPage){
+  gaPage = gaPage || '未知';
+  var htmlstr = '';
+  for(var i=0,len=cl.length;i<len;i++){
+    var c = cl[i];
+    var curl = encodeURIComponent(c.coupon_url);
+    for(var j=0; j < c.products.length ; j++){
+      if(j >= 3){
+        continue;
+      }
+      var z = c.products[j];
+      var buy_url = "/jd/buy/" + z.item_id + '/?coupon=' + curl;
+      var c_url = "/jd/buy_url/" + z.item_id + '/?coupon=' + curl;
+      htmlstr += '<a href="'+ buy_url +'" target="_blank" onclick="_hmt.push([\'_trackEvent\', \'京券领取\', \'click\', \'jd\'])">';
+      htmlstr += '<div class="jd-coupon">';
+      htmlstr += '<div class="img" style="overflow:hidden;white-space:nowrap;">';
+      htmlstr += '<div id="c' + z.item_id + '" style="position:relative;">' 
+      htmlstr += '<img class="lazy new" data-original="'+ z.pict_url +'" style="display:inline;">';
+      htmlstr += '<div id="cv' + z.item_id + '" style="display:inline;height:104px;width:104px"></div>';
+      htmlstr += '</div>' 
+      htmlstr += '</div>';
+      htmlstr += '<div class="c-content">';
+      htmlstr += '<div class="price-area">';
+      htmlstr += '<span class="s1">￥</span>';
+      htmlstr += '<span class="s2">' + c.discount + '</span>';
+      htmlstr += '<span class="s3">满' + c.quota + '元可用</span>';
+      htmlstr += '</div>';
+      htmlstr += '<div class="c-small">';
+      htmlstr += '<p style="height:46px;overflow:hidden;">' + z.title +'</p>';
+      htmlstr += '<img src="/img/jd_logo.png" width="76px" height=38px" style="padding:0;margin:0;float:right;"/>';
+      htmlstr += '</div>';
+      htmlstr += '</div>';
+      htmlstr += '<div class="lingquan">立即领券</div>';
+      htmlstr += '</div>';
+      htmlstr += '</a>';
+    }
+  }
+  htmlstr = $(htmlstr);
+  obj.append(htmlstr);
+  Util.lazyLoad('lazy.new');
+  $('.lazy.new').removeClass('new');
+}

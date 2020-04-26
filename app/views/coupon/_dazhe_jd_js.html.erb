@@ -1,6 +1,6 @@
 <script type="text/javascript">
 var jdRetry = 0;
-var retry =0,page = 1,pagesize = 20,load = 1,channel = '<%= @channel %>',sort = 0,is_simple = true, is_tmall = 0, has_coupon = 1, sort_type='',is_t = false, is_h = false, is_q = false, keyword = '<%= @cname =="精选" ? "5g手机" : @cname %>', platform = '1', jd_sort = 0, jd_is_hot = 0, pdd_sort = 0, pdd_activity = '';
+var retry =0,page = 1,pagesize = 20,load = 1,channel = '<%= @channel %>',sort = 0,is_simple = true, is_tmall = 0, has_coupon = 1, sort_type='',is_t = false, is_h = false, is_q = false, keyword = '<%= @jd_item["name"] %>', platform = '1', jd_sort = 0, jd_is_hot = 0, pdd_sort = 0, pdd_activity = '';
 function createList_jd(cl){
   var obj = $('#dazheList');
   var htmlstr = '';
@@ -178,11 +178,11 @@ function doJingdong(){
 function getJdCouponList(){
   var dd = {
     page: 0,
-    cid: '<%= @cid %>',
+    id: '<%= @jd_item_id %>',
     callback: 'callback_jdcoupon'
   }
   $.ajax({
-    url: "https://api.uuhaodian.com/ddk/jd_coupons",
+    url: "https://api.uuhaodian.com/jduu/jd_home_coupons",
     type: 'GET',
     dataType: 'jsonp',
     data: dd,

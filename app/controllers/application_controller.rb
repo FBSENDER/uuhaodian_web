@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
+  $jd_items = {}
   $cate_data = {}
   $hot_keywords_data = {}
   $banner_data = {}

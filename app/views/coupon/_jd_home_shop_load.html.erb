@@ -1,0 +1,68 @@
+<script type="text/javascript">
+var page = 1, home_item_id = <%= @jd_item_id %>, loading = 0;
+function getJdHomeJson(){
+  if(loading){
+    return;
+  }
+  $.ajax({
+    url: 'https://api.uuhaodian.com/jduu/jd_home_json',
+    type: 'GET',
+    dataType: 'jsonp',
+    data:{
+      'id': home_item_id,
+      'page': page,
+      'callback': 'callback_jdhomejson'
+    },
+    beforeSend:function(){
+      loading = 1;
+    },
+    success:function(data){
+    }
+  });
+}
+var callback_jdhomejson = function(data){
+  if(data.status == 1){
+    var jd_home = $("#jd_home_json_area");
+    var htmlstr = '<div>';
+    var cl = data.result.children.shops;
+    for(var i=0,len=cl.length;i<len;i++){
+      var s = cl[i];
+      htmlstr += '<div class="jd-home-shop">';
+      htmlstr += '<div class="rel-zk-area"><p class="head"><span>';
+      htmlstr += s.shop_name;
+      htmlstr += '</span></p></div>';
+      if(s.coupons.length <= 0){
+      htmlstr += '<div class="no-quan">此店暂时无券 请稍后查看</div>';
+      }
+      else{
+        htmlstr += '<div id="shop_coupon_' + s.shop_id +'" class="wrapper" style="width:1125px;margin: 20px auto 0 auto;"></div>';
+      }
+      if(s.hot_products.length > 0){
+        htmlstr += '<div id="hot_' + s.shop_id +'" class="wrapper1200"></div>';
+      }
+    }
+    htmlstr = $(htmlstr);
+    jd_home.append(htmlstr);
+    for(var i=0,len=cl.length;i<len;i++){
+      var s = cl[i];
+      var hotobj = $("#hot_" + s.shop_id);
+      var spobj = $("#shop_coupon_" + s.shop_id);
+      if(spobj != null){
+        Util.createJdShopCoupon(s.coupons,spobj,0,'');
+      }
+      Util.createJdList(s.hot_products,hotobj,0,'');
+    }
+    page++;
+    loading = 0;
+  }
+};
+$(document).on('scroll',function(){
+  var _top = $(document).scrollTop(),
+    scroll_height = Util.pageSize()['scrollHeight'],
+    client_height = Util.pageSize()['clientHeight'];
+    if(_top + client_height >= (scroll_height-800)){
+      getJdHomeJson();
+      _hmt.push(['_trackEvent', '加载更多', 'click', 'jd']);
+    }
+});
+</script>
