@@ -337,6 +337,9 @@ class CouponController < ApplicationController
     end
     set_cookie_channel
     @keyword = params[:keyword]
+    if @keyword.size > 3 && @keyword[-3,3] == '优惠券'
+      @keyword = @keyword[0..-4]
+    end
     @top_keywords = get_hot_keywords_data.sample(7)
     @items_bang = get_coupon_bang_data
     @path = "http://api.uuhaodian.com/uu/dg_goods_list"
