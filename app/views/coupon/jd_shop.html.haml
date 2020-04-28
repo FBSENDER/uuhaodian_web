@@ -82,6 +82,7 @@
 
 = render partial: "footer"
 = render partial: "sider_fixed_area"
+= render partial: "jd_diy_mengceng", locals: {text: "前往#{@shop_name}", url: "/jdshop_go/#{@shop_id}/"}
 
 :javascript
   $(".shop-cid3").click(function(){$(".shop-cid3").removeClass('active');$(this).addClass("active");$("#jdtongdian").html("");doAjaxJingdongMallProduct(shop_id, $(this).data("cid3"));});

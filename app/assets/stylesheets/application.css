@@ -2036,6 +2036,13 @@ input[type='checkbox'].switch:checked::after {
   color: #e1251b;
   border: 1px solid #e1251b;
 }
+.jd-mengceng-up .center-area .text-area{
+  height: 30px;
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 0 10px;
+  text-overflow: ellipsis;
+}
 .jd-mengceng-up .center-area img{
   width: 240px;
   padding: 50px 30px 10px 30px;
