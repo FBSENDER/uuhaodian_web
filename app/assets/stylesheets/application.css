@@ -2037,9 +2037,9 @@ input[type='checkbox'].switch:checked::after {
   border: 1px solid #e1251b;
 }
 .jd-mengceng-up .center-area .text-area{
-  height: 30px;
+  margin-top: -20px;
+  height: 60px;
   overflow: hidden;
-  white-space: nowrap;
   padding: 0 10px;
   text-overflow: ellipsis;
 }
