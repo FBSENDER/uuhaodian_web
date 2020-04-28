@@ -21,7 +21,12 @@
       %p{style: "text-align:center;color:#ff2b22;line-height:25px;"} 关注"UU好店"公众号
       %p{style: "text-align:center;color:#ff2b22;line-height:25px;"} 查券-淘宝/京东/拼多多
     .platform
-      %span 京东#{coupon["owner"] == 'g' ? '自营' : ''} - #{coupon["shop_title"]}
+      %span 京东#{coupon["owner"] == 'g' ? '自营' : ''} - 
+      - if coupon["shop_id"].to_i > 0
+        %a{href: "/jdshop/#{coupon["shop_id"]}/"}
+          %span #{coupon["shop_title"]}
+      - else
+        %span #{coupon["shop_title"]}
       - if coupon["sales"] != 0 
         %span - 已有
         %span{style: "color:#FF2B22"} #{coupon["sales"]}
@@ -34,7 +39,7 @@
           - elsif coupon["price_type"] == 2 && coupon["coupon_amount"] > 0
             %span.oprice 秒杀价￥#{coupon["lowest_price"]}&nbsp;&nbsp;
           - else
-            %span.oprice 原价￥#{coupon["price"]}&nbsp;&nbsp;
+            %span.oprice 原价￥#{coupon["o_price"]}&nbsp;&nbsp;
           ￥
           %em.int{style: "padding:0"}> #{coupon['lowest_coupon_price'].to_i}
           - if coupon['lowest_coupon_price'].to_s.include?('.')

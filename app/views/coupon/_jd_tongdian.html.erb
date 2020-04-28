@@ -1,25 +1,30 @@
 <script type="text/javascript">
 var jdtongdian= $('#jdtongdian');
+var cid3 = <%= cid3 %>, shop_id = <%= seller_id %>;
 function doAjaxJingdongMallProduct(id, cid3){
+  var d_data = {
+    id: id,
+    sort_name: 'inOrderCount30Days',
+    callback: 'mallCallback'
+  };
+  if(cid3 > 0){
+    d_data.cid3 = cid3
+  }
   $.ajax({
     url: "https://api.uuhaodian.com/jduu/search_by_shop",
     type: 'GET',
     dataType: 'jsonp',
-    data:{
-      id: id,
-      cid3: cid3,
-      callback: 'mallCallback'
-    },
+    data: d_data,
     success:function(data){
     }
   });
 }
 var mallCallback = function(data){
   if(data.status == 200){
-    Util.createJdList(data.results,jdtongdian,channel,'同店推荐');
+    Util.createJdList(data.results,jdtongdian,0,'同店推荐');
   }
 };
 $(function(){
-  doAjaxJingdongMallProduct(<%= seller_id %>, <%= cid3 %>);
+  doAjaxJingdongMallProduct(shop_id, cid3);
 });
 </script>

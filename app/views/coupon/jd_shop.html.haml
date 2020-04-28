@@ -1,0 +1,87 @@
+- title("【#{@shop_name}】#{@shop_name}优惠券/热销正品/首页活动")
+- keywords("#{@shop_name},#{@shop_name}首页,#{@shop_name}活动,#{@shop_name}优惠券,#{@shop_name}正品,#{@shop_name}热销商品")
+- coupon_desc = @coupons.size > 0 ? "满#{@coupons[0]["quota"]}元减#{@coupons[0]["discount"]}元的优惠券正在限量发放中。" : "先到先得。"
+- head_desc("#{@shop_name}是一家在京东平台正在经营的网店，主营：#{@cid3s.map{|c| c["cname3"]}.join("，")}等商品，销售的商品有正品保证，请大家放心。#{@shop_name}今日正在发放优惠券，#{coupon_desc}优优好店每日更新#{@shop_name}优惠券信息、热销商品、促销活动，欢迎使用！")
+
+= render partial: "header_common"
+= render partial: "jd_banner_1200_1"
+%a{href: "/jdshop_go/#{@shop_id}/", target: "_blank", title: "点击直达店铺", onclick: "_hmt.push(['_trackEvent', '上方描述点击', 'click', 'jd_shop'])"}
+  .wrapper1200{style: "margin-top: 10px;"}
+    .item-list-top
+      %h1.left{style: "display:inline;"} #{@shop_name}
+      %span.left{style: "color:#999;margin-left:10px;font-size:16px;"} 搜索商品标题或链接，可精准找券 - 微信扫一扫右侧二维码，关注公众号"UU好店"，领券更方便！
+      %p{style: "color:#666;line-height:30px;"} 领券小帮手：京东的大多数商品都有优惠券，但是这些券不易被找到。本网站，提供了找券功能，搜索京东商品的标题或链接，就能够
+      %p{style: "color:#666;line-height:30px;"} 找到优惠券（如果存在），点击领取优惠券后，下单时即可优惠相应金额。 
+      %p{style: "color:#666;line-height:30px;"} 本站进一步支持：通过搜索，查看同款商品在淘宝天猫和拼多多的价格，为您的购物决策提供方便。
+      %div{style: "height:0;position:relative;top:-138px;float:right;"}
+        %img{src: "/img/lbanner1.png", height: "138px", width: "138px"}
+
+.wrapper1200
+  .rel-zk-area{style: "z-index:1;margin-bottom:0;"}
+    %h2.head
+      %span #{@shop_name} - 优惠券
+.wrapper{style: "margin: 20px auto;"}
+  - if @coupons.size <= 0
+    .no-quan 此刻没有优惠券 请稍后查看
+  .jd-coupon-list.clearfix
+    - @coupons.each do |c|
+      - c["products"][0,3].each do |cc|
+        %a{href: "/jd/buy/#{cc["item_id"]}/?coupon=#{URI.encode_www_form_component(c["coupon_url"])}", target: "_blank", onclick: '', title: "#{@shop_name}#{c["discount"]}元优惠券"}
+          .jd-coupon
+            .img{style: "overflow:hidden;white-space:nowrap;"}
+              %img{src: "#{cc["pict_url"]}"}
+            .c-content
+              .price-area
+                %span.s1 ￥
+                %span.s2 #{c["discount"]}
+                %span.s3 满#{c["quota"]}元可用
+              .c-small
+                %p{style: "height:46px;overflow:hidden;"} #{cc["title"]}
+                %img{src: "/img/jd_logo.png", width: "76px", height: "38px", style: "padding:0;margin:0;float:right;"}
+
+            .lingquan 立即领券
+
+.wrapper1200
+  .rel-zk-area{style: "z-index:1;margin-bottom:0;margin-top:0;"}
+    %h2.head
+      %span #{@shop_name} - 热销商品
+  .hot-product-area{style: "margin-top:10px;"}
+    - @hot_products.each do |pr|
+      .zk-item
+        %a{href: "/jd/#{pr["item_id"]}/#copuon", title: "#{pr["title"]}"}
+          .img-area
+            %img{src: "#{pr["pict_url"]}", alt: "#{pr["title"]}"}
+          %p.title-area #{pr["title"]}
+          .tag-areas
+            %span.tag 热销单品
+          .price-area
+            现价 ￥
+            %span.price #{pr["lowest_coupon_price"]}
+          .raw-price-area 
+            原价 ￥ #{pr["o_price"]}
+            %p.sold 已售#{pr["sales"]}件
+.wrapper1200
+  .rel-zk-area{style: "z-index:1;margin-bottom:0;"}
+    %h2.head
+      %span #{@shop_name} - 相关店铺
+  .jd-shop-desc{style: "margin-top: 10px;"}
+    - @related.each do |r|
+      %a{href: "/jdshop/#{r["id"]}/", style: "padding: 10px;"} #{r["name"]}
+
+.wrapper1200
+  .rel-zk-area{style: "z-index:1;margin-bottom:0;"}
+    %h2.head
+      %span #{@shop_name} - 在售商品
+  .hori-cate-area{style: "margin: 10px auto;width:1200px;"}
+    .cate-l-1{style: "padding-left:20px;width:1200px;"}
+      - @cid3s.each_with_index do |c, index|
+        %a{href: "#", class: "#{'active' if index == 0} shop-cid3", data: {cid3: c["cid3"]}} #{c["cname3"]}
+
+  .zk-list.clearfix#jdtongdian{style: "min-height: 400px;margin-bottom:20px;"}
+  = render partial: "jd_tongdian", locals: {seller_id: @shop_id, cid3: @cid3s[0]["cid3"]}
+
+= render partial: "footer"
+= render partial: "sider_fixed_area"
+
+:javascript
+  $(".shop-cid3").click(function(){$(".shop-cid3").removeClass('active');$(this).addClass("active");$("#jdtongdian").html("");doAjaxJingdongMallProduct(shop_id, $(this).data("cid3"));});

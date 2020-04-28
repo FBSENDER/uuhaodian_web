@@ -623,4 +623,49 @@ class CouponController < ApplicationController
       return
     end
   end
+
+  def jd_shop
+    @shop_id = params[:id].nil? ? 0 : params[:id].to_i
+    if @shop_id == 0
+      not_found
+      return
+    end
+    set_cookie_channel
+    url = "http://api.uuhaodian.com/jduu/jd_shop_json?shop_id=#{@shop_id}"
+    result = Net::HTTP.get(URI(url))
+    r_json = JSON.parse(result)
+    if r_json["status"] == 0
+      redirect_to "/jdshop_go/#{@shop_id}/"
+      return
+    end
+    @top_keywords = get_hot_keywords_data.sample(7)
+    @shop_name = r_json["result"]["shop_name"]
+    @coupons = r_json["result"]["coupons"]
+    @hot_products = r_json["result"]["hot_products"]
+    @brands = r_json["result"]["brands"]
+    @cid3s = r_json["result"]["cid3s"]
+    @related = r_json["result"]["related"]
+    cookies[:ff_platform] = {value: 2, path: "/"}
+  end
+
+  def jd_shop_go
+    shop_id = params[:id].nil? ? 0 : params[:id].to_i
+    if shop_id == 0
+      not_found
+      return
+    end
+    url = "https://mall.jd.com/index-#{shop_id}.html"
+    if is_device_mobile?
+      url = "https://shop.m.jd.com/?shopId=#{shop_id}"
+    end
+    hurl = "https://api.uuhaodian.com/jduu/trans_diy_url?jd_channel=#{cookies[:jd_channel]}&url=#{URI.encode_www_form_component(url)}"
+    result = Net::HTTP.get(URI(hurl))
+    r_json = JSON.parse(result)
+    if r_json["status"] == 200
+      redirect_to r_json["data"]
+    else
+      not_found
+      return
+    end
+  end
 end

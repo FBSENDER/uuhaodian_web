@@ -2053,7 +2053,7 @@ input[type='checkbox'].switch:checked::after {
 .jd-home-shop .rel-zk-area{
   margin: 0;
 }
-.jd-home-shop .no-quan{
+.no-quan{
   text-align: center;
   font-size: 15px;
   font-weight: bold;
@@ -2066,4 +2066,8 @@ input[type='checkbox'].switch:checked::after {
 .jd-home-shop .head-desc{
   line-height: 40px;
   height: 40px;
+}
+.jd-shop-desc{
+  background-color: #fff;
+  padding: 10px;
 }
