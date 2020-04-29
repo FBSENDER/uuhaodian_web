@@ -646,6 +646,17 @@ class CouponController < ApplicationController
     @cid3s = r_json["result"]["cid3s"]
     @related = r_json["result"]["related"]
     cookies[:ff_platform] = {value: 2, path: "/"}
+    if @brands.size > 0
+      @keyword = @brands[0]["brand_name"]
+    elsif @cid3s.size > 0
+      @keyword = @cid3s[0]["cname3"]
+    else
+      @keyword = @shop_name
+    end
+    if is_device_mobile?
+      render :dazhe_shop_jd, layout: "dazhe"
+      return
+    end
   end
 
   def jd_shop_go

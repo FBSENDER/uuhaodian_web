@@ -1,0 +1,72 @@
+- title("【#{@shop_name}】#{@shop_name}优惠券/热销正品/首页活动")
+- keywords("#{@shop_name},#{@shop_name}首页,#{@shop_name}活动,#{@shop_name}优惠券,#{@shop_name}正品,#{@shop_name}热销商品")
+- coupon_desc = @coupons.size > 0 ? "满#{@coupons[0]["quota"]}元减#{@coupons[0]["discount"]}元的优惠券正在限量发放中。" : "先到先得。"
+- head_desc("#{@shop_name}是一家在京东平台正在经营的网店，主营：#{@cid3s.map{|c| c["cname3"]}.join("，")}等商品，销售的商品有正品保证，请大家放心。#{@shop_name}今日正在发放优惠券，#{coupon_desc}优优好店每日更新#{@shop_name}优惠券信息、热销商品、促销活动，欢迎使用！")
+
+.dazhe
+  .header_pr.header_red.transition
+    .icon_header
+      .search
+        %i
+        %a{href: "/dz_search/", onclick: "_hmt.push(['_trackEvent', '顶部点击', 'click', 'dazhe'])"}
+          %p #{@shop_name}
+  .header
+    %h1
+      #{@shop_name} - 网购领券省钱小技巧
+    %p.desc 
+      1. 微信扫码关注“
+      %span.b UU好店
+      ”小程序已经支持淘宝、京东、拼多多优惠券领取
+      %br
+      %br
+      2. 点击上方搜索框，输入商品宝贝标题，领取优惠券
+      %br
+      %br
+      3. 下单使用优惠券，立享折上折！
+      %br
+      &nbsp;&nbsp;&nbsp;
+      %span{style: "line-height: 30px;"}
+        %a{id: "ercode_show", href: "javascript:;", style: "color: #FBAA58;", onclick:"_hmt.push(['_trackEvent', '展开二维码', 'click', 'dazhe'])"} 点击展开二维码
+    %img.sno{id: "ercode", src: "http://www.uuhaodian.com/img/lbanner1.png"}
+  .content
+    .filter
+      .type.active{id: "t1", data: {sort: 1}}
+        %a{href: "javascript:;", onclick:"_hmt.push(['_trackEvent', '筛选-综合', 'click', 'dazhe'])"} 综合
+      .type{data: {sort: 2}}
+        %a{href: "javascript:;", onclick:"_hmt.push(['_trackEvent', '筛选-销量', 'click', 'dazhe'])"} 销量
+      .type{data: {sort: 5}}
+        %a{href: "javascript:;", onclick:"_hmt.push(['_trackEvent', '筛选-推荐', 'click', 'dazhe'])"} 推荐
+      .type{data: {sort: 3}}
+        %a{id: "t3", href: "javascript:;", onclick:"_hmt.push(['_trackEvent', '筛选-价格', 'click', 'dazhe'])"} 价格
+    .platform-filter
+      %div{style: "float:left;padding:5px 0 5px 20px;height:30px;", onclick: "_hmt.push(['_trackEvent', '筛选-券', 'click', 'dazhe'])"}
+        %input.switch{type: "checkbox", style: "font-size: 20px;"}
+      %div{style: "float:left;padding-left:10px;"} 只看券
+      %div{style: "float:right;"}
+        .radio{style: "float:right;", onclick: "_hmt.push(['_trackEvent', '筛选-平台-拼多多', 'click', 'dazhe'])"}
+          %input{id: "radio_3", name: "platform", type: "radio", value: "3"}
+          %label.radio-label{for: "radio_3"} &nbsp;拼多多
+        .radio{style: "float:right;", onclick: "_hmt.push(['_trackEvent', '筛选-平台-京东', 'click', 'dazhe'])"}
+          %input{id: "radio_2", name: "platform", type: "radio", value: "2"}
+          %label.radio-label{for: "radio_2"} &nbsp;京东
+        .radio{style: "float:right;", onclick: "_hmt.push(['_trackEvent', '筛选-平台-淘宝', 'click', 'dazhe'])"}
+          %input{id: "radio_1", name: "platform", type: "radio", value: "1"}
+          %label.radio-label{for: "radio_1"} &nbsp;淘宝
+    #dazheList
+    %img#imgLoading{src: "/img/img_loading.gif", width: "200px", style: "margin: 10px auto;"}
+  .button-btn.sno#loadRetry 重新加载
+  .button-btn.sno#noMore 没有更多了
+
+  = render partial: "jd_mobile_footer_diy", locals: {url: "/jdshop_go/#{@shop_id}/", text: "#{@shop_name}"}
+
+.scroll_top.close
+  %a{href: "javascript:;"}
+    %img{src: "/img/to_top.png"}
+
+
+= render partial: "sem_js"
+:javascript
+  $("#ercode_show").click(function(){$("#ercode").removeClass("sno");$("#ercode_show").css("display","none");});
+  $(".zh").click(function(){window._agl && window._agl.push(['track', ['success', {t: 3}]])});
+
+= render partial: "dazhe_js"
