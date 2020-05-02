@@ -679,4 +679,21 @@ class CouponController < ApplicationController
       return
     end
   end
+
+  def jd_diy_buy
+    if params[:url].nil?
+      not_found
+      return
+    end
+    jd_channel = params[:jd_channel] || cookies[:jd_channel]
+    hurl = "https://api.uuhaodian.com/jduu/trans_diy_url?jd_channel=#{cookies[:jd_channel]}&url=#{URI.encode_www_form_component(params[:url])}"
+    result = Net::HTTP.get(URI(hurl))
+    r_json = JSON.parse(result)
+    if r_json["status"] == 200
+      redirect_to r_json["data"]
+    else
+      not_found
+      return
+    end
+  end
 end
