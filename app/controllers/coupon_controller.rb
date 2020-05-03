@@ -190,6 +190,26 @@ class CouponController < ApplicationController
     end
   end
 
+  def ddk_buy_url
+    if is_robot?
+      render "not_found", status: 403
+      return
+    end
+    url = "http://api.uuhaodian.com/ddk/promotion_url?id=#{params[:id]}"
+    json = {}
+    begin
+      result = Net::HTTP.get(URI(URI.encode(url)))
+      json = JSON.parse(result)
+      if json["status"] != 1
+        render json: {status: 1, id: params[:id], url: "https://p.pinduoduo.com/61pQKH5i"}, callback: params[:callback]
+        return
+      end
+      render json: {status: 1, id: params[:id], url: json["result"]["short_url"]}, callback: params[:callback]
+    rescue
+      render json: {status: 0}, callback: params[:callback]
+    end
+  end
+
   def jd_lingquan
     if $jd_items["update_at"].nil? || $jd_items["items"].nil? || $jd_items["items"].size.zero? || Time.now.to_i - $jd_items["update_at"] > 3600
       url = "http://api.uuhaodian.com/jduu/jd_home_items"

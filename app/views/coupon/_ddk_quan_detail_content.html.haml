@@ -1,5 +1,6 @@
 - coupon = @detail
 - buy_url = "/ddk/buy/#{@detail["itemId"]}/"
+- c_url = "/ddk/buy_url/#{@detail["itemId"]}/"
 
 #coupon.zk-content
   .img-area
@@ -67,8 +68,42 @@
             领券立减
             %em #{coupon['couponMoney'].to_i}
             元
+        #qrcode_cv{style: "width: 219px;height: 200px;margin: 0;background-color:#fff;display:none;"}
+          #qrcode_in{style: "width: 160px;height: 160px;margin: 20px auto 10px;"}
+          %p{style: "text-align:center;color:#787878;font-size:14px;"} 微信扫一扫 直接#{coupon['couponMoney'].to_i == 0 ? '购买' : '领券'}
 
 :javascript
+  var canvas_callback = function(data){
+    if(data.status == 1){
+      var cv = $("#qrcode_in");
+      cv.qrcode({
+        render: "canvas",
+        height: 160,
+        width: 160,
+        text: data.url
+      });
+    }
+  }
+  $(".buy-btn").hover(function(){
+    var cv = $("#qrcode_cv");
+    cv.show();
+    if($("#qrcode_in").html() == ""){
+      $.ajax({
+        url: "#{c_url}",
+        type: 'GET',
+        dataType: 'jsonp',
+        data:{
+          'callback': 'canvas_callback'
+        },
+        success:function(data){
+        }
+      });
+    }
+  },
+  function(){
+    var cv = $("#qrcode_cv");
+    cv.hide();
+  });
   $(".small_img").hover(function(){
     $("#cover_image").attr("src", $(this).attr("src"));  
   })

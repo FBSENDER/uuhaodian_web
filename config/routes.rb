@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get "/dtk/:id", to: "coupon#dtk_product_detail", id: /\d+/
   get "/ddk/:id", to: "coupon#ddk_product_detail", id: /\d+/
   get "/ddk/buy/:id", to: "coupon#ddk_buy", id: /\d+/
+  get "/ddk/buy_url/:id", to: "coupon#ddk_buy_url", id: /\d+/
   get "/jd/", to: "coupon#jd_lingquan"
   get "/jd/:id", to: "coupon#jd_product_detail", id: /\d+/
   get "/jd/buy/:id", to: "coupon#jd_buy", id: /\d+/
