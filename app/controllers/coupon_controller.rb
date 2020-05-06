@@ -716,4 +716,13 @@ class CouponController < ApplicationController
       return
     end
   end
+
+  def old_url
+    if is_robot?
+      not_found
+      return
+    end
+    redirect_to "http://www.uuhaodian.com", status: 302
+  end
+
 end
