@@ -9,7 +9,7 @@
         %i
         %a{href: "/dz_search/", onclick: "_hmt.push(['_trackEvent', '顶部点击', 'click', 'dian'])"}
           %p 输入您需要的商品名称
-  %a{href: "#{@shop['shop_url']}", target: "_blank", isconvert: 1, onclick: "_hmt.push(['_trackEvent', '店铺点击', 'click', 'dian'])", data: {pid: "mm_130328389_44598299_97435850386"}}
+  %a{href: "https://api.uuhaodian.com/uu/shop_go?shop_id=#{@shop_id}", target: "_blank", onclick: "_hmt.push(['_trackEvent', '店铺点击', 'click', 'dian'])"}
     .shop
       .jbtn
         %span{style: "font-size: 18px;padding: 5px 10px;color:#fff;border-radius:5px;font-weight:bold;background: linear-gradient(to left,#FF5E5E 0,#FF927C 100%);"} 进店看看
