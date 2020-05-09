@@ -88,7 +88,7 @@
     %img{src: "/img/to_top.png"}
 
 :javascript
-  $(".goShop").click(function(){window.open("https://api.uuhaodian.com/uu/shop_go?shop_id=#{@shop_id}", "_blank")});
+  $(".goShop").click(function(){var sgo = 'uu';window.open("https://api.uuhaodian.com/uu/shop_go?shop_id=#{@shop_id}&sgo=" + sgo, "_blank")});
   $("#ercode_show").click(function(){$("#ercode").removeClass("sno");$("#ercode_show").css("display","none");});
 
 = render partial: "dazhe_js"
