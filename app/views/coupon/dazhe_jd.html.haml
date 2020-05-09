@@ -43,9 +43,7 @@
     %img#imgLoading{src: "/img/img_loading.gif", width: "200px", style: "margin: 10px auto;"}
   .button-btn.sno#loadRetry 重新加载
   .button-btn.sno#noMore 没有更多了
-  = render partial: "jd_mobile_footer"
-  %a{href: "https://u.jd.com/6rKOdi", target: "_blank"}
-    %img{src: "http://img30.360buyimg.com/ads/jfs/t1/119273/28/1404/57801/5e9805f2E66565ba9/4235e8b2b4ebe40d.jpg", width: "100%", style: "margin: 0 0 20px 0;", onclick: "_hmt.push(['_trackEvent', '底部领券中心', 'click', 'dazhe_jd'])"}
+  = render partial: "jd_mobile_footer_diy", locals: {url: "/jddiybuy/?jd_channel=16&url=#{URI.encode_www_form_component("https://coupon.m.jd.com/center/getCouponCenter.action")}", text: "前往京东领券中心"}
   
 .scroll_top.close
   %a{href: "javascript:;"}

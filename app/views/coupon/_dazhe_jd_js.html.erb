@@ -1,57 +1,63 @@
 <script type="text/javascript">
 var jdRetry = 0;
-var retry =0,page = 1,pagesize = 20,load = 1,channel = '<%= @channel %>',sort = 0,is_simple = true, is_tmall = 0, has_coupon = 1, sort_type='',is_t = false, is_h = false, is_q = false, keyword = '<%= @jd_item["name"] %>', platform = '1', jd_sort = 0, jd_is_hot = 0, pdd_sort = 0, pdd_activity = '';
+var retry =0,page = 1,pagesize = 20,load = 1,channel = '<%= @channel %>',sort = 0,is_simple = true, is_tmall = 0, has_coupon = 1, sort_type='',is_t = false, is_h = false, is_q = false, keyword = '<%= @jd_item["name"] %>', platform = '1', jd_sort = "inOrderCount30Days", jd_is_hot = 0, pdd_sort = 0, pdd_activity = '', cid3 = '<%= @jd_item["filter_code"]%>';
 function createList_jd(cl){
   var obj = $('#dazheList');
   var htmlstr = '';
   for(var i=0,len=cl.length;i<len;i++){
     var z = cl[i];
-    var buy_url = 'http://www.uuhaodian.com/jd/buy/' + z.goods_id + '/';
-    if(z.couponurl != ''){
-      buy_url += '?coupon=' + encodeURIComponent(z.couponurl);
+    var buy_url = 'http://www.uuhaodian.com/jd/buy/' + z.item_id + '/';
+    if(z.coupon_url != ''){
+      buy_url += '?coupon=' + encodeURIComponent(z.coupon_url);
     }
     htmlstr += '<div class="item">';
-    htmlstr += '<a class = "zh" href="'+ buy_url +'" target="_blank" onclick="_hmt.push([\'_trackEvent\', \'京东商品jump\', \'click\', \'dazhe\'])">';
-    htmlstr += '<img class="pic" src="'+ z.picurl +'"/>';
+    htmlstr += '<a class = "zh" href="'+ buy_url +'" target="_blank" onclick="_hmt.push([\'_trackEvent\', \'京东商品jump\', \'click\', \'dazhe_jd\'])">';
+    htmlstr += '<img class="pic" src="'+ z.pict_url +'"/>';
     htmlstr += '<div class="cent">';
     htmlstr += '<h3>';
     htmlstr += '<span>京东</span>';
-    htmlstr += z.goods_short_name;
+    htmlstr += z.title;
     htmlstr += '</h3>';
     htmlstr += '<div class="tags">';
-    if(z.shopname.indexOf('旗舰店') > 0){
+    if(z.shop_title.indexOf('旗舰店') > 0){
       htmlstr += '<span class="tag">旗舰店</span>';
     }
     if(z.owner == 'g'){
       htmlstr += '<span class="tag">自营</span>';
     }
-    if(z.ishot == 1){
+    if(z.is_hot == 1){
       htmlstr += '<span class="tag">爆款</span>';
     }
     htmlstr += '&nbsp;</div>';
     htmlstr += '<div class="num">';
-    if(z.discount > 0 && z.price_pg > 0){
-      htmlstr += '<span>拼购价 ￥'+ z.price_pg + '</span>';
+    if(z.coupon_amount > 0 && z.price_type == 2){
+      htmlstr += '<span>拼购价 ￥'+ z.lowest_price + '</span>';
+    }
+    else if(z.coupon_amount > 0 && z.price_type == 3){
+      htmlstr += '<span>秒杀价 ￥'+ z.lowest_price + '</span>';
     }
     else{
-      htmlstr += '<span>原价 ￥'+ z.price + '</span>';
+      htmlstr += '<span>原价 ￥'+ z.o_price + '</span>';
     }
     if(z.sales > 0){
       var vv = z.sales > 10000 ? ((z.sales / 10000.0).toFixed(1) + '万') : z.sales;
       htmlstr += '<span class="r">已售'+ vv + '件</span>';
     }
     htmlstr += '</div>';
-    if(z.discount > 0){
-      htmlstr += '<div class="money"><div class="quan"><i>' + parseInt(z.discount) + '元券</i></div>';
+    if(z.coupon_amount > 0){
+      htmlstr += '<div class="money"><div class="quan"><i>' + parseInt(z.coupon_amount) + '元券</i></div>';
     }
-    else if(z.price_pg > 0){
+    else if(z.price_type == 2){
       htmlstr += '<div class="money"><div class="quan"><i>拼购</i></div>';
+    }
+    else if(z.price_type == 3){
+      htmlstr += '<div class="money"><div class="quan"><i>秒杀</i></div>';
     }
     else{
       htmlstr += '<div class="money"><div class="quan"><i>看一看</i></div>';
     }
     htmlstr += '到手价 ￥'
-    htmlstr += '<span class="m">' + z.price_after + '</span></div>'
+    htmlstr += '<span class="m">' + z.lowest_coupon_price + '</span></div>'
     htmlstr += '</div></a></div>';
   }
   htmlstr = $(htmlstr);
@@ -93,10 +99,10 @@ function createCp(cl){
 var callback1 = function(data){
   load = 1;
   page ++;
-  if(data.status_code == 200){
-    createList_jd(data.data.data);
+  if(data.status == 200){
+    createList_jd(data.results);
     $("#imgLoading").addClass("sno");
-    if(data.data.data.length < pagesize){
+    if(data.results.length < pagesize){
       $("#loadRetry").addClass("sno");
       $("#noMore").removeClass("sno");
       load = 0;
@@ -143,14 +149,16 @@ function getDazheCouponList(){
 function doJingdong(){
   var dd = {
     page: page,
-    keyword: keyword.slice(0,30),
-    sort_type: jd_sort,
-    has_coupon: has_coupon,
-    is_hot: jd_is_hot,
+    keyword: keyword,
+    has_coupon: 1,
+    sort_name: jd_sort,
     callback: 'callback1'
   }
+  if(cid3 != ''){
+    dd.cid3 = cid3
+  }
   $.ajax({
-    url: "https://api.uuhaodian.com/ddk/jd_search",
+    url: "https://api.uuhaodian.com/jduu/search_by_keyword",
     type: 'GET',
     dataType: 'jsonp',
     data: dd,
