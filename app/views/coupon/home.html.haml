@@ -13,6 +13,29 @@
     = render partial: "wide_banner", locals: {items: @items_9kuai9}
 
 .wrapper1200
+  .item-list-top
+    %span.left 京东优惠券 - 今日上新
+    %a{href: "/jd/"}
+      %span.right 查看更多
+.wrapper{style: "margin: 10px auto;"}
+  .jd-coupon-list.clearfix
+    - @jd_coupons.each do |c|
+      %a{href: "#{c["url"]}", target: "_blank", title: "#{c["shop"]}优惠券"}
+        .jd-coupon
+          .img
+            %img{src: "#{c["pict_url"]}"}
+          .c-content
+            .price-area
+              %span.s1 ￥
+              %span.s2 #{c["discount"]}
+              %span.s3 满#{c["quota"]}元可用
+            .c-desc
+              %p.b #{c["shop"]}
+              %img{src: "/img/jd_logo.png", alt: "京东logo"}
+          .lingquan 立即领券
+
+
+.wrapper1200
   = render partial: "header_lanlan_fenlei"
   .order-area{style: "margin-top: 20px;"}
     %ul.sort-type
@@ -21,14 +44,40 @@
       %li{id: "li-sort-4", data: {sort: "4"}, class: "sort_li"} 销量
       %li{id: "li-sort-3", data: {sort: "3"}, class: "sort_li"} 价格
   .zk-list.clearfix#couponList
+    - @dtks.each do |dtk|
+      .zk-item
+        %a{href: "#{dtk["url"]}", title: "#{dtk["title"]}#{dtk["coupon"]}元优惠券"}
+          .img-area
+            %img{src: "#{dtk["pict_url"]}", alt: "#{dtk["title"]}图片"}
+          %p.title-area #{dtk["title"]}
+          .tags-area
+            - dtk["tags"].each do |tag|
+              %span.tag #{tag}
+            %span.tag.c #{dtk["coupon"]}元券
+          .price-area
+            到手价 ￥
+            %span.price #{dtk["price"]}
+          .raw-price-area
+            原价 ￥#{dtk["o_price"]}
+            %p.sold #{dtk["sales"]}已付款
+
   = render partial: "lanlan_load_more", locals: {path: @path, pagesize: 20, sort_type: 1, pinyin: '', keyword: "#{@keyword}", cid: 0,sort: 1, type: 0}
-- if @items_bang && @items_bang.size > 0
-  .wrapper1200
-    .item-list-top
-      %span.left 优优好店畅销榜 - 大家都在买
-      %a{href: "/collection/2/"}
-        %span.right 查看更多
-    = render partial: "wide_banner", locals: {items: @items_bang}
+
+.wrapper1200
+  .rel-zk-area
+    %p.head
+      %span 京东品类优惠券
+  .link-area
+    - @cores.each do |core|
+      %a{href: "#{core["url"]}", title: "京东#{core["k"]}优惠券"} 京东#{core["k"]}
+
+.wrapper1200
+  .rel-zk-area
+    %p.head
+      %span 京东店铺优惠券
+  .link-area{style: "margin-bottom: 20px;"}
+    - @shops.each do |s|
+      %a{href: "#{s["url"]}", title: "#{s["name"]}优惠券"} #{s["name"]}
 
 = render partial: "home_footer"
 = render partial: "sider_fixed_area"

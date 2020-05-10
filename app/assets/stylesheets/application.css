@@ -1845,6 +1845,18 @@ input,input:focus{
 .jd-coupon .c-content .c-desc{
   font-size:15px;
 }
+.jd-coupon .c-content .c-desc .b{
+  height:46px;
+  overflow:hidden;
+  font-weight:bold;
+}
+.jd-coupon .c-content .c-desc img{
+  width: 76px;
+  height: 38px;
+  padding:0;
+  margin:0;
+  float:right;
+}
 .jd-coupon .c-content .c-small{
   font-size:10px;
   margin-top: -6px;
@@ -2077,4 +2089,11 @@ input[type='checkbox'].switch:checked::after {
 .jd-shop-desc{
   background-color: #fff;
   padding: 10px;
+}
+.link-area{
+  background-color: #fff;
+  padding: 20px;
+}
+.link-area a{
+  padding: 10px 10px 10px 0;
 }

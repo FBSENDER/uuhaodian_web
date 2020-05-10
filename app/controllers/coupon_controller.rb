@@ -14,11 +14,15 @@ class CouponController < ApplicationController
     @banners = get_banner_data
     @top_keywords = get_hot_keywords_data.sample(7)
     @items_9kuai9 = get_coupon_9kuai9_data
-    @items_bang = get_coupon_bang_data
     @path = "http://api.uuhaodian.com/uu/home_list"
     @keyword = ''
-    @kk = $kk.sample(20)
+    #@kk = $kk.sample(20)
     @items = []
+    home_page_json = get_home_page_json
+    @dtks = home_page_json["dtk"]
+    @jd_coupons = home_page_json["coupons"]
+    @cores = home_page_json["cores"]
+    @shops = home_page_json["jd_shops"]
   end
 
   def like
