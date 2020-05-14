@@ -508,6 +508,10 @@ class CouponController < ApplicationController
     end
   end
 
+  def dazhe_monitor
+    render :dazhe_monitor, layout: "dazhe"
+  end
+
   def dazhe
     if params[:platform] && [1,2,3].include?(params[:platform].to_i)
       cookies[:ff_platform] = {value: params[:platform].to_i, path: "/"}

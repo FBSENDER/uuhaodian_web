@@ -32,6 +32,7 @@ Rails.application.routes.draw do
   get "/dz/:keyword", to: "coupon#dazhe", keyword: /.+/
   get "/dz_search", to: "coupon#dazhe_search"
   get "/dr/:keyword", to: "coupon#dazhe_result", keyword: /.+/
+  get "/dt/:id", to: "coupon#dazhe_monitor", id: /\d+/
 
   get "/dianpu/:name", to: "coupon#shop"
   get "/sshop/:name", to: "coupon#sem_shop"
