@@ -4,7 +4,7 @@
 
 = render partial: "header_common"
 = render partial: "jd_banner_1200_1"
-%a{href: "https://union-click.jd.com/jdc?e=&p=AyIGZRprFDJWWA1FBCVbV0IUWVALHEIYDk5ER1xOGWUdIWdaeWBXfThCUklFDlkbFnkWRAdrVxkyEAZUGlIVAhIBXCtZEAcWAVQeUhIyIgdUKxB7AyIFVBpaHAITAF0SaxUGGwFRHloUAxMDVxJrEgIbNyJoOWF9Z3M2K2slASI3ZRprFTJNQwhGaxcDEwNc", target: "_blank", title: "点击直达京东领券中心", onclick: "_hmt.push(['_trackEvent', '上方描述点击', 'click', 'jd'])"}
+%a{href: "/jddiybuy/?jd_channel=15&url=#{URI.encode_www_form_component("https://a.jd.com/")}", target: "_blank", title: "点击直达京东领券中心", onclick: "_hmt.push(['_trackEvent', '上方描述点击', 'click', 'jd'])"}
   .wrapper1200{style: "margin-top: 10px;"}
     .item-list-top
       %span.left 京东优惠券领取
@@ -19,7 +19,7 @@
     .cate-l-1{style: "padding-left:20px;width:1200px;"}
       - @jd_home_items.each do |item|
         %a{href: "/jd/?id=#{item["id"]}", class: "#{'active' if item["id"] == @jd_item_id}", onclick: "_hmt.push(['_trackEvent', '顶部分类', 'click', 'jd'])"} #{item["name"]}
-      %a{href: "https://union-click.jd.com/jdc?e=&p=AyIGZRprFDJWWA1FBCVbV0IUWVALHEIYDk5ER1xOGWUdIWdaeWBXfThCUklFDlkbFnkWRAdrVxkyEAZUGlIVAhIBXCtZEAcWAVQeUhIyIgdUKxB7AyIFVBpaHAITAF0SaxUGGwFRHloUAxMDVxJrEgIbNyJoOWF9Z3M2K2slASI3ZRprFTJNQwhGaxcDEwNc", target: "_blank", title: "点击直达京东领券中心", onclick: "_hmt.push(['_trackEvent', '分类更多按钮点击', 'click', 'jd'])"} 更多
+      %a{href: "/jddiybuy/?jd_channel=15&url=#{URI.encode_www_form_component("https://a.jd.com/")}", target: "_blank", title: "点击直达京东领券中心", onclick: "_hmt.push(['_trackEvent', '分类更多按钮点击', 'click', 'jd'])"} 更多
 .wrapper{style: "margin: 10px auto;"}
   .jd-coupon-list.clearfix#jdCouponList
   = render partial: "jd_coupon_load_more", locals: {cid: @cid}
