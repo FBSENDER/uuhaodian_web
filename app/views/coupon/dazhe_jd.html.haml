@@ -37,6 +37,8 @@
           - if item["id"] != @jd_item_id
             %a.top-menu-item{href: "/jd/?id=#{item["id"]}"} #{item["name"]}
   .content
+    %a{href: "/jddiybuy/?jd_channel=16&url=#{URI.encode_www_form_component("https://coupon.m.jd.com/center/getCouponCenter.action")}", target: "_blank"}
+      %div{style: "font-size:14px;font-weight:bold;text-align:center;border-bottom:5px solid #f7f7f7;line-height:40px;"} 点击前往京东领券中心
     #jdDazheList
     #dazheList
 
