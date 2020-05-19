@@ -11,6 +11,9 @@ module ApplicationHelper
   def path(path)
     content_for :path, path
   end
+  def mobile_url(path)
+    content_for :mobile_url, path 
+  end
   def h1(h1)
     content_for :h1, h1
   end

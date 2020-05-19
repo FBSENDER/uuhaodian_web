@@ -1,19 +1,32 @@
-- title("抖音同款_视频购_优优好店")
-- keywords("抖音同款,视频购")
-- head_desc("优优好店 - 视频购 - 抖音同款")
+- title("抖音同款_抖音爆款_优优好店")
+- keywords("抖音同款,抖音爆款视频购")
+- head_desc("优优好店 - 视频购 - 抖音同款,抖音爆款")
+- path("/douyintongkuan/")
+- mobile_url("http://www.uuhaodian.com/douyintonkuan/")
 
 = render partial: "header_common"
+.wrapper1200{style: "margin-top:10px;"}
+  %div{style: "height: 80px;"}
+    #gy_filter
+      .wrapper1200
+        %ul.platform-area{style: "margin:0;"}
+          %li.platform-type{id: "platform_1", data:{type: 1}} 天猫淘宝
+          %li.platform-type{id: "platform_2", data:{type: 2}} 京东
+          %li.platform-type{id: "platform_3", data:{type: 3}} 拼多多
+          %h1{style: "float:right;padding: 0 20px;font-size:14px;"} “#{@keyword[0,40]}”搜索结果
+        = render partial: "dg_filter", locals: {has_coupon: false}
+  .zk-list.clearfix#couponList{style: "margin-top: 20px;"}
+  = render partial: "dg_load_more", locals: {keyword: @keyword, has_coupon: 0}
 .wrapper
   .item-list-top{style: "margin-top: 10px;"}
-    %span.left 抖音同款 - 视频购
+    %span.left 抖音同款 - 抖音爆款
   .sp-list{style: "margin-top: 10px;"}
     - @videos.each do |video|
-      %a{href: "/sp/#{video["id"]}/"}
-        .sp-item
-          .img-area
-            %img{src: "#{video["cover_url"]}"}
-          .info-area
-            %img{src: "#{video["user_avatar"]}"}
-            %p #{video["user_name"]} | 抖音
+      .sp-item
+        .img-area
+          %img{src: "#{video["cover_url"]}"}
+        .info-area
+          %img{src: "#{video["user_avatar"]}"}
+          %p #{video["user_name"]} | 抖音
 
 = render partial: "footer"

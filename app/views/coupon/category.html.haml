@@ -1,6 +1,8 @@
 - title("#{@category_name},#{@category_name}折扣,#{@category_name}优惠_优优好店")
 - keywords("#{@category_name},#{@category_name}折扣,#{@category_name}优惠")
 - head_desc("优优好店 - 分类 - #{@category_name}")
+- path("/category/#{@cid}/")
+- mobile_url("http://www.uuhaodian.com/category/#{@cid}/")
 
 = render partial: "header_common"
 = render partial: "header_lanlan_fenlei", locals: {categories: @lanlan_cates}

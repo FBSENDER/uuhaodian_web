@@ -131,6 +131,7 @@ class CouponController < ApplicationController
       not_found
       return
     end
+    @id = params[:id]
     @detail["shortTitle"] = @detail["dtitle"]
     @detail["itemId"] = @detail["goodsId"]
     @detail["coverImage"] = @detail["mainPic"]
@@ -506,6 +507,7 @@ class CouponController < ApplicationController
     if json["status"] == 1
       @videos = json["result"]
     end
+    @keyword = '抖音爆款'
   end
 
   def dazhe_monitor

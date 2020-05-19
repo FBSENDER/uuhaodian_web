@@ -1,6 +1,8 @@
 - title("#{@detail["title"]}_优优好店")
 - keywords("#{@detail["title"]},#{@detail["title"]}")
 - head_desc("优优好店 - 商品详情 - #{@detail["title"]}")
+- path("/jd/#{@detail["item_id"]}/")
+- mobile_url("http://www.uuhaodian.com/jd/#{@detail["item_id"]}/")
 
 = render partial: "header_common"
 .wrapper1200{style: "overflow:visible;z-index:98;"}

@@ -1,6 +1,8 @@
 - title("#{@detail["shortTitle"]}_优优好店")
 - keywords("#{@detail["shortTitle"]},#{@detail["title"]}")
 - head_desc("#{@detail["shortTitle"]} - 优优好店推荐：#{@detail["desc"]} 优优好店，找券领券更方便！")
+- path("/dtk/#{@id}/")
+- mobile_url("http://www.uuhaodian.com/dtk/#{@id}/")
 
 %header.header#header
   = render partial: "header_top"

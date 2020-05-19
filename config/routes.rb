@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   get "/jdshop/:id", to: "coupon#jd_shop", id: /\d+/
   get "/jdshop_go/:id", to: "coupon#jd_shop_go", id: /\d+/
   get "/jddiybuy", to: "coupon#jd_diy_buy"
-  get "/sp/:id", to: "coupon#video_detail", id: /\d+/
+  #get "/sp/:id", to: "coupon#video_detail", id: /\d+/
   get "/query/:keyword", to: "coupon#query", keyword: /.+/
   get "/query_suggest", to: "coupon#query_suggest"
   get "/gy/:keyword", to: "coupon#gaoyong", keyword: /.+/
