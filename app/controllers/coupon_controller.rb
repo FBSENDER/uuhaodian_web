@@ -735,4 +735,12 @@ class CouponController < ApplicationController
     redirect_to "http://www.uuhaodian.com", status: 302
   end
 
+  def old_url_wp
+    redirect_to "http://www.17430.com.cn/wp/#{params[:id]}.html", status: 301
+  end
+
+  def old_url_ws
+    redirect_to "http://www.17430.com.cn/ws/#{params[:id]}.html", status: 301
+  end
+
 end

@@ -26,8 +26,8 @@ Rails.application.routes.draw do
   get "/app/", to: "coupon#app"
   get "/douyintongkuan/", to: "coupon#video_list"
 
-  get "/wp/:id.html", to: "coupon#old_url", id: /\d+/
-  get "/ws/:id.html", to: "coupon#old_url", id: /\d+/
+  get "/wp/:id.html", to: "coupon#old_url_wp", id: /\d+/
+  get "/ws/:id.html", to: "coupon#old_url_ws", id: /\d+/
 
   get "/dz/:keyword", to: "coupon#dazhe", keyword: /.+/
   get "/dz_search", to: "coupon#dazhe_search"
