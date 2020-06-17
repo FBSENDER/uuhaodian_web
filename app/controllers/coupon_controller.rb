@@ -699,7 +699,7 @@ class CouponController < ApplicationController
     if is_device_mobile?
       url = "https://shop.m.jd.com/?shopId=#{shop_id}"
     end
-    hurl = "https://api.uuhaodian.com/jduu/trans_diy_url?jd_channel=#{cookies[:jd_channel]}&url=#{URI.encode_www_form_component(url)}"
+    hurl = "http://api.uuhaodian.com/jduu/trans_diy_url?jd_channel=#{cookies[:jd_channel]}&url=#{URI.encode_www_form_component(url)}"
     result = Net::HTTP.get(URI(hurl))
     r_json = JSON.parse(result)
     if r_json["status"] == 200
@@ -716,7 +716,7 @@ class CouponController < ApplicationController
       return
     end
     jd_channel = params[:jd_channel] || cookies[:jd_channel]
-    hurl = "https://api.uuhaodian.com/jduu/trans_diy_url?jd_channel=#{jd_channel}&url=#{URI.encode_www_form_component(params[:url])}"
+    hurl = "http://api.uuhaodian.com/jduu/trans_diy_url?jd_channel=#{jd_channel}&url=#{URI.encode_www_form_component(params[:url])}"
     result = Net::HTTP.get(URI(hurl))
     r_json = JSON.parse(result)
     if r_json["status"] == 200
