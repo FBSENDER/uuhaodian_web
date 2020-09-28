@@ -1,4 +1,4 @@
-- title("优优好店-天猫淘宝京东拼多多优惠券,一键查询,免费领取!")
+- title("优优好店-天猫淘宝拼多多京东优惠券,一键查询,免费领取!")
 - keywords("优优好店,uuhaodian,淘宝优惠券,天猫优惠券,京东优惠券,拼多多优惠券,淘宝领券,京东领券,拼多多领券")
 - head_desc("优优好店-现已支持天猫淘宝优惠券、京东优惠券、拼多多优惠券的查询与领取，先领券再下单，省钱又实惠！一键查券，免费领取，便捷实用的省钱工具-优优好店。")
 - path("/")
@@ -66,6 +66,11 @@
   = render partial: "lanlan_load_more", locals: {path: @path, pagesize: 20, sort_type: 1, pinyin: '', keyword: "#{@keyword}", cid: 0,sort: 1, type: 0}
 
 .wrapper1200
+  .item-list-top{style: "margin-top: 10px;padding-left:0;z-index:1;"}
+    %span.left{style: "padding-left:15px;"} 发现好货
+    = render partial: "wide_banner_jd_static", locals: {items: @items_jd_static}
+
+.wrapper1200
   .rel-zk-area
     %p.head
       %span 京东品类优惠券
@@ -77,9 +82,11 @@
   .rel-zk-area
     %p.head
       %span 京东店铺优惠券
-  .link-area{style: "margin-bottom: 20px;"}
+  .link-area
     - @shops.each do |s|
       %a{href: "#{s["url"]}", title: "#{s["name"]}优惠券"} #{s["name"]}
+
+= render partial: "home_jd_qa"
 
 = render partial: "home_footer"
 = render partial: "sider_fixed_area"

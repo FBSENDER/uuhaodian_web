@@ -2097,3 +2097,15 @@ input[type='checkbox'].switch:checked::after {
 .link-area a{
   padding: 10px 10px 10px 0;
 }
+.qa-area{
+  width: 350px;
+  background-color: #fff;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+.qa-area .question{
+  color: #FF7438;
+}
+.qa-area .answer{
+  line-height: 30px;
+}

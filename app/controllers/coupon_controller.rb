@@ -14,6 +14,7 @@ class CouponController < ApplicationController
     @banners = get_banner_data
     @top_keywords = get_hot_keywords_data.sample(7)
     @items_9kuai9 = get_coupon_9kuai9_data
+    @items_jd_static = [{"id" => 3,"title" => "柏云森 双重隔板 储物床","price_info" => "558.0元","pic_url" => "https://m.360buyimg.com/ceco/jfs/t16378/217/2173835764/374835/13bbedf9/5a96c8edN4fe0d171.jpg!q70.jpg"},{"id" => 4,"title" => "三星 Note20 Ultra 5G手机","price_info" => "9199.0元（京东自营 热卖1.1万件）","pic_url" => "https://m.360buyimg.com/ceco/jfs/t1/149113/6/4603/71598/5f2a66ceEb2ada927/0afed4942dde8fab.jpg!q70.jpg"},{"id" => 5,"title" => "阿迪达斯 无痕橡胶 足球鞋","price_info" => "1283.04元","pic_url" => "https://m.360buyimg.com/ceco/jfs/t1/105860/28/19658/123082/5e9fd23eEa73456ba/02840c3e28b783a4.jpg!q70.jpg"},{"id" => 6,"title" => "旭福 高纯净易吸收 磷虾油","price_info" => "458.0元（京东自营）","pic_url" => "https://m.360buyimg.com/ceco/jfs/t1/131650/26/5955/340581/5f27dd88E0e25fda9/6f715a0da21368e1.png"},{"id" => 7,"title" => "vivo S7 5G手机","price_info" => "2798.0元（京东自营 近期爆款 热卖2.0万件）","pic_url" => "https://m.360buyimg.com/ceco/jfs/t1/122362/36/8850/47232/5f295bf6E5920468b/fdacbf3366737915.jpg!q70.jpg"},{"id" => 8,"title" => "美心 香滑浓郁 流心奶黄月饼","price_info" => "318.0元（需领东券30元 近期爆款）","pic_url" => "https://m.360buyimg.com/ceco/jfs/t1/134604/6/5408/75161/5f1d3cc7E1b416ef0/04ecaddcf31f1bb7.jpg!q70.jpg"},{"id" => 9,"title" => "Puma 专项运动 板鞋","price_info" => "1499.0元（近期爆款）","pic_url" => "https://m.360buyimg.com/ceco/jfs/t1/87080/4/18783/87499/5e992d2bE8ed08393/0bd11a9320c3bfdf.jpg!q70.jpg"},{"id" => 10,"title" => "3M 棱镜结构 车贴","price_info" => "699.0元（京东自营）","pic_url" => "https://m.360buyimg.com/ceco/jfs/t3082/312/5158038116/477978/c3fcbd3e/58661421N509c5879.jpg!q70.jpg"},{"id" => 11,"title" => "阿迪达斯 轻薄简约 运动鞋","price_info" => "799.0元","pic_url" => "https://m.360buyimg.com/ceco/jfs/t1/114776/10/1080/63221/5e946152Ec77592c2/3ba256b6dd8458db.jpg!q70.jpg"},{"id" => 12,"title" => "三宅一生 针扣牛皮 男表","price_info" => "4390.0元（京东自营）","pic_url" => "https://m.360buyimg.com/ceco/jfs/t1/128279/28/5715/89997/5ef7f5a4E21738d65/de12ffebf47a786d.jpg!q70.jpg"},{"id" => 13,"title" => "旭福 复合维生素 泡腾片","price_info" => "89.0元（京东自营 热卖1.2万件）","pic_url" => "https://m.360buyimg.com/ceco/jfs/t1/127650/9/5039/144749/5ee9bcecEf92e5f7d/b687c312e60075be.jpg!q70.jpg"},{"id" => 14,"title" => "迪士尼 透气多隔层 书包","price_info" => "89.0元（京东自营）","pic_url" => "https://m.360buyimg.com/ceco/jfs/t1/134975/38/2263/213270/5ee60f60E37357811/e38ccdf3663e0be5.jpg!q70.jpg"},{"id" => 15,"title" => "美的 搪瓷易清洁内胆 电烤箱","price_info" => "429.0元（京东自营 热卖1.5万件）","pic_url" => "https://img20.360buyimg.com/ceco/jfs/t1/119619/37/3450/242468/5eaff34bE601381e7/55bac022b3ddcd8e.jpg!q70.jpg"},{"id" => 16,"title" => "全友 简约可伸缩 电脑桌","price_info" => "1116.0元","pic_url" => "https://img20.360buyimg.com/ceco/jfs/t1/131337/22/1927/55098/5ee03975Eacdba3d7/bd24f9023b419873.jpg!q70.jpg"},{"id" => 17,"title" => "小米 蓝牙便携 无线鼠标","price_info" => "89.0元（京东自营 热卖4.9万件）","pic_url" => "https://img20.360buyimg.com/ceco/jfs/t1/139292/30/152/58051/5edcdb75Eda7885ef/52c60bff4a2e2510.jpg!q70.jpg"},{"id" => 18,"title" => "格澜帝尔 玄关美式屏风门厅 酒柜","price_info" => "3750.0元","pic_url" => "https://img20.360buyimg.com/ceco/jfs/t1/140748/6/308/102395/5edf651bE48af48d7/f8edb1e4047a302a.jpg!q70.jpg"},{"id" => 19,"title" => "香可 现代简约 电脑桌","price_info" => "199.0元（京东自营）","pic_url" => "https://img20.360buyimg.com/ceco/jfs/t1/133307/26/1041/425624/5ed4ae4aE692d6ff1/fd848401de3942a6.jpg!q70.jpg"},{"id" => 20,"title" => "全友 现代简约 茶几电视柜组合套装","price_info" => "3091.0元","pic_url" => "https://img20.360buyimg.com/ceco/jfs/t1/97007/24/16491/214827/5e7d588bE38b76656/e5467a4a0569b93d.jpg!q70.jpg"}]
     @path = "http://api.uuhaodian.com/uu/home_list"
     @keyword = ''
     #@kk = $kk.sample(20)
@@ -282,6 +283,34 @@ class CouponController < ApplicationController
       return
     end
   end
+
+  def jd_static_product
+    url = "http://api.uuhaodian.com/jduu/zhinan_jd_static_products?id=#{params[:id]}"
+    @id = params[:id]
+    json = {}
+    @items = []
+    set_cookie_channel
+    begin
+      result = Net::HTTP.get(URI(URI.encode(url)))
+      json = JSON.parse(result)
+      if json["status"] != 1
+        not_found
+        return
+      end
+    rescue
+      not_found
+      return
+    end
+    @detail = json["info"]
+    @items = json["related"]
+    @top_keywords = get_hot_keywords_data.sample(7)
+    @path = "http://api.uuhaodian.com/uu/goods_list"
+    if !is_robot? && is_device_mobile?
+      redirect_to "/jd/buy/#{@detail["sku"]}"
+      return
+    end
+  end
+
   def jd_buy
     if is_robot?
       render "not_found", status: 403

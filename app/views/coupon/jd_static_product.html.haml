@@ -1,0 +1,23 @@
+- title("#{@detail["title"].split.join}_优优好店")
+- keywords("#{@detail["title"].split.join},#{@detail["title"].split.join(',')}")
+- head_desc("#{@detail["recommends"][0]}-#{@detail["title"]}")
+- path("/jdhh/#{@id}/")
+- mobile_url("http://www.uuhaodian.com/jdhh/#{@id}/")
+
+= render partial: "header_common"
+.wrapper1200{style: "overflow:visible;z-index:98;"}
+  = render partial: "jd_static_quan_detail_content"
+%aside.wrapper1200
+  - if @items.size > 0
+    .item-list-top{style: "margin-top: 10px;padding-left:0;z-index:1;"}
+      %span.left{style: "padding-left:15px;"} 发现好货
+      = render partial: "wide_banner_jd_static", locals: {items: @items}
+  .zk-list.clearfix#jdtongdian{style: "min-height:0;"}
+  .rel-zk-area
+    %p.head
+      %span 更多推荐
+  .zk-list.clearfix#couponList
+  = render partial: "lanlan_load_more", locals: {path: @path, pagesize: 20, sort_type: 7, pinyin: '', keyword: @detail["title"].split.last, cid: 0,sort: 7, type: 0}
+
+= render partial: "footer"
+= render partial: "sider_fixed_area"

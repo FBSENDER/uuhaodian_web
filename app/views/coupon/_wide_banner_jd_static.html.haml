@@ -1,0 +1,35 @@
+.wide-banner.swiper-container.swiper-container-horizontal
+  .swiper-wrapper
+    .swiper-slide
+      - items[0,6].each_with_index do |item, index|
+        %a{href: "/jdhh/#{item["id"]}/#coupon", onclick: "ga_event(this);", data:{ga: "wide_banner:wide_banner:wide_banner"}}
+          .item{style: "#{'margin-left:90px' if index == 0}"}
+            %img{src: "#{item["pic_url"]}"}
+            %p.title{style: "height: 16px;"} #{item["title"].split.join}
+            %p.price{style: "height: 42px;"} #{item["price_info"]}
+    .swiper-slide
+      - if items.size > 6
+        - items[6,6].each_with_index do |item, index|
+          %a{href: "/jdhh/#{item["id"]}/#coupon", onclick: "ga_event(this);", data:{ga: "wide_banner:wide_banner:wide_banner"}}
+            .item{style: "#{'margin-left:90px' if index == 0}"}
+              %img{src: "#{item["pic_url"]}"}
+              %p.title{style: "height: 16px;"} #{item["title"].split.join}
+              %p.price{style: "height: 42px;"} #{item["price_info"]}
+    .swiper-slide
+      - if items.size > 12
+        - items[12,6].each_with_index do |item, index|
+          %a{href: "/jdhh/#{item["id"]}/#coupon", onclick: "ga_event(this);", data:{ga: "wide_banner:wide_banner:wide_banner"}}
+            .item{style: "#{'margin-left:90px' if index == 0}"}
+              %img{src: "#{item["pic_url"]}"}
+              %p.title{style: "height: 16px;"} #{item["title"].split.join}
+              %p.price{style: "height: 42px;"} #{item["price_info"]}
+    .swiper-slide
+      - if items.size > 18
+        - items[18,6].each_with_index do |item, index|
+          %a{href: "/jdhh/#{item["id"]}/#coupon", onclick: "ga_event(this);", data:{ga: "wide_banner:wide_banner:wide_banner"}}
+            .item{style: "#{'margin-left:90px' if index == 0}"}
+              %img{src: "#{item["pic_url"]}"}
+              %p.title{style: "height: 16px;"} #{item["title"].split.join}
+              %p.price{style: "height: 42px;"} #{item["price_info"]}
+  .swiper-button-prev
+  .swiper-button-next

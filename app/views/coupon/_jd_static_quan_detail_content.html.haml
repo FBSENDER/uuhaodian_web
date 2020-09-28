@@ -1,61 +1,40 @@
 - coupon = @detail
-- buy_url = @detail["coupon_url"] == '' ? "/jd/buy/#{@detail["item_id"]}/" : "/jd/buy/#{@detail["item_id"]}/?coupon=#{URI.encode_www_form_component(@detail["coupon_url"])}"
-- c_url = @detail["coupon_url"] == '' ? "/jd/buy_url/#{@detail["item_id"]}/" : "/jd/buy_url/#{@detail["item_id"]}/?coupon=#{URI.encode_www_form_component(@detail["coupon_url"])}"
+- buy_url = @detail["coupon"]["coupon_url"] == '' ? "/jd/buy/#{@detail["sku"]}/" : "/jd/buy/#{@detail["sku"]}/?coupon=#{URI.encode_www_form_component(@detail["coupon"]["coupon_url"])}"
+- c_url = @detail["coupon"]["coupon_url"] == '' ? "/jd/buy_url/#{@detail["sku"]}/" : "/jd/buy_url/#{@detail["sku"]}/?coupon=#{URI.encode_www_form_component(@detail["coupon"]["coupon_url"])}"
 
 #coupon.zk-content
   .img-area
     %a{href: "#{buy_url}", title: "#{coupon['title']}", target: "_blank", onclick: "_hmt.push(['_trackEvent', '领券购买', 'click', '京东详情页'])"}
-      %img#cover_image{src: "#{coupon['pict_url']}", alt: "#{coupon['title']}"}
+      %img#cover_image{src: "#{coupon['pics'][0]}", alt: "#{coupon['title']}"}
   .info-area
     .title
       %h1
-        #{coupon['title']}
+        #{coupon['title'].split.join}
     %p.recommend
-      微信扫一扫右侧二维码，关注公众号"UU好店"，领券更方便！现已支持淘宝天猫、京东、拼多多优惠券领取，还有不定期红包！
-    %input{id: "endTime", value: "#{coupon['end_time']}", type: "hidden"}
+      - coupon["recommends"].each do |re|
+        #{re}
+        %br
+    %input{id: "endTime", value: "", type: "hidden"}
     .small-img-area
-      - coupon["images"][0,6].each_with_index do |img_url, index|
+      - coupon["pics"][0,6].each_with_index do |img_url, index|
         %img.small_img{src: "#{img_url}", style:"#{'margin-left:0' if index == 0}"}
     .banner
       %img{src: "/img/lbanner1.png"}
       %p{style: "text-align:center;color:#ff2b22;line-height:25px;"} 关注"UU好店"公众号
       %p{style: "text-align:center;color:#ff2b22;line-height:25px;"} 查券-淘宝/京东/拼多多
     .platform
-      %span 京东#{coupon["owner"] == 'g' ? '自营' : ''} - 
+      %span 京东 - 
       - if coupon["shop_id"].to_i > 0
         %a{href: "/jdshop/#{coupon["shop_id"]}/"}
           %span #{coupon["shop_title"]}
       - else
         %span #{coupon["shop_title"]}
-      - if coupon["sales"] != 0 
-        %span - 已有
-        %span{style: "color:#FF2B22"} #{coupon["sales"]}
-        %span 人购买 
     .stat
       %p.price-area
         %span.price
-          - if coupon["price_type"] == 1 && coupon["coupon_amount"] > 0
-            %span.oprice 拼购价￥#{coupon["lowest_price"]}&nbsp;&nbsp;
-          - elsif coupon["price_type"] == 2 && coupon["coupon_amount"] > 0
-            %span.oprice 秒杀价￥#{coupon["lowest_price"]}&nbsp;&nbsp;
-          - else
-            %span.oprice 原价￥#{coupon["o_price"]}&nbsp;&nbsp;
-          ￥
-          %em.int{style: "padding:0"}> #{coupon['lowest_coupon_price'].to_i}
-          - if coupon['lowest_coupon_price'].to_s.include?('.')
-            %em.decimal> .#{coupon['lowest_coupon_price'].to_s.sub(/\d+\./,'')}
-          - else
-            %em.decimal> .00
-          - if coupon["coupon_amount"] > 0
-            %i 券后价
-          - elsif coupon["price_type"] == 1
-            %i 拼购价
-          - elsif coupon["price_type"] == 2
-            %i 秒杀价
-          - else
-            %i 现价
+          #{coupon["price_info"]}
       .buy-area
-        - if coupon["coupon_amount"] > 0
+        - if coupon["coupon"]["coupon_amount"] > 0
           %p#eventTimeStr.desc 有效期
         - else
           %p.desc 扫描上方二维码，天天享优惠！
@@ -76,15 +55,15 @@
             %i
             %i
             %i
-          - if coupon['coupon_amount'] == 0
+          - if coupon["coupon"]['coupon_amount'] == 0
             去京东购买
           - else
             领券立减
-            %em #{coupon['coupon_amount']}
+            %em #{coupon["coupon"]['coupon_amount']}
             元
         #qrcode_cv{style: "width: 219px;height: 200px;margin: 0;background-color:#fff;display:none;"}
           #qrcode_in{style: "width: 160px;height: 160px;margin: 20px auto 10px;"}
-          %p{style: "text-align:center;color:#787878;font-size:14px;"} 手机京东扫啊扫 直接#{coupon['coupon_amount'].to_i == 0 ? '购买' : '领券'}
+          %p{style: "text-align:center;color:#787878;font-size:14px;"} 手机京东扫啊扫 直接#{coupon["coupon"]['coupon_amount'].to_i == 0 ? '购买' : '领券'}
 
 :javascript
   var canvas_callback = function(data){
