@@ -1,0 +1,40 @@
+<% title(@title) %>
+<% head_desc(@description) %>
+<% keywords(@page_keywords) %>
+<% path(@path) %>
+
+<%= render partial: "header" %>
+<article style="margin-top: 55px;">
+  <div class="header-area">
+    <h1><%= @h1 %></h1>
+    <p>This article brings you the recommendation of Top 10 best <%= @keyword %>, contains the purchase reason, reference price, current promotion, and picture preview. Let's have a look!</p>
+  </div>
+  <% @items.each_with_index do |item, index| %>
+    <div class="goods-item-disc">
+      <h2>TOP <%= index + 1%> - <%= item["title"] %></h2>
+      <div class="img-area">
+        <amp-img src="<%= item["pic_url"] %>" width="350" height="350" layout="responsive"></amp-img>
+      </div>
+      <p class="recommend">Purchase Reaseon - <%= item["disc"] %></p>
+      <p class="price-info"><%= item["price_info"] %></p>
+      <p class="more">
+        <a href="/en/goods_<%= item["id"] %>/" class="btn">See Details</a>
+      </p>
+    </div>
+  <% end %>
+  <div class="ks-area">
+    <p>Related Products: </p>
+    <p>
+      <% @ks.each do |k| %>
+        <a href="/en/popular/<%= URI.encode(k.downcase) %>/" class="btn"><%= k.titleize %></a>
+      <% end %>
+    </p>
+    <% if @num >= 20 %>
+      <p><a href="/en/new_release/<%= URI.encode(@keyword.downcase) %>/">New Releases In <%= @keyword %></a></p>
+    <% end %>
+  </div>
+  <div class="footer-area">
+    <p>This is what this article brings you about Top 10 Best <%= @keyword %>.</p>
+    <p>Thank you for reading.</p>
+  </div>
+</article>

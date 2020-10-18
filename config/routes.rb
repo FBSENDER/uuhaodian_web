@@ -52,4 +52,11 @@ Rails.application.routes.draw do
   get "/core_1_:id", to: "coupon#core_tb", id: /\d+/
   get "/core_2_:id", to: "coupon#core_jd", id: /\d+/
 
+  #en
+  get "/en/", to: "en#home"
+  get "/en/goods_:id", to: "en#goods", id: /\d+/
+  get "/en/popular/:keyword", to: "en#popular"
+  get "/en/new_release/:keyword", to: "en#new_release"
+
+
 end

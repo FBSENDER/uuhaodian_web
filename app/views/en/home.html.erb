@@ -1,0 +1,43 @@
+<% title(@title) %>
+<% head_desc(@description) %>
+<% keywords(@page_keywords) %>
+<% path(@path) %>
+
+<%= render partial: "header" %>
+<article style="margin-top: 55px;">
+  <div class="ks-area">
+    <p>
+      <% @ks.split(',').each do |k| %>
+        <a href="/en/popular/<%= URI.encode(k.downcase) %>/" class="btn"><%= k.titleize %></a>
+      <% end %>
+    </p>
+  </div>
+  <div class="goods-area">
+    <% @items.each do |item| %>
+      <div class="goods-item">
+        <div class="img">
+          <a href="/en/goods_<%= item["id"] %>/">
+            <amp-img src="<%= item["pic_url"] %>" width="120" height="120"></amp-img>
+          </a>
+        </div>
+        <div class="info">
+          <div class="title">
+            <a href="/en/goods_<%= item["id"] %>/" style="color: #3b4351;">
+              <%= item["title"] %>
+            </a>
+          </div>
+          <div class="price"><%= item["price_info"] %></div>
+          <div class="more">
+            <% item["keywords"].each do |k| %>
+              <% if k[1] >= 10%>
+                <a href="/en/popular/<%= URI.encode(k[0].downcase) %>/" style="padding-right: 10px;"><%= k[0].titleize %></a>
+              <% else %>
+                <span style="padding-right: 10px;"><%= k[0].titleize %></span>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</article>

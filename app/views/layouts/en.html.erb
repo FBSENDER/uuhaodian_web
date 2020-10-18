@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html amp lang="en">
+  <head>
+    <meta charset="utf-8">
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+    <script async custom-element="amp-carousel" src="https://cdn.ampproject.org/v0/amp-carousel-0.1.js"></script>
+    <script async custom-element="amp-sidebar" src="https://cdn.ampproject.org/v0/amp-sidebar-0.1.js"></script>
+    <title><%= yield(:title) %></title>
+    <meta name="keywords" content="<%= yield(:keywords)%>">
+    <meta name="description" content="<%= yield(:head_desc)%>">
+    <link rel="canonical" href="<%= yield(:path) %>">
+    <link rel="amphtml" href="<%= yield(:path) %>">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <style amp-custom>
+      <%= render partial: "layouts/amp_spectre_css" %>
+      body{
+        background-color: #f7f7f7;
+      }
+      .my-body{
+        max-width: 960px;
+        margin: 0 auto;
+      }
+      .sno{
+        display: none;
+      }
+      .headerbar {
+        height: 50px;
+        position: fixed;
+        z-index: 999;
+        top: 0;
+        width: 100%;
+        align-items: center;
+        background-color: #ff4747;
+        color: #ffffff;
+        max-width: 960px;
+      }
+      .site-name {
+        margin: auto;
+        height: 50px;
+        line-height: 50px;
+        text-align: center;
+      }
+      .hamburger {
+        padding: 0 10px;
+        float: left;
+        height: 50px;
+        line-height: 50px;
+      }
+      .sidebar {
+        padding: 10px;
+        margin: 0;
+      }
+      .sidebar > li {
+        list-style: none;
+        margin-bottom:10px;
+      }
+      .sidebar a {
+        text-decoration: none;
+      }
+      .close-sidebar {
+        font-size: 1.5em;
+        padding-left: 5px;
+      }
+      article {
+        margin-top: 50px;
+      }
+      .goods-area{
+        margin-top: 10px;
+        background-color: #ffffff;
+        padding: 10px;
+        margin-bottom: 20px;
+      }
+      .goods-item{
+        display: flex;
+        width: 100%;
+        max-width: 960px;
+        border-top: 2px solid #f7f7f7;
+        height: 130px;
+        padding: 5px 0;
+      }
+      .goods-item .info{
+        padding: 0 10px;
+      }
+      .goods-item .info .img{
+        width: 120px;
+        margin: 0 auto;
+      }
+      .goods-item .info .title{
+        height: 40px;
+        line-height: 20px;
+        overflow: hidden;
+        font-weight: bold;
+      }
+      .goods-item .info .price{
+        color: #ff4747;
+        line-height: 20px;
+        height: 40px;
+        overflow: hidden;
+        margin-top: 10px;
+      }
+      .goods-item .info .more{
+        line-height: 30px;
+        height: 30px;
+        overflow: hidden;
+        font-size: 14px;
+      }
+      .header-area{
+        padding: 15px;
+        background-color: #FFFFFF;
+      }
+      .header-area h1{
+        font-size: 20px;
+      }
+      .goods-item-disc{
+        margin-top: 10px;
+        background-color: #ffffff;
+        padding: 15px;
+      }
+      .goods-item-disc h2{
+        font-size: 18px;
+      }
+      .goods-item-disc .img-area{
+        margin: 20px auto;
+        max-width: 350px;
+      }
+      .goods-item-disc .price-info{
+        color: #ff4747;
+        text-align: right;
+      }
+      .goods-item-disc .recommend{
+        line-height: 30px;
+      }
+      .goods-item-disc .more{
+        text-align: right;
+      }
+      .ks-area{
+        margin-top: 10px;
+        padding: 15px;
+        background-color: #FFFFFF;
+      }
+      .ks-area a{
+        margin-bottom: 10px;
+      }
+      .footer-area{
+        margin-top: 10px;
+        padding: 15px;
+        background-color: #FFFFFF;
+        margin-bottom: 20px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="my-body">
+      <%= yield %>
+    </div>
+    <amp-sidebar id="sidebar1" layout="nodisplay" side="left">
+      <div role="button" aria-label="close sidebar" on="tap:sidebar1.toggle" tabindex="0" class="close-sidebar">✕</div>
+      <ul class="sidebar">
+        <li><a href="/en/">Home</a></li>
+        <li><a href="/en/popular/sweater/">Sweater</a></li>
+        <li><a href="/en/popular/bluetooth%20audio/">Bluetooth Audio</a></li>
+        <li><a href="/en/popular/high-heeled%20shoes/">High-heeled Shoes</a></li>
+        <li><a href="/en/popular/athletic%20wear/">Athletic Wear</a></li>
+        <li><a href="/en/popular/yoga%20mat/">Yoga Mat</a></li>
+      </ul>
+    </amp-sidebar>
+    <amp-analytics type="gtag" data-credentials="include">
+      <script type="application/json">
+        {
+          "vars" : {
+            "gtag_id": "UA-96984648-11",
+            "config" : {
+              "UA-96984648-11": { "groups": "default" }
+            }
+          }
+        }
+      </script>
+    </amp-analytics>
+  </body>
+</html>
