@@ -8,6 +8,7 @@ class ApplicationController < ActionController::Base
   $coupon_bang_data = {}
   $kk = []
   $home_page_json = {}
+  $jd_seo_data = {}
 
   def get_home_page_json
     if $home_page_json["update_at"].nil? || $home_page_json["data"].nil? || Time.now.to_i - $home_page_json["update_at"] > 3600
@@ -57,6 +58,22 @@ class ApplicationController < ActionController::Base
       end
     end
     return $cate_data["cate"]
+  end
+
+  def get_jd_seo_data
+    if $jd_seo_data.nil? || $jd_seo_data["update_at"].nil? || Time.now.to_i - $jd_seo_data["update_at"] > 7200
+      url = "http://api.uuhaodian.com/jduu/jd_seo_data"
+      result = Net::HTTP.get(URI(url))
+      json = JSON.parse(result)
+      if json["status"] == 1 
+        $jd_seo_data = json
+        $jd_seo_data["update_at"] = Time.now.to_i
+        return $jd_seo_data
+      else
+        return {"status" => 0}
+      end
+    end
+    return $jd_seo_data
   end
 
   def get_hot_keywords_data

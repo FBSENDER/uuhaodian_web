@@ -22,3 +22,4 @@ Capfile
 /config/deploy/staging.rb
 /config/deploy.rb
 .DS_Store
+/public/seo_articles/

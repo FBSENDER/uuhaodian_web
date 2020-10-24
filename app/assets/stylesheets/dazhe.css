@@ -685,3 +685,15 @@ input[type='checkbox'].switch:checked::after {
     color: #FF2A24;
     border-bottom-color: #FF2A24;
 }
+.dazhe .article-container{
+  display: block;
+  margin: auto;
+}
+.dazhe .article-container article{
+  padding: 10px;
+}
+.dazhe .article-container aside{
+  margin: 10px 0;
+  width: 100%;
+
+}

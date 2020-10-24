@@ -2109,3 +2109,200 @@ input[type='checkbox'].switch:checked::after {
 .qa-area .answer{
   line-height: 30px;
 }
+
+.article-container{
+  display: flex;
+  margin: 10px auto;
+}
+.article-container article{
+  background-color: #fff;
+  padding: 20px;
+}
+.article-container article h1{
+  font-size: 26px;
+  margin-bottom: 5px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #f6f6f6;
+}
+.article-container article h2{
+  font-size: 22px;
+  margin-bottom: 5px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #f6f6f6;
+}
+.article-container article h3{
+  font-size: 18px;
+  margin-bottom: 5px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #f6f6f6;
+}
+.article-container article img{
+  width: 90%;
+  max-width: 500px;
+  margin: 20px auto;
+}
+.article-container article p{
+  font-size: 16px;
+  line-height: 30px;
+  padding: 10px 0;
+}
+.article-container article p a{
+  color: #000;
+  font-style:italic;
+  text-decoration:underline;
+}
+.article-container article ul{
+  padding: 20px 20px 20px 40px;
+  list-style:square;
+}
+.article-container article ul li{
+  font-size: 16px;
+  line-height: 30px;
+}
+
+.article-container .tb-area{
+  width: 90%;
+  max-width: 500px;
+  margin: 20px auto;
+  display: flex;
+  padding: 10px;
+  border-radius: 10px;
+  border: 2px solid #F6F6F6;
+}
+.article-container .tb-area:hover{
+  border: 2px solid #FF6434;
+}
+
+.article-container .tb-area img{
+  height: 120px;
+  width: 120px;
+  margin: auto;
+}
+.article-container .tb-area .tb-info{
+  margin-left: 10px;
+  border-left: 2px solid #f6f6f6;
+  padding-left: 10px;
+  width: 100%;
+}
+.article-container .tb-area .tb-info .title{
+  font-size: 14px;
+  line-height: 20px;
+  height: 40px;
+  overflow:hidden;
+  padding: 0;
+}
+
+.article-container .tb-area .tb-info .platform{
+  font-size: 12px;
+  color:#FC4D52;
+  border:1px solid #FC4D52;
+  border-radius:3px;
+  padding: 1px 3px;
+  margin-right: 5px;
+}
+.article-container .tb-area .tb-info .num{
+  margin-top: 30px;
+  height: 20px;
+  line-height: 20px;
+  padding: 0;
+  font-size: 12px;
+  color:#aaa;
+  font-weight:bold;
+}
+.article-container .tb-area .tb-info .price-info{
+  margin-top: 30px;
+  height: 40px;
+  line-height: 20px;
+  padding: 0;
+  font-size: 12px;
+  color:#FC4D52;
+  font-weight:bold;
+}
+.article-container .tb-area .tb-info .right{
+  float: right;
+}
+.article-container .tb-area .tb-info .price{
+  margin-top: 5px;
+  height: 20px;
+  line-height: 20px;
+  padding: 0;
+}
+.article-container .tb-area .tb-info .price .pri{
+  font-size: 12px;
+  color:#FC4D52;
+  font-weight:bold;
+}
+.article-container .tb-area .tb-info .price .b{
+  font-size: 16px;
+  color:#FC4D52;
+  font-weight:bold;
+}
+.article-container .tb-area .tb-info .quan{
+  float: right;
+  padding: 0;
+  position: relative;
+  z-index: 1;
+  zoom: 1;
+  top: 0;
+  overflow: hidden;
+}
+.article-container .tb-area .tb-info .quan i{
+  background: -moz-linear-gradient(left,#FF5E5E 0,#FF927C 100%);
+  background: -webkit-gradient(linear,left top,left right,color-stop(0,#FF5E5E),color-stop(100%,#FF927C));
+  background: -webkit-linear-gradient(left,#FF5E5E 0,#FF927C 100%);
+  background: -o-linear-gradient(left,#FF5E5E 0,#FF927C 100%);
+  background: -ms-linear-gradient(left,#FF5E5E 0,#FF927C 100%);
+  background: linear-gradient(to left,#FF5E5E 0,#FF927C 100%);
+  position: relative;
+  z-index: 1;
+  zoom: 1;
+  font-style: normal;
+  display: block;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -o-border-radius: 3px;
+  -ms-border-radius: 3px;
+  font-size: 12px;
+  min-width: 50px;
+  text-align: center;
+  padding: 1px 10px;
+  color: #fff;
+  font-weight: bold;
+}
+.article-container .tb-area .tb-info .quan i:before, .article-container .tb-area .tb-info .quan i:after{
+  position: absolute;
+  z-index: 1;
+  zoom: 1;
+  left: -4px;
+  top: 50%;
+  margin-top: -3px;
+  background: #fff;
+  display: block;
+  width: 5px;
+  height: 5px;
+  content: "";
+  border-radius: 10px;
+  border: 1px solid #fff;
+} 
+.article-container .tb-area .tb-info .quan i:before{
+  left: auto;
+  right: -4px;
+}
+.article-container aside{
+  margin-left: 10px;
+  width: 290px;
+  background-color: #fff;
+  padding: 20px;
+}
+.article-container aside h3{
+  font-size: 18px;
+  margin-bottom: 5px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #f6f6f6;
+}
+.article-container aside p{
+  font-size: 16px;
+  line-height: 20px;
+  padding: 10px 0;
+}

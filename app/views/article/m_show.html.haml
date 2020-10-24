@@ -1,0 +1,36 @@
+- title("#{@title} - 优优好店")
+- keywords(@keywords)
+- head_desc(@description)
+
+.dazhe
+  .header_pr.header_red.transition
+    .icon_header
+      .search
+        %i
+        %a{href: "/dz_search/", onclick: "_hmt.push(['_trackEvent', '顶部点击', 'click', 'dazhe'])"}
+          %p 输入关键词，可以搜索商品及优惠
+  .article-container
+    %article
+      = @content.html_safe
+    %aside
+      %h3 更多文章
+      - @articles.each do |a|
+        %a{href: "/article/#{a["id"]}.html"}
+          %p #{a["title"]}
+      %h3{style: "margin-top: 20px;"} 好货推荐
+      - @products.each do |pr|
+        %a{href: "/jdhh/#{pr["id"]}/"}
+          %p #{pr["title"]}
+      %h3{style: "margin-top: 20px;"} 好店推荐
+      - @shops.each do |shop|
+        %a{href: "/jdshop/#{shop["shop_id"]}/"}
+          %p #{shop["shop_name"]}
+      %h3{style: "margin-top: 20px;"} 京东精选
+      - @cores.each do |core|
+        %a{href: "/core_2_#{core["id"]}/"}
+          %p 京东#{core["keyword"]}
+  .footer
+    %a.home.zh{href: "http://m.uuhaodian.com/index.php?r=index/wap&source=dazhe", target: "_blank", onclick:"_hmt.push(['_trackEvent', '首页', 'click', 'dazhe'])"}
+      %img.icon{src: "http://www.uuhaodian.com/favicon.ico"}
+      .text 优优好店首页
+    %a#more_btn.btn.zh{href: "https://13ifsgnd.kuaizhan.com/#/app/down?appId=550416&productType=1&userId=0", target: "_blank", onclick:"_hmt.push(['_trackEvent', '下载app', 'click', 'dazhe'])"} 下载APP获取更多优惠
