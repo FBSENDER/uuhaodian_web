@@ -13,6 +13,7 @@ class ArticleController < ApplicationController
       not_found
       return
     end
+    set_cookie_channel
     @top_keywords = get_hot_keywords_data.sample(7)
     @title = json["title"]
     @keywords = json["k"]
