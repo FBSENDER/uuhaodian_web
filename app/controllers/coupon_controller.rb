@@ -724,6 +724,10 @@ class CouponController < ApplicationController
       not_found
       return
     end
+    if is_robot?
+      render "not_found", status: 403
+      return
+    end
     url = "https://mall.jd.com/index-#{shop_id}.html"
     if is_device_mobile?
       url = "https://shop.m.jd.com/?shopId=#{shop_id}"
@@ -740,6 +744,10 @@ class CouponController < ApplicationController
   end
 
   def jd_diy_buy
+    if is_robot?
+      render "not_found", status: 403
+      return
+    end
     if params[:url].nil?
       not_found
       return
