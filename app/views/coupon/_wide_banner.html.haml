@@ -4,7 +4,7 @@
       - items[0,6].each_with_index do |item, index|
         %a{href: "/yh/#{item["itemId"]}/#coupon", onclick: "ga_event(this);", data:{ga: "wide_banner:wide_banner:wide_banner"}}
           .item{style: "#{'margin-left:90px' if index == 0}"}
-            %img{src: "#{item["coverImage"]}"}
+            %img{src: "#{item["coverImage"].sub('http:', '')}"}
             %p.title #{item["shortTitle"]}
             %p.price 领券#{(item["couponMoney"].to_f * 10/ item["price"].to_f).ceil}折 —— ￥#{item["nowPrice"]}
             - if index < 3
@@ -14,7 +14,7 @@
         - items[6,6].each_with_index do |item, index|
           %a{href: "/yh/#{item["itemId"]}/#coupon", onclick: "ga_event(this);", data:{ga: "wide_banner:wide_banner:wide_banner"}}
             .item{style: "#{'margin-left:90px' if index == 0}"}
-              %img{src: "#{item["coverImage"]}"}
+              %img{src: "#{item["coverImage"].sub('http:', '')}"}
               %p.title #{item["shortTitle"]}
               %p.price 领券#{(item["couponMoney"].to_f * 10/ item["price"].to_f).ceil}折 —— ￥#{item["nowPrice"]}
     .swiper-slide
@@ -22,7 +22,7 @@
         - items[12,6].each_with_index do |item, index|
           %a{href: "/yh/#{item["itemId"]}/#coupon", onclick: "ga_event(this);", data:{ga: "wide_banner:wide_banner:wide_banner"}}
             .item{style: "#{'margin-left:90px' if index == 0}"}
-              %img{src: "#{item["coverImage"]}"}
+              %img{src: "#{item["coverImage"].sub('http:', '')}"}
               %p.title #{item["shortTitle"]}
               %p.price 领券#{(item["couponMoney"].to_f * 10/ item["price"].to_f).ceil}折 —— ￥#{item["nowPrice"]}
   .swiper-button-prev
