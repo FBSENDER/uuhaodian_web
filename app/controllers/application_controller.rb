@@ -49,7 +49,7 @@ class ApplicationController < ActionController::Base
       if json["status"] && json["status"]["code"] == 1001
         $cate_data["cate"] = json["result"].sort{|a, b| a["cid"].to_i <=> b["cid"].to_i}
         $cate_data["cate"].each do |c|
-          c["img_url"] = c["list"][0]["image"]
+          c["img_url"] = c["list"][0]["image"].sub('http:', '')
         end
         $cate_data["update_at"] = Time.now.to_i
         return $cate_data["cate"]
