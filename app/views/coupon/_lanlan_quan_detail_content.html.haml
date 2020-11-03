@@ -7,7 +7,7 @@
 #coupon.zk-content
   .img-area
     %a{href: "#{buy_url}", title: "#{coupon['title']}", target: "_blank", onclick: "_hmt.push(['_trackEvent', '领券购买', 'click', '淘宝详情页'])"}
-      %img#cover_image{src: "#{coupon['coverImage']}", alt: "#{coupon['title']}"}
+      %img#cover_image{src: "#{coupon['coverImage'].sub('http:', '')}", alt: "#{coupon['title']}"}
   .info-area
     .title
       %h1
@@ -20,7 +20,7 @@
     %input{id: "endTime", value: "#{coupon['couponEndTime']}", type: "hidden"}
     .small-img-area
       - coupon["auctionImages"][0,6].each_with_index do |img_url, index|
-        %img.small_img{src: "#{img_url}", style:"#{'margin-left:0' if index == 0}"}
+        %img.small_img{src: "#{img_url.sub('http:', '')}", style:"#{'margin-left:0' if index == 0}"}
     .banner
       %img{src: "/img/lbanner1.png"}
       %p{style: "text-align:center;color:#ff2b22;line-height:25px;"} 关注"UU好店"公众号

@@ -49,7 +49,7 @@ var createLanlanCouponList = function(cl,obj,channel,gaPage){
     htmlstr += '<div class="bottom-info">';
     htmlstr += '<p data-endtime="'+ z.couponEndTime +'" class="time-count"></p>';
     htmlstr += '</div>';
-    htmlstr += '<img data-ga-event="商品_图片:点击:'+ gaPage +'" class="lazy new" data-original="'+ z.coverImage +'" alt="'+z.title +'">';
+    htmlstr += '<img data-ga-event="商品_图片:点击:'+ gaPage +'" class="lazy new" data-original="'+ z.coverImage.replace('http:', '') +'" alt="'+z.title +'">';
     htmlstr += '</div>';
     htmlstr += '<p class="title-area elli">';
     htmlstr += '<span class="post-free">包邮</span>';

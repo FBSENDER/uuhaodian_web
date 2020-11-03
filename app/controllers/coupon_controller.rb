@@ -440,13 +440,13 @@ class CouponController < ApplicationController
     url = ""
     if @collection_type == 1
       @collection_name = "聚特卖"
-      url = "http://api.uuhaodian.com/uu/temai_list"
+      url = "https://api.uuhaodian.com/uu/temai_list"
     elsif @collection_type == 2
       @collection_name = "销量榜"
-      url = "http://api.uuhaodian.com/uu/sale_list"
+      url = "https://api.uuhaodian.com/uu/sale_list"
     elsif @collection_type == 4
       @collection_name = "九块九包邮"
-      url = "http://api.uuhaodian.com/uu/jiukuaijiu_list"
+      url = "https://api.uuhaodian.com/uu/jiukuaijiu_list"
     else
       not_found
       return

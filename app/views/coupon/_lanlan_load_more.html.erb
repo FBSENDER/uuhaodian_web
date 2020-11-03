@@ -38,7 +38,7 @@ var callback = function(data){
     Util.createLanlanCouponList(data.result,couponList,channel,'首页');
     if(data.result.length < pagesize)
     {
-      path = "http://api.uuhaodian.com/uu/tb_goods_list";
+      path = "https://api.uuhaodian.com/uu/tb_goods_list";
       load = 1;
       page = 1;
       getLanlanCouponList();
@@ -54,7 +54,7 @@ var callback = function(data){
   else if(data.status == 1){
     Util.createTaobaoCouponList(data.results,couponList,channel,'首页');
     if(data.results.length < pagesize){
-      path = "http://api.uuhaodian.com/uu/tb_goods_item_list";
+      path = "https://api.uuhaodian.com/uu/tb_goods_item_list";
       load = 1;
       page = 1;
       getLanlanCouponList();

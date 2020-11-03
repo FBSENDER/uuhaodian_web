@@ -104,7 +104,7 @@ Util.createLanlanCouponList = function(cl,obj,channel,gaPage){
     htmlstr += '<div class="bottom-info">';
     htmlstr += '<p data-endtime="'+ z.couponEndTime +'" class="time-count"></p>';
     htmlstr += '</div>';
-    htmlstr += '<img data-ga-event="商品_图片:点击:'+ gaPage +'" class="lazy new" data-original="'+ z.coverImage +'" alt="'+z.title +'">';
+    htmlstr += '<img data-ga-event="商品_图片:点击:'+ gaPage +'" class="lazy new" data-original="'+ z.coverImage.replace('http:', '') +'" alt="'+z.title +'">';
     htmlstr += '</div>';
     htmlstr += '<p class="title-area">';
     htmlstr +=  z.shortTitle +'</p>';
@@ -294,7 +294,7 @@ Util.createLanlanCouponFluid = function(cl,obj,channel,gaPage){
     htmlstr += '<div class="item" onclick="ga_event(this);" data-ga="信息流详情:小时风云榜:小时风云榜_信息流详情">';
     htmlstr += '<a href="'+ buy_url +'">';
     htmlstr += '<div class="img-area">';
-    htmlstr += '<img data-ga-event="商品_图片:点击:'+ gaPage +'" class="lazy new" data-original="'+ z.coverImage +'" alt="'+z.
+    htmlstr += '<img data-ga-event="商品_图片:点击:'+ gaPage +'" class="lazy new" data-original="'+ z.coverImage.replace('http:', '') +'" alt="'+z.
       title +'"/>';
     if(page == 1 && i < 3){
       htmlstr += '<span class="top-bang-order">' + (i + 1) + '</span>'
