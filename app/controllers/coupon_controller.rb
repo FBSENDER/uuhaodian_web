@@ -469,15 +469,15 @@ class CouponController < ApplicationController
   def brand
     set_cookie_channel
     @cates = [
-      {"cid" => 3761, "name" => "美食", "img_url"=> "http://qnoss1.lanlanlife.com/0a29c91c030c7d324c7651cddf7e31d2_126x126.png"},
-      {"cid"=> 3767, "name"=> "女装", "img_url"=> "http://qnoss3.lanlanlife.com/de67fe83df5046ac7f3d6042120152c2_126x126.jpg"},
-      {"cid"=> 3758, "name"=> "家居", "img_url"=> "http://qnoss.lanlanlife.com/5174917635791c5eb63bfe482d5fc175_126x126.jpg"},
-      {"cid"=> 3763, "name"=> "美妆", "img_url"=> "http://qnoss.lanlanlife.com/bf45e751fc791ea6cbb743eaeb0d31c1_126x126.jpg"},
-      {"cid"=> 3762, "name"=> "鞋包配饰", "img_url"=> "http://qnoss.lanlanlife.com/5a87f8a441028e199cba8af5188fc06f_126x126.jpg"},
-      {"cid"=> 3765, "name"=> "内衣", "img_url"=> "http://qnoss1.lanlanlife.com/884bc36f08752afbc7d149205f8c1138_126x126.jpg"},
-      {"cid"=> 3764, "name"=> "男装", "img_url"=> "http://qnoss2.lanlanlife.com/98d45a951aa5dca79fd3d251b625122e_126x126.jpg"},
-      {"cid"=> 3760, "name"=> "母婴", "img_url"=> "http://qnoss2.lanlanlife.com/282cd239d5b99379edb68f3009a20c26_126x126.jpg"},
-      {"cid"=> 3759, "name"=> "数码", "img_url"=> "http://qnoss2.lanlanlife.com/740886691d1c742a6a1c028d2c818271_126x126.jpg"}
+      {"cid" => 3761, "name" => "美食", "img_url"=> "https://qnoss1.lanlanlife.com/0a29c91c030c7d324c7651cddf7e31d2_126x126.png"},
+      {"cid"=> 3767, "name"=> "女装", "img_url"=> "https://qnoss3.lanlanlife.com/de67fe83df5046ac7f3d6042120152c2_126x126.jpg"},
+      {"cid"=> 3758, "name"=> "家居", "img_url"=> "https://qnoss.lanlanlife.com/5174917635791c5eb63bfe482d5fc175_126x126.jpg"},
+      {"cid"=> 3763, "name"=> "美妆", "img_url"=> "https://qnoss.lanlanlife.com/bf45e751fc791ea6cbb743eaeb0d31c1_126x126.jpg"},
+      {"cid"=> 3762, "name"=> "鞋包配饰", "img_url"=> "https://qnoss.lanlanlife.com/5a87f8a441028e199cba8af5188fc06f_126x126.jpg"},
+      {"cid"=> 3765, "name"=> "内衣", "img_url"=> "https://qnoss1.lanlanlife.com/884bc36f08752afbc7d149205f8c1138_126x126.jpg"},
+      {"cid"=> 3764, "name"=> "男装", "img_url"=> "https://qnoss2.lanlanlife.com/98d45a951aa5dca79fd3d251b625122e_126x126.jpg"},
+      {"cid"=> 3760, "name"=> "母婴", "img_url"=> "https://qnoss2.lanlanlife.com/282cd239d5b99379edb68f3009a20c26_126x126.jpg"},
+      {"cid"=> 3759, "name"=> "数码", "img_url"=> "https://qnoss2.lanlanlife.com/740886691d1c742a6a1c028d2c818271_126x126.jpg"}
     ]
     @top_keywords = get_hot_keywords_data.sample(7)
     @cid = params[:cid].nil? ? 3761 : params[:cid].to_i

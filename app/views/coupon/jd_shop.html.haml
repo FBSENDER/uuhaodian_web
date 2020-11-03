@@ -31,7 +31,7 @@
         %a{href: "/jd/buy/#{cc["item_id"]}/?coupon=#{URI.encode_www_form_component(c["coupon_url"])}", target: "_blank", onclick: '_hmt.push(["_trackEvent", "店铺优惠券点击", "click", "jd_shop"])', title: "#{@shop_name}#{c["discount"]}元优惠券"}
           .jd-coupon
             .img{style: "overflow:hidden;white-space:nowrap;"}
-              %img{src: "#{cc["pict_url"]}"}
+              %img{src: "#{cc["pict_url"].sub('http:', '')}"}
             .c-content
               .price-area
                 %span.s1 ￥
@@ -52,7 +52,7 @@
       .zk-item
         %a{href: "/jd/#{pr["item_id"]}/#copuon", title: "#{pr["title"]}", onclick: '_hmt.push(["_trackEvent", "热销商品点击", "click", "jd_shop"])'}
           .img-area
-            %img{src: "#{pr["pict_url"]}", alt: "#{pr["title"]}"}
+            %img{src: "#{pr["pict_url"].sub('http:', '')}", alt: "#{pr["title"]}"}
           %p.title-area #{pr["title"]}
           .tag-areas
             %span.tag 热销单品
