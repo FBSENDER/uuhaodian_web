@@ -19,5 +19,13 @@
   .zk-list.clearfix#couponList
   = render partial: "lanlan_load_more", locals: {path: @path, pagesize: 20, sort_type: 7, pinyin: '', keyword: @detail["title"].split.last, cid: 0,sort: 7, type: 0}
 
+  .rel-zk-area
+    %p.head
+      %span 随便看看
+  .link-area{style: "margin-bottom: 30px;"}
+    %a{href: "https://www.iquan.net/dianpu/jd_#{@detail["shop_id"]}/", target: "_blank"} #{@detail["shop_title"]}介绍
+    - @ks.each do |ks|
+      %a{href: "/query/#{URI.encode_www_form_component(ks)}/"} #{ks}
+
 = render partial: "footer"
 = render partial: "sider_fixed_area"

@@ -305,6 +305,11 @@ class CouponController < ApplicationController
     @items = json["related"]
     @top_keywords = get_hot_keywords_data.sample(7)
     @path = "https://api.uuhaodian.com/uu/goods_list"
+    @ks = []
+    @items.each do |item|
+      @ks += item["keywords"].map{|k| k[0]}
+    end
+    @ks = @ks.uniq.sample(15)
     if !is_robot? && is_device_mobile?
       redirect_to "/jd/buy/#{@detail["sku"]}"
       return
