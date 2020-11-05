@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   root "car#index", constraints: {host: "car.uuhaodian.com"}
   root "coupon#home"
   get "/article/:id.html", to: "article#show"
+  get "/article/tag_:tag", to: "article#list"
   get "/about.html", to: "coupon#about"
   get "/category/:cid", to: "coupon#category", cid: /\d+/
   get "/collection/:tid", to: "coupon#collection", tid: /\d+/

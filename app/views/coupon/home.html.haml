@@ -88,5 +88,32 @@
 
 = render partial: "home_jd_qa"
 
+.wrapper1200.article-container
+  %div{style: "width: 900px;"}
+    .article-list-container
+      %h3{style: "border-bottom: 1px solid #f6f6f6;padding-bottom: 5px;font-size:18px;"} 文章推荐
+      - @articles.each do |a|
+        .item
+          %a{href: "/article/#{a["id"]}.html"}
+            %img{src: "#{a["img_url"]}"}
+          .info 
+            %a{href: "/article/#{a["id"]}.html"}
+              %p.title #{a["title"]}
+            %p.time 更新于 #{a["updated_at"]}
+            %p.tag
+              - a["tags"].split(',').each do |tag|
+                %span.article-tag 
+                  %i #
+                  %a{href: "/article/tag_#{URI.encode(tag)}/"} #{tag}
+  %aside
+    %h3 好店推荐
+    - @seo_shops.each do |shop|
+      %a{href: "/jdshop/#{shop["shop_id"]}/"}
+        %p #{shop["shop_name"]}
+    %h3{style: "margin-top: 20px;"} 京东精选
+    - @seo_cores.each do |core|
+      %a{href: "/core_2_#{core["id"]}/"}
+        %p 京东#{core["keyword"]}
+
 = render partial: "home_footer"
 = render partial: "sider_fixed_area"

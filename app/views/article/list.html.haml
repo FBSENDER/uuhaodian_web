@@ -13,19 +13,8 @@
 
 .wrapper1200.article-container
   %div{style: "width: 900px;"}
-    %article
-      = @content.html_safe
-      %hr
-      %p{style: "margin: 10px 0;"} 
-        %strong 本文收录在
-      - @tags.each do |tag|
-        %span.article-tag 
-          %i #
-          %a{href: "/article/tag_#{URI.encode(tag)}/"} #{tag}
-    .rel-zk-area
-      %p.head 
-        %span 更多文章
     .article-list-container
+      %h1{style: "border-bottom: 1px solid #f6f6f6;padding-bottom: 5px;"} #{@title}
       - @articles.each do |a|
         .item
           %a{href: "/article/#{a["id"]}.html"}
@@ -39,6 +28,7 @@
                 %span.article-tag 
                   %i #
                   %a{href: "/article/tag_#{URI.encode(tag)}/"} #{tag}
+
   %aside
     %img{src: "/img/lbanner1.png", style: "width: 180px;height:180px;margin: 0 auto;"}
     %div{style: "text-align:center;color: #FF6434;"} 关注微信公众号 UU好店
