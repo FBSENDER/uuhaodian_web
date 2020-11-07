@@ -1,0 +1,20 @@
+.filter
+  .type.active{id: "t1", data: {sort: 1}}
+    %a{href: "javascript:;", onclick:"_hmt.push(['_trackEvent', '筛选-综合', 'click', 'dazhe'])"} 综合
+  .type{data: {sort: 2}}
+    %a{href: "javascript:;", onclick:"_hmt.push(['_trackEvent', '筛选-销量', 'click', 'dazhe'])"} 销量
+  .type{data: {sort: 5}}
+    %a{href: "javascript:;", onclick:"_hmt.push(['_trackEvent', '筛选-推荐', 'click', 'dazhe'])"} 推荐
+  .type{data: {sort: 3}}
+    %a{id: "t3", href: "javascript:;", onclick:"_hmt.push(['_trackEvent', '筛选-价格', 'click', 'dazhe'])"} 价格
+.platform-filter
+  %div{style: "float:left;padding:5px 0 5px 20px;height:30px;", onclick: "_hmt.push(['_trackEvent', '筛选-券', 'click', 'dazhe'])"}
+    %input.switch{type: "checkbox", style: "font-size: 20px;"}
+  %div{style: "float:left;padding-left:10px;"} 只看券
+  %div{style: "float:right;"}
+    .radio{style: "float:right;", onclick: "_hmt.push(['_trackEvent', '筛选-平台-京东', 'click', 'dazhe'])"}
+      %input{id: "radio_2", name: "platform", type: "radio", value: "2"}
+      %label.radio-label{for: "radio_2"} &nbsp;京东
+    .radio{style: "float:right;", onclick: "_hmt.push(['_trackEvent', '筛选-平台-淘宝', 'click', 'dazhe'])"}
+      %input{id: "radio_1", name: "platform", type: "radio", value: "1"}
+      %label.radio-label{for: "radio_1"} &nbsp;淘宝

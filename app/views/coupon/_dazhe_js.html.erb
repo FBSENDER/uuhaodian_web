@@ -10,7 +10,7 @@ function createList_dg(cl){
     var now_price = (parseFloat(z.zk_final_price) - coupon_money).toFixed(2);
     var o_price = coupon_money > 0 ? parseFloat(z.zk_final_price).toFixed(2) : parseFloat(z.reserve_price).toFixed(2);
     var zhe = (now_price * 10.0 / o_price).toFixed(1);
-    var buy_url = 'http://api.uuhaodian.com/uu/buy?id=' + z.item_id + '&channel=' + channel;
+    var buy_url = 'https://api.uuhaodian.com/uu/buy?id=' + z.item_id + '&channel=' + channel;
     if(coupon_money <= 0){
       buy_url = z.url
     }
@@ -315,7 +315,7 @@ function doTaobao(){
     dd.has_coupon = 1
   }
   $.ajax({
-    url: 'http://api.uuhaodian.com/uu/dg_goods_list',
+    url: 'https://api.uuhaodian.com/uu/dg_goods_list',
     type: 'GET',
     dataType: 'jsonp',
     data: dd,

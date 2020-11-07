@@ -11,26 +11,7 @@
         %i
         %a{href: "/dz_search/", onclick: "_hmt.push(['_trackEvent', '顶部点击', 'click', 'dazhe_jd'])"}
           %p 输入京东宝贝标题或链接，可精准搜券
-  .header
-    %h1
-      超过99.9%用户不知道的
-      %span.b 京东领券秘诀
-      ！
-    %p.desc 
-      1. 微信扫码关注“
-      %span.b UU好店
-      ” 已经支持京东、淘宝、拼多多优惠券领取
-      %br
-      %br
-      2. 点击上方搜索框，输入京东宝贝标题或链接，可领取优惠券
-      %br
-      %br
-      3. 下单使用优惠券，立享折上折！
-      %br
-      &nbsp;&nbsp;&nbsp;
-      %span{style: "line-height: 30px;"}
-        %a{id: "ercode_show", href: "javascript:;", style: "color: #FBAA58;", onclick:"_hmt.push(['_trackEvent', '展开二维码', 'click', 'dazhe_jd'])"} 点击展开二维码
-    %img.sno{id: "ercode", src: "http://www.uuhaodian.com/img/lbanner1.png"}
+  = render partial: "dazhe_gongzhonghao_guide"
   .top-menu-container{style: "max-width:750px;"}
     .top-menu{style: "max-width:750px;"}
       .inner

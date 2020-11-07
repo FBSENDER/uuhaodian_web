@@ -20,56 +20,9 @@
         %p.desc #{@shop['place']}
         %p.desc 主营：#{@shop['type']}
         %p.desc 评价：优
-  .header
-    %h1
-      超过99.9%用户不知道的
-      %span.b 领券省钱秘诀
-    %p.desc 
-      1. 微信扫码关注“ 
-      %span.b UU好店
-      ”小程序已经支持
-      %span.b 淘宝、京东、拼多多
-      优惠券领取
-      %br
-      %br
-      2. 点击上方搜索框，输入商品宝贝标题，领取优惠券
-      %br
-      %br
-      3. 下单使用优惠券，立享折上折！
-      %br
-      %br
-      4. 以下是
-      %span.b #{@shop["title"]}
-      相关#{@keyword}商品推荐
-      %br
-      &nbsp;&nbsp;&nbsp;
-      %span{style: "line-height: 30px;"}
-        %a{id: "ercode_show", href: "javascript:;", style: "color: #FBAA58;", onclick:"_hmt.push(['_trackEvent', '展开二维码', 'click', 'dian'])"} 点击展开二维码
-    %img.sno{id: "ercode", src: "http://www.uuhaodian.com/img/lbanner1.png"}
+  = render partial: "dazhe_ad"
   .content
-    .filter
-      .type.active{id: "t1", data: {sort: 1}}
-        %a{href: "javascript:;", onclick:"_hmt.push(['_trackEvent', '筛选-综合', 'click', 'dian'])"} 综合
-      .type{data: {sort: 2}}
-        %a{href: "javascript:;", onclick:"_hmt.push(['_trackEvent', '筛选-销量', 'click', 'dian'])"} 销量
-      .type{data: {sort: 5}}
-        %a{href: "javascript:;", onclick:"_hmt.push(['_trackEvent', '筛选-推荐', 'click', 'dian'])"} 推荐
-      .type{data: {sort: 3}}
-        %a{id: "t3", href: "javascript:;", onclick:"_hmt.push(['_trackEvent', '筛选-价格', 'click', 'dian'])"} 价格
-    .platform-filter
-      %div{style: "float:left;padding:5px 0 5px 20px;height:30px;", onclick: "_hmt.push(['_trackEvent', '筛选-券', 'click', 'dian'])"}
-        %input.switch{type: "checkbox", style: "font-size: 20px;"}
-      %div{style: "float:left;padding-left:10px;"} 只看券
-      %div{style: "float:right;"}
-        .radio{style: "float:right;", onclick: "_hmt.push(['_trackEvent', '筛选-平台-拼多多', 'click', 'dian'])"}
-          %input{id: "radio_3", name: "platform", type: "radio", value: "3"}
-          %label.radio-label{for: "radio_3"} &nbsp;拼多多
-        .radio{style: "float:right;", onclick: "_hmt.push(['_trackEvent', '筛选-平台-京东', 'click', 'dian'])"}
-          %input{id: "radio_2", name: "platform", type: "radio", value: "2"}
-          %label.radio-label{for: "radio_2"} &nbsp;京东
-        .radio{style: "float:right;", onclick: "_hmt.push(['_trackEvent', '筛选-平台-淘宝', 'click', 'dian'])"}
-          %input{id: "radio_1", name: "platform", type: "radio", value: "1"}
-          %label.radio-label{for: "radio_1"} &nbsp;淘宝
+    = render partial: "dazhe_filter"
     #dazheList
     %img#imgLoading{src: "/img/img_loading.gif", width: "200px", style: "margin: 10px auto;"}
   .button-btn.sno#loadRetry 重新加载
