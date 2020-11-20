@@ -1,0 +1,52 @@
+- title("#{@detail["title"].split.join}_优优好店")
+- keywords("#{@detail["title"].split.join},#{@detail["title"].split.join(',')}")
+- head_desc("#{@detail["recommends"][0]}-#{@detail["title"]}")
+- path("/jdhh/#{@id}/")
+- mobile_url("https://www.uuhaodian.com/jdhh/#{@id}/")
+
+.dazhe
+  .header_pr.header_red.transition
+    .icon_header
+      .search
+        %i
+        %a{href: "/dz_search/", onclick: "_hmt.push(['_trackEvent', '顶部点击', 'click', 'dazhe'])"}
+          %p 点击搜索优惠券
+
+  %article
+    %div{style: "padding: 20px;text-align:center;background-color:#fff;"}        
+      %img{src: "#{@detail["pics"][0]}", style: "width: 100%;margin: 0 auto;"}
+    %div{style: "margin: 2px 0;padding: 10px;background-color:#fff;"}
+      %h1 #{@detail["title"].gsub(/\s/, "")}
+      %p{style: "line-height: 50px;color: red;"} #{@detail["price_info"]}
+      %p{style: "text-align:right;"}
+        %a{href: "/jd/buy/#{@detail["sku"]}/", target: "_blank", style: "color:red;text-decoration:underline;"} 去京东购买
+      %p{style: "line-height: 30px;"} 推荐理由：
+      - @detail["recommends"].each do |r|
+        %p{style: "line-height: 22px;"} #{r}
+
+  = render partial: "dazhe_gongzhonghao_guide"
+  
+  .content
+    - @items.each do |r|
+      .item
+        %a{href: "/jdhh/#{r["id"]}/"}
+          %img.pic{src: "#{r["pic_url"]}", alt: "#{r["title"]}"}
+          .cent
+            %h3
+              %span 京东
+              #{r["title"]}
+            .tags &nbsp;
+            .money #{r["price_info"]}
+
+  .footer
+    %a.home.zh{href: "http://m.uuhaodian.com/index.php?r=index/wap&source=dazhe", target: "_blank", onclick:"_hmt.push(['_trackEvent', '首页', 'click', 'dazhe'])"}
+      %img.icon{src: "http://www.uuhaodian.com/favicon.ico"}
+      .text 优优好店首页
+    %a#more_btn.btn.zh{href: "https://13ifsgnd.kuaizhan.com/#/app/down?appId=550416&productType=1&userId=0", target: "_blank", onclick:"_hmt.push(['_trackEvent', '下载app', 'click', 'dazhe'])"} 下载APP获取更多优惠
+
+.scroll_top.close
+  %a{href: "javascript:;"}
+    %img{src: "/img/to_top.png"}
+:javascript
+  $("#ercode_show").click(function(){$("#ercode").removeClass("sno");$("#ercode_show").css("display","none");});
+  $(".zh").click(function(){window._agl && window._agl.push(['track', ['success', {t: 3}]])});

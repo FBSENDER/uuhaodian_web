@@ -331,9 +331,12 @@ class CouponController < ApplicationController
       @ks += item["keywords"].map{|k| k[0]}
     end
     @ks = @ks.uniq.sample(15)
-    if !is_robot? && is_device_mobile?
-      redirect_to "/jd/buy/#{@detail["sku"]}"
-      return
+    #if !is_robot? && is_device_mobile?
+    #  redirect_to "/jd/buy/#{@detail["sku"]}"
+    #  return
+    #end
+    if is_device_mobile?
+      render :dazhe_jd_static_product, layout: "dazhe"
     end
   end
 
