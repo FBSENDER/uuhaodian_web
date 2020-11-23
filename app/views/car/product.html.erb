@@ -73,6 +73,7 @@
         <a href="http://car.uuhaodian.com/car/category/<%= cc[:id] %>/" class="k" title="汽车<%= cc[:name] %>"><%= cc[:name] %></a>
       <% end %>
     <% end %>
+    <%= render partial: "link_for_top" %>
     <div style="margin-top:20px;overflow: auto;height: 60px;line-height:60px;">
       <p style="margin:0;"><a href="#" style="color:#999;">汽车品牌</a></p>
       <% @brands.each do |b| %>
