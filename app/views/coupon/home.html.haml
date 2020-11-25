@@ -15,6 +15,7 @@
     = render partial: "wide_banner", locals: {items: @items_9kuai9}
 
 .wrapper1200
+  %h1.sno 京东优惠券
   .item-list-top
     %span.left 京东优惠券 - 今日上新
     %a{href: "/jd/"}
@@ -25,7 +26,7 @@
       %a{href: "#{c["url"]}", target: "_blank", title: "#{c["shop"]}优惠券"}
         .jd-coupon
           .img
-            %img{src: "#{c["pict_url"]}"}
+            %img.lazy.new{data: {original: "#{c["pict_url"]}"}}
           .c-content
             .price-area
               %span.s1 ￥
@@ -50,7 +51,7 @@
       .zk-item
         %a{href: "#{dtk["url"]}", title: "#{dtk["title"]}#{dtk["coupon"]}元优惠券"}
           .img-area
-            %img{src: "#{dtk["pict_url"]}", alt: "#{dtk["title"]}图片"}
+            %img.lazy.new{data: {original: "#{dtk["pict_url"]}"}, alt: "#{dtk["title"]}图片"}
           %p.title-area #{dtk["title"]}
           .tags-area
             - dtk["tags"].each do |tag|
@@ -95,7 +96,7 @@
       - @articles.each do |a|
         .item
           %a{href: "/article/#{a["id"]}.html"}
-            %img{src: "#{a["img_url"]}"}
+            %img.lazy.new{data: {original: "#{a["img_url"]}"}}
           .info 
             %a{href: "/article/#{a["id"]}.html"}
               %p.title #{a["title"]}

@@ -165,6 +165,8 @@ $(function(){
   $("#suggest_close").click(function(){
     $(".suggest-area").addClass('sno');
   });
+  Util.lazyLoad('lazy.new');
+  $('.lazy.new').removeClass('new');
 
 });
 

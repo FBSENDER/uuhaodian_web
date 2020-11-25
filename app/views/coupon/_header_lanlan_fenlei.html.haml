@@ -9,7 +9,7 @@
     - @lanlan_category['list'][0,10].each do |cate|
       - is_active = cate['cid'] == @cid ? 'color:red;' : ''
       %a{href: "/category/#{cate['cid']}/?cid_1=#{@lanlan_category['cid']}&category_name=#{URI.encode(cate['name'])}"}
-        %img{src: "#{cate['image']}"}
+        %img.lazy.new{data: {original: "#{cate['image']}"}}
         %p{style:"#{is_active}"} #{cate['name']}
 - else
   .lanlan-category-area-all
