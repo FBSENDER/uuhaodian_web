@@ -5,11 +5,16 @@ class CouponController < ApplicationController
   def home
     if is_device_mobile?
       redirect_to "http://m.uuhaodian.com"
-      #redirect_to "http://uuhaodian.haozhia.cc/"
       return
     end
-    #redirect_to "http://uuhaodian.com", status: 302
     set_cookie_channel
+
+    file = Rails.root.join("public/seo_articles").join("uupc_home.html")
+    if File.exists?(file) && !params[:is_refresh]
+      render inline: File.read(file), layout: nil
+      return
+    end
+
     @cates = get_cate_data
     @banners = get_banner_data
     @top_keywords = get_hot_keywords_data.sample(7)
