@@ -26,7 +26,7 @@
       %a{href: "#{c["url"]}", target: "_blank", title: "#{c["shop"]}优惠券"}
         .jd-coupon
           .img
-            %img.lazy.new{data: {original: "#{c["pict_url"]}"}}
+            %img{src: "#{c["pict_url"]}", alt: "#{c["shop"]}优惠券领取"}
           .c-content
             .price-area
               %span.s1 ￥
@@ -51,7 +51,7 @@
       .zk-item
         %a{href: "#{dtk["url"]}", title: "#{dtk["title"]}#{dtk["coupon"]}元优惠券"}
           .img-area
-            %img.lazy.new{data: {original: "#{dtk["pict_url"]}"}, alt: "#{dtk["title"]}图片"}
+            %img{src: "#{dtk["pict_url"]}", alt: "#{dtk["title"]}#{dtk["coupon"]}元优惠券图片"}
           %p.title-area #{dtk["title"]}
           .tags-area
             - dtk["tags"].each do |tag|
@@ -96,7 +96,7 @@
       - @articles.each do |a|
         .item
           %a{href: "/article/#{a["id"]}.html"}
-            %img.lazy.new{data: {original: "#{a["img_url"]}"}}
+            %img.lazy.new{data: {original: "#{a["img_url"]}"}, alt: "#{a["title"]}"}
           .info 
             %a{href: "/article/#{a["id"]}.html"}
               %p.title #{a["title"]}

@@ -5,7 +5,7 @@
         - items[num * 6,6].each_with_index do |item, index|
           %a{href: "/yh/#{item["itemId"]}/#coupon", onclick: "ga_event(this);", data:{ga: "wide_banner:wide_banner:wide_banner"}}
             .item{style: "#{'margin-left:90px' if index == 0}"}
-              %img.lazy.new{data: {original: "#{item["coverImage"].sub('http:', '')}"}}
+              %img{src: "#{item["coverImage"].sub('http:', '')}", alt: "#{item["shortTitle"]}领取优惠券_图片"}
               %p.title #{item["shortTitle"]}
               %p.price 领券#{(item["couponMoney"].to_f * 10/ item["price"].to_f).ceil}折 —— ￥#{item["nowPrice"]}
               - if num == 0 && index < 3
