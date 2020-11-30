@@ -1,6 +1,8 @@
 - title("【#{@shop['title']}】#{@shop['title']}优惠券/首页/评价/怎么样_优优好店")
 - head_desc("#{@shop['title']} - 优优好店推荐")
 - keywords("#{@shop['title']},#{@shop['title']}首页,#{@shop['title']}优惠券,#{@shop['title']}折扣,#{@shop['title']}怎么样,#{@shop['title']}评价")
+- path("/dianpu/#{URI.encode_www_form_component(@name)}/")
+- mobile_url("http://wap.uuhaodian.com/dianpu/#{URI.encode_www_form_component(@name)}/")
 
 .dazhe
   .header_pr.header_red.transition

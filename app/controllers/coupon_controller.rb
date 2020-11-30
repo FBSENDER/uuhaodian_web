@@ -324,8 +324,12 @@ class CouponController < ApplicationController
   end
 
   def jd_static_product
-    url = "http://api.uuhaodian.com/jduu/zhinan_jd_static_products?id=#{params[:id]}"
     @id = params[:id]
+    if is_device_mobile? && request.host != "wap.uuhaodian.com"
+      redirect_to "http://wap.uuhaodian.com/jdhh/#{@id}/", status: 302
+      return
+    end
+    url = "http://api.uuhaodian.com/jduu/zhinan_jd_static_products?id=#{@id}"
     json = {}
     @items = []
     set_cookie_channel
@@ -349,11 +353,7 @@ class CouponController < ApplicationController
       @ks += item["keywords"].map{|k| k[0]}
     end
     @ks = @ks.uniq.sample(15)
-    #if !is_robot? && is_device_mobile?
-    #  redirect_to "/jd/buy/#{@detail["sku"]}"
-    #  return
-    #end
-    if is_device_mobile?
+    if request.host == "wap.uuhaodian.com"
       render :dazhe_jd_static_product, layout: "dazhe"
     end
   end
@@ -433,7 +433,7 @@ class CouponController < ApplicationController
       return
     end
     if is_device_mobile?
-      redirect_to "/dz/#{URI.encode(params[:keyword])}/", status: 302
+      redirect_to "http://wap.uuhaodian.com/dz/#{URI.encode(params[:keyword])}/", status: 302
       return
     end
     set_cookie_channel
@@ -487,15 +487,22 @@ class CouponController < ApplicationController
     url = ""
     if @collection_type == 1
       @collection_name = "聚特卖"
+      @mobile_url = "http://m.uuhaodian.com/index.php?r=index/brand"
       url = "https://api.uuhaodian.com/uu/temai_list"
     elsif @collection_type == 2
       @collection_name = "销量榜"
       url = "https://api.uuhaodian.com/uu/sale_list"
+      @mobile_url = "http://m.uuhaodian.com/index.php?r=activity/sc#/fengqianglist"
     elsif @collection_type == 4
       @collection_name = "九块九包邮"
+      @mobile_url = "http://m.uuhaodian.com/index.php?r=activity/sc#/ninePackageMail"
       url = "https://api.uuhaodian.com/uu/jiukuaijiu_list"
     else
       not_found
+      return
+    end
+    if is_device_mobile?
+      redirect_to @mobile_url
       return
     end
     @path = url
@@ -597,9 +604,6 @@ class CouponController < ApplicationController
     set_cookie_channel
     @channel = cookies[:channel]
     @keyword = params[:keyword]
-    #url = "http://api.uuhaodian.com/uu/goods_list?keyword=#{@keyword}"
-    #result = Net::HTTP.get(URI(URI.encode(url)))
-    #json = JSON.parse(result)
     @items = []
     @device = mobile_device == 1 ? "ios" : "android" 
     render :dazhe, layout: "dazhe"
@@ -653,6 +657,7 @@ class CouponController < ApplicationController
       not_found
       return
     end
+    @name = params[:name]
     @shop = json["result"]["shop"]
     @keyword = @shop["keyword"]
     @shop_id = @shop["source_id"]
@@ -687,6 +692,10 @@ class CouponController < ApplicationController
   end
 
   def core_tb
+    if is_device_mobile? && request.host != "wap.uuhaodian.com"
+      redirect_to "http://wap.uuhaodian.com/core_1_#{params[:id]}/"
+      return
+    end
     url = "http://api.uuhaodian.com/jduu/core_keyword?id=#{params[:id]}"
     result = Net::HTTP.get(URI(url))
     r_json = JSON.parse(result)
@@ -702,13 +711,17 @@ class CouponController < ApplicationController
     @shops = r_json["result"]["shops"]
     @related = r_json["result"]["related_keywords"]
     cookies[:ff_platform] = {value: 1, path: "/"}
-    if is_device_mobile?
+    if request.host == "wap.uuhaodian.com"
       render :dazhe_core_tb, layout: "dazhe"
       return
     end
   end
 
   def core_jd
+    if is_device_mobile? && request.host != "wap.uuhaodian.com"
+      redirect_to "http://wap.uuhaodian.com/core_2_#{params[:id]}/"
+      return
+    end
     url = "http://api.uuhaodian.com/jduu/core_keyword?id=#{params[:id]}"
     result = Net::HTTP.get(URI(url))
     r_json = JSON.parse(result)
@@ -724,7 +737,7 @@ class CouponController < ApplicationController
     @shops = r_json["result"]["shops"]
     @related = r_json["result"]["related_keywords"]
     cookies[:ff_platform] = {value: 2, path: "/"}
-    if is_device_mobile?
+    if request.host == "wap.uuhaodian.com"
       render :dazhe_core_jd, layout: "dazhe"
       return
     end
@@ -734,6 +747,10 @@ class CouponController < ApplicationController
     @shop_id = params[:id].nil? ? 0 : params[:id].to_i
     if @shop_id == 0
       not_found
+      return
+    end
+    if is_device_mobile? && request.host != "wap.uuhaodian.com"
+      redirect_to "http://wap.uuhaodian.com/jdshop/#{@shop_id}/"
       return
     end
     set_cookie_channel
@@ -759,7 +776,7 @@ class CouponController < ApplicationController
     else
       @keyword = @shop_name
     end
-    if is_device_mobile?
+    if request.host == "wap.uuhaodian.com"
       render :dazhe_shop_jd, layout: "dazhe"
       return
     end

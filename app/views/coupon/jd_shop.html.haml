@@ -3,7 +3,7 @@
 - coupon_desc = @coupons.size > 0 ? "满#{@coupons[0]["quota"]}元减#{@coupons[0]["discount"]}元的优惠券正在限量发放中。" : "先到先得。"
 - head_desc("#{@shop_name}是一家在京东平台正在经营的网店，主营：#{@cid3s.map{|c| c["cname3"]}.join("，")}等商品，销售的商品有正品保证，请大家放心。#{@shop_name}今日正在发放优惠券，#{coupon_desc}优优好店每日更新#{@shop_name}优惠券信息、热销商品、促销活动，欢迎使用！")
 - path("/jdshop/#{@shop_id}/")
-- mobile_url("https://www.uuhaodian.com/jdshop/#{@shop_id}/")
+- mobile_url("http://wap.uuhaodian.com/jdshop/#{@shop_id}/")
 
 = render partial: "header_common"
 = render partial: "jd_banner_1200_1"
