@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root "coupon#wap_home", constraints: {host: "wap.uuhaodian.com"}
   root "car#index", constraints: {host: "car.uuhaodian.com"}
   root "coupon#home"
   get "/article/:id.html", to: "article#show"
@@ -41,14 +42,14 @@ Rails.application.routes.draw do
   get "/sshop/:name", to: "coupon#sem_shop"
 
   #car
-  get "/car/brand/:id", to: "car#brand"
-  get "/car/category/:id", to: "car#category"
-  get "/car/series/:id", to: "car#series"
-  get "/car/cd/:id", to: "car#cd"
-  get "/car/cb-:cid-:bid", to: "car#cb"
-  get "/car/cs-:cid-:sid", to: "car#cs"
-  get "/car/product/:id", to: "car#product"
-  get "/car/keyword", to: "car#keyword"
+  get "/car/brand/:id", to: "car#brand", constraints: {host: "car.uuhaodian.com"}
+  get "/car/category/:id", to: "car#category", constraints: {host: "car.uuhaodian.com"}
+  get "/car/series/:id", to: "car#series", constraints: {host: "car.uuhaodian.com"}
+  get "/car/cd/:id", to: "car#cd", constraints: {host: "car.uuhaodian.com"}
+  get "/car/cb-:cid-:bid", to: "car#cb", constraints: {host: "car.uuhaodian.com"}
+  get "/car/cs-:cid-:sid", to: "car#cs", constraints: {host: "car.uuhaodian.com"}
+  get "/car/product/:id", to: "car#product", constraints: {host: "car.uuhaodian.com"}
+  get "/car/keyword", to: "car#keyword", constraints: {host: "car.uuhaodian.com"}
 
   #seo
   get "/core_1_:id", to: "coupon#core_tb", id: /\d+/

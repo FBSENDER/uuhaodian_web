@@ -2,9 +2,22 @@ class CouponController < ApplicationController
   def not_found
     render "not_found", status: 404
   end
+  def wap_home
+    set_cookie_channel
+
+    @banners = get_banner_data
+    @path = "https://api.uuhaodian.com/uu/home_list"
+    @keyword = ''
+    @kk = get_hot_keywords_data
+    @items = []
+    @path = "https://api.uuhaodian.com/uu/dg_goods_list"
+    @keyword = @kk.sample
+    render "wap_home", layout: "dazhe"
+  end
+
   def home
     if is_device_mobile?
-      redirect_to "http://m.uuhaodian.com"
+      redirect_to "http://wap.uuhaodian.com"
       return
     end
     set_cookie_channel

@@ -1,8 +1,8 @@
 - title("#{@title} - 优优好店")
 - keywords(@keywords)
 - head_desc(@description)
-- path("/article/#{@id}.html")
-- mobile_url("https://www.uuhaodian.com/article/#{@id}.html")
+- path("/article/tag_#{URI.encode(@tag)}/")
+- mobile_url("http://wap.uuhaodian.com/article/tag_#{URI.encode(@tag)}/")
 
 %header.header#header
   = render partial: "/coupon/header_bar"

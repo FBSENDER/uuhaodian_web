@@ -1,0 +1,49 @@
+- title("优优好店-京东优惠券,京东优惠券免费领取平台,大额东券jd券查询助手")
+- keywords("优优好店,京东优惠券,京东券,jd券,jd优惠券,东券,京券,京东优惠券领取,京东优惠券领取平台,大额京东优惠券,京东优惠券查询助手")
+- head_desc("优优好店——京东优惠券免费领取平台，在这里可以免费查询和领取京东优惠券，包含京券、东券、京享礼金、大额券、jd券、自营券、手机券、图书券等等。还在找哪里领取京东优惠券？快来优优好店！关于如何领取京东优惠券，本站也有详细的说明，关注优优好店公众号还有更多惊喜等着你！")
+- path("")
+- mobile_url("http://wap.uuhaodian.com")
+
+.dazhe
+  %header
+    .header_pr.header_red.transition
+      .icon_header
+        .search
+          %i
+          %a{href: "/dz_search/", onclick: "_hmt.push(['_trackEvent', '顶部点击', 'click', 'dazhe_jd'])"}
+            %p 输入京东宝贝标题或链接，可精准搜券
+    .banner-area.swiper-container.swiper-container-horizontal
+      .swiper-wrapper
+        - if @banners && @banners.size > 0
+          - @banners.each do |b|
+            %a.swiper-slide{href: "#{b["link_url"]}", target: "_blank" }
+              %img.lazy.new{data: {original: "#{b["img_url"]}"}, style: "width: 100%;"}
+      .swiper-bottom
+        .swiper-pager
+  %article
+    = render partial: "dazhe_gongzhonghao_guide"
+    .top-menu-container{style: "max-width:750px;"}
+      .top-menu{style: "max-width:750px;"}
+        .inner
+          - @kk.each do |k|
+            %a.top-menu-item{href: "/dz/#{URI.encode(k)}/"} #{k}
+    .content
+      #dazheList
+      %img#imgLoading{src: "/img/img_loading.gif", width: "200px", style: "margin: 10px auto;"}
+    .button-btn.sno#loadRetry 重新加载
+    .button-btn.sno#noMore 没有更多了
+  %footer.footer
+    %a.home.zh{href: "http://m.uuhaodian.com/index.php?r=index/wap&source=dazhe", target: "_blank", onclick:"_hmt.push(['_trackEvent', '首页', 'click', 'dazhe'])"}
+      %img.icon{src: "https://www.uuhaodian.com/favicon.ico"}
+      .text 更多优惠
+    %a#more_btn.btn.zh{href: "https://13ifsgnd.kuaizhan.com/#/app/down?appId=550416&productType=1&userId=0", target: "_blank", onclick:"_hmt.push(['_trackEvent', '下载app', 'click', 'dazhe'])"} 下载APP成为合作伙伴
+
+.scroll_top.close
+  %a{href: "javascript:;"}
+    %img{src: "/img/to_top.png"}
+
+
+:javascript
+  $("#ercode_show").click(function(){$("#ercode").removeClass("sno");$("#ercode_show").css("display","none");});
+
+= render partial: "dazhe_js"

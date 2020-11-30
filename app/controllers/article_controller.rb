@@ -1,6 +1,10 @@
 class ArticleController < ApplicationController
   def show
     @id = params[:id].to_i
+    if is_device_mobile? && request.host != "wap.uuhaodian.com"
+      redirect_to "http://wap.uuhaodian.com/article/#{@id}.html", status: 302
+      return
+    end
     url = "http://api.uuhaodian.com/uu/article?id=#{@id}"
     begin
       result = Net::HTTP.get(URI(URI.encode(url)))
@@ -44,6 +48,10 @@ class ArticleController < ApplicationController
 
   def list
     @tag = params[:tag]
+    if is_device_mobile? && request.host != "wap.uuhaodian.com"
+      redirect_to "http://wap.uuhaodian.com/article/tag_#{URI.encode(@tag)}/", status: 302
+      return
+    end
     @articles = []
     url = "http://api.uuhaodian.com/uu/article_list?tag=#{@tag}"
     begin
@@ -71,6 +79,10 @@ class ArticleController < ApplicationController
       @cores = jd_seo_data["cores"]
       @products = jd_seo_data["products"]
     end
-    render :list, layout: "application"
+    if request.host == "wap.uuhaodian.com"
+      render :m_list, layout: "dazhe"
+    else
+      render :list, layout: "application"
+    end
   end
 end
