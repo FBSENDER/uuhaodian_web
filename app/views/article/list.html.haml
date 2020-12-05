@@ -3,6 +3,7 @@
 - head_desc(@description)
 - path("/article/tag_#{URI.encode(@tag)}/")
 - mobile_url("http://wap.uuhaodian.com/article/tag_#{URI.encode(@tag)}/")
+- mp = "http://wap.uuhaodian.com/article/tag_#{URI.encode(@tag)}/"
 
 %header.header#header
   = render partial: "/coupon/header_bar"
@@ -46,4 +47,4 @@
       %a{href: "/core_2_#{core["id"]}/"}
         %p 京东#{core["keyword"]}
 
-= render partial: "/coupon/footer"
+= render partial: "/coupon/footer", locals: {mobile_path: mp}

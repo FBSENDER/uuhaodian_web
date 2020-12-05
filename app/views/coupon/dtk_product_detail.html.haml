@@ -2,7 +2,8 @@
 - keywords("#{@detail["shortTitle"]},#{@detail["title"]}")
 - head_desc("#{@detail["shortTitle"]} - 优优好店推荐：#{@detail["desc"]} 优优好店，找券领券更方便！")
 - path("/dtk/#{@id}/")
-- mobile_url("https://www.uuhaodian.com/dtk/#{@id}/")
+- mobile_url("http://wap.uuhaodian.com/dtk/#{@id}/")
+- mp = "http://wap.uuhaodian.com/dtk/#{@id}/"
 
 %header.header#header
   = render partial: "header_top"
@@ -22,5 +23,5 @@
   .zk-list.clearfix#couponList
   = render partial: "dg_load_more", locals: {keyword: @detail["title"][-6,6], has_coupon: 0}
 
-= render partial: "footer"
+= render partial: "footer", locals: {mobile_path: mp}
 = render partial: "sider_fixed_area"

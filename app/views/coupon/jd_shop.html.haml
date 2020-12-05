@@ -4,6 +4,7 @@
 - head_desc("#{@shop_name}是一家在京东平台正在经营的网店，主营：#{@cid3s.map{|c| c["cname3"]}.join("，")}等商品，销售的商品有正品保证，请大家放心。#{@shop_name}今日正在发放优惠券，#{coupon_desc}优优好店每日更新#{@shop_name}优惠券信息、热销商品、促销活动，欢迎使用！")
 - path("/jdshop/#{@shop_id}/")
 - mobile_url("http://wap.uuhaodian.com/jdshop/#{@shop_id}/")
+- mp = "http://wap.uuhaodian.com/jdshop/#{@shop_id}/"
 
 = render partial: "header_common"
 = render partial: "jd_banner_1200_1"
@@ -82,7 +83,7 @@
   .zk-list.clearfix#jdtongdian{style: "min-height: 400px;margin-bottom:20px;"}
   = render partial: "jd_tongdian", locals: {seller_id: @shop_id, cid3: @cid3s[0]["cid3"]}
 
-= render partial: "footer"
+= render partial: "footer", locals: {mobile_path: mp}
 = render partial: "sider_fixed_area"
 = render partial: "jd_diy_mengceng", locals: {text: "前往#{@shop_name}", url: "/jdshop_go/#{@shop_id}/"}
 

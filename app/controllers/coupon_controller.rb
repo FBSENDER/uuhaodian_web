@@ -151,6 +151,10 @@ class CouponController < ApplicationController
 
   def dtk_product_detail
     set_cookie_channel
+    if is_device_mobile? && request.host != "wap.uuhaodian.com"
+      redirect_to "http://wap.uuhaodian.com/dtk/#{params[:id]}/", status: 302
+      return
+    end
     @channel = cookies[:channel]
     url = "http://api.uuhaodian.com/uu/dtk_static_product?id=#{params[:id]}"
     json = {}

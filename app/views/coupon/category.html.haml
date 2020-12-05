@@ -3,6 +3,7 @@
 - head_desc("优优好店 - 分类 - #{@category_name}")
 - path("/category/#{@cid}/")
 - mobile_url("https://www.uuhaodian.com/category/#{@cid}/")
+- mp = ""
 
 = render partial: "header_common"
 = render partial: "header_lanlan_fenlei", locals: {categories: @lanlan_cates}
@@ -19,5 +20,5 @@
         %span.right 查看更多
     = render partial: "wide_banner", locals: {items: @items_bang}
 
-= render partial: "footer"
+= render partial: "footer", locals: {mobile_path: mp}
 = render partial: "sider_fixed_area"

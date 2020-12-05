@@ -495,8 +495,6 @@
   padding: 0 5px;
 }
 .product-info{
-  position: fixed;
-  top: 217px;
   width: 100%;
   max-width: 750px;
   background-color: #fff;
@@ -504,6 +502,8 @@
 }
 .product-info .title{
   height: 48px;
+  line-height: 24px;
+  overflow: hidden;
   font-size: 16px;
   font-weight: bold;
   padding: 10px 10px 0 10px;

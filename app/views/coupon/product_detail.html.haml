@@ -3,6 +3,7 @@
 - head_desc("优优好店 - 商品详情 - #{@detail["shortTitle"]}")
 - path("/yh/#{@detail["itemId"]}/")
 - mobile_url("https://www.uuhaodian.com/yh/#{@detail["itemId"]}/")
+- mp = ""
 
 %header.header#header
   = render partial: "header_top"
@@ -21,5 +22,5 @@
   .zk-list.clearfix#couponList
   = render partial: "dg_load_more", locals: {keyword: @detail["title"][-6,6], has_coupon: 0}
 
-= render partial: "footer"
+= render partial: "footer", locals: {mobile_path: mp}
 = render partial: "sider_fixed_area"

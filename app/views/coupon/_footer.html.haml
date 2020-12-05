@@ -4,6 +4,8 @@
       .yl
         %p.head 友情链接：
         .yl-links
+          - if mobile_path != ""
+            %a{href: "#{mobile_path}", target: "_blank"} 移动页
           %a{href: "https://www.iquan.net", target: "_blank"} 淘宝优惠券
           %a{href: "http://www.shikuaigou.com", target: "_blank"} 粉丝福利购
           %a{href: "http://www.xiongmao123.com", target: "_blank"} 装饰画

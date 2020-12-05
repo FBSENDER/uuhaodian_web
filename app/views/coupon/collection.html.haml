@@ -3,6 +3,7 @@
 - head_desc("优优好店 - #{@collection_name}")
 - path("/collection/#{@collection_type}/")
 - mobile_url(@mobile_url)
+- mp = ""
 
 = render partial: "header_common"
 .wrapper1200{style: "margin-top: 10px;"}
@@ -24,5 +25,5 @@
   .zk-list.clearfix#couponList
   = render partial: "lanlan_load_more", locals: {path: @path, pagesize: 20, sort_type: 7, pinyin: '', keyword: '', cid: @cid,sort: 7, type: @collection_type}
 
-= render partial: "footer"
+= render partial: "footer", locals: {mobile_path: mp}
 = render partial: "sider_fixed_area"

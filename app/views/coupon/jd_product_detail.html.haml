@@ -3,6 +3,7 @@
 - head_desc("优优好店 - 商品详情 - #{@detail["title"]}")
 - path("/jd/#{@detail["item_id"]}/")
 - mobile_url("https://www.uuhaodian.com/jd/#{@detail["item_id"]}/")
+- mp = ""
 
 = render partial: "header_common"
 .wrapper1200{style: "overflow:visible;z-index:98;"}
@@ -19,5 +20,5 @@
   .zk-list.clearfix#couponList
   = render partial: "lanlan_load_more", locals: {path: @path, pagesize: 20, sort_type: 7, pinyin: '', keyword: @detail["cname3"], cid: 0,sort: 7, type: 0}
 
-= render partial: "footer"
+= render partial: "footer", locals: {mobile_path: mp}
 = render partial: "sider_fixed_area"

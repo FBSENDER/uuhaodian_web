@@ -2,12 +2,12 @@
 - keywords("#{@detail["shortTitle"]},#{@detail["title"]}")
 - head_desc("#{@detail["shortTitle"]} - 优优好店推荐：#{@detail["desc"]} 优优好店，找券领券更方便！")
 - path("/dtk/#{@id}/")
-- mobile_url("https://www.uuhaodian.com/dtk/#{@id}/")
+- mobile_url("https://wap.uuhaodian.com/dtk/#{@id}/")
 
 - coupon = @detail
 - aaid = coupon['couponUrl'].match(/activityId=(\w*)/)
 - aaid = aaid.nil? ? '' : aaid[1]
-- buy_url = coupon["couponMoney"].to_f > 0 ? "http://api.uuhaodian.com/uu/buy?id=#{coupon["itemId"]}&activity_id=#{aaid}" : "http://item.taobao.com/item.htm?id=#{coupon['itemId']}"
+- buy_url = coupon["couponMoney"].to_f > 0 ? "http://api.uuhaodian.com/uu/buy?id=#{coupon["itemId"]}&activity_id=#{aaid}" : "http://api.uuhaodian.com/uu/buy?id=#{coupon['itemId']}"
 - buy_url += ("&channel=" + @channel) if @channel
 
 .dazhe
@@ -17,31 +17,44 @@
         %i
         %a{href: "/dz_search/", onclick: "_hmt.push(['_trackEvent', '顶部点击', 'click', 'detail'])"}
           %p 输入您需要的商品名称
-  .img-content{style: "text-align:center;width:100%;"}
-    - @detail["auctionImages"].each do |img|
-      %img{src: "#{img}"}
-  .product-info
-    .title #{@detail["title"]}
-    - if @detail["recommend"] != ''
-      .desc #{@detail["recommend"]}
-    - else
-      .desc 扫码关注公众号【优优好店】，领券超方便!
-    .price 
-      原价 ￥#{@detail["price"]}
-      %span.r 优惠价 ￥#{@detail["nowPrice"]}
-    - if @detail["couponMoney"].to_i > 0
-      %a{href: "#{buy_url}"}
-        .coupon
-          %img{src: "http://cmsstatic.dataoke.com//wap_new/main/images/goods_quan.png?v=201903141045"}
-          .t 
-            点击领取
-            %span{style: "font-size:22px;"} #{@detail["couponMoney"].to_i}
-            元 优惠券
-    - else
-      %a{href: "#{buy_url}", target: "_blank", isconvert: "1"}
-        .coupon
-          %img{src: "http://cmsstatic.dataoke.com//wap_new/main/images/goods_quan.png?v=201903141045"}
-          .t 点击购买
+  %article
+    %div{style: "padding: 20px;text-align:center;background-color:#fff;"}        
+      - @detail["auctionImages"].each do |img|
+        %img{src: "#{img}", style: "width: 100%;margin: 0 auto;"}
+    .product-info
+      .title #{@detail["title"]}
+      - if @detail["recommend"] != ''
+        .desc #{@detail["recommend"]}
+      - else
+        .desc 扫码关注公众号【优优好店】，领券超方便!
+      .price 
+        原价 ￥#{@detail["price"]}
+        %span.r 优惠价 ￥#{@detail["nowPrice"]}
+      - if @detail["couponMoney"].to_i > 0
+        %a{href: "#{buy_url}"}
+          .coupon
+            %img{src: "http://cmsstatic.dataoke.com//wap_new/main/images/goods_quan.png?v=201903141045"}
+            .t 
+              点击领取
+              %span{style: "font-size:22px;"} #{@detail["couponMoney"].to_i}
+              元 优惠券
+      - else
+        %a{href: "#{buy_url}", target: "_blank", isconvert: "1"}
+          .coupon
+            %img{src: "http://cmsstatic.dataoke.com//wap_new/main/images/goods_quan.png?v=201903141045"}
+            .t 点击购买
+  = render partial: "dazhe_gongzhonghao_guide"
+
+  .content
+    - @items.each do |r|
+      .item
+        %a{href: "/dtk/#{r["id"]}/"}
+          %img.pic{src: "#{r["mainPic"]}", alt: "#{r["dtitle"]}"}
+          .cent
+            %h3
+              #{r["dtitle"]}
+            .tags &nbsp;
+            .money 热卖中
 
   .footer
     %a.home.zh{href: "http://m.uuhaodian.com/index.php?r=index/wap&source=dazhe", target: "_blank", onclick:"_hmt.push(['_trackEvent', '首页', 'click', 'detail'])"}
@@ -49,7 +62,9 @@
       .text 优优好店首页
     %a#more_btn.btn.zh{href: "https://13ifsgnd.kuaizhan.com/#/app/down?appId=550416&productType=1&userId=0", target: "_blank", onclick:"_hmt.push(['_trackEvent', '下载app', 'click', 'dazhe'])"} 下载APP获取更多优惠
 
+.scroll_top.close
+  %a{href: "javascript:;"}
+    %img{src: "/img/to_top.png"}
 :javascript
+  $("#ercode_show").click(function(){$("#ercode").removeClass("sno");$("#ercode_show").css("display","none");});
   $(".zh").click(function(){window._agl && window._agl.push(['track', ['success', {t: 3}]])});
-
-= render partial: "dazhe_js"

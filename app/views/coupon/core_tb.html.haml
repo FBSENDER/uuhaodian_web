@@ -3,6 +3,7 @@
 - head_desc("优优好店 - 提供#{@keyword}淘宝天猫商品价格查询，#{@keyword}淘宝优惠券，#{@keyword}天猫优惠免费领取，搜索#{@keyword}商品标题，即可精确找券，先领券再下单，在淘宝天猫购物更便宜！")
 - path("/core_1_#{@id}/")
 - mobile_url("http://wap.uuhaodian.com/core_1_#{@id}/")
+- mp = "http://wap.uuhaodian.com/core_1_#{@id}/"
 
 = render partial: "header_common"
 .wrapper1200{style: "margin-top: 10px;"}
@@ -50,6 +51,6 @@
         %a{href: "/core_1_#{r["id"]}/", style: "color:blue;", title: "#{r["keyword"]}淘宝天猫优惠券"} #{r["keyword"]}
 = render partial: "jd_tool"
 
-= render partial: "footer"
+= render partial: "footer", locals: {mobile_path: mp}
 = render partial: "sider_fixed_area"
 = render partial: "jd_tool_right_fixed"

@@ -3,6 +3,7 @@
 - head_desc("优优好店 - 现在已经支持查询与领取京东优惠券啦，搜索商品标题，即可精确找券，先领券再下单，在京东购物更便宜！")
 - path("/jd/")
 - mobile_url("https://www.uuhaodian.com/jd/")
+- mp = ""
 
 = render partial: "header_common"
 = render partial: "jd_banner_1200_1"
@@ -34,7 +35,7 @@
 
 
 = render partial: "jd_tool"
-= render partial: "footer"
+= render partial: "footer", locals: {mobile_path: mp}
 = render partial: "sider_fixed_area"
 = render partial: "jd_tool_right_fixed"
 = render partial: "jd_diy_mengceng", locals: {text: "京东领券中心", url: "/jddiybuy/?jd_channel=15&url=#{URI.encode_www_form_component("https://a.jd.com/")}"}
