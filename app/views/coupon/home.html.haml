@@ -1,13 +1,18 @@
-- title("优优好店-京东优惠券,京东优惠券免费领取平台,大额东券jd券查询助手")
-- keywords("优优好店,京东优惠券,京东券,jd券,jd优惠券,东券,京券,京东优惠券领取,京东优惠券领取平台,大额京东优惠券,京东优惠券查询助手")
-- head_desc("优优好店——京东优惠券免费领取平台，在这里可以免费查询和领取京东优惠券，包含京券、东券、京享礼金、大额券、jd券、自营券、手机券、图书券等等。还在找哪里领取京东优惠券？快来优优好店！关于如何领取京东优惠券，本站也有详细的说明，关注优优好店公众号还有更多惊喜等着你！")
+- title("京东优惠券,京东优惠券大全,京东优惠券领取与查询-优优好店")
+- keywords("优优好店,京东优惠券,京东券,jd券,jd优惠券,东券,京券,京东优惠券领取,京东优惠券领取平台,大额京东优惠券,京东优惠券查询助手,京东优惠券大全")
+- head_desc("优优好店——京东优惠券免费领取平台。每日更新海量京东商城优惠券，覆盖的品类已包含：手机、电视、笔记本、平板电脑、显示器、空调、电扇、冰箱、热水器、路由器等等，您可以方便的查询并领取京券和东券。精确找jd券：请直接搜索京东商品的标题或链接，即可找到商品对应的优惠券，领券后下单，可以立减相应金额，5元、10元、50元、100元、500元的券都可能有。优优好店，您可靠的省钱领券小助手，快加入收藏吧！")
 - path("")
 - mobile_url("http://wap.uuhaodian.com")
 
 = render partial: "header_common"
 = render partial: "header_adzone"
+.wrapper1200
+  .item-list-top{style: "padding-bottom: 10px;"}
+    %h1.left{style: "display:inline;"} 京东优惠券
+    %span.left{style: "color:#999;margin-left:10px;font-size:16px;"} 搜索商品标题或链接，可精准找券 - 微信扫一扫右侧二维码，关注公众号"UU好店"，领券更方便！
+    %p{style: "color:#666;line-height:30px;"} 优优好店——京东优惠券免费领取平台。每日更新海量京东商城优惠券，覆盖的品类已包含：手机、电视、笔记本、平板电脑、显示器、空调、电扇、冰箱、热水器、路由器等等，您可以方便的查询并领取京券和东券。精确找jd券：请直接搜索京东商品的标题或链接，即可找到商品对应的优惠券，领券后下单，可以立减相应金额，5元、10元、50元、100元、500元的券都可能有。优优好店，您可靠的省钱领券小助手，快加入收藏吧！
 - if @items_9kuai9 && @items_9kuai9.size > 0
-  .wrapper1200
+  .wrapper1200{style: "margin-top: 10px;"}
     .item-list-top
       %span.left 9块9包邮
       %a{href: "/collection/4/"}
@@ -15,7 +20,6 @@
     = render partial: "wide_banner", locals: {items: @items_9kuai9}
 
 .wrapper1200
-  %h1.sno 京东优惠券
   .item-list-top
     %span.left 京东优惠券 - 今日上新
     %a{href: "/jd/"}
@@ -115,6 +119,11 @@
     - @seo_cores.each do |core|
       %a{href: "/core_2_#{core["id"]}/"}
         %p 京东#{core["keyword"]}
+
+.wrapper1200{style: "margin-bottom: 10px;"}
+  .item-list-top{style: "padding-bottom: 10px;"}
+    %h2.left{style: "display:inline;"} 京东优惠券更新机制说明
+    %p{style: "color:#666;line-height:30px;"} 京东优惠券来源于京东各个店铺自己的设置与发放，通常会限定优惠券使用的商品、发放的数量、开始领取的时间以及有效期。于是某个商品是否存在优惠券及优惠金额会有极大的不确定性，并且优惠信息在其页面上有时不会露出。想要确保每次购物都能享受到优惠，下单前一定要记得找券呀！
 
 = render partial: "home_footer"
 = render partial: "sider_fixed_area"
