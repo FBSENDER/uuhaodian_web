@@ -356,6 +356,10 @@ class CouponController < ApplicationController
     @items.each do |item|
       @ks += item["keywords"].map{|k| k[0]}
     end
+    @jd_items = []
+    if is_robot? && @ks.size > 0
+      @jd_items = get_jd_open_search(@ks.first[0])
+    end
     @ks = @ks.uniq.sample(15)
     if request.host == "wap.uuhaodian.com"
       render :dazhe_jd_static_product, layout: "dazhe"
@@ -457,6 +461,10 @@ class CouponController < ApplicationController
       @kk = []
     end
     @kk = @kk.sample(10)
+    @jd_items = []
+    if is_robot?
+      @jd_items = get_jd_open_search(@keyword)
+    end
   end
 
   def gaoyong
@@ -610,6 +618,10 @@ class CouponController < ApplicationController
     @keyword = params[:keyword]
     @items = []
     @device = mobile_device == 1 ? "ios" : "android" 
+    @jd_items = []
+    if is_robot?
+      @jd_items = get_jd_open_search(@keyword)
+    end
     render :dazhe, layout: "dazhe"
   end
 
@@ -846,6 +858,20 @@ class CouponController < ApplicationController
 
   def old_url_ws
     redirect_to "http://www.17430.com.cn/ws/#{params[:id]}.html", status: 301
+  end
+
+  def get_jd_open_search(k)
+    begin
+      url = "http://api.uuhaodian.com/jduu/jd_open_search?keyword=#{URI.encode_www_form_component(k)}"
+      result = Net::HTTP.get(URI(url))
+      json = JSON.parse(result)
+      if json["status"] == "OK" && json["result"]["items"]
+        return json["result"]["items"]
+      end
+      return []
+    rescue
+      return []
+    end
   end
 
 end

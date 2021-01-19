@@ -25,6 +25,13 @@
           %h1{style: "float:right;padding: 0 20px;font-size:14px;"} “#{@keyword[0,40]}”搜索结果
         = render partial: "dg_filter", locals: {has_coupon: false}
   .zk-list.clearfix#couponList{style: "margin-top: 20px;"}
+    - @jd_items.each do |item|
+      .zk-item
+        %a{href: "/jdhh/#{item["id"]}/", title: "#{item["title"].split.join}"}
+          .img-area
+            %img{src: "#{item["pic_url"]}", alt: "#{item["title"].split.join}图片"}
+          %p.title-area #{item["title"].split.join}
+          %p.title-area #{item["price_info"]}
   = render partial: "dg_load_more", locals: {keyword: @keyword, has_coupon: 0}
 
 - if @items_bang && @items_bang.size > 0

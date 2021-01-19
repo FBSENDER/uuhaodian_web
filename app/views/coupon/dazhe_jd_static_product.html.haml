@@ -29,12 +29,22 @@
   .content
     - @items.each do |r|
       .item
-        %a{href: "/jdhh/#{r["id"]}/"}
+        %a{href: "/jdhh/#{r["id"]}/", title: "#{r["title"]}"}
           %img.pic{src: "#{r["pic_url"]}", alt: "#{r["title"]}"}
           .cent
             %h3
               %span 京东
               #{r["title"]}
+            .tags &nbsp;
+            .money #{r["price_info"]}
+    - @jd_items.each do |r|
+      .item
+        %a{href: "/jdhh/#{r["id"]}/", title: "#{r["title"].split.join}"}
+          %img.pic{src: "#{r["pic_url"]}", alt: "#{r["title"].split.join}"}
+          .cent
+            %h3
+              %span 京东
+              #{r["title"].split.join}
             .tags &nbsp;
             .money #{r["price_info"]}
 

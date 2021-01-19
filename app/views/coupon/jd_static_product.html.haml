@@ -18,6 +18,13 @@
     %p.head
       %span 更多推荐
   .zk-list.clearfix#couponList
+    - @jd_items.each do |item|
+      .zk-item
+        %a{href: "/jdhh/#{item["id"]}/", title: "#{item["title"].split.join}"}
+          .img-area
+            %img{src: "#{item["pic_url"]}", alt: "#{item["title"].split.join}图片"}
+          %p.title-area #{item["title"].split.join}
+          %p.title-area #{item["price_info"]}
   = render partial: "lanlan_load_more", locals: {path: @path, pagesize: 20, sort_type: 7, pinyin: '', keyword: @detail["title"].split.last, cid: 0,sort: 7, type: 0}
 
   .rel-zk-area
