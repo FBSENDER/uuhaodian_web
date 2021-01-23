@@ -25,7 +25,7 @@
     .platform
       %span 京东 - 
       - if coupon["shop_id"].to_i > 0
-        %a{href: "/jdshop/#{coupon["shop_id"]}/"}
+        %a{href: "/jshop_#{coupon["shop_id"]}.html"}
           %span #{coupon["shop_title"]}
       - else
         %span #{coupon["shop_title"]}

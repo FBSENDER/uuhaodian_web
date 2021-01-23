@@ -1,0 +1,46 @@
+- title("【#{@shop_name}】#{@shop_name}首页/活动/优惠券")
+- keywords("#{@shop_name},#{@shop_name}首页,#{@shop_name}活动,#{@shop_name}优惠券")
+- coupon_desc = @coupons.size > 0 ? "满#{@coupons[0]["quota"]}元减#{@coupons[0]["discount"]}元的优惠券正在限量发放中。" : "先到先得。"
+- shop_desc = "#{@shop_name}是一家在京东平台正在经营的网店，主营：#{@cid3s.map{|c| c["cname3"]}.join("，")}等商品，销售的商品有正品保证，请大家放心。点击链接，即可直达#{@shop_name}首页。#{@shop_name}今日正在发放优惠券，#{coupon_desc}优优好店每日更新#{@shop_name}优惠券信息、促销活动，助力大家网购更实惠！"
+- head_desc(shop_desc)
+- path("/jshop_#{@shop_id}.html")
+- mobile_url("http://wap.uuhaodian.com/jshop_#{@shop_id}.html")
+
+.dazhe
+  .header_pr.header_red.transition
+    .icon_header
+      .search
+        %i
+        %a{href: "/dz_search/", onclick: "_hmt.push(['_trackEvent', '顶部点击', 'click', 'dazhe'])"}
+          %p #{@shop_name}
+  = render partial: "dazhe_gongzhonghao_guide"
+  .content
+    = render partial: "dazhe_filter"
+    #dazheList
+      - @jd_items.each do |r|
+        .item
+          %a{href: "/jdhh/#{r["id"]}/", title: "#{r["title"].split.join}"}
+            %img.pic{src: "#{r["pic_url"]}", alt: "#{r["title"].split.join}"}
+            .cent
+              %h3
+                %span 京东
+                #{r["title"].split.join}
+              .tags &nbsp;
+              .money #{r["price_info"]}
+    %img#imgLoading{src: "/img/img_loading.gif", width: "200px", style: "margin: 10px auto;"}
+  .button-btn.sno#loadRetry 重新加载
+  .button-btn.sno#noMore 没有更多了
+
+  = render partial: "jd_mobile_footer_diy", locals: {url: "/jdshop_go/#{@shop_id}/", text: "#{@shop_name}"}
+
+.scroll_top.close
+  %a{href: "javascript:;"}
+    %img{src: "/img/to_top.png"}
+
+
+= render partial: "sem_js"
+:javascript
+  $("#ercode_show").click(function(){$("#ercode").removeClass("sno");$("#ercode_show").css("display","none");});
+  $(".zh").click(function(){window._agl && window._agl.push(['track', ['success', {t: 3}]])});
+
+= render partial: "dazhe_js"

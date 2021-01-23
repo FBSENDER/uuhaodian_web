@@ -31,7 +31,6 @@
     %p.head
       %span 随便看看
   .link-area{style: "margin-bottom: 30px;"}
-    %a{href: "https://www.iquan.net/dianpu/jd_#{@detail["shop_id"]}/", target: "_blank"} #{@detail["shop_title"]}介绍
     - @ks.each do |ks|
       %a{href: "/query/#{URI.encode_www_form_component(ks)}/"} #{ks}
 

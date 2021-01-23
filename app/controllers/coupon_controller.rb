@@ -823,6 +823,48 @@ class CouponController < ApplicationController
     end
   end
 
+  def jd_shop_seo
+    @shop_id = params[:id].nil? ? 0 : params[:id].to_i
+    if @shop_id == 0
+      not_found
+      return
+    end
+    if is_device_mobile? && request.host != "wap.uuhaodian.com"
+      redirect_to "http://wap.uuhaodian.com/jshop_#{@shop_id}.html"
+      return
+    end
+    set_cookie_channel
+    url = "http://api.uuhaodian.com/jduu/jd_shop_seo_json?shop_id=#{@shop_id}"
+    result = Net::HTTP.get(URI(url))
+    r_json = JSON.parse(result)
+    if r_json["status"] == 0
+      not_found
+      return
+    end
+    @shop_name = r_json["result"]["shop_name"]
+    @coupons = r_json["result"]["coupons"]
+    @hot_products = r_json["result"]["hot_products"]
+    @brands = r_json["result"]["brands"]
+    @cid3s = r_json["result"]["cid3s"]
+    @top_keywords = @cid3s.map{|c| c["cname3"]}
+    @related = r_json["result"]["related"]
+    cookies[:ff_platform] = {value: 2, path: "/"}
+    if @brands.size > 0
+      @keyword = @brands[0]["brand_name"]
+      @top_keywords << @keyword
+    elsif @cid3s.size > 0
+      @keyword = @cid3s[0]["cname3"]
+    else
+      @keyword = @shop_name
+    end
+    @jd_items = get_jd_open_search(@shop_name)
+    @top_keywords += get_hot_keywords_data.sample(8 - @top_keywords.size)
+    if request.host == "wap.uuhaodian.com"
+      render :dazhe_shop_jd_seo, layout: "dazhe"
+      return
+    end
+  end
+
   def jd_diy_buy
     if is_robot?
       render "not_found", status: 403
