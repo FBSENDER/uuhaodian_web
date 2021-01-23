@@ -45,21 +45,20 @@
     .no-quan 此刻没有优惠券 请稍后查看
   .jd-coupon-list.clearfix
     - @coupons.each do |c|
-      - c["products"][0,3].each do |cc|
-        %a{href: "/jd/buy/#{cc["item_id"]}/?coupon=#{URI.encode_www_form_component(c["coupon_url"])}", target: "_blank", onclick: '_hmt.push(["_trackEvent", "店铺优惠券点击", "click", "jd_shop"])', title: "#{@shop_name}#{c["discount"]}元优惠券"}
-          .jd-coupon
-            .img{style: "overflow:hidden;white-space:nowrap;"}
-              %img{src: "#{cc["pict_url"].sub('http:', '')}"}
-            .c-content
-              .price-area
-                %span.s1 ￥
-                %span.s2 #{c["discount"]}
-                %span.s3 满#{c["quota"]}元可用
-              .c-small
-                %p{style: "height:46px;overflow:hidden;"} #{cc["title"]}
-                %img{src: "/img/jd_logo.png", width: "76px", height: "38px", style: "padding:0;margin:0;float:right;"}
+      %a{href: "/jd/buy/#{c["product_id"]}/?coupon=#{URI.encode_www_form_component(c["coupon_url"])}", target: "_blank", onclick: '_hmt.push(["_trackEvent", "店铺优惠券点击", "click", "jd_shop"])', title: "#{@shop_name}#{c["discount"]}元优惠券"}
+        .jd-coupon
+          .img{style: "overflow:hidden;white-space:nowrap;"}
+            %img{src: "#{c["pict_url"].sub('http:', '')}"}
+          .c-content
+            .price-area
+              %span.s1 ￥
+              %span.s2 #{c["discount"]}
+              %span.s3 满#{c["quota"]}元可用
+            .c-small
+              %p{style: "height:46px;overflow:hidden;"} #{@shop_name}#{c["discount"]}元优惠券
+              %img{src: "/img/jd_logo.png", width: "76px", height: "38px", style: "padding:0;margin:0;float:right;"}
 
-            .lingquan 立即领券
+          .lingquan 立即领券
 
 .wrapper1200
   .rel-zk-area{style: "z-index:1;margin-bottom:0;margin-top:0;"}
@@ -72,11 +71,11 @@
           .img-area
             %img{src: "#{pr["pict_url"].sub('http:', '')}", alt: "#{pr["title"]}"}
           %p.title-area #{pr["title"]}
-          .tag-areas
+          .tags-area
             %span.tag 热销单品
           .price-area
             现价 ￥
-            %span.price #{pr["lowest_coupon_price"]}
+            %span.price #{pr["lowest_price"]}
           .raw-price-area 
             原价 ￥ #{pr["o_price"]}
             %p.sold 已售#{pr["sales"]}件

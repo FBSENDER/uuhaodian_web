@@ -843,10 +843,10 @@ class CouponController < ApplicationController
     end
     @shop_name = r_json["result"]["shop_name"]
     @coupons = r_json["result"]["coupons"]
-    @hot_products = r_json["result"]["hot_products"]
+    @hot_products = r_json["result"]["products"]
     @brands = r_json["result"]["brands"]
     @cid3s = r_json["result"]["cid3s"]
-    @top_keywords = @cid3s.map{|c| c["cname3"]}
+    @top_keywords = @cid3s.map{|c| c["cname3"].split('/')[0]}
     @related = r_json["result"]["related"]
     cookies[:ff_platform] = {value: 2, path: "/"}
     if @brands.size > 0
@@ -858,7 +858,11 @@ class CouponController < ApplicationController
       @keyword = @shop_name
     end
     @jd_items = get_jd_open_search(@shop_name)
-    @top_keywords += get_hot_keywords_data.sample(8 - @top_keywords.size)
+    if @top_keywords.size < 7
+      @top_keywords += get_hot_keywords_data.sample(7 - @top_keywords.size)
+    else
+      @top_keywords = @top_keywords.sample(7)
+    end
     if request.host == "wap.uuhaodian.com"
       render :dazhe_shop_jd_seo, layout: "dazhe"
       return
