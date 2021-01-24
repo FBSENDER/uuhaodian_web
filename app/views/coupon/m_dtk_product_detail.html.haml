@@ -20,9 +20,9 @@
   %article
     %div{style: "padding: 20px;text-align:center;background-color:#fff;"}        
       - @detail["auctionImages"].each do |img|
-        %img{src: "#{img}", style: "width: 100%;margin: 0 auto;"}
+        %img{src: "#{img}", alt: "#{@detail["title"]}", style: "width: 100%;margin: 0 auto;"}
     .product-info
-      .title #{@detail["title"]}
+      %h1.title #{@detail["shortTitle"]}
       - if @detail["recommend"] != ''
         .desc #{@detail["recommend"]}
       - else

@@ -190,7 +190,7 @@ class CouponController < ApplicationController
     @items = json["data"]["related"]
     @path = "https://api.uuhaodian.com/uu/dg_goods_list"
     @top_keywords = get_hot_keywords_data.sample(7)
-    if is_device_mobile?
+    if request.host == "wap.uuhaodian.com"
       render :m_dtk_product_detail, layout: "dazhe"
     end
   end
