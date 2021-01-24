@@ -18,7 +18,7 @@
         >
         - c.split('/').each do |cc|
           %a{href: "/query/#{URI.encode(cc)}/"} #{cc}
-      - unless coupon["brandName"].empty?
+      - if !coupon["brandName"].empty? && !coupon["brandName"].include?("other")
         %a{href: "/query/#{URI.encode(coupon["brandName"])}/"} #{coupon["brandName"]}
     %p.recommend
       - if coupon["recommend"] != ''
