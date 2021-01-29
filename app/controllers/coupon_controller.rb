@@ -869,6 +869,41 @@ class CouponController < ApplicationController
     end
   end
 
+  def dtk_shop_seo
+    @shop_id = params[:id].nil? ? 0 : params[:id].to_i
+    if @shop_id == 0
+      not_found
+      return
+    end
+    if is_device_mobile? && request.host != "wap.uuhaodian.com"
+      redirect_to "http://wap.uuhaodian.com/tshop_#{@shop_id}.html"
+      return
+    end
+    set_cookie_channel
+    url = "http://api.uuhaodian.com/uu/dtk_shop_seo?shop_id=#{@shop_id}"
+    result = Net::HTTP.get(URI(url))
+    r_json = JSON.parse(result)
+    if r_json["status"] == 0
+      not_found
+      return
+    end
+    @shop_name = r_json["result"]["shop_name"]
+    @shop_type = r_json["result"]["shop_type"]
+    @shop_logo = r_json["result"]["shop_logo"]
+    @is_gold = r_json["result"]["is_gold"]
+    @pd1 = r_json["result"]["pd1"]
+    @pd2 = r_json["result"]["pd2"]
+    @cnames = r_json["result"]["cnames"].split(',')
+    @top_keywords = get_hot_keywords_data.sample(7)
+    @related = r_json["result"]["shops"]
+    @brand = r_json["result"]["brand_name"]
+    @keyword = @brand.empty? ? @cnames[0] : @brand
+    if request.host == "wap.uuhaodian.com"
+      render :dazhe_shop_dtk_seo, layout: "dazhe"
+      return
+    end
+  end
+
   def jd_diy_buy
     if is_robot?
       render "not_found", status: 403

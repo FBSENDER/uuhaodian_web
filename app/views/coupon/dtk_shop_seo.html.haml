@@ -1,0 +1,89 @@
+- title("【#{@shop_name}】#{@shop_name}首页/活动/优惠券")
+- keywords("#{@shop_name},#{@shop_name}首页,#{@shop_name}活动,#{@shop_name}优惠券")
+- shop_desc = "#{@shop_name}是一家在#{@shop_type == 1 ? "天猫" : "淘宝"}平台正在经营的网店，主营：#{@cnames.split(',').join('、')}等商品，#{"主营品牌：#{@brand}，" if @brand != ''}销售的商品有质量保证，请大家放心。点击链接，即可直达#{@shop_name}首页。#{@shop_name}今日正在发放优惠券，点击即可领取，优优好店每日更新#{@shop_name}优惠券信息、促销活动，助力大家网购更实惠！"
+- head_desc(shop_desc)
+- path("/tshop_#{@shop_id}.html")
+- mobile_url("http://wap.uuhaodian.com/tshop_#{@shop_id}.html")
+- mp = "http://wap.uuhaodian.com/tshop_#{@shop_id}.html"
+
+= render partial: "header_common"
+= render partial: "jd_banner_1200_1"
+%a{href: "https://api.uuhaodian.com/uu/shop_go?shop_id=#{@shop_id}&sgo=uuhaodian", target: "_blank", rel: "nofollow", title: "直达 - #{@shop_name}", onclick: "_hmt.push(['_trackEvent', '上方描述点击', 'click', 'jd_shop'])"}
+  .wrapper1200{style: "margin-top: 10px;"}
+    .item-list-top
+      %h1.left{style: "display:inline;"} #{@shop_name}
+      %span.left{style: "color:#999;margin-left:10px;font-size:16px;"} 搜索商品标题或链接，可精准找券 - 微信扫一扫右侧二维码，关注公众号"UU好店"，领券更方便！
+      %p{style: "color:#666;line-height:30px;"} 领券小帮手：目前大多数商品都有优惠券，但是这些券不易被找到。本网站，提供了找券功能，搜索商品的标题，就能够
+      %p{style: "color:#666;line-height:30px;"} 找到优惠券（如果存在），点击领取优惠券后，下单时即可优惠相应金额。 
+      %p{style: "color:#666;line-height:30px;"} 本站进一步支持：通过搜索，查看同款商品在淘宝天猫和京东的价格，为您的购物决策提供方便。
+      %div{style: "height:0;position:relative;top:-138px;float:right;"}
+        %img{src: "/img/lbanner1.png", height: "138px", width: "138px"}
+  .wrapper1200{style: "margin-top: 10px;"}
+    .item-list-top
+      %p{style: "color:#666;line-height:30px;"} #{shop_desc}
+
+.wrapper1200
+  .rel-zk-area{style: "z-index:1;margin-bottom:0;"}
+    %h2.head
+      %span #{@shop_name} - 商品推荐
+  .hot-product-area{style: "margin-top:10px;"}
+    - @pd1.each do |pr|
+      .zk-item
+        %a{href: "/dtk/#{pr["id"]}/#copuon", title: "#{pr["dtitle"]}"}
+          .img-area
+            %img{src: "#{pr["mainPic"]}", alt: "#{pr["dtitle"]}"}
+          %p.title-area #{pr["dtitle"]}
+          .tags-area
+            %span.tag 热销单品
+            %span.tag.c #{pr["couponPrice"]}元券
+          .price-area
+            现价 ￥
+            %span.price #{pr["actualPrice"]}
+          .raw-price-area 
+            原价 ￥ #{pr["originalPrice"]}
+            %p.sold 已售#{pr["monthSales"]}件
+
+.wrapper1200
+  .rel-zk-area{style: "z-index:1;margin-bottom:0;margin-top:20px;"}
+    %h2.head
+      %span 热销商品推荐
+  .hot-product-area{style: "margin-top:10px;"}
+    - @pd2.each do |pr|
+      .zk-item
+        %a{href: "/dtk/#{pr["id"]}/#copuon", title: "#{pr["dtitle"]}"}
+          .img-area
+            %img{src: "#{pr["mainPic"]}", alt: "#{pr["dtitle"]}"}
+          %p.title-area #{pr["dtitle"]}
+          .tags-area
+            %span.tag 热销单品
+            %span.tag.c #{pr["couponPrice"]}元券
+          .price-area
+            现价 ￥
+            %span.price #{pr["actualPrice"]}
+          .raw-price-area 
+            原价 ￥ #{pr["originalPrice"]}
+            %p.sold 已售#{pr["monthSales"]}件
+.wrapper1200
+  .rel-zk-area{style: "z-index:1;margin-bottom:0;"}
+    %h2.head
+      %span #{@shop_name} - 相关店铺
+  - @related.each do |r|
+    .shop-item
+      %a{href: "/tshop_#{r["source_id"]}.html", style: "padding: 10px;", title: "#{r["shopName"]}"}
+        %img.shop-item-img{src: "#{r["shopLogo"]}", alt: "#{r["shopName"]}Logo"}
+        %p.shop-item-p #{r["shopName"]}
+
+
+.wrapper1200{style: "margin-bottom: 20px;margin-top: 20px;"}
+  .item-list-top
+    %p{style: "color:#666;line-height:30px;"} 
+      以上就是优优好店介绍#{@shop_name}的全部商品及优惠折扣信息啦，希望对您网购有帮助！找更多相关优惠券请点击：
+      - @cnames.each do |c|
+        %a{href: "/query/#{URI.encode_www_form_component(c)}/", style: "color: red;"} #{c}优惠券
+      - unless @brand.empty?
+        %a{href: "/query/#{URI.encode_www_form_component(@brand)}/", style: "color: red;"} #{@brand}优惠券
+
+= render partial: "footer", locals: {mobile_path: mp}
+= render partial: "sider_fixed_area"
+= render partial: "dtk_shop_diy_mengceng", locals: {text: "前往#{@shop_name}", url: "https://api.uuhaodian.com/uu/shop_go?shop_id=#{@shop_id}&sgo=uuhaodian", img: "#{@shop_logo}"}
+

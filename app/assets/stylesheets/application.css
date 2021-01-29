@@ -2362,3 +2362,32 @@ input[type='checkbox'].switch:checked::after {
 .article-tag:hover{
   background-color: #fff;
 }
+.shop-item{
+  float: left;
+  width: 238px;
+  margin: 0;
+  border: 1px solid #eee;
+  background-color: #fff;
+  text-align: center;
+  overflow: hidden;
+}
+.shop-item:hover{
+  border: 1px solid #FF2B22;
+}
+.shop-item-img{
+  width: 130px;
+  height: 130px;
+  padding: 10px;
+  border: 1px solid #f8f8f8;
+  border-radius: 50%;
+  text-align: center;
+  margin: 20px auto 0 auto;
+}
+.shop-item-p{
+  padding: 20px 0;
+  font-size: 13px;
+  color: #444;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
