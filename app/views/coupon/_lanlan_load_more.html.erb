@@ -38,7 +38,7 @@ var callback = function(data){
     Util.createLanlanCouponList(data.result,couponList,channel,'首页');
     if(data.result.length < pagesize)
     {
-      path = "https://api.uuhaodian.com/uu/tb_goods_list";
+      path = "https://api.uuhaodian.com/uu/dg_goods_list";
       load = 1;
       page = 1;
       getLanlanCouponList();
@@ -52,12 +52,9 @@ var callback = function(data){
     }
   }
   else if(data.status == 1){
-    Util.createTaobaoCouponList(data.results,couponList,channel,'首页');
+    Util.createDgList(data.results,couponList,channel,'首页');
     if(data.results.length < pagesize){
-      path = "https://api.uuhaodian.com/uu/tb_goods_item_list";
-      load = 1;
-      page = 1;
-      getLanlanCouponList();
+      loadingText.html('没有更多了');
     }
     else{
       page ++;
@@ -65,11 +62,8 @@ var callback = function(data){
       loadingText.html('加载完成');
     }
   }
-  else if(data.status == 2){
-    Util.createTaobaoProductList(data.results,couponList,channel,'首页');
-    page ++;
-    load = 1;
-    loadingText.html('加载完成');
+  else{
+    loadingText.html('没有更多了');
   }
 };
 $(function(){
