@@ -21,7 +21,7 @@
 
 .wrapper1200
   .item-list-top
-    %span.left 京东优惠券 - 今日上新
+    %span.left 京东优惠券免费领取 - 今日上新
     %a{href: "/jd/"}
       %span.right 查看更多
 .wrapper{style: "margin: 10px auto;"}
@@ -78,7 +78,7 @@
 .wrapper1200
   .rel-zk-area
     %p.head
-      %span 京东品类优惠券
+      %span 京东品类优惠券大全
   .link-area
     - @cores.each do |core|
       %a{href: "#{core["url"]}", title: "京东#{core["k"]}优惠券"} 京东#{core["k"]}
@@ -86,7 +86,7 @@
 .wrapper1200
   .rel-zk-area
     %p.head
-      %span 京东店铺优惠券
+      %span 京东店铺优惠券大全
   .link-area
     - @shops.each do |s|
       %a{href: "#{s["url"]}", title: "#{s["name"]}优惠券"} #{s["name"]}
