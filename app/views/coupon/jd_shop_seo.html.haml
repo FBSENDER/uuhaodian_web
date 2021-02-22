@@ -97,7 +97,7 @@
         %a{href: "javascript:;", class: "#{'active' if index == 0} shop-cid3", data: {cid3: c["cid3"]}, onclick: '_hmt.push(["_trackEvent", "店铺cid3点击", "click", "jd_shop"])'} #{c["cname3"]}
 
   .zk-list.clearfix#jdtongdian{style: "min-height: 400px;margin-bottom:20px;"}
-  = render partial: "jd_tongdian", locals: {seller_id: @shop_id, cid3: @cid3s[0]["cid3"]}
+  = render partial: "jd_tongdian", locals: {seller_id: @shop_id, cid3: @cid3s.size > 0 ? @cid3s[0]["cid3"] : 0}
 
 .wrapper1200{style: "margin-bottom: 20px;"}
   .item-list-top
