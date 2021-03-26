@@ -1,5 +1,5 @@
 - title("#{@detail["title"].split.join}_优优好店")
-- keywords("#{@detail["title"].split.join},#{@detail["title"].split.join(',')}")
+- keywords("#{@detail["title"].split.join},#{(@ks2 + @ks1).uniq.join(',')}")
 - head_desc("#{@detail["recommends"][0]}-#{@detail["title"]}")
 - path("/jdhh/#{@id}/")
 - mobile_url("http://wap.uuhaodian.com/jdhh/#{@id}/")
@@ -20,11 +20,16 @@
   .zk-list.clearfix#couponList
     - @jd_items.each do |item|
       .zk-item
-        %a{href: "/jdhh/#{item["id"]}/", title: "#{item["title"].split.join}"}
-          .img-area
+        .img-area
+          %a{href: "/jdhh/#{item["id"]}/", title: "#{item["title"].split.join}"}
             %img{src: "#{item["pic_url"]}", alt: "#{item["title"].split.join}图片"}
-          %p.title-area #{item["title"].split.join}
-          %p.title-area #{item["price_info"]}
+        %p.title-area 
+          %a{href: "/jdhh/#{item["id"]}/", title: "#{item["title"].split.join}"}
+            #{@ks2.inject(item["title"].split.join){|r, x| r.gsub(x, "<b>#{x}</b>")}.html_safe}
+        %p.price-area{style: "color: red;"} #{item["price_info"]}
+        %p.raw-price-area
+          %a{href: "/jshop_#{item["shop_id"]}.html"}
+            #{item["shop_title"]}
   = render partial: "lanlan_load_more", locals: {path: @path, pagesize: 20, sort_type: 7, pinyin: '', keyword: @detail["title"].split.last, cid: 0,sort: 7, type: 0}
 
   .rel-zk-area

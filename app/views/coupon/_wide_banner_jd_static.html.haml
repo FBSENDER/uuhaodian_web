@@ -3,10 +3,13 @@
     - (0..((items.size * 1.0 / 6.0).ceil - 1)).each do |page|
       .swiper-slide
         - items[page * 6,6].each_with_index do |item, index|
-          %a{href: "/jdhh/#{item["id"]}/#coupon", onclick: "ga_event(this);", data:{ga: "wide_banner:wide_banner:wide_banner"}}
-            .item{style: "#{'margin-left:90px' if index == 0}"}
-              %img{src: "#{item["pic_url"]}"}
-              %p.title{style: "height: 16px;"} #{item["title"].split.join}
-              %p.price{style: "height: 42px;"} #{item["price_info"]}
+          .item{style: "#{'margin-left:90px' if index == 0}"}
+            %a{href: "/jdhh/#{item["id"]}/#coupon", title: "#{item["title"].split.join}"}
+              %img{src: "#{item["pic_url"]}", alt: "#{item["title"]}"}
+            %p.title{style: "height: 16px;"}
+              %a{href: "/jdhh/#{item["id"]}/#coupon"} #{item["title"].split.join}
+            %p.price{style: "height: 16px;overflow:hidden;"}
+              %a{href: "/jshop_#{item["shop_id"]}.html", title: "#{item["shop_title"]}"} #{item["shop_title"]}
+            %p.price{style: "height: 16px;overflow:hidden;"} #{item["price_info"]}
   .swiper-button-prev
   .swiper-button-next

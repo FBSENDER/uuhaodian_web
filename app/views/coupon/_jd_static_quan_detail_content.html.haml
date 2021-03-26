@@ -12,7 +12,7 @@
         #{coupon['title'].split.join}
     %p.recommend
       - coupon["recommends"].each do |re|
-        #{re}
+        #{@ks2.inject(re){|r, x| r.gsub(x, "<b>#{x}</b>")}.html_safe}
         %br
     %input{id: "endTime", value: "", type: "hidden"}
     .small-img-area

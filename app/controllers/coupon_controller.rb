@@ -357,10 +357,13 @@ class CouponController < ApplicationController
       @ks += item["keywords"].map{|k| k[0]}
     end
     @jd_items = []
-    if is_robot? && @ks.size > 0
-      @jd_items = get_jd_open_search(@ks.first[0])
+    @ks1 = @detail["ks1"]
+    @ks2 = @detail["ks2"]
+    @ks2.delete(" ")
+    if @ks1.size > 0
+      @jd_items = get_jd_open_search(@ks1[-1])
     end
-    @ks = @ks.uniq.sample(15)
+    @ks = @ks1 + @ks.uniq.sample(10)
     if request.host == "wap.uuhaodian.com"
       render :dazhe_jd_static_product, layout: "dazhe"
     end
