@@ -2,34 +2,42 @@
   .swiper-wrapper
     .swiper-slide
       - items[0,6].each_with_index do |item, index|
-        %a{href: "/dtk/#{item["id"]}/#coupon", onclick: "ga_event(this);", data:{ga: "wide_banner:wide_banner:wide_banner"}}
-          .item{style: "#{'margin-left:90px' if index == 0}"}
-            %img{src: "#{item["mainPic"]}"}
-            %p.title #{item["dtitle"]}
-            %p.price 可享折扣/领取优惠券
+        .item{style: "#{'margin-left:90px' if index == 0}"}
+          %a{href: "/dtk/#{item["id"]}/#coupon", title: "#{item["dtitle"]}"}
+            %img{src: "#{item["mainPic"]}", alt: "#{item["dtitle"]}图片"}
+          %p.title
+            %a{href: "/dtk/#{item["id"]}/#coupon"} #{item["dtitle"]}
+          %p.price 
+            %a{href: "/tshop_#{item["sellerId"]}.html"} #{item["shopName"]}
     .swiper-slide
       - if items.size > 6
         - items[6,6].each_with_index do |item, index|
-          %a{href: "/dtk/#{item["id"]}/#coupon", onclick: "ga_event(this);", data:{ga: "wide_banner:wide_banner:wide_banner"}}
-            .item{style: "#{'margin-left:90px' if index == 0}"}
-              %img{src: "#{item["mainPic"]}"}
-              %p.title #{item["dtitle"]}
-              %p.price 可享折扣/领取优惠券
+          .item{style: "#{'margin-left:90px' if index == 0}"}
+            %a{href: "/dtk/#{item["id"]}/#coupon", title: "#{item["dtitle"]}"}
+              %img{src: "#{item["mainPic"]}", alt: "#{item["dtitle"]}图片"}
+            %p.title
+              %a{href: "/dtk/#{item["id"]}/#coupon"} #{item["dtitle"]}
+            %p.price 
+              %a{href: "/tshop_#{item["sellerId"]}.html"} #{item["shopName"]}
     .swiper-slide
       - if items.size > 12
         - items[12,6].each_with_index do |item, index|
-          %a{href: "/dtk/#{item["id"]}/#coupon", onclick: "ga_event(this);", data:{ga: "wide_banner:wide_banner:wide_banner"}}
-            .item{style: "#{'margin-left:90px' if index == 0}"}
-              %img{src: "#{item["mainPic"]}"}
-              %p.title #{item["dtitle"]}
-              %p.price 可享折扣/领取优惠券
+          .item{style: "#{'margin-left:90px' if index == 0}"}
+            %a{href: "/dtk/#{item["id"]}/#coupon", title: "#{item["dtitle"]}"}
+              %img{src: "#{item["mainPic"]}", alt: "#{item["dtitle"]}图片"}
+            %p.title
+              %a{href: "/dtk/#{item["id"]}/#coupon"} #{item["dtitle"]}
+            %p.price 
+              %a{href: "/tshop_#{item["sellerId"]}.html"} #{item["shopName"]}
     .swiper-slide
       - if items.size > 18
         - items[18,6].each_with_index do |item, index|
-          %a{href: "/dtk/#{item["id"]}/#coupon", onclick: "ga_event(this);", data:{ga: "wide_banner:wide_banner:wide_banner"}}
-            .item{style: "#{'margin-left:90px' if index == 0}"}
-              %img{src: "#{item["mainPic"]}"}
-              %p.title #{item["dtitle"]}
-              %p.price 可享折扣/领取优惠券
+          .item{style: "#{'margin-left:90px' if index == 0}"}
+            %a{href: "/dtk/#{item["id"]}/#coupon", title: "#{item["dtitle"]}"}
+              %img{src: "#{item["mainPic"]}", alt: "#{item["dtitle"]}图片"}
+            %p.title
+              %a{href: "/dtk/#{item["id"]}/#coupon"} #{item["dtitle"]}
+            %p.price 
+              %a{href: "/tshop_#{item["sellerId"]}.html"} #{item["shopName"]}
   .swiper-button-prev
   .swiper-button-next

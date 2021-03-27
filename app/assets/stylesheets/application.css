@@ -741,6 +741,8 @@ input,input:focus{
   margin: 5px 0 0 0;
   font-size: 12px;
   color: #FF2B22;
+  height: 17px;
+  overflow: hidden;
 }
 .zk-item .price-area .price{
   font-size: 20px;

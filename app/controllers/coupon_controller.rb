@@ -190,6 +190,17 @@ class CouponController < ApplicationController
     @items = json["data"]["related"]
     @path = "https://api.uuhaodian.com/uu/dg_goods_list"
     @top_keywords = get_hot_keywords_data.sample(7)
+    @jd_items = []
+    @k = ''
+    begin
+      if cn = @detail["cnames"].split(',')
+        if cn.size > 0
+          @k = cn[-1]
+          @jd_items = get_jd_open_search(@k)
+        end 
+      end
+    rescue
+    end
     if request.host == "wap.uuhaodian.com"
       render :m_dtk_product_detail, layout: "dazhe"
     end
@@ -464,10 +475,7 @@ class CouponController < ApplicationController
       @kk = []
     end
     @kk = @kk.sample(10)
-    @jd_items = []
-    if is_robot?
-      @jd_items = get_jd_open_search(@keyword)
-    end
+    @jd_items = get_jd_open_search(@keyword)
   end
 
   def gaoyong

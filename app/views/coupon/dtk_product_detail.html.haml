@@ -19,8 +19,20 @@
 .wrapper1200
   .rel-zk-area
     %p.head
-      %span 更多推荐
+      %span 更多#{@k}推荐
   .zk-list.clearfix#couponList
+    - @jd_items.each do |item|
+      .zk-item
+        .img-area
+          %a{href: "/jdhh/#{item["id"]}/", title: "#{item["title"].split.join}"}
+            %img{src: "#{item["pic_url"]}", alt: "#{item["title"].split.join}图片"}
+        %p.title-area 
+          %a{href: "/jdhh/#{item["id"]}/", title: "#{item["title"].split.join}"}
+            #{item["title"].split.join.gsub(@k, "<b>#{@k}</b>").html_safe}
+        %p.price-area{style: "color: red;"} #{item["price_info"]}
+        %p.raw-price-area
+          %a{href: "/jshop_#{item["shop_id"]}.html"}
+            #{item["shop_title"]}
   = render partial: "dg_load_more", locals: {keyword: @detail["title"][-6,6], has_coupon: 0}
 
 = render partial: "footer", locals: {mobile_path: mp}

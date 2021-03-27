@@ -25,18 +25,6 @@
           %h1{style: "float:right;padding: 0 20px;font-size:14px;"} “#{@keyword[0,40]}”搜索结果
         = render partial: "dg_filter", locals: {has_coupon: false}
   .zk-list.clearfix#couponList{style: "margin-top: 20px;"}
-    - @jd_items.each do |item|
-      .zk-item
-        .img-area
-          %a{href: "/jdhh/#{item["id"]}/", title: "#{item["title"].split.join}"}
-            %img{src: "#{item["pic_url"]}", alt: "#{item["title"].split.join}图片"}
-        %p.title-area 
-          %a{href: "/jdhh/#{item["id"]}/", title: "#{item["title"].split.join}"}
-            #{item["title"].split.join.gsub(@keyword, "<b>#{@keyword}</b>").html_safe}
-        %p.price-area{style: "color: red;"} #{item["price_info"]}
-        %p.raw-price-area
-          %a{href: "/jshop_#{item["shop_id"]}.html"}
-            #{item["shop_title"]}
   = render partial: "dg_load_more", locals: {keyword: @keyword, has_coupon: 0}
 
 - if @items_bang && @items_bang.size > 0
@@ -46,6 +34,24 @@
       %a{href: "/collection/2/"}
         %span.right 查看更多
     = render partial: "wide_banner", locals: {items: @items_bang}
+- if @jd_items.size > 0
+  .wrapper1200{style: "margin-bottom: 20px;"}  
+    .rel-zk-area
+      %h2.head 
+        %span 更多#{@keyword}推荐
+    .zk-list.clearfix
+      - @jd_items.each do |item|
+        .zk-item
+          .img-area
+            %a{href: "/jdhh/#{item["id"]}/", title: "#{item["title"].split.join}"}
+              %img{src: "#{item["pic_url"]}", alt: "#{item["title"].split.join}图片"}
+          %p.title-area 
+            %a{href: "/jdhh/#{item["id"]}/", title: "#{item["title"].split.join}"}
+              #{item["title"].split.join.gsub(@keyword, "<b>#{@keyword}</b>").html_safe}
+          %p.price-area{style: "color: red;"} #{item["price_info"]}
+          %p.raw-price-area
+            %a{href: "/jshop_#{item["shop_id"]}.html"}
+              #{item["shop_title"]}
 
 = render partial: "footer", locals: {mobile_path: mp}
 = render partial: "sider_fixed_area"
