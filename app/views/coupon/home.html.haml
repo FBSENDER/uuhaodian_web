@@ -27,10 +27,10 @@
 .wrapper{style: "margin: 10px auto;"}
   .jd-coupon-list.clearfix
     - @jd_coupons.each do |c|
-      %a{href: "#{c["url"]}", target: "_blank", title: "#{c["shop"]}优惠券"}
+      %a{href: "#{c["url"]}", target: "_blank", title: "#{c["shop"]}优惠券-优优好店"}
         .jd-coupon
           .img
-            %img{src: "#{c["pict_url"]}", alt: "#{c["shop"]}优惠券领取"}
+            %img{src: "#{c["pict_url"]}", alt: "#{c["shop"]}优惠券领取-优优好店"}
           .c-content
             .price-area
               %span.s1 ￥
@@ -53,7 +53,7 @@
   .zk-list.clearfix#couponList
     - @dtks.each do |dtk|
       .zk-item
-        %a{href: "#{dtk["url"]}", title: "#{dtk["title"]}#{dtk["coupon"]}元优惠券"}
+        %a{href: "#{dtk["url"]}", title: "#{dtk["title"]}#{dtk["coupon"]}元优惠券-优优好店"}
           .img-area
             %img{src: "#{dtk["pict_url"]}", alt: "#{dtk["title"]}#{dtk["coupon"]}元优惠券图片"}
           %p.title-area #{dtk["title"]}
@@ -89,7 +89,7 @@
       %span 京东店铺优惠券大全
   .link-area
     - @shops.each do |s|
-      %a{href: "#{s["url"]}", title: "#{s["name"]}优惠券"} #{s["name"]}
+      %a{href: "#{s["url"]}", title: "#{s["name"]}优惠券-优优好店"} #{s["name"]}
 
 = render partial: "home_jd_qa"
 
@@ -122,7 +122,7 @@
 
 .wrapper1200{style: "margin-bottom: 10px;"}
   .item-list-top{style: "padding-bottom: 10px;"}
-    %h2.left{style: "display:inline;"} 京东优惠券更新机制说明
+    %h2.left{style: "display:inline;"} 京东优惠券更新机制说明 - 优优好店
     %p{style: "color:#666;line-height:30px;"} 京东优惠券来源于京东各个店铺自己的设置与发放，通常会限定优惠券使用的商品、发放的数量、开始领取的时间以及有效期。于是某个商品是否存在优惠券及优惠金额会有极大的不确定性，并且优惠信息在其页面上有时不会露出。想要确保每次购物都能享受到优惠，下单前一定要记得找券呀！
 
 = render partial: "home_footer"
