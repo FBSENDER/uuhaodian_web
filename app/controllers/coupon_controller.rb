@@ -16,6 +16,10 @@ class CouponController < ApplicationController
   end
 
   def home
+    unless is_robot?
+      redirect_to "http://uuhaodian.com"
+      return
+    end
     if is_device_mobile?
       redirect_to "http://wap.uuhaodian.com"
       return
