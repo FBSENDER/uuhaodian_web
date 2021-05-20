@@ -17,7 +17,8 @@ class CouponController < ApplicationController
 
   def home
     unless is_robot?
-      redirect_to "http://uuhaodian.com"
+      for_shenhe_home
+      puts "12312312"
       return
     end
     if is_device_mobile?
@@ -80,6 +81,19 @@ class CouponController < ApplicationController
     @cates = get_cate_data
   end
 
+  def for_shenhe_home
+    @cid = "1325"
+    @cates = get_cate_data
+    @lanlan_category = @cates.select{|c| c["cid"] == @cid || c["cid"] == params[:cid_1]}.first
+    if @lanlan_category.nil?
+      not_found
+      return
+    end
+    @category_name = params[:category_name] || @lanlan_category["name"]
+    @path = "https://api.uuhaodian.com/uu/home_list"
+    render "coupon/for_shenhe_home"
+  end
+
   def category
     set_cookie_channel
     @cid = params[:cid]
@@ -98,6 +112,10 @@ class CouponController < ApplicationController
   end
 
   def product_detail
+    if !is_robot? && request.referer && (URI(request.referer).path == "" || URI(request.referer).path == "/")
+      redirect_to "https://api.uuhaodian.com/uu/pcbuy?id=#{params[:id]}"
+      return
+    end
     set_cookie_channel
     @channel = cookies[:channel]
     @coupon_money = params[:coupon_money].to_i

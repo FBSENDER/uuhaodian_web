@@ -1,0 +1,37 @@
+- title("#{@category_name},#{@category_name}折扣,#{@category_name}优惠_优优好店")
+- keywords("#{@category_name},#{@category_name}折扣,#{@category_name}优惠")
+- head_desc("优优好店 - 分类 - #{@category_name}")
+- path("/category/#{@cid}/")
+- mobile_url("https://www.uuhaodian.com/category/#{@cid}/")
+- mp = ""
+
+%header.header#header
+  = render partial: "header_bar"
+
+.wrapper1200
+  = render partial: "lanlan_quan_filter"
+  .zk-list.clearfix#couponList
+  = render partial: "lanlan_load_more", locals: {path: @path, pagesize: 20, sort_type: 7, pinyin: '', keyword: '', cid: @cid,sort: 7, type: 0}
+
+%footer.footer
+  .footer-top
+    .wrapper
+      .yl
+        %p.head 友情链接：
+        .yl-links
+          %a 友链申请 请联系QQ: 174786080
+          %br
+          %a{href: "/about.html", rel: "nofollow"} 关于我们
+      .logo-slogan
+        .qr-code
+          %img.lazy.new{data: {original: "/img/uuhaodian_logo_90.png"}}
+        .txt
+          %p.s1 微信公众号小程序
+          %p.s2 现已支持淘宝京东拼多多
+  .footer-bottom
+    .wrapper
+      %p 
+        © CopyRight 2021 优优好店  http://www.uuhaodian.com  
+        %a{href: "https://beian.miit.gov.cn", target: "_blank", style:"color:#ff6a00;", rel: "nofollow"}京ICP备18009981号-1 
+        %a{href: "/about.html", rel: "nofollow"}关于我们
+        ：北京弗格朗瑞科技有限公司 联系我们：010-86202725
