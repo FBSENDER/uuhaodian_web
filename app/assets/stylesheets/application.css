@@ -743,6 +743,9 @@ input,input:focus{
   color: #FF2B22;
   overflow: hidden;
 }
+.zk-item .price-area.one{
+  height: 17px;
+}
 .zk-item .price-area .price{
   font-size: 20px;
   font-weight: bold;

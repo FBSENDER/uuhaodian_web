@@ -381,9 +381,9 @@ class CouponController < ApplicationController
       not_found
       return
     end
+    @top_keywords = get_hot_keywords_data.sample(7)
     @detail = json["info"]
     @items = json["related"]
-    @top_keywords = get_hot_keywords_data.sample(7)
     @path = "https://api.uuhaodian.com/uu/goods_list"
     @ks = []
     @items.each do |item|
@@ -881,6 +881,7 @@ class CouponController < ApplicationController
     @cid3s = r_json["result"]["cid3s"]
     @top_keywords = @cid3s.map{|c| c["cname3"].split('/')[0]}
     @related = r_json["result"]["related"]
+    @more = r_json["result"]["more"]
     cookies[:ff_platform] = {value: 2, path: "/"}
     if @brands.size > 0
       @keyword = @brands[0]["brand_name"]
