@@ -31,22 +31,30 @@
       .item
         %a{href: "/jdhh/#{r["id"]}/", title: "#{r["title"]}"}
           %img.pic{src: "#{r["pic_url"]}", alt: "#{r["title"]}"}
-          .cent
-            %h3
-              %span 京东
+        .cent
+          %h3
+            %span 京东
+            %a{href: "/jdhh/#{r["id"]}/"}
               #{r["title"]}
-            .tags &nbsp;
-            .money #{r["price_info"]}
+          .tags &nbsp;
+          .num
+            %a{href: "/jshop_#{r["shop_id"]}.html"}
+              #{r["shop_title"]}
+          .money #{r["price_info"]}
     - @jd_items.each do |r|
       .item
         %a{href: "/jdhh/#{r["id"]}/", title: "#{r["title"].split.join}"}
           %img.pic{src: "#{r["pic_url"]}", alt: "#{r["title"].split.join}"}
-          .cent
-            %h3
-              %span 京东
+        .cent
+          %h3
+            %span 京东
+            %a{href: "/jdhh/#{r["id"]}/"}
               #{r["title"].split.join}
-            .tags &nbsp;
-            .money #{r["price_info"]}
+          .tags &nbsp;
+          .num
+            %a{href: "/jshop_#{r["shop_id"]}.html"}
+              #{r["shop_title"]}
+          .money #{r["price_info"]}
 
   .footer
     %a.home.zh{href: "http://m.uuhaodian.com/index.php?r=index/wap&source=dazhe", target: "_blank", onclick:"_hmt.push(['_trackEvent', '首页', 'click', 'dazhe'])"}
