@@ -18,7 +18,6 @@ class CouponController < ApplicationController
   def home
     unless is_robot?
       for_shenhe_home
-      puts "12312312"
       return
     end
     if is_device_mobile?
@@ -27,11 +26,11 @@ class CouponController < ApplicationController
     end
     set_cookie_channel
 
-    file = Rails.root.join("public/seo_articles").join("uupc_home.html")
-    if File.exists?(file) && !params[:is_refresh]
-      render inline: File.read(file), layout: nil
-      return
-    end
+    #file = Rails.root.join("public/seo_articles").join("uupc_home.html")
+    #if File.exists?(file) && !params[:is_refresh]
+    #  render inline: File.read(file), layout: nil
+    #  return
+    #end
 
     @cates = get_cate_data
     @banners = get_banner_data
@@ -42,7 +41,8 @@ class CouponController < ApplicationController
     #@kk = $kk.sample(20)
     @items = []
     home_page_json = get_home_page_json
-    @dtks = home_page_json["dtk"]
+    #@dtks = home_page_json["dtk"]
+    @dtks = []
     @jd_coupons = home_page_json["coupons"]
     @cores = home_page_json["cores"]
     @shops = home_page_json["jd_shops"]
@@ -50,10 +50,12 @@ class CouponController < ApplicationController
     jd_seo_data = get_jd_seo_data
     @seo_shops = []
     @seo_cores = []
+    @seo_keywords = []
     @items_jd_static = []
     if jd_seo_data["status"] == 1
       @seo_shops = jd_seo_data["shops"]
       @seo_cores = jd_seo_data["cores"]
+      @seo_keywords = jd_seo_data["keyword"]
       @items_jd_static = jd_seo_data["products"]
     end
 
@@ -399,6 +401,18 @@ class CouponController < ApplicationController
     @ks = @ks1 + @ks.uniq.sample(10)
     if request.host == "wap.uuhaodian.com"
       render :dazhe_jd_static_product, layout: "dazhe"
+      return
+    end
+    jd_seo_data = get_jd_seo_data
+    @seo_shops = []
+    @seo_cores = []
+    @seo_keywords = []
+    @items_jd_static = []
+    if jd_seo_data["status"] == 1
+      @seo_shops = jd_seo_data["shops"]
+      @seo_cores = jd_seo_data["cores"]
+      @seo_keywords = jd_seo_data["keyword"]
+      @items_jd_static = jd_seo_data["products"]
     end
   end
 
@@ -498,6 +512,17 @@ class CouponController < ApplicationController
     end
     @kk = @kk.sample(10)
     @jd_items = get_jd_open_search(@keyword)
+    jd_seo_data = get_jd_seo_data
+    @seo_shops = []
+    @seo_cores = []
+    @seo_keywords = []
+    @items_jd_static = []
+    if jd_seo_data["status"] == 1
+      @seo_shops = jd_seo_data["shops"]
+      @seo_cores = jd_seo_data["cores"]
+      @seo_keywords = jd_seo_data["keyword"]
+      @items_jd_static = jd_seo_data["products"]
+    end
   end
 
   def gaoyong

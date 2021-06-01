@@ -48,10 +48,27 @@
           %p.title-area 
             %a{href: "/jdhh/#{item["id"]}/", title: "#{item["title"].split.join}"}
               #{item["title"].split.join.gsub(@keyword, "<b>#{@keyword}</b>").html_safe}
-          %p.price-area{style: "color: red;"} #{item["price_info"]}
+          %p.price-area.one{style: "color: red;"} #{item["price_info"]}
           %p.raw-price-area
             %a{href: "/jshop_#{item["shop_id"]}.html"}
               #{item["shop_title"]}
+
+    .rel-zk-area
+      %p.head
+        %span 随便看看
+    .link-area{style: "margin-bottom: 30px;"}
+      - @seo_keywords.each do |ks|
+        %a{href: "/query/#{URI.encode_www_form_component(ks)}/"} #{ks}
+
+    - if @items_jd_static.size > 0
+      .item-list-top{style: "margin-top: 10px;padding-left:0;z-index:1;"}
+        %span.left{style: "padding-left:15px;"} 今日上新
+        = render partial: "wide_banner_jd_static", locals: {items: @items_jd_static}
+
+    - if @seo_shops.size > 0
+      .link-area{style: "margin-bottom: 30px;"}
+        - @seo_shops.each do |s|
+          %a{href: "/jshop_#{s["shop_id"]}.html"} #{s["shop_name"]}
 
 = render partial: "footer", locals: {mobile_path: mp}
 = render partial: "sider_fixed_area"

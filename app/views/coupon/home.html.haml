@@ -111,14 +111,18 @@
                   %i #
                   %a{href: "/article/tag_#{URI.encode(tag)}/"} #{tag}
   %aside
-    %h3 好店推荐
+    %h3 新店推荐
     - @seo_shops.each do |shop|
-      %a{href: "/jdshop/#{shop["shop_id"]}/"}
+      %a{href: "/jshop_#{shop["shop_id"]}.html"}
         %p #{shop["shop_name"]}
     %h3{style: "margin-top: 20px;"} 京东精选
     - @seo_cores.each do |core|
       %a{href: "/core_2_#{core["id"]}/"}
         %p 京东#{core["keyword"]}
+    %h3{style: "margin-top: 20px;"} 更多推荐
+    - @seo_keywords.each do |k|
+      %a{href: "/query/#{URI.encode(k)}/"}
+        %p #{k}
 
 .wrapper1200{style: "margin-bottom: 10px;"}
   .item-list-top{style: "padding-bottom: 10px;"}

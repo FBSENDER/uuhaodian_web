@@ -38,6 +38,18 @@
   .link-area{style: "margin-bottom: 30px;"}
     - @ks.each do |ks|
       %a{href: "/query/#{URI.encode_www_form_component(ks)}/"} #{ks}
+    - @seo_keywords.each do |ks|
+      %a{href: "/query/#{URI.encode_www_form_component(ks)}/"} #{ks}
+
+  - if @items_jd_static.size > 0
+    .item-list-top{style: "margin-top: 10px;padding-left:0;z-index:1;"}
+      %span.left{style: "padding-left:15px;"} 今日上新
+      = render partial: "wide_banner_jd_static", locals: {items: @items_jd_static}
+
+  - if @seo_shops.size > 0
+    .link-area{style: "margin-bottom: 30px;"}
+      - @seo_shops.each do |s|
+        %a{href: "/jshop_#{s["shop_id"]}.html"} #{s["shop_name"]}
 
 = render partial: "footer", locals: {mobile_path: mp}
 = render partial: "sider_fixed_area"

@@ -61,7 +61,7 @@ class ApplicationController < ActionController::Base
   end
 
   def get_jd_seo_data
-    if $jd_seo_data.nil? || $jd_seo_data["update_at"].nil? || Time.now.to_i - $jd_seo_data["update_at"] > 7200
+    #if $jd_seo_data.nil? || $jd_seo_data["update_at"].nil? || Time.now.to_i - $jd_seo_data["update_at"] > 7200
       url = "http://api.uuhaodian.com/jduu/jd_seo_data"
       result = Net::HTTP.get(URI(url))
       json = JSON.parse(result)
@@ -72,8 +72,8 @@ class ApplicationController < ActionController::Base
       else
         return {"status" => 0}
       end
-    end
-    return $jd_seo_data
+    #end
+    #return $jd_seo_data
   end
 
   def get_hot_keywords_data
