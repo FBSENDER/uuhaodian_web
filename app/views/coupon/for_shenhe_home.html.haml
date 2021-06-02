@@ -1,17 +1,24 @@
-- title("#{@category_name},#{@category_name}折扣,#{@category_name}优惠_优优好店")
-- keywords("#{@category_name},#{@category_name}折扣,#{@category_name}优惠")
-- head_desc("优优好店 - 分类 - #{@category_name}")
-- path("/category/#{@cid}/")
-- mobile_url("https://www.uuhaodian.com/category/#{@cid}/")
+- title("#{@keyword}_#{@keyword}优惠券/价格/比价_优优好店")
+- keywords("#{@keyword},#{@keyword}优惠券,#{@keyword}价格,#{@keyword}多少钱,#{@keyword}比价")
+- head_desc("优优好店-#{@keyword}商品优惠券搜索结果。您可以在优优好店查找并免费领取#{@keyword}淘宝天猫、京东、拼多多优惠券，并可以按照商品的销量、价格等维度进行筛选，领券后在淘宝、京东、拼多多平台使用并购买商品，即可享受优惠与折扣！")
+- path("/query/#{URI.encode_www_form_component(@keyword)}/")
+- mobile_url("http://wap.uuhaodian.com/dz/#{URI.encode_www_form_component(@keyword)}/")
 - mp = ""
 
 %header.header#header
   = render partial: "header_bar"
 
-.wrapper1200
-  = render partial: "lanlan_quan_filter"
+.wrapper1200{style: "margin-top:10px;"}
+  %div{style: "height: 80px;"}
+    #gy_filter
+      .wrapper1200
+        %ul.platform-area{style: "margin:0;"}
+          %li.platform-type{id: "platform_1", data:{type: 1}} 天猫淘宝
+          %li.platform-type{id: "platform_2", data:{type: 2}} 京东
+          %h1{style: "float:right;padding: 0 20px;font-size:14px;"} “#{@keyword[0,40]}”搜索结果
+        = render partial: "dg_filter", locals: {has_coupon: false}
   .zk-list.clearfix#couponList
-  = render partial: "lanlan_load_more", locals: {path: @path, pagesize: 20, sort_type: 7, pinyin: '', keyword: '', cid: @cid,sort: 7, type: 0}
+  = render partial: "dg_load_more", locals: {keyword: @keyword, has_coupon: 0}
 
 %footer.footer
   .footer-top

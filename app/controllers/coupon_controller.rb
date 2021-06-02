@@ -93,6 +93,8 @@ class CouponController < ApplicationController
     end
     @category_name = params[:category_name] || @lanlan_category["name"]
     @path = "https://api.uuhaodian.com/uu/home_list"
+    @keyword = "签字笔"
+    @path = "https://api.uuhaodian.com/uu/dg_goods_list"
     render "coupon/for_shenhe_home"
   end
 
