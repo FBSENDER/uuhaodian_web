@@ -167,7 +167,7 @@ class ApplicationController < ActionController::Base
 
   def is_device_mobile?
     user_agent = request.headers["HTTP_USER_AGENT"]
-    user_agent.present? && user_agent =~ /\b(Android|iPhone|Windows Phone|Opera Mobi|Kindle|BackBerry|PlayBook|UCWEB|Mobile)\b/i
+    user_agent.present? && user_agent =~ /\b(Android|iPhone|Windows Phone|Opera Mobi|Kindle|BackBerry|PlayBook|UCWEB|Mobile|YisouSpider)\b/i
   end
 
   def is_robot?

@@ -103,8 +103,12 @@
   = render partial: "jd_tongdian", locals: {seller_id: @shop_id, cid3: @cid3s.size > 0 ? @cid3s[0]["cid3"] : 0}
 
 .wrapper1200{style: "margin-bottom: 20px;"}
-  .item-list-top
-    %p{style: "color:#666;line-height:30px;"} 以上就是优优好店介绍#{@shop_name}的全部商品及优惠折扣信息啦，希望对您在京东购物有帮助！
+  .link-area
+    %p{style: "color:#666;line-height:30px;"} 
+      以上就是优优好店介绍#{@shop_name}的全部商品及优惠折扣信息啦，希望对您在京东购物有帮助！
+      店铺推荐：
+      - @cid3s.each do |c|
+        %a{href: "/jshops/#{URI.encode_www_form_component(c["cname3"])}"} 京东#{c["cname3"]}店铺大全
 
 = render partial: "footer", locals: {mobile_path: mp}
 = render partial: "sider_fixed_area"

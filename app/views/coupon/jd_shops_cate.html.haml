@@ -1,0 +1,66 @@
+- @page > 0 ? title("京东#{@c}店铺大全-京东#{@c}店铺推荐-第#{@page}页-优优好店") : title("京东#{@c}店铺大全-京东#{@c}店铺推荐-优优好店")
+- keywords("京东#{@c}店铺,京东#{@c}店铺推荐,京东#{@c}店铺大全,京东店铺,京东店铺推荐,京东店铺大全,优优好店")
+- head_desc("优优好店为您推荐京东优质#{@c}店铺（共#{@total_page * 20}家），好店好价店铺优惠每日更新！还可以来优优好店查看京东#{@c}店铺大全。")
+- path("/jdshops/#{URI.encode_www_form_component(@c)}")
+- mobile_url("https://www.uuhaodian.com/jdshops/#{URI.encode_www_form_component(@c)}")
+- mp = ""
+
+= render partial: "header_common"
+= render partial: "jd_banner_1200_1"
+.wrapper1200{style: "margin-top: 10px;"}
+  .item-list-top
+    %h1.left{style: "display:inline;"} 京东#{@c}店铺推荐
+    %span.left{style: "color:#999;margin-left:10px;font-size:16px;"} 搜索商品标题或链接，可精准找券 - 微信扫一扫右侧二维码，关注公众号"UU好店"，领券更方便！
+    %p{style: "color:#666;line-height:30px;"} 每日更新京东#{@c}店铺优惠券信息，为您推荐京东#{@c}好店！
+    %p{style: "color:#666;line-height:30px;"} 找到优惠券（如果存在），点击领取优惠券后，下单时即可优惠相应金额。 
+    %p{style: "color:#666;line-height:30px;"} 本站进一步支持：通过搜索，查看同款商品在淘宝天猫和拼多多的价格，为您的购物决策提供方便。
+    %div{style: "height:0;position:relative;top:-138px;float:right;"}
+      %img{src: "/img/lbanner1.png", height: "138px", width: "138px"}
+
+.wrapper1200
+  .rel-zk-area{style: "z-index:1;margin-bottom:0;"}
+    %h2.head
+      %span 
+        京东店铺 - #{@c}
+
+    .hot-product-area{style: "margin-top:10px;"}
+      - @shops.each do |item|
+        .zk-item
+          %a{href: "/jshop_#{item["shop_id"]}.html", title: "#{item["shop_name"]}"}
+            .img-area
+              %img{src: "#{item["img_url"]}", alt: "#{item["shop_name"]}商品图片"}
+            %p.title-area{style: "height: 40px;"} #{item["shop_name"]}
+
+.wrapper1200
+  .rel-zk-area{style: "z-index:1;margin-bottom:0;"}
+    %h2.head
+      %span 京东店铺 - 新店推荐
+  .hot-product-area{style: "margin-top:10px;"}
+    - @new_shops.each do |item|
+      .zk-item
+        %a{href: "/jshop_#{item["shop_id"]}.html", title: "#{item["shop_name"]}"}
+          .img-area
+            %img{src: "#{item["img_url"]}", alt: "#{item["shop_name"]}商品图片"}
+          %p.title-area{style: "height: 40px;"} #{item["shop_name"]}
+
+.wrapper1200
+  .rel-zk-area{style: "z-index:1;margin-bottom:0;"}
+    %h2.head
+      %span 更多京东店铺分类
+  .link-area{style: "margin-bottom:10px;"}
+    %p{style: "line-height: 30px;"}
+      - @cs.each do |c|
+        %a{href: "/jshops/#{URI.encode_www_form_component(c[0])}", title: "京东#{c[0]}店铺大全"} #{c[0]} - #{c[1]}家
+  - if @total_page > 1
+    %div{style: "background-color: #fff;margin-bottom:10px;padding: 20px;"}
+      - (1...@total_page).each do |page|
+        %a.rk{href: "/jshops/#{URI.encode_www_form_component(@c)}/#{page}"} 第#{page}页
+
+.wrapper1200
+  .link-area{style: "margin-bottom:20px;"} 优优好店为您推荐京东优质#{@c}店铺（共#{@total_page * 20}家），好店好价店铺优惠每日更新！还可以来优优好店查看京东#{@c}店铺大全。
+
+= render partial: "footer", locals: {mobile_path: mp}
+= render partial: "sider_fixed_area"
+
+:javascript
+  $(".shop-cid3").click(function(){$(".shop-cid3").removeClass('active');$(this).addClass("active");$("#jdtongdian").html("");doAjaxJingdongMallProduct(shop_id, $(this).data("cid3"));});
