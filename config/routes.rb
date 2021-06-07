@@ -21,7 +21,8 @@ Rails.application.routes.draw do
   get "/jdshop_go/:id", to: "coupon#jd_shop_go", id: /\d+/
   get "/jshops", to: "coupon#jd_shops"
   get "/jshops/:cate", to: "coupon#jd_shops_cate"
-  get "/jshops/:cate/:page", to: "coupon#jd_shops_cate"
+  get "/jshops/:cate/ziying", to: "coupon#jd_shops_cate_ziying"
+  get "/jshops/:cate/:page", to: "coupon#jd_shops_cate", page: /\d+/
   get "/jshop_:id.html", to: "coupon#jd_shop_seo", id: /\d+/
   get "/tshop_:id.html", to: "coupon#dtk_shop_seo", id: /\d+/
   get "/jddiybuy", to: "coupon#jd_diy_buy"

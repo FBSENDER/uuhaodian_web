@@ -940,6 +940,35 @@ class CouponController < ApplicationController
     @top_keywords = get_hot_keywords_data.sample(7)
   end
 
+  def jd_shops_cate_ziying
+    @c = params[:cate]
+    set_cookie_channel
+    url = "http://api.uuhaodian.com/jduu/jd_shop_seo_list_by_cate_ziying?cate=#{URI.encode_www_form_component(@c)}"
+    result = Net::HTTP.get(URI(url))
+    r_json = JSON.parse(result)
+    @shops = []
+    @total_page = 1
+    if r_json["status"] == 1
+      @shops = r_json["result"]
+      @total_page = r_json["total_page"].to_i
+    end
+    url = "http://api.uuhaodian.com/jduu/new_jd_shop_seo_json_list"
+    result = Net::HTTP.get(URI(url))
+    r_json = JSON.parse(result)
+    @new_shops = []
+    if r_json["status"] == 1
+      @new_shops = r_json["result"]
+    end
+    url = "http://api.uuhaodian.com/jduu/jd_shop_all_cate"
+    result = Net::HTTP.get(URI(url))
+    r_json = JSON.parse(result)
+    @cs = []
+    if r_json["status"] == 1
+      @cs = r_json["result"].sample(40)
+    end
+    @top_keywords = get_hot_keywords_data.sample(7)
+  end
+
   def jd_shop_seo
     @shop_id = params[:id].nil? ? 0 : params[:id].to_i
     if @shop_id == 0
