@@ -53,11 +53,13 @@
             .img-area
               %img{src: "#{item["img_url"]}", alt: "#{item["shop_name"]}商品图片"}
             %p.title-area{style: "height: 40px;"} #{item["shop_name"]}
-.wrapper1200{style: "margin: 20px auto 30px auto"}
+.wrapper1200{style: "margin: 20px auto 20px auto"}
   .link-area 优优好店为您推荐京东优质店铺，好店好价店铺优惠每日更新！还可以来优优好店查看京东店铺大全。
 
+= render partial: "jd_tool"
 = render partial: "footer", locals: {mobile_path: mp}
 = render partial: "sider_fixed_area"
+= render partial: "jd_tool_right_fixed"
 
 :javascript
   $(".shop-cid3").click(function(){$(".shop-cid3").removeClass('active');$(this).addClass("active");$("#jdtongdian").html("");doAjaxJingdongMallProduct(shop_id, $(this).data("cid3"));});

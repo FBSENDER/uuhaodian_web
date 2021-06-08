@@ -59,10 +59,12 @@
         %a.rk{href: "/jshops/#{URI.encode_www_form_component(@c)}/#{page}"} 第#{page}页
 
 .wrapper1200
-  .link-area{style: "margin-bottom:20px;"} 优优好店为您推荐京东优质#{@c}自营店铺（共#{@shops.size}家），好店好价店铺优惠每日更新！还可以来优优好店查看京东#{@c}自营店铺大全。
+  .link-area 优优好店为您推荐京东优质#{@c}自营店铺（共#{@shops.size}家），好店好价店铺优惠每日更新！还可以来优优好店查看京东#{@c}自营店铺大全。
 
+= render partial: "jd_tool"
 = render partial: "footer", locals: {mobile_path: mp}
 = render partial: "sider_fixed_area"
+= render partial: "jd_tool_right_fixed"
 
 :javascript
   $(".shop-cid3").click(function(){$(".shop-cid3").removeClass('active');$(this).addClass("active");$("#jdtongdian").html("");doAjaxJingdongMallProduct(shop_id, $(this).data("cid3"));});

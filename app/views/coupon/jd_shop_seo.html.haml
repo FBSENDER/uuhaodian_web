@@ -110,8 +110,10 @@
       - @cid3s.each do |c|
         %a{href: "/jshops/#{URI.encode_www_form_component(c["cname3"])}"} 京东#{c["cname3"]}店铺大全
 
+= render partial: "jd_tool"
 = render partial: "footer", locals: {mobile_path: mp}
 = render partial: "sider_fixed_area"
+= render partial: "jd_tool_right_fixed"
 = render partial: "jd_diy_mengceng", locals: {text: "前往#{@shop_name}", url: "/jdshop_go/#{@shop_id}/"}
 
 :javascript
