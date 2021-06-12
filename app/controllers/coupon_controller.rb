@@ -17,7 +17,7 @@ class CouponController < ApplicationController
 
   def home
     unless is_robot?
-      for_shenhe_home
+      render "coupon/for_shenhe_home_iframe"
       return
     end
     if is_device_mobile?
