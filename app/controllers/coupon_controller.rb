@@ -389,6 +389,8 @@ class CouponController < ApplicationController
     @detail = json["info"]
     price_info = @detail["price_info"]
     pi = price_info.split("（")
+    pd= json["updated_at"][0,10].split('-')
+    @date = "#{pd[0]}年#{pd[1]}月#{pd[2]}日"
     if pi.size > 1
       @price = pi[0]
       @youhui = pi[1].gsub("）", "")

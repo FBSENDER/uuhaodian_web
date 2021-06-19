@@ -18,13 +18,16 @@
             %li{style: "display:inline;"}
               %img.small_img{src: "#{pic}"}
     .info-middle-area
-      %h1 #{@detail["title"].split.join}
+      %h1 
+        #{@detail["title"].split.join}
       %p.recommend #{@detail["recommends"][0]}
       .price-d
-        %p 优惠信息：#{@youhui}
+        %p 
+          优惠信息：#{@youhui}
+          %span{style: "float:right"} 包邮
         %p
           价格：#{@price}
-          %span{style: "float:right"} 包邮
+          %span{style: "float:right"} 更新于#{@date}
 
       %a#buy_click{href: "javascript:;", onclick: "go_buy_url();"}
         .buy-d
