@@ -1,0 +1,135 @@
+- title("#{@detail["title"].split.join}")
+- keywords("#{@detail["title"].split.join},#{(@ks2 + @ks1).uniq.join(',')}")
+- head_desc("#{@detail["recommends"][0]}-#{@detail["title"]}")
+- path("/jdhh/#{@id}/")
+- mobile_url("http://wap.uuhaodian.com/jdhh/#{@id}/")
+- mp = "http://wap.uuhaodian.com/jdhh/#{@id}/"
+- buy_url = @detail["coupon"]["coupon_url"] == '' ? "/jd/buy/#{@detail["sku"]}/" : "/jd/buy/#{@detail["sku"]}/?coupon=#{URI.encode_www_form_component(@detail["coupon"]["coupon_url"])}"
+- c_url = @detail["coupon"]["coupon_url"] == '' ? "/jd/buy_url/#{@detail["sku"]}/" : "/jd/buy_url/#{@detail["sku"]}/?coupon=#{URI.encode_www_form_component(@detail["coupon"]["coupon_url"])}"
+
+= render partial: "header_common"
+.wrapper1200
+  .haohuo-area
+    .img-left-area
+      %img#cover_image{src: "#{@detail["pics"][0]}", alt: "#{@detail["title"]}"}
+      .small-area
+        %ul
+          - @detail["pics"][0,5].each do |pic|
+            %li{style: "display:inline;"}
+              %img.small_img{src: "#{pic}"}
+    .info-middle-area
+      %h1 #{@detail["title"].split.join}
+      %p.recommend #{@detail["recommends"][0]}
+      .price-d
+        %p 优惠信息：#{@youhui}
+        %p
+          价格：#{@price}
+          %span{style: "float:right"} 包邮
+
+      %a#buy_click{href: "javascript:;", onclick: "go_buy_url();"}
+        .buy-d
+          %span.s1 到手价#{@price}
+          %span.s2 立即购买
+
+      %a{href: "/jshop_#{@detail["shop_id"]}.html", title: "#{@detail["shop_title"]}", target: "_blank"}
+        .shop-d
+          .d1
+            %img{src: "https://www.uuhaodian.com/img/shop.svg"}
+          .d2
+            %h3 #{@detail["shop_title"]}
+            %p 京东好店推荐
+          .d3 进店看看 >>
+      .query-d
+        相关搜索：
+        - @ks1.each do |k|
+          %a{href: "/query/#{URI.encode_www_form_component(k)}/"} #{k}
+      .ma-d
+        .d1
+          %img{src: "https://www.uuhaodian.com/img/lbanner1.png"}
+          关注公众号 
+        .d1
+          #qrcode_in{style: "height: 80px;margin: 10px auto;"}
+          京东扫啊扫 直接购买
+    .list-right-area
+      %h3 今日上新
+      %ul
+        - @items_jd_static.each do |item|
+          %a{href: "/jdhh/#{item["id"]}/", title: "#{item["title"]}"}
+            %li
+              %img{src: "#{item["pic_url"]}", alt: "#{item["title"]}"}
+              %p 
+                #{item["title"]}
+                %br
+                #{item["price_info"]}
+
+.wrapper1200.haohuo-detail-area
+  .same-left-area
+    %h3 相似商品推荐
+    %ul
+      - @jd_items.each do |item|
+        %a{href: "/jdhh/#{item["id"]}", title: "#{item["title"]}"}
+          %li
+            %img{src: "#{item["pic_url"]}"}
+            %p 
+              #{@ks2.inject(item["title"].split.join){|r, x| r.gsub(x, "<b>#{x}</b>")}.html_safe}
+              %br
+              %span #{item["price_info"]}
+  .detail-middle-area
+    %h3 商品详情与用户评价
+    .d1
+      .title
+        %h4 商品描述
+      %p #{@detail["recommends"][0]}
+      .title
+        %h4 商品详情
+      - @detail["pics"].each_with_index do |pic, index|
+        %img{src: "#{pic}", alt: "#{@detail["title"]}商品图片-#{index+1}"}
+      .title
+        %h4 用户评价
+      - if @detail["recommends"].size > 1
+        - @detail["recommends"][1..-1].each_with_index do |r, index|
+          %p 评价#{index+1}：#{r}
+          %br
+
+      - else
+        %p 没有更多了
+  .shop-right-area
+    %h3 店铺推荐
+    %ul
+      - @seo_shops.each do |s|
+        %li
+          %a{href: "/jshop_#{s["shop_id"]}.html"}
+            #{s["shop_name"]}
+
+
+= render partial: "footer", locals: {mobile_path: mp}
+= render partial: "sider_fixed_area"
+
+:javascript
+  $(".small_img").hover(function(){
+    $("#cover_image").attr("src", $(this).attr("src"));  
+  })
+  var go_buy_url = function(){
+    window.location.href = "#{buy_url}";
+  }
+  var canvas_callback = function(data){
+    if(data.status == 1){
+      var cv = $("#qrcode_in");
+      cv.qrcode({
+        render: "canvas",
+        height: 80,
+        width: 80,
+        text: data.url
+      });
+    }
+  }
+  $.ajax({
+    url: "#{c_url}",
+    type: 'GET',
+    dataType: 'jsonp',
+    data:{
+      'callback': 'canvas_callback'
+    },
+    success:function(data){
+    }
+  });

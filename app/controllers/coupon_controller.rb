@@ -364,6 +364,68 @@ class CouponController < ApplicationController
     end
   end
 
+  def haohuo
+    @id = params[:id]
+    if is_device_mobile? && request.host != "wap.uuhaodian.com"
+      redirect_to "http://wap.uuhaodian.com/jdhh/#{@id}/", status: 302
+      return
+    end
+    url = "http://api.uuhaodian.com/jduu/zhinan_jd_static_products?id=#{@id}"
+    json = {}
+    @items = []
+    set_cookie_channel
+    begin
+      result = Net::HTTP.get(URI(URI.encode(url)))
+      json = JSON.parse(result)
+      if json["status"] != 1
+        not_found
+        return
+      end
+    rescue
+      not_found
+      return
+    end
+    @top_keywords = get_hot_keywords_data.sample(7)
+    @detail = json["info"]
+    price_info = @detail["price_info"]
+    pi = price_info.split("（")
+    if pi.size > 1
+      @price = pi[0]
+      @youhui = pi[1].gsub("）", "")
+    else
+      @price = pi[0]
+      @youhui = "无"
+    end
+    @items = json["related"]
+    @path = "https://api.uuhaodian.com/uu/goods_list"
+    @ks = []
+    @items.each do |item|
+      @ks += item["keywords"].map{|k| k[0]}
+    end
+    @jd_items = []
+    @ks1 = @detail["ks1"]
+    @ks2 = @detail["ks2"]
+    @ks2.delete(" ")
+    if @ks1.size > 0
+      @jd_items = get_jd_open_search(@ks1[-1])
+    end
+    @ks = @ks1 + @ks.uniq.sample(10)
+    if request.host == "wap.uuhaodian.com"
+      render :dazhe_jd_static_product, layout: "dazhe"
+      return
+    end
+    jd_seo_data = get_jd_seo_data
+    @seo_shops = []
+    @seo_cores = []
+    @seo_keywords = []
+    @items_jd_static = []
+    if jd_seo_data["status"] == 1
+      @seo_shops = jd_seo_data["shops"]
+      @seo_cores = jd_seo_data["cores"]
+      @seo_keywords = jd_seo_data["keyword"]
+      @items_jd_static = jd_seo_data["products"]
+    end
+  end
   def jd_static_product
     @id = params[:id]
     if is_device_mobile? && request.host != "wap.uuhaodian.com"
