@@ -890,7 +890,10 @@ class CouponController < ApplicationController
       return
     end
     if is_device_mobile? && request.host != "wap.uuhaodian.com"
-      redirect_to "http://wap.uuhaodian.com/jdshop/#{@shop_id}/"
+      redirect_to "http://wap.uuhaodian.com/jshop_#{@shop_id}.html", status: 301
+      return
+    else
+      redirect_to "https://www.uuhaodian.com/jshop_#{@shop_id}.html", status: 301
       return
     end
     set_cookie_channel
