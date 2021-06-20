@@ -72,11 +72,11 @@ class EnController < ApplicationController
     @ks = json["ks"]
     @items = json["data"]
 
-    @title = "Top 10 Best #{@keyword} in 2020 | Related Products, Promotion, Reference Price on Auuhaodian"
-    @description = "Top 10 Best #{@keyword} in 2020, related products, promotion and reference price of #{@keyword}.#{@items.last["disc"]} - uuhaodian"
+    @title = "Top 10 Best #{@keyword} in 2021 | Related Products, Promotion, Reference Price on Auuhaodian"
+    @description = "Top 10 Best #{@keyword} in 2021, related products, promotion and reference price of #{@keyword}.#{@items.last["disc"]} - uuhaodian"
     @page_keywords = "#{@keyword},#{@ks.join(',')}"
     @path = "http://www.uuhaodian.com/en/popular/#{URI.encode(@keyword.downcase)}/"
-    @h1 = "Top 10 Best #{@keyword} in 2020"
+    @h1 = "Top 10 Best #{@keyword} in 2021"
 
     render "en/popular", layout: "layouts/en"
   end
