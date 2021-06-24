@@ -1,8 +1,8 @@
 - @page > 0 ? title("京东#{@c}店铺大全-京东#{@c}店铺推荐-第#{@page}页-优优好店") : title("京东#{@c}店铺大全-京东#{@c}店铺推荐-优优好店")
 - keywords("京东#{@c}店铺,京东#{@c}店铺推荐,京东#{@c}店铺大全,京东店铺,京东店铺推荐,京东店铺大全,优优好店")
 - head_desc("优优好店为您推荐京东优质#{@c}店铺（共#{@total_page * 20}家），好店好价店铺优惠每日更新！还可以来优优好店查看京东#{@c}店铺大全。")
-- path("/jdshops/#{URI.encode_www_form_component(@c)}")
-- mobile_url("https://www.uuhaodian.com/jdshops/#{URI.encode_www_form_component(@c)}")
+- path("/jshops/#{URI.encode_www_form_component(@c)}")
+- mobile_url("https://www.uuhaodian.com/jshops/#{URI.encode_www_form_component(@c)}")
 - mp = ""
 
 = render partial: "header_common"
