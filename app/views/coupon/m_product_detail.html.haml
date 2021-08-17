@@ -48,9 +48,9 @@
       %img.icon{src: "http://www.uuhaodian.com/favicon.ico"}
       .text 优优好店首页
     - if @device == "ios"
-      %a#more_btn.btn.zh{href: "http://download1.51cyin.cn/index.php?r=index/ios-down&app_id=550416", target: "_blank", onclick:"_hmt.push(['_trackEvent', '下载app-ios', 'click', 'dazhe'])"} 下载APP获取更多优惠
+      %a#more_btn.btn.zh{href: "https://api.uuhaodian.com/uu/xiaohui_app", target: "_blank", onclick:"_hmt.push(['_trackEvent', '下载app-ios', 'click', 'dazhe'])"} 下载APP获取更多优惠
     - else
-      %a#more_btn.btn.zh{href: "http://download1.51cyin.cn/index.php?r=index/down&app_id=550416", target: "_blank", onclick:"_hmt.push(['_trackEvent', '下载app-android', 'click', 'dazhe'])"} 下载APP获取更多优惠
+      %a#more_btn.btn.zh{href: "https://api.uuhaodian.com/uu/xiaohui_app", target: "_blank", onclick:"_hmt.push(['_trackEvent', '下载app-android', 'click', 'dazhe'])"} 下载APP获取更多优惠
 
 :javascript
   $(".zh").click(function(){window._agl && window._agl.push(['track', ['success', {t: 3}]])});
