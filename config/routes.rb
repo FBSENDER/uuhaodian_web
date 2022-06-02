@@ -9,9 +9,9 @@ Rails.application.routes.draw do
   get "/collection/:tid", to: "coupon#collection", tid: /\d+/
   get "/yh/:id", to: "coupon#product_detail", id: /\d+/
   get "/dtk/:id", to: "coupon#dtk_product_detail", id: /\d+/
-  get "/ddk/:id", to: "coupon#ddk_product_detail", id: /\d+/
-  get "/ddk/buy/:id", to: "coupon#ddk_buy", id: /\d+/
-  get "/ddk/buy_url/:id", to: "coupon#ddk_buy_url", id: /\d+/
+  get "/ddk/:id", to: "coupon#ddk_product_detail"
+  get "/ddk/buy/:id", to: "coupon#ddk_buy"
+  get "/ddk/buy_url/:id", to: "coupon#ddk_buy_url"
   get "/jd/", to: "coupon#jd_lingquan"
   get "/jd/:id", to: "coupon#jd_product_detail", id: /\d+/
   get "/jdhh/:id", to: "coupon#haohuo", id: /\d+/
