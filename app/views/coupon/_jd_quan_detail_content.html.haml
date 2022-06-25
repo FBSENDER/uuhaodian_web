@@ -58,7 +58,7 @@
         - if coupon["coupon_amount"] > 0
           %p#eventTimeStr.desc 有效期
         - else
-          %p.desc 扫描上方二维码，天天享优惠！
+          %p.desc 更新于#{Time.now.to_s[0,10]}
         %a{href: "#{buy_url}", target: "_blank", class: "buy-btn", onclick: "_hmt.push(['_trackEvent', '领券购买', 'click', '京东详情页'])"}
           .line.line-l
             %i

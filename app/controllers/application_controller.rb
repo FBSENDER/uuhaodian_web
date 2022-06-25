@@ -77,20 +77,20 @@ class ApplicationController < ActionController::Base
   end
 
   def get_hot_keywords_data
-    %w(手机 电脑 笔记本电脑 显卡 显示器 固态硬盘 华为手机 oppo手机 vivo手机 iphone11 iphone 荣耀手机 小米手机 红米手机 戴尔电脑 联想电脑 Thinkpad电脑 包包 女鞋 鼠标 连衣裙 瑜伽垫 男T恤 女T恤 阔腿裤 女春装 打底裤 开衫)
-    #if $hot_keywords_data["update_at"].nil? || $hot_keywords_data["keywords"].nil? || $hot_keywords_data["keywords"].size.zero? || Time.now.to_i - $hot_keywords_data["update_at"] > 3600
-    #  url = "http://api.uuhaodian.com/uu/hot_keywords"
-    #  result = Net::HTTP.get(URI(url))
-    #  json = JSON.parse(result)
-    #  if json["status"] && json["status"]["code"] == 1001
-    #    $hot_keywords_data["keywords"] = json["result"]
-    #    $hot_keywords_data["update_at"] = Time.now.to_i
-    #    return $hot_keywords_data["keywords"]
-    #  else
-    #    return []
-    #  end
-    #end
-    #return $hot_keywords_data["keywords"]
+    #%w(手机 电脑 笔记本电脑 显卡 显示器 固态硬盘 华为手机 oppo手机 vivo手机 iphone11 iphone 荣耀手机 小米手机 红米手机 戴尔电脑 联想电脑 Thinkpad电脑 包包 女鞋 鼠标 连衣裙 瑜伽垫 男T恤 女T恤 阔腿裤 女春装 打底裤 开衫)
+    if $hot_keywords_data["update_at"].nil? || $hot_keywords_data["keywords"].nil? || $hot_keywords_data["keywords"].size.zero? || Time.now.to_i - $hot_keywords_data["update_at"] > 3600
+      url = "http://api.uuhaodian.com/uu/hot_keywords_new"
+      result = Net::HTTP.get(URI(url))
+      json = JSON.parse(result)
+      if json["code"] && json["code"] == 0 && json["data"]["hotWords"]
+        $hot_keywords_data["keywords"] = json["data"]["hotWords"]
+        $hot_keywords_data["update_at"] = Time.now.to_i
+        return $hot_keywords_data["keywords"]
+      else
+        return []
+      end
+    end
+    return $hot_keywords_data["keywords"]
   end
 
   def get_coupon_9kuai9_data
