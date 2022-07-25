@@ -17,10 +17,13 @@
       %img{src: "#{@detail["pics"][0]}", style: "width: 100%;margin: 0 auto;"}
     %div{style: "margin: 2px 0;padding: 10px;background-color:#fff;"}
       %h1 #{@detail["title"].gsub(/\s/, "")}
-      %p{style: "line-height: 50px;color: red;"} #{@detail["price_info"]}
+      %p{style: "line-height: 50px;color: red;"} 
+        #{@detail["price_info"]}
+        %span{style: "float:right;color: #aaa;"} 更新于#{@date}
       %p{style: "text-align:right;"}
         %a{href: "/jd/buy/#{@detail["sku"]}/", target: "_blank", style: "color:red;text-decoration:underline;"} 去京东购买
-      %p{style: "line-height: 30px;"} 推荐理由：
+      %p{style: "line-height: 30px;"}
+        推荐理由：
       - @detail["recommends"].each do |r|
         %p{style: "line-height: 22px;"} #{r}
 

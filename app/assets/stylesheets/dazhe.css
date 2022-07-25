@@ -111,6 +111,12 @@
   padding: 10px;
   font-weight: normal;
 }
+.dazhe .header h2{
+  font-size: 16px;
+  border-bottom: 1px solid #e7e7e7;
+  padding: 10px;
+  font-weight: normal;
+}
 
 .dazhe .header .desc{
   font-size: 14px;

@@ -11,6 +11,7 @@
         %i
         %a{href: "/dz_search/", onclick: "_hmt.push(['_trackEvent', '顶部点击', 'click', 'dazhe'])"}
           %p #{@keyword}
+  %h1.sno #{@keyword}-优优好店
   = render partial: "dazhe_gongzhonghao_guide"
   .content
     = render partial: "dazhe_filter"
@@ -28,6 +29,7 @@
               .money
                 #{item["price_info"]}
     %img#imgLoading{src: "/img/img_loading.gif", width: "200px", style: "margin: 10px auto;"}
+    %p{style: "text-align:center;padding:10px;"} #{@keyword}优惠券/价格/比价信息-更新于#{Time.now.to_s[0,10]}
   .button-btn.sno#loadRetry 重新加载
   .button-btn.sno#noMore 没有更多了
   .footer

@@ -454,6 +454,7 @@ class CouponController < ApplicationController
     @items = json["related"]
     @path = "https://api.uuhaodian.com/uu/goods_list"
     @ks = []
+    @date = Time.now.to_s[0,10]
     @items.each do |item|
       @ks += item["keywords"].map{|k| k[0]}
     end

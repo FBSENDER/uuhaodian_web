@@ -1,5 +1,5 @@
 .header
-  %h1
+  %h2
     超过99.9%用户不知道的
     %span.b 领券秘诀
     ！
@@ -17,4 +17,7 @@
     &nbsp;&nbsp;&nbsp;
     %span{style: "line-height: 30px;"}
       %a{id: "ercode_show", href: "javascript:;", style: "color: #FBAA58;", onclick:"_hmt.push(['_trackEvent', '展开二维码', 'click', 'dazhe_jd'])"} 点击展开二维码
-  %img.sno{id: "ercode", src: "https://www.uuhaodian.com/img/lbanner1.png"}
+  #ercode.sno
+    %img{src: "https://www.uuhaodian.com/img/lbanner1.png"}
+    %p{style: "text-align: right;padding: 10px;"}
+      %span 更新于#{Time.now.to_s[0,10]}

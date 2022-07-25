@@ -30,6 +30,9 @@
           %br
           店铺：
           %a{href: "/tshop_#{@detail["sellerId"]}.html"} #{@detail["shopName"]}
+          %br
+          %br
+          更新于#{Time.now.to_s[0,10]}
       - else
         .desc 扫码关注公众号【优优好店】，领券超方便!
       .price 
