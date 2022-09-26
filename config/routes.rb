@@ -7,8 +7,8 @@ Rails.application.routes.draw do
   get "/about.html", to: "coupon#about"
   get "/category/:cid", to: "coupon#category", cid: /\d+/
   get "/collection/:tid", to: "coupon#collection", tid: /\d+/
-  get "/yh/:id", to: "coupon#product_detail", id: /\d+/
-  get "/dtk/:id", to: "coupon#dtk_product_detail", id: /\d+/
+  get "/yh/:id", to: "coupon#product_detail"
+  get "/dtk/:id", to: "coupon#dtk_product_detail"
   get "/ddk/:id", to: "coupon#ddk_product_detail"
   get "/ddk/buy/:id", to: "coupon#ddk_buy"
   get "/ddk/buy_url/:id", to: "coupon#ddk_buy_url"
