@@ -115,7 +115,7 @@ Util.createLanlanCouponList = function(cl,obj,channel,gaPage){
     else{
       htmlstr += '<span class="tag taobao">淘宝</span>';
     }
-    if(z.sellerName.indexOf('旗舰店') > 0){
+    if(z.shopName.indexOf('旗舰店') > 0){
       htmlstr += '<span class="tag">旗舰店</span>';
     }
     if(z.activityType == 2){
