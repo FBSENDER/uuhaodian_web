@@ -1158,12 +1158,12 @@ class CouponController < ApplicationController
 
   def get_jd_open_search(k)
     begin
-      url = "http://api.uuhaodian.com/jduu/jd_open_search?keyword=#{URI.encode_www_form_component(k)}"
-      result = Net::HTTP.get(URI(url))
-      json = JSON.parse(result)
-      if json["status"] == "OK" && json["result"]["items"]
-        return json["result"]["items"]
-      end
+      #url = "http://api.uuhaodian.com/jduu/jd_open_search?keyword=#{URI.encode_www_form_component(k)}"
+      #result = Net::HTTP.get(URI(url))
+      #json = JSON.parse(result)
+      #if json["status"] == "OK" && json["result"]["items"]
+      #  return json["result"]["items"]
+      #end
       return []
     rescue
       return []
