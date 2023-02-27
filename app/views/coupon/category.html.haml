@@ -8,9 +8,9 @@
 = render partial: "header_common"
 = render partial: "header_lanlan_fenlei", locals: {categories: @lanlan_cates}
 .wrapper1200
-  = render partial: "lanlan_quan_filter"
+  = render partial: "dg_filter", locals: {has_coupon: false}
   .zk-list.clearfix#couponList
-  = render partial: "lanlan_load_more", locals: {path: @path, pagesize: 20, sort_type: 7, pinyin: '', keyword: '', cid: @cid,sort: 7, type: 0}
+  = render partial: "dg_load_more", locals: {keyword: @keyword, has_coupon: 0}
 
 - if @items_bang && @items_bang.size > 0
   .wrapper1200

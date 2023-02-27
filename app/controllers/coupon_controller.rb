@@ -38,6 +38,8 @@ class CouponController < ApplicationController
     @items_9kuai9 = get_coupon_9kuai9_data
     @path = "https://api.uuhaodian.com/uu/home_list"
     @keyword = ''
+    @path = "https://api.uuhaodian.com/uu/dg_goods_list"
+    @keyword = @top_keywords.sample
     #@kk = $kk.sample(20)
     @items = []
     home_page_json = get_home_page_json
@@ -113,6 +115,8 @@ class CouponController < ApplicationController
     @items_bang = get_coupon_bang_data
     @path = "https://api.uuhaodian.com/uu/home_list"
     @kk = $kk.sample(20)
+    @path = "https://api.uuhaodian.com/uu/dg_goods_list"
+    @keyword = @category_name
   end
 
   def product_detail
