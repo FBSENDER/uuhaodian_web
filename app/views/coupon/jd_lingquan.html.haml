@@ -7,7 +7,7 @@
 
 = render partial: "header_common"
 = render partial: "jd_banner_1200_1"
-%a{href: "/jddiybuy/?jd_channel=15&url=#{URI.encode_www_form_component("https://a.jd.com/")}", target: "_blank", title: "点击直达京东领券中心", onclick: "_hmt.push(['_trackEvent', '上方描述点击', 'click', 'jd'])"}
+%a{href: "/jddiybuy/?jd_channel=15&url=#{URI.encode_www_form_component("https://miaosha.jd.com/")}", target: "_blank", title: "点击直达京东领券中心", onclick: "_hmt.push(['_trackEvent', '上方描述点击', 'click', 'jd'])"}
   .wrapper1200{style: "margin-top: 10px;"}
     .item-list-top
       %span.left 京东优惠券领取
@@ -23,7 +23,7 @@
     .cate-l-1{style: "padding-left:20px;width:1200px;"}
       - @jd_home_items.each do |item|
         %a{href: "/jd/?id=#{item["id"]}", class: "#{'active' if item["id"] == @jd_item_id}", onclick: "_hmt.push(['_trackEvent', '顶部分类', 'click', 'jd'])"} #{item["name"]}
-      %a{href: "/jddiybuy/?jd_channel=15&url=#{URI.encode_www_form_component("https://a.jd.com/")}", target: "_blank", title: "点击直达京东领券中心", onclick: "_hmt.push(['_trackEvent', '分类更多按钮点击', 'click', 'jd'])"} 更多
+      %a{href: "/jddiybuy/?jd_channel=15&url=#{URI.encode_www_form_component("https://miaosha.jd.com/")}", target: "_blank", title: "点击直达京东领券中心", onclick: "_hmt.push(['_trackEvent', '分类更多按钮点击', 'click', 'jd'])"} 更多
 .wrapper{style: "margin: 10px auto;"}
   .jd-coupon-list.clearfix#jdCouponList
   = render partial: "jd_coupon_load_more", locals: {cid: @cid}
@@ -39,4 +39,4 @@
 = render partial: "footer", locals: {mobile_path: mp}
 = render partial: "sider_fixed_area"
 = render partial: "jd_tool_right_fixed"
-= render partial: "jd_diy_mengceng", locals: {text: "前往领券中心 GO!", url: "/jddiybuy/?jd_channel=15&url=#{URI.encode_www_form_component("https://a.jd.com")}"}
+= render partial: "jd_diy_mengceng", locals: {text: "超值秒杀 GO!", url: "/jddiybuy/?jd_channel=15&url=#{URI.encode_www_form_component("https://miaosha.jd.com")}"}
