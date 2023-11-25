@@ -95,11 +95,11 @@ class ApplicationController < ActionController::Base
 
   def get_coupon_9kuai9_data
     if $coupon_9kuai9_data["update_at"].nil? || $coupon_9kuai9_data["items"].nil? || $coupon_9kuai9_data["items"].size.zero? || Time.now.to_i - $coupon_9kuai9_data["update_at"] > 3600
-      url = "http://api.uuhaodian.com/uu/jiukuaijiu_list"
+      url = "http://api.uuhaodian.com/uu/jiukuaijiu_list?dtk=1"
       result = Net::HTTP.get(URI(url))
       json = JSON.parse(result)
-      if json["status"] && json["status"]["code"] == 1001
-        $coupon_9kuai9_data["items"] = json["result"]
+      if json["code"] && json["code"] == 0
+        $coupon_9kuai9_data["items"] = json["data"]["list"]
         $coupon_9kuai9_data["update_at"] = Time.now.to_i
         return $coupon_9kuai9_data["items"]
       else
@@ -111,11 +111,11 @@ class ApplicationController < ActionController::Base
 
   def get_coupon_bang_data
     if $coupon_bang_data["update_at"].nil? || $coupon_bang_data["items"].nil? || $coupon_bang_data["items"].size.zero? || Time.now.to_i - $coupon_bang_data["update_at"] > 3600
-      url = "http://api.uuhaodian.com/uu/sale_list"
+      url = "http://api.uuhaodian.com/uu/dtk_ranks"
       result = Net::HTTP.get(URI(url))
       json = JSON.parse(result)
-      if json["status"] && json["status"]["code"] == 1001
-        $coupon_bang_data["items"] = json["result"]
+      if json["code"] && json["code"] == 0
+        $coupon_bang_data["items"] = json["data"]
         $coupon_bang_data["update_at"] = Time.now.to_i
         return $coupon_bang_data["items"]
       else
