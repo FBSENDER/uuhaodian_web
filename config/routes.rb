@@ -13,10 +13,10 @@ Rails.application.routes.draw do
   get "/ddk/buy/:id", to: "coupon#ddk_buy"
   get "/ddk/buy_url/:id", to: "coupon#ddk_buy_url"
   get "/jd/", to: "coupon#jd_lingquan"
-  get "/jd/:id", to: "coupon#jd_product_detail", id: /\d+/
+  get "/jd/:id", to: "coupon#jd_product_detail"
   get "/jdhh/:id", to: "coupon#haohuo", id: /\d+/
-  get "/jd/buy/:id", to: "coupon#jd_buy", id: /\d+/
-  get "/jd/buy_url/:id", to: "coupon#jd_buy_url", id: /\d+/
+  get "/jd/buy/:id", to: "coupon#jd_buy"
+  get "/jd/buy_url/:id", to: "coupon#jd_buy_url"
   get "/jdshop/:id", to: "coupon#jd_shop", id: /\d+/
   get "/jdshop_go/:id", to: "coupon#jd_shop_go", id: /\d+/
   get "/jshops", to: "coupon#jd_shops"
